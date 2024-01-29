@@ -1,4 +1,5 @@
-
+#include <AccelStepper.h>
+#include <MultiStepper.h>
 // Pin definitions
 //buttons (2 x 4 )
 
@@ -17,39 +18,55 @@
 #define COM_BAUD_Debug 115200
 #define COM_BAUD_PC 115200
 
-//motors
-//Chair1 (4x3
-#define CHAIR1_LEFT_UPPER_LIMIT 8
-#define CHAIR1_LEFT_LOWER_LIMIT 9
-#define CHAIR1_LEFT_EN 10
-#define CHAIR1_LEFT_RST 11
-#define CHAIR1_LEFT_STEP 12
-#define CHAIR1_LEFT_DIR 13
-#define CHAIR1_LEFT_INTERFACE_TYPE 1
+//motors (4 motors
+//Chair 1 
+#define CHAIR1_LEFT_UPPER_LIMIT 52
+#define CHAIR1_LEFT_LOWER_LIMIT 50
+#define CHAIR1_LEFT_EN 48
+#define CHAIR1_LEFT_STEP 44
+#define CHAIR1_LEFT_DIR 42
 
-#define CHAIR1_RIGHT_UPPER_LIMIT 8
-#define CHAIR1_RIGHT_LOWER_LIMIT 9
-#define CHAIR1_RIGHT_EN 10
-#define CHAIR1_RIGHT_RST 11
-#define CHAIR1_RIGHT_STEP 12
-#define CHAIR1_RIGHT_DIR 13
-#define CHAIR1_RIGHT_INTERFACE_TYPE 1
-//Charir 2 
-#define CHAIR1_RIGHT_UPPER_LIMIT 8
-#define CHAIR1_RIGHT_LOWER_LIMIT 9
-#define CHAIR1_RIGHT_EN 10
-#define CHAIR1_RIGHT_RST 11
-#define CHAIR1_RIGHT_STEP 12
-#define CHAIR1_RIGHT_DIR 13
-#define CHAIR1_RIGHT_INTERFACE_TYPE 1
+#define CHAIR1_RIGHT_UPPER_LIMIT 22
+#define CHAIR1_RIGHT_LOWER_LIMIT 24
+#define CHAIR1_RIGHT_EN 26
+#define CHAIR1_RIGHT_STEP 30
+#define CHAIR1_RIGHT_DIR 32
 
-#define CHAIR2_LEFT_UPPER_LIMIT 8
-#define CHAIR2_LEFT_LOWER_LIMIT 9
-#define CHAIR2_LEFT_EN 10
-#define CHAIR2_LEFT_RST 11
-#define CHAIR2_LEFT_STEP 12
-#define CHAIR2_LEFT_DIR 13
-#define CHAIR2_LEFT_INTERFACE_TYPE 1
+//Chair 2 
+#define CHAIR2_RIGHT_UPPER_LIMIT 23
+#define CHAIR2_RIGHT_LOWER_LIMIT 25
+#define CHAIR2_RIGHT_EN 27
+#define CHAIR2_RIGHT_STEP 31
+#define CHAIR2_RIGHT_DIR 33
+
+#define CHAIR2_LEFT_UPPER_LIMIT 53
+#define CHAIR2_LEFT_LOWER_LIMIT 51
+#define CHAIR2_LEFT_EN 49
+#define CHAIR2_LEFT_STEP 45
+#define CHAIR2_LEFT_DIR 43
+
+byte morcontrolPins[] = { 
+	CHAIR1_LEFT_EN		,
+	CHAIR1_LEFT_STEP	, 
+	CHAIR1_LEFT_DIR		,
+	CHAIR1_RIGHT_EN		,
+	CHAIR1_RIGHT_STEP	,
+	CHAIR1_RIGHT_DIR	,
+	CHAIR2_LEFT_EN		,
+	CHAIR2_LEFT_STEP	,
+	CHAIR2_LEFT_DIR		,
+	CHAIR2_RIGHT_EN		,
+	CHAIR2_RIGHT_STEP	,
+	CHAIR2_RIGHT_DIR	,
+ };
+long maxTravel = 200000; // max distance you could be away from zero switch
+long maxBackup = 200; // max distance to correct limit switch overshoot
+
+AccelStepper motorC1L = AccelStepper(AccelStepper::FULL3WIRE, CHAIR1_LEFT_STEP, CHAIR1_LEFT_DIR);
+AccelStepper motorC1R = AccelStepper(AccelStepper::FULL3WIRE, CHAIR1_RIGHT_STEP, CHAIR1_RIGHT_DIR);
+AccelStepper motorC2L = AccelStepper(AccelStepper::FULL3WIRE, CHAIR2_LEFT_STEP, CHAIR2_LEFT_DIR);
+AccelStepper motorC2R = AccelStepper(AccelStepper::FULL3WIRE, CHAIR2_RIGHT_STEP, CHAIR2_RIGHT_DIR);
+
 
 enum E_STATE {
 	HOMING,
@@ -64,7 +81,7 @@ void setup() {
 	
 }
 
-// the loop function runs over and over again until power down or reset
+
 void loop() {
   
 }
