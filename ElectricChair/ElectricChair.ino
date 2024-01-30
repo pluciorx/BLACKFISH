@@ -199,7 +199,7 @@ void HandlePedaling()
 
 	p2_aState = digitalRead(PEDAL2_A);
 
-	if (p2_aState != p1_aLastState) {
+	if (p2_aState != p2_aLastState) {
 		if (digitalRead(PEDAL2_B) != p2_aState) {
 			p2_counter++;
 			p2_angle++;
