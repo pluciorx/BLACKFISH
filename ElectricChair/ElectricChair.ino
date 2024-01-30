@@ -106,6 +106,7 @@ void setup() {
 	Serial1.begin(COM_BAUD_PC);
 	Serial.println("<================= Starting =================>");
 	
+	//motors
 	// Set limit switch inputs
 	pinMode(CHAIR2_LEFT_UPPER_LIMIT, INPUT_PULLUP);
 	pinMode(CHAIR1_LEFT_LOWER_LIMIT, INPUT_PULLUP);
@@ -121,7 +122,18 @@ void setup() {
 		pinMode(buttonPins[i], INPUT_PULLUP);
 		digitalWrite(buttonPins[i], HIGH); //redundant but just in case
 	}
+	//end motors
+	// 
+	//pedals
+	pinMode(PEDAL1_A, INPUT);
+	pinMode(PEDAL1_B, INPUT);
+	pinMode(PEDAL2_A, INPUT);
+	pinMode(PEDAL2_B, INPUT);
 
+	p1_aLastState = digitalRead(PEDAL1_A);
+	p2_aLastState = digitalRead(PEDAL2_A);
+
+	//end pedals
 	SetState(E_STATE::HOMING);
 }
 
