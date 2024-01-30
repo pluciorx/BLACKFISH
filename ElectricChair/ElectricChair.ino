@@ -210,7 +210,7 @@ void HandlePedaling()
 			p2_angle--;
 
 		}
-		SendPedalState(2, p1_angle);
+		SendPedalState(2, p2_angle);
 	}
 }
 
