@@ -89,7 +89,7 @@ void setup() {
 	Serial.begin(COM_BAUD_Debug);
 	//Serial1 to talk with host
 	Serial1.begin(COM_BAUD_PC);
-	Serial.println("<================= Starting ================= >");
+	Serial.println("<================= Starting =================>");
 	
 	// Set limit switch inputs
 	pinMode(CHAIR2_LEFT_UPPER_LIMIT, INPUT_PULLUP);
