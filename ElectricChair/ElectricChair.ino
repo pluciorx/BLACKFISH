@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include <AccelStepper.h>
 #include <MultiStepper.h>
 // Pin definitions
@@ -12,8 +13,13 @@
 #define P2_B2 6
 #define P2_B3 5
 #define P2_B4 4
-// end buttons
 
+const byte buttonCount = 8;
+byte buttonPins[] = { P1_B1, P1_B2, P1_B3, P1_B4, P2_B1, P2_B2, P2_B3, P2_B4 };
+byte buttonState[buttonCount];
+byte buttonActive[buttonCount];
+// end buttons
+// 
 //Com
 #define COM_BAUD_Debug 115200
 #define COM_BAUD_PC 115200
@@ -45,7 +51,7 @@
 #define CHAIR2_LEFT_STEP 45
 #define CHAIR2_LEFT_DIR 43
 
-byte morcontrolPins[] = { 
+byte motorControlPins[] = { 
 	CHAIR1_LEFT_EN		,
 	CHAIR1_LEFT_STEP	, 
 	CHAIR1_LEFT_DIR		,
@@ -71,17 +77,64 @@ AccelStepper motorC2R = AccelStepper(AccelStepper::FULL3WIRE, CHAIR2_RIGHT_STEP,
 enum E_STATE {
 	HOMING,
 	READY,
+	BTN_ACTION_SEND,
 	SEND_PC,
 	MOTOR
 };
 
+E_STATE _state;
+
 void setup() {
 	Serial.begin(COM_BAUD_Debug, SERIAL_8N1);
+	//Serial1 to talk with host
 	Serial1.begin(COM_BAUD_PC, SERIAL_8N1);
-	
+
+	// Set limit switch inputs
+	pinMode(CHAIR2_LEFT_UPPER_LIMIT, INPUT_PULLUP);
+	pinMode(CHAIR1_LEFT_LOWER_LIMIT, INPUT_PULLUP);
+	pinMode(CHAIR2_RIGHT_UPPER_LIMIT, INPUT_PULLUP);
+	pinMode(CHAIR1_RIGHT_LOWER_LIMIT, INPUT_PULLUP);
+
+	for (int i = 0; i < 12; i++) {
+		pinMode(motorControlPins[i], OUTPUT);
+		digitalWrite(motorControlPins[i], LOW);
+	}
+
+	for (int i = 0; i < buttonCount; i++) {
+		pinMode(buttonPins[i], INPUT_PULLUP);
+		digitalWrite(buttonPins[i], HIGH); //redundant but just in case
+	}
+
+	_state = HOMING;	
 }
 
 
 void loop() {
-  
+	
+	switch (_state)
+	{
+		case HOMING:{
+			_state = READY;
+
+		}break;
+		case READY: {
+			// we check if any of the buttons are pressed first and send msg to host 
+			for (byte i = 0; i < buttonCount; i++)
+			{
+				buttonState[i] = !digitalRead(buttonPins[i]); //inversion for ease read
+				if (buttonActive[i] == false && buttonState[i] == true)
+				{
+					buttonActive[i] = true;
+					Serial1.println("button|" + i + 1);
+					Serial.println("==>button|" + i + 1);
+				}
+				else
+					buttonActive[i] = false;
+			
+			}
+
+		}break;
+	
+	}
+
 }
