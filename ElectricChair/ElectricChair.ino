@@ -144,6 +144,7 @@ void HandlePanelPress()
 		buttonState[i] = !digitalRead(buttonPins[i]); //inversion for ease read
 		if (buttonActive[i] == false && buttonState[i] == true)
 		{
+			//check if we need to repeat msg or only when it's changed ?
 			buttonActive[i] = true;
 			char cMsg[20];
 			sprintf(cMsg, "button|%d", i + 1);
