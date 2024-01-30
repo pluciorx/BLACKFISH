@@ -75,20 +75,22 @@ AccelStepper motorC2R = AccelStepper(AccelStepper::FULL3WIRE, CHAIR2_RIGHT_STEP,
 
 
 enum E_STATE {
-	HOMING,
-	READY,
-	BTN_ACTION_SEND,
-	SEND_PC,
-	MOTOR
+	SETUP = 'S',
+	HOMING = 'H',
+	READY = 'R',	
+	VIBRATE = 'V'
 };
 
-E_STATE _state;
+E_STATE _state = E_STATE::SETUP;
+E_STATE _prevState = E_STATE::SETUP;
 
 void setup() {
-	Serial.begin(COM_BAUD_Debug, SERIAL_8N1);
+	
+	Serial.begin(COM_BAUD_Debug);
 	//Serial1 to talk with host
-	Serial1.begin(COM_BAUD_PC, SERIAL_8N1);
-
+	Serial1.begin(COM_BAUD_PC);
+	Serial.println("<================= Starting ================= >");
+	
 	// Set limit switch inputs
 	pinMode(CHAIR2_LEFT_UPPER_LIMIT, INPUT_PULLUP);
 	pinMode(CHAIR1_LEFT_LOWER_LIMIT, INPUT_PULLUP);
@@ -105,7 +107,7 @@ void setup() {
 		digitalWrite(buttonPins[i], HIGH); //redundant but just in case
 	}
 
-	_state = HOMING;	
+	SetState(E_STATE::HOMING);
 }
 
 
@@ -114,27 +116,42 @@ void loop() {
 	switch (_state)
 	{
 		case HOMING:{
-			_state = READY;
-
+			
+			SetState(E_STATE::READY);
 		}break;
 		case READY: {
 			// we check if any of the buttons are pressed first and send msg to host 
-			for (byte i = 0; i < buttonCount; i++)
-			{
-				buttonState[i] = !digitalRead(buttonPins[i]); //inversion for ease read
-				if (buttonActive[i] == false && buttonState[i] == true)
-				{
-					buttonActive[i] = true;
-					Serial1.println("button|" + i + 1);
-					Serial.println("==>button|" + i + 1);
-				}
-				else
-					buttonActive[i] = false;
-			
-			}
-
-		}break;
-	
+			HandlePanelPress();
+		}break;	
 	}
+}
 
+void SetState(E_STATE newState)
+{
+	Serial.print("State:"); Serial.println((char)newState);
+	
+	if (_state != newState)
+	{
+		_prevState = _state;
+		_state = newState;		
+	}	
+}
+
+void HandlePanelPress()
+{
+	for (byte i = 0; i < buttonCount; i++)
+	{
+		buttonState[i] = !digitalRead(buttonPins[i]); //inversion for ease read
+		if (buttonActive[i] == false && buttonState[i] == true)
+		{
+			buttonActive[i] = true;
+			char cMsg[20];
+			sprintf(cMsg, "button|%d", i + 1);
+			Serial1.println(cMsg);
+			Serial.print("==>"); Serial.println(cMsg);
+		}
+		else
+			buttonActive[i] = false;
+
+	}
 }
