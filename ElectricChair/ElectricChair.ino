@@ -125,10 +125,10 @@ void setup() {
 	//end motors
 	// 
 	//pedals
-	pinMode(PEDAL1_A, INPUT);
-	pinMode(PEDAL1_B, INPUT);
-	pinMode(PEDAL2_A, INPUT);
-	pinMode(PEDAL2_B, INPUT);
+	pinMode(PEDAL1_A, INPUT_PULLUP);
+	pinMode(PEDAL1_B, INPUT_PULLUP);
+	pinMode(PEDAL2_A, INPUT_PULLUP);
+	pinMode(PEDAL2_B, INPUT_PULLUP);
 
 	p1_aLastState = digitalRead(PEDAL1_A);
 	p2_aLastState = digitalRead(PEDAL2_A);
@@ -206,6 +206,7 @@ void HandlePedaling()
 			p1_counter--;
 			p1_angle--;
 		}
+		p1_aLastState = p1_aState;
 		SendPedalState(1, p1_angle);
 	}
 
@@ -222,8 +223,18 @@ void HandlePedaling()
 			p2_angle--;
 
 		}
+		p2_aLastState = p2_aState;
 		SendPedalState(2, p2_angle);
+
 	}
+
+	Serial.print("Position Pedal1: ");
+	Serial.print(int(p1_angle * (-1.8)));
+	Serial.print("deg");
+
+	Serial.print("Position Pedal2: ");
+	Serial.print(int(p2_angle * (-1.8)));
+	Serial.print("deg");
 }
 
 
