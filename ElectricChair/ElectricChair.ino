@@ -21,19 +21,19 @@ byte buttonActive[buttonCount];
 
 //Pedals
 int p1_counter = 0;
+int p1_prevCounter = 0;
 int p1_angle = 0;
-int p1_aState;
-int p1_aLastState;
+bool p1_prevA = 1, p1_prevB = 1;
 
 int p2_counter = 0;
+int p2_prevCounter = 0;
 int p2_angle = 0;
-int p2_aState;
-int p2_aLastState;
+bool p2_prevA = 1, p2_prevB = 1;
 
- #define PEDAL1_A 31
- #define PEDAL1_B 33
- #define PEDAL2_A 35
- #define PEDAL2_B 37
+#define PEDAL1_A 31
+#define PEDAL1_B 33
+#define PEDAL2_A 35
+#define PEDAL2_B 37
 
 //Com
 #define COM_BAUD_Debug 115200
@@ -130,9 +130,6 @@ void setup() {
 	pinMode(PEDAL2_A, INPUT_PULLUP);
 	pinMode(PEDAL2_B, INPUT_PULLUP);
 
-	p1_aLastState = digitalRead(PEDAL1_A);
-	p2_aLastState = digitalRead(PEDAL2_A);
-
 	//end pedals
 	SetState(E_STATE::HOMING);
 }
@@ -191,50 +188,39 @@ void SendPedalState(byte pedalNo, int pedalAngle)
 	sprintf(cMsg, "pedal%d|%d", pedalNo, pedalAngle);
 	Serial1.println(cMsg);
 	Serial.print("==>"); Serial.println(cMsg);
+	
+	Serial.print("Position Pedal_"+String(pedalNo)+":");
+	Serial.print(int(pedalAngle * (-1.8)));
+	Serial.println("deg");
 }
 
 void HandlePedaling()
 {
-	p1_aState = digitalRead(PEDAL1_A);
+	bool A = digitalRead(PEDAL1_A), B = digitalRead(PEDAL1_B);
 
-	if (p1_aState != p1_aLastState) {
-		if (digitalRead(PEDAL1_B) != p1_aState) {
-			p1_counter++;
-			p1_angle++;
-		}
-		else {
-			p1_counter--;
-			p1_angle--;
-		}
-		p1_aLastState = p1_aState;
-		SendPedalState(1, p1_angle);
+	p1_counter += (A ^ p1_prevA) | (B ^ p1_prevB) ? A ^ p1_prevB ? 1 : -1 : 0;
+
+	p1_prevA = A;
+	p1_prevB = B;
+	if (p1_counter != p1_prevCounter)
+	{
+		SendPedalState(1, p1_counter);
+		p1_prevCounter = p1_counter;
 	}
 
-	p2_aState = digitalRead(PEDAL2_A);
+	A = digitalRead(PEDAL2_A), B = digitalRead(PEDAL2_B);
 
-	if (p2_aState != p2_aLastState) {
-		if (digitalRead(PEDAL2_B) != p2_aState) {
-			p2_counter++;
-			p2_angle++;
-			
-		}
-		else {
-			p2_counter--;
-			p2_angle--;
+	p2_counter += (A ^ p2_prevA) | (B ^ p2_prevB) ? A ^ p2_prevB ? 1 : -1 : 0;
+	 
+	p2_prevA = A;
+	p2_prevB = B;
 
-		}
-		p2_aLastState = p2_aState;
-		SendPedalState(2, p2_angle);
-
+	if (p2_counter != p2_prevCounter)
+	{
+		SendPedalState(2, p2_counter);
+		p2_prevCounter = p2_counter;
 	}
-
-	Serial.print("Position Pedal1: ");
-	Serial.print(int(p1_angle * (-1.8)));
-	Serial.print("deg");
-
-	Serial.print("Position Pedal2: ");
-	Serial.print(int(p2_angle * (-1.8)));
-	Serial.print("deg");
+	
 }
 
 
