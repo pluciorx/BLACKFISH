@@ -1,6 +1,5 @@
 #include <Arduino.h>
-#include <AccelStepper.h>
-#include <MultiStepper.h>
+
 // Pin definitions
 //buttons (2 x 4 )
 
@@ -19,7 +18,23 @@ byte buttonPins[] = { P1_B1, P1_B2, P1_B3, P1_B4, P2_B1, P2_B2, P2_B3, P2_B4 };
 byte buttonState[buttonCount];
 byte buttonActive[buttonCount];
 // end buttons
-// 
+
+//Pedals
+int p1_counter = 0;
+int p1_angle = 0;
+int p1_aState;
+int p1_aLastState;
+
+int p2_counter = 0;
+int p2_angle = 0;
+int p2_aState;
+int p2_aLastState;
+
+ #define PEDAL1_A 31
+ #define PEDAL1_B 33
+ #define PEDAL2_A 35
+ #define PEDAL2_B 37
+
 //Com
 #define COM_BAUD_Debug 115200
 #define COM_BAUD_PC 115200
@@ -68,10 +83,10 @@ byte motorControlPins[] = {
 long maxTravel = 200000; // max distance you could be away from zero switch
 long maxBackup = 200; // max distance to correct limit switch overshoot
 
-AccelStepper motorC1L = AccelStepper(AccelStepper::FULL3WIRE, CHAIR1_LEFT_STEP, CHAIR1_LEFT_DIR);
-AccelStepper motorC1R = AccelStepper(AccelStepper::FULL3WIRE, CHAIR1_RIGHT_STEP, CHAIR1_RIGHT_DIR);
-AccelStepper motorC2L = AccelStepper(AccelStepper::FULL3WIRE, CHAIR2_LEFT_STEP, CHAIR2_LEFT_DIR);
-AccelStepper motorC2R = AccelStepper(AccelStepper::FULL3WIRE, CHAIR2_RIGHT_STEP, CHAIR2_RIGHT_DIR);
+//AccelStepper motorC1L = AccelStepper(AccelStepper::FULL3WIRE, CHAIR1_LEFT_STEP, CHAIR1_LEFT_DIR);
+//AccelStepper motorC1R = AccelStepper(AccelStepper::FULL3WIRE, CHAIR1_RIGHT_STEP, CHAIR1_RIGHT_DIR);
+//AccelStepper motorC2L = AccelStepper(AccelStepper::FULL3WIRE, CHAIR2_LEFT_STEP, CHAIR2_LEFT_DIR);
+//AccelStepper motorC2R = AccelStepper(AccelStepper::FULL3WIRE, CHAIR2_RIGHT_STEP, CHAIR2_RIGHT_DIR);
 
 
 enum E_STATE {
@@ -122,6 +137,7 @@ void loop() {
 		case READY: {
 			// we check if any of the buttons are pressed first and send msg to host 
 			HandlePanelPress();
+			HandlePedaling();
 		}break;	
 	}
 }
@@ -156,3 +172,46 @@ void HandlePanelPress()
 
 	}
 }
+
+void SendPedalState(byte pedalNo, int pedalAngle)
+{
+	char cMsg[20];
+	sprintf(cMsg, "pedal%d|%d", pedalNo, pedalAngle);
+	Serial1.println(cMsg);
+	Serial.print("==>"); Serial.println(cMsg);
+}
+
+void HandlePedaling()
+{
+	p1_aState = digitalRead(PEDAL1_A);
+
+	if (p1_aState != p1_aLastState) {
+		if (digitalRead(PEDAL1_B) != p1_aState) {
+			p1_counter++;
+			p1_angle++;
+		}
+		else {
+			p1_counter--;
+			p1_angle--;
+		}
+		SendPedalState(1, p1_angle);
+	}
+
+	p2_aState = digitalRead(PEDAL2_A);
+
+	if (p2_aState != p1_aLastState) {
+		if (digitalRead(PEDAL2_B) != p2_aState) {
+			p2_counter++;
+			p2_angle++;
+			
+		}
+		else {
+			p2_counter--;
+			p2_angle--;
+
+		}
+		SendPedalState(2, p1_angle);
+	}
+}
+
+
