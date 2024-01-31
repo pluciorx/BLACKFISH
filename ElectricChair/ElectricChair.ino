@@ -2,6 +2,13 @@
 
 // Pin definitions
 //buttons (2 x 4 )
+// 
+//Defines so the device can do a self reset
+#define SYSRESETREQ    (1<<2)
+#define VECTKEY        (0x05fa0000UL)
+#define VECTKEY_MASK   (0x0000ffffUL)
+#define AIRCR          (*(uint32_t*)0xe000ed0cUL) // fixed arch-defined address
+#define REQUEST_EXTERNAL_RESET (AIRCR=(AIRCR&VECTKEY_MASK)|VECTKEY|SYSRESETREQ)
 
 #define P1_B1 12
 #define P1_B2 11
@@ -93,7 +100,8 @@ enum E_STATE {
 	SETUP = 'S',
 	HOMING = 'H',
 	READY = 'R',	
-	VIBRATE = 'V'
+	VIBRATE = 'V',
+	KILL = 'K'
 };
 
 E_STATE _state = E_STATE::SETUP;
@@ -135,20 +143,32 @@ void setup() {
 }
 
 
+
 void loop() {
 	
 	switch (_state)
 	{
 		case HOMING:{
-			
+			//HomeChairs();
+			//HomePedals();
 			SetState(E_STATE::READY);
 		}break;
 		case READY: {
-			// we check if any of the buttons are pressed first and send msg to host 
+			ProcessIncommingMsg(Serial1);
 			HandlePanelPress();
 			HandlePedaling();
-		}break;	
+			
+			//SetState(E_STATE::KILL);
+		}break;
+		case KILL: {
+			REQUEST_EXTERNAL_RESET;
+		}break;
 	}
+}
+
+void ProcessIncommingMsg(UARTClass sourceSerial)
+{
+
 }
 
 void SetState(E_STATE newState)
