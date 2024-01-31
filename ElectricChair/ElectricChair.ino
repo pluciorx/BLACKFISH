@@ -49,7 +49,7 @@ byte pedalResistance = 0;
 #define MAX_INPUT 200U
 
 char input_line[MAX_INPUT];
-
+char error[MAX_INPUT];
 //motors (4 for chairs 2 for pedals)
 //Chair 1 
 #define CHAIR1_LEFT_UPPER_LIMIT 52
@@ -113,7 +113,8 @@ enum E_STATE {
 	EXECUTE_CMD = 'E',
 	READY = 'R',	
 	VIBRATE = 'V',
-	KILL = 'K'
+	KILL = 'K',
+	ERROR = 'X'
 };
 
 enum CommandType {
@@ -171,8 +172,7 @@ void loop() {
 	switch (_state)
 	{
 		case HOMING:{
-			
-			
+
 			//HomeChairs();
 			//HomePedals();
 			SetState(E_STATE::LISTENING);
@@ -183,7 +183,12 @@ void loop() {
 			SetState(E_STATE::READY);
 		}break;
 		case EXECUTE_CMD: {
-			ExecuteCMD();
+			if(!ExecuteCMD()) 
+			{
+				SetError("Command execution failure");
+				SetState(E_STATE::ERROR);
+				
+			}
 			SetState(E_STATE::LISTENING);
 		}break;
 
@@ -196,28 +201,46 @@ void loop() {
 		}break;
 		case KILL: {
 			REQUEST_EXTERNAL_RESET;
+
+		}break;
+		case ERROR: {
+			Serial.print("ERROR has occured:"); Serial.println(error);
+
 		}break;
 	}
+}
+void SetError(char* errorInput )
+{
+	strncpy(error, errorInput, 100);
+	Serial.print(F("Error Set:")); Serial.println(error);
 }
 
 bool ExecuteCMD()
 {
-
 	CommandType cmd = GetCMDFromInput();
 	switch (cmd)
 	{
 	case VibStart:
-		break;
+	{
+		
+	}break;
 	case VibStop:
-		break;
+	{
+
+	}break;
 	case PedalResistance:
-		break;
+	{
+
+	}break;
 	case Ping:
 	{
 		Serial1.println("pong");
+		return true;
 	}break;
 	default:
-		break;
+	{
+		return false;
+	}break;
 	}
 	//startVibration
 	//stopVibration
@@ -275,7 +298,6 @@ bool commBuild(const char inByte, int serialNum)
 
 	switch (inByte)
 	{
-
 	case '\n':   // end of text
 	{
 		input_line[input_pos] = 0;  // terminating null byte
