@@ -41,6 +41,7 @@ bool p2_prevA = 1, p2_prevB = 1;
 #define PEDAL1_B 33
 #define PEDAL2_A 35
 #define PEDAL2_B 37
+byte pedalResistance = 0; 
 
 //Com
 #define COM_BAUD_Debug 115200
@@ -76,6 +77,9 @@ char input_line[MAX_INPUT];
 #define CHAIR2_LEFT_STEP 45
 #define CHAIR2_LEFT_DIR 43
 
+//TODO: ADD oil valve motor.
+
+
 byte motorControlPins[] = { 
 	CHAIR1_LEFT_EN		,
 	CHAIR1_LEFT_STEP	, 
@@ -110,6 +114,13 @@ enum E_STATE {
 	READY = 'R',	
 	VIBRATE = 'V',
 	KILL = 'K'
+};
+
+enum CommandType {
+	VibStart,
+	VibStop,
+	PedalResistance,
+	Ping
 };
 
 E_STATE _state = E_STATE::SETUP;
@@ -191,13 +202,59 @@ void loop() {
 
 bool ExecuteCMD()
 {
+
+	CommandType cmd = GetCMDFromInput();
+	switch (cmd)
+	{
+	case VibStart:
+		break;
+	case VibStop:
+		break;
+	case PedalResistance:
+		break;
+	default:
+		break;
+	}
 	//startVibration
 	//stopVibration
 	//pedalResistance|ID
 	Serial.println(input_line);
 	return true;
 }
+CommandType GetCMDFromInput()
+{
+	if (input_line == "startVibration")
+	{
+		Serial.println("Vibration ON....");
+		return CommandType::VibStart;
+	}
+	if (input_line == "stopVibration")
+	{
+		Serial.println("Vibration OFF");
+		return CommandType::VibStop;
+	}
+	char* p;
+	p = strstr(input_line, "pedalResistance|");
+	if (p)
+	{
+		char level[1];
+		 level[0] = input_line[strlen(input_line) - 1];
+		
+		 if (isdigit(level[0])) {     // checks if end_char is a number
+			 pedalResistance = stringToByte(level);
+			 if (pedalResistance > 0 && pedalResistance <= 4)
+			 {  
+				 Serial.print("Pedal Resistance:"); Serial.println(pedalResistance);
+				 return CommandType::PedalResistance;
+			 }  				 
+		}		
+		Serial.print("Invalid resistance:"); Serial.println(level[0]);
+	}
+}
 
+byte stringToByte(char* src) {
+	return byte(atoi(src));
+}
 bool ProcessIncommingMsg(UARTClass sourceSerial)
 {
 	while (sourceSerial.available())
