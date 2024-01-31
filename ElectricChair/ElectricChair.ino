@@ -191,6 +191,9 @@ void loop() {
 
 bool ExecuteCMD()
 {
+	//startVibration
+	//stopVibration
+	//pedalResistance|ID
 	Serial.println(input_line);
 	return true;
 }
