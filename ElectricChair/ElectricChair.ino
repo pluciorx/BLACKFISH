@@ -45,8 +45,11 @@ bool p2_prevA = 1, p2_prevB = 1;
 //Com
 #define COM_BAUD_Debug 115200
 #define COM_BAUD_PC 115200
+#define MAX_INPUT 200U
 
-//motors (4 motors
+char input_line[MAX_INPUT];
+
+//motors (4 for chairs 2 for pedals)
 //Chair 1 
 #define CHAIR1_LEFT_UPPER_LIMIT 52
 #define CHAIR1_LEFT_LOWER_LIMIT 50
@@ -90,6 +93,9 @@ byte motorControlPins[] = {
 long maxTravel = 200000; // max distance you could be away from zero switch
 long maxBackup = 200; // max distance to correct limit switch overshoot
 
+bool IsVibrationEnabled = false;
+
+
 //AccelStepper motorC1L = AccelStepper(AccelStepper::FULL3WIRE, CHAIR1_LEFT_STEP, CHAIR1_LEFT_DIR);
 //AccelStepper motorC1R = AccelStepper(AccelStepper::FULL3WIRE, CHAIR1_RIGHT_STEP, CHAIR1_RIGHT_DIR);
 //AccelStepper motorC2L = AccelStepper(AccelStepper::FULL3WIRE, CHAIR2_LEFT_STEP, CHAIR2_LEFT_DIR);
@@ -99,6 +105,8 @@ long maxBackup = 200; // max distance to correct limit switch overshoot
 enum E_STATE {
 	SETUP = 'S',
 	HOMING = 'H',
+	LISTENING = 'L',
+	EXECUTE_CMD = 'E',
 	READY = 'R',	
 	VIBRATE = 'V',
 	KILL = 'K'
@@ -106,6 +114,7 @@ enum E_STATE {
 
 E_STATE _state = E_STATE::SETUP;
 E_STATE _prevState = E_STATE::SETUP;
+
 
 void setup() {
 	
@@ -138,6 +147,8 @@ void setup() {
 	pinMode(PEDAL2_A, INPUT_PULLUP);
 	pinMode(PEDAL2_B, INPUT_PULLUP);
 
+	//DUMP whatever is in the serial and wait for the clean go.
+	while (Serial1.available()) Serial2.read();
 	//end pedals
 	SetState(E_STATE::HOMING);
 }
@@ -149,16 +160,28 @@ void loop() {
 	switch (_state)
 	{
 		case HOMING:{
+			
+			
 			//HomeChairs();
 			//HomePedals();
+			SetState(E_STATE::LISTENING);
+		}break;
+		case LISTENING: {
+			if (ProcessIncommingMsg(Serial1)) SetState(E_STATE::EXECUTE_CMD);
+			
 			SetState(E_STATE::READY);
 		}break;
+		case EXECUTE_CMD: {
+			
+			SetState(E_STATE::LISTENING);
+		}break;
+
 		case READY: {
-			ProcessIncommingMsg(Serial1);
+			
 			HandlePanelPress();
 			HandlePedaling();
 			
-			//SetState(E_STATE::KILL);
+			SetState(E_STATE::LISTENING);
 		}break;
 		case KILL: {
 			REQUEST_EXTERNAL_RESET;
@@ -166,10 +189,43 @@ void loop() {
 	}
 }
 
-void ProcessIncommingMsg(UARTClass sourceSerial)
+bool ProcessIncommingMsg(UARTClass sourceSerial)
 {
-
+	while (sourceSerial.available())
+	{
+		byte chr1 = sourceSerial.read();
+		if (commBuild(chr1, 1)) return true;		
+	}
+	return false;
 }
+
+bool commBuild(const char inByte, int serialNum)
+{
+	static unsigned int input_pos = 0;
+
+	switch (inByte)
+	{
+
+	case '\n':   // end of text
+	{
+		input_line[input_pos] = 0;  // terminating null byte
+		input_pos = 0;
+		return true;
+	}
+	break;
+	case '\r':   // discard carriage return - t should never get here
+		break;
+
+	default: {
+		// keep adding if not full ... allow for terminating null byte
+		if (input_pos < (MAX_INPUT - 1))
+			input_line[input_pos++] = inByte;
+		return false;
+	}break;
+
+	}  // end of switch
+}
+
 
 void SetState(E_STATE newState)
 {
