@@ -47,7 +47,7 @@ byte pedalResistance = 0;
 //Com
 #define COM_BAUD_Debug 115200
 #define COM_BAUD_PC 115200
-#define MAX_INPUT 200U
+#define MAX_INPUT 50
 
 char input_line[MAX_INPUT];
 char error[MAX_INPUT];
@@ -122,7 +122,8 @@ enum CommandType {
 	VibStart,
 	VibStop,
 	PedalResistance,
-	Ping
+	Ping,
+	Unknown
 };
 
 E_STATE _state = E_STATE::SETUP;
@@ -179,12 +180,21 @@ void loop() {
 			SetState(E_STATE::LISTENING);
 		}break;
 		case LISTENING: {
+#if DEBUG == 1 
+			if (ProcessIncommingMsg(Serial))
+			{
+				SetState(E_STATE::EXECUTE_CMD);
+			}
+#endif
+
+#if DEBUG == 0 
 			if (ProcessIncommingMsg(Serial1)) SetState(E_STATE::EXECUTE_CMD);
-			
-			SetState(E_STATE::READY);
+#endif
+
 		}break;
 		case EXECUTE_CMD: {
-			if(!ExecuteCMD()) 
+			CommandType cmd = GetCMDFromInput();
+			if(!ExecuteCMD(cmd)) 
 			{
 				SetError("Command execution failure");
 				SetState(E_STATE::ERROR);
@@ -216,26 +226,33 @@ void SetError(char* errorInput )
 	Serial.print(F("Error Set:")); Serial.println(error);
 }
 
-bool ExecuteCMD()
-{
-	CommandType cmd = GetCMDFromInput();
+bool ExecuteCMD(CommandType cmd)
+{		
 	switch (cmd)
 	{
 	case VibStart: //startVibration
 	{
+		Serial.println("==>Vibration ON");
 		
 	}break;
 	case VibStop://stopVibration
 	{
-
+		Serial.println("==>Vibration OFF");
 	}break;
 	case PedalResistance://pedalResistance|ID
 	{
+		Serial.println("==>Pedals resistance");
 
 	}break;
 	case Ping:
 	{
+		Serial.println("==>pong");
 		Serial1.println("pong");
+		return true;
+	}break;
+	case Unknown:
+	{
+		Serial.println("Unknown Command received:");		
 		return true;
 	}break;
 	default:
@@ -243,25 +260,30 @@ bool ExecuteCMD()
 		return false;
 	}break;
 	}
-	
-	Serial.println(input_line);
-	return true;
 }
 CommandType GetCMDFromInput()
 {
-	if (input_line == "startVibration")
+	CommandType cmdFound = CommandType::Unknown;
+	
+	if (strcmp(input_line, "ping") == NULL)
+	{
+		Serial.println("Pong....");		
+		cmdFound = CommandType::Ping;
+	}
+
+	if (strcmp(input_line, "startVibration") == NULL)
 	{
 		Serial.println("Vibration ON....");
-		return CommandType::VibStart;
+		cmdFound = CommandType::VibStart;
 	}
-	if (input_line == "stopVibration")
+
+	if (strcmp(input_line, "stopVibration") == NULL)
 	{
 		Serial.println("Vibration OFF");
-		return CommandType::VibStop;
+		cmdFound = CommandType::VibStop;
 	}
-	char* p;
-	p = strstr(input_line, "pedalResistance|");
-	if (p)
+
+	if (strcmp(input_line, "pedalResistance|") == NULL)
 	{
 		char level[1];
 		 level[0] = input_line[strlen(input_line) - 1];
@@ -271,11 +293,13 @@ CommandType GetCMDFromInput()
 			 if (pedalResistance > 0 && pedalResistance <= 4)
 			 {  
 				 Serial.print("Pedal Resistance:"); Serial.println(pedalResistance);
-				 return CommandType::PedalResistance;
+				 cmdFound = CommandType::PedalResistance;
 			 }  				 
 		}		
 		Serial.print("Invalid resistance:"); Serial.println(level[0]);
 	}
+	Serial.print("CMD Found:"); Serial.println(cmdFound);
+	return cmdFound;
 }
 
 byte stringToByte(char* src) {
@@ -287,7 +311,10 @@ bool ProcessIncommingMsg(UARTClass sourceSerial)
 	while (sourceSerial.available())
 	{
 		byte chr1 = sourceSerial.read();
-		if (commBuild(chr1, 1)) return true;		
+		if (commBuild(chr1, 1))
+		{
+			return true;
+		}
 	}
 	return false;
 }
@@ -322,7 +349,7 @@ bool commBuild(const char inByte, int serialNum)
 void SetState(E_STATE newState)
 {
 
-#if DEBUG == 1
+#if DEBUG == 2
 	Serial.print("State:"); Serial.println((char)newState);
 #endif //  DEBUG = 1
 
@@ -391,8 +418,7 @@ void HandlePedaling()
 	{
 		SendPedalState(2, p2_counter);
 		p2_prevCounter = p2_counter;
-	}
-	
+	}	
 }
 
 
