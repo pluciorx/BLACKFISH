@@ -1,5 +1,6 @@
 #include <Arduino.h>
 
+#define DEBUG 1
 // Pin definitions
 //buttons (2 x 4 )
 // 
@@ -220,15 +221,15 @@ bool ExecuteCMD()
 	CommandType cmd = GetCMDFromInput();
 	switch (cmd)
 	{
-	case VibStart:
+	case VibStart: //startVibration
 	{
 		
 	}break;
-	case VibStop:
+	case VibStop://stopVibration
 	{
 
 	}break;
-	case PedalResistance:
+	case PedalResistance://pedalResistance|ID
 	{
 
 	}break;
@@ -242,9 +243,7 @@ bool ExecuteCMD()
 		return false;
 	}break;
 	}
-	//startVibration
-	//stopVibration
-	//pedalResistance|ID
+	
 	Serial.println(input_line);
 	return true;
 }
@@ -282,6 +281,7 @@ CommandType GetCMDFromInput()
 byte stringToByte(char* src) {
 	return byte(atoi(src));
 }
+
 bool ProcessIncommingMsg(UARTClass sourceSerial)
 {
 	while (sourceSerial.available())
@@ -321,8 +321,11 @@ bool commBuild(const char inByte, int serialNum)
 
 void SetState(E_STATE newState)
 {
+
+#if DEBUG == 1
 	Serial.print("State:"); Serial.println((char)newState);
-	
+#endif //  DEBUG = 1
+
 	if (_state != newState)
 	{
 		_prevState = _state;
@@ -346,7 +349,6 @@ void HandlePanelPress()
 		}
 		else
 			buttonActive[i] = false;
-
 	}
 }
 
@@ -356,10 +358,12 @@ void SendPedalState(byte pedalNo, int pedalAngle)
 	sprintf(cMsg, "pedal%d|%d", pedalNo, pedalAngle);
 	Serial1.println(cMsg);
 	Serial.print("==>"); Serial.println(cMsg);
-	
+
+#if DEBUG == 1 	
 	Serial.print("Position Pedal_"+String(pedalNo)+":");
 	Serial.print(int(pedalAngle * (-1.8)));
 	Serial.println("deg");
+#endif
 }
 
 void HandlePedaling()
