@@ -49,7 +49,7 @@ byte pedalResistance = 0;
 #define COM_BAUD_PC 115200
 #define MAX_INPUT 50
 
-char input_line[MAX_INPUT];
+char input_line[MAX_INPUT] ="";
 char error[MAX_INPUT];
 //motors (4 for chairs 2 for pedals)
 //Chair 1 
@@ -180,21 +180,29 @@ void loop() {
 			SetState(E_STATE::LISTENING);
 		}break;
 		case LISTENING: {
-#if DEBUG == 1 
+#if DEBUG == 1
+			
 			if (ProcessIncommingMsg(Serial))
-			{
+			{						
 				SetState(E_STATE::EXECUTE_CMD);
-			}
+			}else 
+				SetState(E_STATE::READY);
 #endif
 
 #if DEBUG == 0 
-			if (ProcessIncommingMsg(Serial1)) SetState(E_STATE::EXECUTE_CMD);
+			if (ProcessIncommingMsg(Serial1))
+			{
+				SetState(E_STATE::EXECUTE_CMD);
+			}
+			else 
+				SetState(E_STATE::READY);
 #endif
 
 		}break;
 		case EXECUTE_CMD: {
-			CommandType cmd = GetCMDFromInput();
-			if(!ExecuteCMD(cmd)) 
+			CommandType cmd = GetCMDFromInput(input_line);
+			
+			if(cmd != CommandType::Unknown && !ExecuteCMD(cmd)) 
 			{
 				SetError("Command execution failure");
 				SetState(E_STATE::ERROR);
@@ -220,6 +228,7 @@ void loop() {
 		}break;
 	}
 }
+
 void SetError(char* errorInput )
 {
 	strncpy(error, errorInput, 100);
@@ -232,16 +241,16 @@ bool ExecuteCMD(CommandType cmd)
 	{
 	case VibStart: //startVibration
 	{
-		Serial.println("==>Vibration ON");
+		Serial.println("Vibration ON");
 		
 	}break;
 	case VibStop://stopVibration
 	{
-		Serial.println("==>Vibration OFF");
+		Serial.println("Vibration OFF");
 	}break;
 	case PedalResistance://pedalResistance|ID
 	{
-		Serial.println("==>Pedals resistance");
+		Serial.print("Pedals resistance"); Serial.println(pedalResistance);
 
 	}break;
 	case Ping:
@@ -252,7 +261,7 @@ bool ExecuteCMD(CommandType cmd)
 	}break;
 	case Unknown:
 	{
-		Serial.println("Unknown Command received:");		
+		Serial.print("Unknown Command received:'"); Serial.print(input_line); Serial.println('\'');
 		return true;
 	}break;
 	default:
@@ -261,44 +270,44 @@ bool ExecuteCMD(CommandType cmd)
 	}break;
 	}
 }
-CommandType GetCMDFromInput()
+CommandType GetCMDFromInput(const char* input)
 {
 	CommandType cmdFound = CommandType::Unknown;
-	
-	if (strcmp(input_line, "ping") == NULL)
+	Serial.print("<=="); Serial.println(input_line);
+	if (strcmp(input, "ping") == NULL)
 	{
-		Serial.println("Pong....");		
 		cmdFound = CommandType::Ping;
 	}
 
-	if (strcmp(input_line, "startVibration") == NULL)
+	if (strcmp(input, "startVibration") == NULL)
 	{
-		Serial.println("Vibration ON....");
 		cmdFound = CommandType::VibStart;
 	}
 
-	if (strcmp(input_line, "stopVibration") == NULL)
+	if (strcmp(input, "stopVibration") == NULL)
 	{
-		Serial.println("Vibration OFF");
 		cmdFound = CommandType::VibStop;
 	}
 
-	if (strcmp(input_line, "pedalResistance|") == NULL)
+	if (strstr(input, "pedalResistance|") != NULL)
 	{
 		char level[1];
-		 level[0] = input_line[strlen(input_line) - 1];
-		
-		 if (isdigit(level[0])) {     // checks if end_char is a number
-			 pedalResistance = stringToByte(level);
-			 if (pedalResistance > 0 && pedalResistance <= 4)
-			 {  
-				 Serial.print("Pedal Resistance:"); Serial.println(pedalResistance);
-				 cmdFound = CommandType::PedalResistance;
-			 }  				 
-		}		
-		Serial.print("Invalid resistance:"); Serial.println(level[0]);
+		level[0] = input_line[strlen(input_line) - 1];	
+		if (isdigit(level[0])) {     // checks if end_char is a number
+			pedalResistance = stringToByte(level);
+			if (pedalResistance >= 0 && pedalResistance <= 4)
+			{				 
+			 cmdFound = CommandType::PedalResistance;
+			}
+			else {
+				Serial.print("Invalid resistance range:"); Serial.println(level[0]);
+			}
+		}
+		else {
+			Serial.print("Invalid resistance:"); Serial.println(level[0]);
+		}
 	}
-	Serial.print("CMD Found:"); Serial.println(cmdFound);
+	input_line[0] = '\0';
 	return cmdFound;
 }
 
@@ -309,10 +318,9 @@ byte stringToByte(char* src) {
 bool ProcessIncommingMsg(UARTClass sourceSerial)
 {
 	while (sourceSerial.available())
-	{
+	{	
 		byte chr1 = sourceSerial.read();
-		if (commBuild(chr1, 1))
-		{
+		if(commBuild(chr1, 1)) {
 			return true;
 		}
 	}
@@ -333,8 +341,9 @@ bool commBuild(const char inByte, int serialNum)
 	}
 	break;
 	case '\r':   // discard carriage return - t should never get here
-		break;
-
+	{
+		return false;
+	}break;
 	default: {
 		// keep adding if not full ... allow for terminating null byte
 		if (input_pos < (MAX_INPUT - 1))
