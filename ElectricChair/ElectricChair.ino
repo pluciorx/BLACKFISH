@@ -172,7 +172,7 @@ void loop() {
 			SetState(E_STATE::READY);
 		}break;
 		case EXECUTE_CMD: {
-			
+			ExecuteCMD();
 			SetState(E_STATE::LISTENING);
 		}break;
 
@@ -187,6 +187,12 @@ void loop() {
 			REQUEST_EXTERNAL_RESET;
 		}break;
 	}
+}
+
+bool ExecuteCMD()
+{
+	Serial.println(input_line);
+	return true;
 }
 
 bool ProcessIncommingMsg(UARTClass sourceSerial)
