@@ -212,6 +212,10 @@ bool ExecuteCMD()
 		break;
 	case PedalResistance:
 		break;
+	case Ping:
+	{
+		Serial1.println("pong");
+	}break;
 	default:
 		break;
 	}
