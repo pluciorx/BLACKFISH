@@ -162,7 +162,7 @@ void setup() {
 	Serial.begin(COM_BAUD_Debug);
 	//Serial1 to talk with host
 	Serial1.begin(COM_BAUD_PC);
-	Serial.println("<================= Starting =================>");
+	Serial.println(F("<================= Starting =================>"));
 	
 	//motors
 	// Set limit switch inputs
@@ -202,7 +202,6 @@ void setup() {
 	motorPedals.enableOutputs();
 	motorPedals.setMaxSpeed(500);
 
-	
 	//end motors
 	
 
@@ -273,7 +272,7 @@ void loop() {
 
 		}break;
 		case ERROR: {
-			Serial.print("ERROR has occured:"); Serial.println(error);
+			Serial.print(F("ERROR has occured:")); Serial.println(error);
 
 		}break;
 	}
@@ -282,7 +281,9 @@ void loop() {
 void SetError(char* errorInput )
 {
 	strncpy(error, errorInput, 100);
+#if DEBUG == 1
 	Serial.print(F("Error Set:")); Serial.println(error);
+#endif
 }
 
 void HandleVibrations()
@@ -328,30 +329,30 @@ bool ExecuteCMD(CommandType cmd)
 	{
 	case VibStart: //startVibration
 	{
-		Serial.println("Vibration ON");
+		Serial.println(F("Vibration ON"));
 		IsVibrationEnabled = true;
 		
 	}break;
 	case VibStop://stopVibration
 	{
-		Serial.println("Vibration OFF");
+		Serial.println(F("Vibration OFF"));
 		IsVibrationEnabled = false;
 	}break;
 	case PedalResistance://pedalResistance|ID
 	{
-		Serial.print("Pedals resistance"); Serial.println(pedalResistance);
+		Serial.print(F("Pedals resistance")); Serial.println(pedalResistance);
 
 	}break;
 	case Ping:
 	{
 		//reserved for future use...
-		Serial.println("==>pong");
-		Serial1.println("pong");
+		Serial.println(F("==>pong"));
+		Serial1.println(F("pong"));
 		return true;
 	}break;
 	case Unknown:
 	{
-		Serial.print("Unknown Command received:'"); Serial.print(input_line); Serial.println('\'');
+		Serial.print(F("Unknown Command received:'")); Serial.print(input_line); Serial.println(F('\''));
 		return true;
 	}break;
 	default:
@@ -363,7 +364,7 @@ bool ExecuteCMD(CommandType cmd)
 CommandType GetCMDFromInput(const char* input)
 {
 	CommandType cmdFound = CommandType::Unknown;
-	Serial.print("<=="); Serial.println(input_line);
+	Serial.print(F("<==")); Serial.println(input_line);
 	if (strcmp(input, "ping") == NULL)
 	{
 		cmdFound = CommandType::Ping;
@@ -390,11 +391,11 @@ CommandType GetCMDFromInput(const char* input)
 			 cmdFound = CommandType::PedalResistance;
 			}
 			else {
-				Serial.print("Invalid resistance range:"); Serial.println(level[0]);
+				Serial.print(F("Invalid resistance range:")); Serial.println(level[0]);
 			}
 		}
 		else {
-			Serial.print("Invalid resistance:"); Serial.println(level[0]);
+			Serial.print(F("Invalid resistance:")); Serial.println(level[0]);
 		}
 	}
 	input_line[0] = '\0';
@@ -470,7 +471,7 @@ void HandlePanelPress()
 			char cMsg[20];
 			sprintf(cMsg, "button|%d", i + 1);
 			Serial1.println(cMsg);
-			Serial.print("==>"); Serial.println(cMsg);
+			Serial.print(F("==>")); Serial.println(cMsg);
 		}
 		else
 			buttonActive[i] = false;
@@ -482,7 +483,7 @@ void SendPedalState(byte pedalNo, int pedalAngle)
 	char cMsg[20];
 	sprintf(cMsg, "pedal%d|%d", pedalNo, pedalAngle);
 	Serial1.println(cMsg);
-	Serial.print("==>"); Serial.println(cMsg);
+	Serial.print(F("==>")); Serial.println(cMsg);
 
 #if DEBUG == 1 	
 	Serial.print("Position Pedal_"+String(pedalNo)+":");
