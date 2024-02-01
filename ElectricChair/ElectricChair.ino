@@ -61,12 +61,14 @@ char error[MAX_INPUT];
 #define CHAIR1_LEFT_EN 44
 #define CHAIR1_LEFT_STEP 2
 #define CHAIR1_LEFT_DIR 3
+volatile bool IsC1LHomed = false;
 
 #define CHAIR1_RIGHT_UPPER_LIMIT 49
 #define CHAIR1_RIGHT_ALARM 47
 #define CHAIR1_RIGHT_EN 45
 #define CHAIR1_RIGHT_STEP 4
 #define CHAIR1_RIGHT_DIR 5
+volatile bool IsC1RHomed = false;
 
 //Chair 2 
 #define CHAIR2_RIGHT_UPPER_LIMIT 40
@@ -74,26 +76,28 @@ char error[MAX_INPUT];
 #define CHAIR2_RIGHT_EN 36
 #define CHAIR2_RIGHT_STEP 6
 #define CHAIR2_RIGHT_DIR 7
-
+volatile bool IsC2RHomed = false;
 
 #define CHAIR2_LEFT_UPPER_LIMIT 41
 #define CHAIR2_LEFT_ALARM 39
 #define CHAIR2_LEFT_EN 37
 #define CHAIR2_LEFT_STEP 8
 #define CHAIR2_LEFT_DIR 9
-
-
+volatile bool IsC2LHomed = false;
 
 //Resistance
 #define PEDALL_UPPER_LIMIT 34
 #define PEDALL_EN 30
 #define PEDALL_STEP 10
 #define PEDALL_DIR 11
+volatile bool IsPLHomed = false;
 
 #define PEDALR_UPPER_LIMIT 33
 #define PEDALR_EN 29
 #define PEDALR_STEP 12 
 #define PEDALR_DIR 13
+volatile bool IsPRHomed = false;
+
 #define PEDALS_MAX_MAXDISTANCE 20000
 #define PEDALS_BASE_SPEED 500
 
@@ -130,8 +134,6 @@ byte motorControlPins[] = {
 	PEDALR_DIR 			,
  };
 
-long maxTravel = 200000; // max distance you could be away from zero switch
-long maxBackup = 200; // max distance to correct limit switch overshoot
 
 bool IsVibrationEnabled = false;
 
@@ -348,52 +350,53 @@ bool HandlePedalsHoming() //can be blocking
 	IsHomingFinished = true;
 #endif
 
-
 	Serial.println("HOMING LEFT"); //print action
 	motorPedalsL.setAcceleration(HOMING_SPEED); //defining some low acceleration
 	motorPedalsL.setMaxSpeed(HOMING_SPEED); //set speed, 100 for test purposes
 	motorPedalsL.move(-1 * PEDALS_MAX_MAXDISTANCE); ////set distance - negative value flips the direction
 	while (!IsHomingFinished ) motorPedalsL.run();
 	
-	
+
+
 
 	return IsHomingFinished;
 }
 
 void stopMotorC1L()
 {
-	StopMotor(motorC1L);
+	IsC1LHomed = StopMotor(motorC1L,1);
 }
 
 void stopMotorC1R()
 {
-	StopMotor(motorC1R);
+	IsC1RHomed = StopMotor(motorC1R,2);
 }
 void stopMotorC2L()
 {
-	StopMotor(motorC2L);
+	IsC2LHomed = StopMotor(motorC2L,3);
 }
 void stopMotorC2R()
 {
-	StopMotor(motorC2R);
+	IsC2RHomed = StopMotor(motorC2R,4);
 }
 
 void stopMotorPL()
 {
-	StopMotor(motorPedalsL);
+	IsPLHomed = StopMotor(motorPedalsL,5);
 }
 
 void stopMotorPR()
 {
-	StopMotor(motorPedalsR);
+	IsPRHomed = StopMotor(motorPedalsR,6);
 }
 
-void StopMotor(AccelStepper & stepper)
+bool StopMotor(AccelStepper & stepper, byte motorNum)
 {
 	stepper.setCurrentPosition(0); 
-	Serial.println("STOP "); 
+	Serial.print("STOP"); Serial.println(motorNum);
 	stepper.stop(); 
 	stepper.disableOutputs(); 
+	return true;
 }
 
 bool ExecuteCMD(CommandType cmd)
