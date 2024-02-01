@@ -225,9 +225,8 @@ void loop() {
 	switch (_state)
 	{
 		case HOMING:{
-
-			//HomeChairs();
-			//HomePedals();
+			while (!HandlePedalsHoming());
+			while (!HandleChairsHoming());
 			SetState(E_STATE::LISTENING);
 		}break;
 		case LISTENING: {
@@ -301,6 +300,26 @@ void HandleVibrations()
 		//stop all the motors
 		
 	}
+}
+
+bool HandleChairsHoming()
+{
+#if DEBUG == 2
+	Serial.print("Homing:"); Serial.println(IsVibrationEnabled);
+#endif
+	bool IsHomingFinished = false;
+
+	return IsHomingFinished;
+}
+
+bool HandlePedalsHoming()
+{
+#if DEBUG == 2
+	Serial.print("Homing:"); Serial.println(IsVibrationEnabled);
+#endif
+	bool IsHomingFinished = false;
+
+	return IsHomingFinished;
 }
 
 bool ExecuteCMD(CommandType cmd)
