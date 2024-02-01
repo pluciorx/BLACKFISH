@@ -52,40 +52,43 @@ char error[MAX_INPUT];
 //motors (4 for chairs 2 for pedals)
 //Chair 1 
 #define CHAIR1_LEFT_UPPER_LIMIT 48
-#define CHAIR1_LEFT_LOWER_LIMIT 46
+#define CHAIR1_LEFT_ALARM 46
 #define CHAIR1_LEFT_EN 44
 #define CHAIR1_LEFT_STEP 2
 #define CHAIR1_LEFT_DIR 3
-#define CHAIR1_LEFT_ALARM 42
 
 #define CHAIR1_RIGHT_UPPER_LIMIT 49
-#define CHAIR1_RIGHT_LOWER_LIMIT 47
+#define CHAIR1_RIGHT_ALARM 47
 #define CHAIR1_RIGHT_EN 45
 #define CHAIR1_RIGHT_STEP 4
 #define CHAIR1_RIGHT_DIR 5
-#define CHAIR1_RIGHT_ALARM 43
 
 //Chair 2 
 #define CHAIR2_RIGHT_UPPER_LIMIT 40
-#define CHAIR2_RIGHT_LOWER_LIMIT 38
+#define CHAIR2_RIGHT_ALARM 38
 #define CHAIR2_RIGHT_EN 36
 #define CHAIR2_RIGHT_STEP 6
 #define CHAIR2_RIGHT_DIR 7
-#define CHAIR2_RIGHT_ALARM 34
+
 
 #define CHAIR2_LEFT_UPPER_LIMIT 41
-#define CHAIR2_LEFT_LOWER_LIMIT 39
+#define CHAIR2_LEFT_ALARM 39
 #define CHAIR2_LEFT_EN 37
 #define CHAIR2_LEFT_STEP 8
 #define CHAIR2_LEFT_DIR 9
-#define CHAIR2_LEFT_ALARM 35
 
 //Resistance
-#define PEDAL_UPPER_LIMIT 34
-#define PEDAL_LOWER_LIMIT 32
-#define PEDAL_EN 30
-#define PEDAL_STEP 10
-#define PEDAL_DIR 11
+#define PEDAL1_UPPER_LIMIT 34
+#define PEDAL1_ALARM 32
+#define PEDAL1_EN 30
+#define PEDAL1_STEP 10
+#define PEDAL1_DIR 11
+
+#define PEDAL2_UPPER_LIMIT 33
+#define PEDAL2_ALARM 31
+#define PEDAL2_EN 29
+#define PEDAL2_STEP 12
+#define PEDAL2_DIR 13
 
 
 byte motorControlPins[] = { 
@@ -109,11 +112,17 @@ byte motorControlPins[] = {
 	CHAIR2_RIGHT_DIR	,
 	CHAIR2_RIGHT_ALARM	,
 
-	PEDAL_UPPER_LIMIT	,
-	PEDAL_LOWER_LIMIT	,
-	PEDAL_EN 			,
-	PEDAL_STEP 			,
-	PEDAL_DIR 			,
+	PEDAL1_UPPER_LIMIT	,
+	PEDAL1_ALARM		,
+	PEDAL1_EN 			,
+	PEDAL1_STEP 		,
+	PEDAL1_DIR 			,
+
+	PEDAL2_UPPER_LIMIT	,
+	PEDAL2_ALARM		,
+	PEDAL2_EN 			,
+	PEDAL2_STEP 		,
+	PEDAL2_DIR 			,
  };
 
 long maxTravel = 200000; // max distance you could be away from zero switch
@@ -121,12 +130,12 @@ long maxBackup = 200; // max distance to correct limit switch overshoot
 
 bool IsVibrationEnabled = false;
 
-
 AccelStepper motorC1L(AccelStepper::DRIVER, CHAIR1_LEFT_STEP, CHAIR1_LEFT_DIR);
 AccelStepper motorC1R(AccelStepper::DRIVER, CHAIR1_RIGHT_STEP, CHAIR1_RIGHT_DIR);
 AccelStepper motorC2L(AccelStepper::DRIVER, CHAIR2_LEFT_STEP, CHAIR2_LEFT_DIR);
 AccelStepper motorC2R(AccelStepper::DRIVER, CHAIR2_RIGHT_STEP, CHAIR2_RIGHT_DIR);
-AccelStepper motorPedals(AccelStepper::DRIVER, PEDAL_STEP, PEDAL_DIR);
+AccelStepper motorPedalsL(AccelStepper::DRIVER, PEDAL1_STEP, PEDAL1_DIR);
+AccelStepper motorPedalsR(AccelStepper::DRIVER, PEDAL2_STEP, PEDAL2_DIR);
 
 
 enum E_STATE {
@@ -284,7 +293,7 @@ void SetError(char* errorInput )
 #endif
 }
 
-void HandleVibrations()
+void HandleVibrations() //none blockin
 {
 #if DEBUG == 2
 	Serial.print("Vibrations:"); Serial.println(IsVibrationEnabled);
@@ -301,7 +310,7 @@ void HandleVibrations()
 	}
 }
 
-bool HandleChairsHoming()
+bool HandleChairsHoming() //can be blocking
 {
 	bool IsHomingFinished = false;
 #if DEBUG >= 1
@@ -313,7 +322,7 @@ bool HandleChairsHoming()
 	return IsHomingFinished;
 }
 
-bool HandlePedalsHoming()
+bool HandlePedalsHoming() //can be blocking
 {
 	bool IsHomingFinished = false;
 #if DEBUG >= 1
