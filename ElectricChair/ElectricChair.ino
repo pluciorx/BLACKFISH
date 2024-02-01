@@ -12,18 +12,13 @@
 #define AIRCR          (*(uint32_t*)0xe000ed0cUL) // fixed arch-defined address
 #define REQUEST_EXTERNAL_RESET (AIRCR=(AIRCR&VECTKEY_MASK)|VECTKEY|SYSRESETREQ)
 
-#define P1_B1 12
-#define P1_B2 11
-#define P1_B3 10
-#define P1_B4 9
+#define P1_B1 52
+#define P1_B2 53
+#define P1_B3 50
+#define P1_B4 51
 
-#define P2_B1 7
-#define P2_B2 6
-#define P2_B3 5
-#define P2_B4 4
-
-const byte buttonCount = 8;
-byte buttonPins[] = { P1_B1, P1_B2, P1_B3, P1_B4, P2_B1, P2_B2, P2_B3, P2_B4 };
+const byte buttonCount = 4;
+byte buttonPins[] = { P1_B1, P1_B2, P1_B3, P1_B4 };
 byte buttonState[buttonCount];
 byte buttonActive[buttonCount];
 // end buttons
@@ -56,41 +51,41 @@ char error[MAX_INPUT];
 
 //motors (4 for chairs 2 for pedals)
 //Chair 1 
-#define CHAIR1_LEFT_UPPER_LIMIT 52
-#define CHAIR1_LEFT_LOWER_LIMIT 50
-#define CHAIR1_LEFT_EN 48
-#define CHAIR1_LEFT_STEP 44
-#define CHAIR1_LEFT_DIR 42
-#define CHAIR1_LEFT_ALARM 40
+#define CHAIR1_LEFT_UPPER_LIMIT 48
+#define CHAIR1_LEFT_LOWER_LIMIT 46
+#define CHAIR1_LEFT_EN 44
+#define CHAIR1_LEFT_STEP 2
+#define CHAIR1_LEFT_DIR 3
+#define CHAIR1_LEFT_ALARM 42
 
-#define CHAIR1_RIGHT_UPPER_LIMIT 22
-#define CHAIR1_RIGHT_LOWER_LIMIT 24
-#define CHAIR1_RIGHT_EN 26
-#define CHAIR1_RIGHT_STEP 28
-#define CHAIR1_RIGHT_DIR 30
-#define CHAIR1_RIGHT_ALARM 32
+#define CHAIR1_RIGHT_UPPER_LIMIT 49
+#define CHAIR1_RIGHT_LOWER_LIMIT 47
+#define CHAIR1_RIGHT_EN 45
+#define CHAIR1_RIGHT_STEP 4
+#define CHAIR1_RIGHT_DIR 5
+#define CHAIR1_RIGHT_ALARM 43
 
 //Chair 2 
-#define CHAIR2_RIGHT_UPPER_LIMIT 23
-#define CHAIR2_RIGHT_LOWER_LIMIT 25
-#define CHAIR2_RIGHT_EN 27
-#define CHAIR2_RIGHT_STEP 31
-#define CHAIR2_RIGHT_DIR 33
-#define CHAIR2_RIGHT_ALARM 35
+#define CHAIR2_RIGHT_UPPER_LIMIT 40
+#define CHAIR2_RIGHT_LOWER_LIMIT 38
+#define CHAIR2_RIGHT_EN 36
+#define CHAIR2_RIGHT_STEP 6
+#define CHAIR2_RIGHT_DIR 7
+#define CHAIR2_RIGHT_ALARM 34
 
-#define CHAIR2_LEFT_UPPER_LIMIT 53
-#define CHAIR2_LEFT_LOWER_LIMIT 51
-#define CHAIR2_LEFT_EN 49
-#define CHAIR2_LEFT_STEP 47
-#define CHAIR2_LEFT_DIR 45
-#define CHAIR2_LEFT_ALARM 43
+#define CHAIR2_LEFT_UPPER_LIMIT 41
+#define CHAIR2_LEFT_LOWER_LIMIT 39
+#define CHAIR2_LEFT_EN 37
+#define CHAIR2_LEFT_STEP 8
+#define CHAIR2_LEFT_DIR 9
+#define CHAIR2_LEFT_ALARM 35
 
 //Resistance
-#define PEDAL_UPPER_LIMIT 41
-#define PEDAL_LOWER_LIMIT 39
-#define PEDAL_EN 37
-#define PEDAL_STEP 38
-#define PEDAL_DIR 36
+#define PEDAL_UPPER_LIMIT 34
+#define PEDAL_LOWER_LIMIT 32
+#define PEDAL_EN 30
+#define PEDAL_STEP 10
+#define PEDAL_DIR 11
 
 
 byte motorControlPins[] = { 
@@ -127,11 +122,11 @@ long maxBackup = 200; // max distance to correct limit switch overshoot
 bool IsVibrationEnabled = false;
 
 
-AccelStepper motorC1L = AccelStepper(AccelStepper::DRIVER, CHAIR1_LEFT_STEP, CHAIR1_LEFT_DIR);
-AccelStepper motorC1R = AccelStepper(AccelStepper::DRIVER, CHAIR1_RIGHT_STEP, CHAIR1_RIGHT_DIR);
-AccelStepper motorC2L = AccelStepper(AccelStepper::DRIVER, CHAIR2_LEFT_STEP, CHAIR2_LEFT_DIR);
-AccelStepper motorC2R = AccelStepper(AccelStepper::DRIVER, CHAIR2_RIGHT_STEP, CHAIR2_RIGHT_DIR);
-AccelStepper motorPedals = AccelStepper(AccelStepper::DRIVER, PEDAL_STEP, PEDAL_DIR);
+AccelStepper motorC1L(AccelStepper::DRIVER, CHAIR1_LEFT_STEP, CHAIR1_LEFT_DIR);
+AccelStepper motorC1R(AccelStepper::DRIVER, CHAIR1_RIGHT_STEP, CHAIR1_RIGHT_DIR);
+AccelStepper motorC2L(AccelStepper::DRIVER, CHAIR2_LEFT_STEP, CHAIR2_LEFT_DIR);
+AccelStepper motorC2R(AccelStepper::DRIVER, CHAIR2_RIGHT_STEP, CHAIR2_RIGHT_DIR);
+AccelStepper motorPedals(AccelStepper::DRIVER, PEDAL_STEP, PEDAL_DIR);
 
 
 enum E_STATE {
@@ -322,7 +317,7 @@ bool HandlePedalsHoming()
 {
 	bool IsHomingFinished = false;
 #if DEBUG >= 1
-	Serial.println("Homing Pedals:");
+	Serial.print("Homing Pedals:");
 	IsHomingFinished = true;
 #endif
 	
