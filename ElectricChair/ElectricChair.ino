@@ -224,9 +224,12 @@ void loop() {
 	switch (_state)
 	{
 		case HOMING:{
+			Serial.println(F("Homing started..."));
 			while (!HandlePedalsHoming());
 			while (!HandleChairsHoming());
+			Serial.println(F("Homing Finished..."));
 			SetState(E_STATE::LISTENING);
+			
 		}break;
 		case LISTENING: {
 #if DEBUG == 1
@@ -305,20 +308,24 @@ void HandleVibrations()
 
 bool HandleChairsHoming()
 {
-#if DEBUG == 2
-	Serial.print("Homing:"); Serial.println(IsVibrationEnabled);
-#endif
 	bool IsHomingFinished = false;
+#if DEBUG >= 1
+	Serial.println("Homing Chairs:");
+	IsHomingFinished = true;
+#endif
+	
 
 	return IsHomingFinished;
 }
 
 bool HandlePedalsHoming()
 {
-#if DEBUG == 2
-	Serial.print("Homing:"); Serial.println(IsVibrationEnabled);
-#endif
 	bool IsHomingFinished = false;
+#if DEBUG >= 1
+	Serial.println("Homing Pedals:");
+	IsHomingFinished = true;
+#endif
+	
 
 	return IsHomingFinished;
 }
