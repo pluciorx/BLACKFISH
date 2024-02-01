@@ -180,11 +180,6 @@ void setup() {
 	pinMode(CHAIR2_RIGHT_UPPER_LIMIT, INPUT_PULLUP);
 	pinMode(CHAIR1_RIGHT_ALARM, INPUT_PULLUP);
 
-	attachInterrupt(digitalPinToInterrupt(CHAIR1_LEFT_UPPER_LIMIT), stopMotorC1L, FALLING);
-	attachInterrupt(digitalPinToInterrupt(CHAIR1_RIGHT_UPPER_LIMIT), stopMotorC1R, FALLING);
-	attachInterrupt(digitalPinToInterrupt(CHAIR2_LEFT_UPPER_LIMIT), stopMotorC2L, FALLING);
-	attachInterrupt(digitalPinToInterrupt(CHAIR2_RIGHT_UPPER_LIMIT), stopMotorC2R, FALLING);
-
 	for (int i = 0; i < 12; i++) {
 		pinMode(motorControlPins[i], OUTPUT);
 		digitalWrite(motorControlPins[i], LOW);
@@ -199,31 +194,36 @@ void setup() {
 	motorC1L.enableOutputs();
 	motorC1L.setAcceleration(MOTORS_ACCEL);
 	motorC1L.setMaxSpeed(MOTORS_BASE_SPEED);
+	attachInterrupt(digitalPinToInterrupt(CHAIR1_LEFT_UPPER_LIMIT), stopMotorC1L, FALLING);
 	//motorC1L.setSpeed(400);
 
 	motorC1R.setEnablePin(CHAIR1_RIGHT_EN);
 	motorC1R.enableOutputs();
 	motorC1R.setAcceleration(MOTORS_ACCEL);
 	motorC1R.setMaxSpeed(500);
+	attachInterrupt(digitalPinToInterrupt(CHAIR1_RIGHT_UPPER_LIMIT), stopMotorC1R, FALLING);
 
 	motorC2L.setEnablePin(CHAIR2_RIGHT_EN);
 	motorC2L.enableOutputs();
 	motorC2L.setAcceleration(MOTORS_ACCEL);
 	motorC2L.setMaxSpeed(MOTORS_BASE_SPEED);
+	attachInterrupt(digitalPinToInterrupt(CHAIR2_LEFT_UPPER_LIMIT), stopMotorC2L, FALLING);
 
 	motorC2R.setEnablePin(CHAIR2_LEFT_EN);
 	motorC2R.enableOutputs();
 	motorC2R.setAcceleration(MOTORS_ACCEL);
 	motorC2R.setMaxSpeed(MOTORS_BASE_SPEED);
+	attachInterrupt(digitalPinToInterrupt(CHAIR2_RIGHT_UPPER_LIMIT), stopMotorC2R, FALLING);
 
 	motorPedalsL.setEnablePin(PEDALL_EN);
 	motorPedalsL.enableOutputs();
 	motorPedalsL.setMaxSpeed(MOTORS_BASE_SPEED);
+	attachInterrupt(digitalPinToInterrupt(PEDALL_UPPER_LIMIT), stopMotorPL, FALLING);
 
 	motorPedalsR.setEnablePin(PEDALR_EN);
 	motorPedalsR.enableOutputs();
 	motorPedalsR.setMaxSpeed(MOTORS_BASE_SPEED);
-
+	attachInterrupt(digitalPinToInterrupt(PEDALR_UPPER_LIMIT), stopMotorPR, FALLING);
 	//end motors
 	
 
@@ -232,8 +232,6 @@ void setup() {
 	pinMode(PEDAL1_B, INPUT_PULLUP);
 	pinMode(PEDAL2_A, INPUT_PULLUP);
 	pinMode(PEDAL2_B, INPUT_PULLUP);
-	attachInterrupt(digitalPinToInterrupt(PEDALL_UPPER_LIMIT), stopMotorPL, FALLING);
-	attachInterrupt(digitalPinToInterrupt(PEDALR_UPPER_LIMIT), stopMotorPR, FALLING);
 	
 	//DUMP whatever is in the serial and wait for the clean go.
 	while (Serial1.available()) Serial2.read();
