@@ -48,8 +48,13 @@ byte pedalResistance = 0;
 char input_line[MAX_INPUT] ="";
 char error[MAX_INPUT];
 
+#define HOMING_SPEED 100
+#define HOMING_ACCELERATION 100
 
 //motors (4 for chairs 2 for pedals)
+#define MOTORS_BASE_SPEED 500
+#define	MOTORS_ACCEL 500
+
 //Chair 1 
 #define CHAIR1_LEFT_UPPER_LIMIT 48
 #define CHAIR1_LEFT_ALARM 46
@@ -77,16 +82,20 @@ char error[MAX_INPUT];
 #define CHAIR2_LEFT_STEP 8
 #define CHAIR2_LEFT_DIR 9
 
-//Resistance
-#define PEDAL1_UPPER_LIMIT 34
-#define PEDAL1_EN 30
-#define PEDAL1_STEP 10
-#define PEDAL1_DIR 11
 
-#define PEDAL2_UPPER_LIMIT 33
-#define PEDAL2_EN 29
-#define PEDAL2_STEP 12
-#define PEDAL2_DIR 13
+
+//Resistance
+#define PEDALL_UPPER_LIMIT 34
+#define PEDALL_EN 30
+#define PEDALL_STEP 10
+#define PEDALL_DIR 11
+
+#define PEDALR_UPPER_LIMIT 33
+#define PEDALR_EN 29
+#define PEDALR_STEP 12 
+#define PEDALR_DIR 13
+#define PEDALS_MAX_MAXDISTANCE 20000
+#define PEDALS_BASE_SPEED 500
 
 
 byte motorControlPins[] = { 
@@ -110,15 +119,15 @@ byte motorControlPins[] = {
 	CHAIR2_RIGHT_DIR	,
 	CHAIR2_RIGHT_ALARM	,
 
-	PEDAL1_UPPER_LIMIT	,
-	PEDAL1_EN 			,
-	PEDAL1_STEP 		,
-	PEDAL1_DIR 			,
+	PEDALL_UPPER_LIMIT	,
+	PEDALL_EN 			,
+	PEDALL_STEP 		,
+	PEDALL_DIR 			,
 
-	PEDAL2_UPPER_LIMIT	,
-	PEDAL2_EN 			,
-	PEDAL2_STEP 		,
-	PEDAL2_DIR 			,
+	PEDALR_UPPER_LIMIT	,
+	PEDALR_EN 			,
+	PEDALR_STEP 		,
+	PEDALR_DIR 			,
  };
 
 long maxTravel = 200000; // max distance you could be away from zero switch
@@ -130,8 +139,8 @@ AccelStepper motorC1L(AccelStepper::DRIVER, CHAIR1_LEFT_STEP, CHAIR1_LEFT_DIR);
 AccelStepper motorC1R(AccelStepper::DRIVER, CHAIR1_RIGHT_STEP, CHAIR1_RIGHT_DIR);
 AccelStepper motorC2L(AccelStepper::DRIVER, CHAIR2_LEFT_STEP, CHAIR2_LEFT_DIR);
 AccelStepper motorC2R(AccelStepper::DRIVER, CHAIR2_RIGHT_STEP, CHAIR2_RIGHT_DIR);
-AccelStepper motorPedalsL(AccelStepper::DRIVER, PEDAL1_STEP, PEDAL1_DIR);
-AccelStepper motorPedalsR(AccelStepper::DRIVER, PEDAL2_STEP, PEDAL2_DIR);
+AccelStepper motorPedalsL(AccelStepper::DRIVER, PEDALL_STEP, PEDALL_DIR);
+AccelStepper motorPedalsR(AccelStepper::DRIVER, PEDALR_STEP, PEDALR_DIR);
 
 
 enum E_STATE {
@@ -171,6 +180,11 @@ void setup() {
 	pinMode(CHAIR2_RIGHT_UPPER_LIMIT, INPUT_PULLUP);
 	pinMode(CHAIR1_RIGHT_ALARM, INPUT_PULLUP);
 
+	attachInterrupt(digitalPinToInterrupt(CHAIR1_LEFT_UPPER_LIMIT), stopMotorC1L, FALLING);
+	attachInterrupt(digitalPinToInterrupt(CHAIR1_RIGHT_UPPER_LIMIT), stopMotorC1R, FALLING);
+	attachInterrupt(digitalPinToInterrupt(CHAIR2_LEFT_UPPER_LIMIT), stopMotorC2L, FALLING);
+	attachInterrupt(digitalPinToInterrupt(CHAIR2_RIGHT_UPPER_LIMIT), stopMotorC2R, FALLING);
+
 	for (int i = 0; i < 12; i++) {
 		pinMode(motorControlPins[i], OUTPUT);
 		digitalWrite(motorControlPins[i], LOW);
@@ -183,28 +197,32 @@ void setup() {
 
 	motorC1L.setEnablePin(CHAIR1_LEFT_EN);
 	motorC1L.enableOutputs();
-	motorC1L.setMaxSpeed(500);
+	motorC1L.setAcceleration(MOTORS_ACCEL);
+	motorC1L.setMaxSpeed(MOTORS_BASE_SPEED);
 	//motorC1L.setSpeed(400);
 
 	motorC1R.setEnablePin(CHAIR1_RIGHT_EN);
 	motorC1R.enableOutputs();
+	motorC1R.setAcceleration(MOTORS_ACCEL);
 	motorC1R.setMaxSpeed(500);
 
 	motorC2L.setEnablePin(CHAIR2_RIGHT_EN);
 	motorC2L.enableOutputs();
-	motorC2L.setMaxSpeed(500);
+	motorC2L.setAcceleration(MOTORS_ACCEL);
+	motorC2L.setMaxSpeed(MOTORS_BASE_SPEED);
 
-	motorC1L.setEnablePin(CHAIR2_LEFT_EN);
-	motorC1L.enableOutputs();
-	motorC1L.setMaxSpeed(500);
+	motorC2R.setEnablePin(CHAIR2_LEFT_EN);
+	motorC2R.enableOutputs();
+	motorC2R.setAcceleration(MOTORS_ACCEL);
+	motorC2R.setMaxSpeed(MOTORS_BASE_SPEED);
 
-	motorPedalsL.setEnablePin(PEDAL1_EN);
+	motorPedalsL.setEnablePin(PEDALL_EN);
 	motorPedalsL.enableOutputs();
-	motorPedalsL.setMaxSpeed(500);
+	motorPedalsL.setMaxSpeed(MOTORS_BASE_SPEED);
 
-	motorPedalsR.setEnablePin(PEDAL2_EN);
+	motorPedalsR.setEnablePin(PEDALR_EN);
 	motorPedalsR.enableOutputs();
-	motorPedalsR.setMaxSpeed(500);
+	motorPedalsR.setMaxSpeed(MOTORS_BASE_SPEED);
 
 	//end motors
 	
@@ -214,7 +232,9 @@ void setup() {
 	pinMode(PEDAL1_B, INPUT_PULLUP);
 	pinMode(PEDAL2_A, INPUT_PULLUP);
 	pinMode(PEDAL2_B, INPUT_PULLUP);
-
+	attachInterrupt(digitalPinToInterrupt(PEDALL_UPPER_LIMIT), stopMotorPL, FALLING);
+	attachInterrupt(digitalPinToInterrupt(PEDALR_UPPER_LIMIT), stopMotorPR, FALLING);
+	
 	//DUMP whatever is in the serial and wait for the clean go.
 	while (Serial1.available()) Serial2.read();
 	//end pedals
@@ -329,9 +349,53 @@ bool HandlePedalsHoming() //can be blocking
 	Serial.print("Homing Pedals:");
 	IsHomingFinished = true;
 #endif
+
+
+	Serial.println("HOMING LEFT"); //print action
+	motorPedalsL.setAcceleration(HOMING_SPEED); //defining some low acceleration
+	motorPedalsL.setMaxSpeed(HOMING_SPEED); //set speed, 100 for test purposes
+	motorPedalsL.move(-1 * PEDALS_MAX_MAXDISTANCE); ////set distance - negative value flips the direction
+	while (!IsHomingFinished ) motorPedalsL.run();
+	
 	
 
 	return IsHomingFinished;
+}
+
+void stopMotorC1L()
+{
+	StopMotor(motorC1L);
+}
+
+void stopMotorC1R()
+{
+	StopMotor(motorC1R);
+}
+void stopMotorC2L()
+{
+	StopMotor(motorC2L);
+}
+void stopMotorC2R()
+{
+	StopMotor(motorC2R);
+}
+
+void stopMotorPL()
+{
+	StopMotor(motorPedalsL);
+}
+
+void stopMotorPR()
+{
+	StopMotor(motorPedalsR);
+}
+
+void StopMotor(AccelStepper & stepper)
+{
+	stepper.setCurrentPosition(0); 
+	Serial.println("STOP "); 
+	stepper.stop(); 
+	stepper.disableOutputs(); 
 }
 
 bool ExecuteCMD(CommandType cmd)
@@ -417,7 +481,7 @@ byte stringToByte(char* src) {
 	return byte(atoi(src));
 }
 
-bool ProcessIncommingMsg(UARTClass sourceSerial)
+bool ProcessIncommingMsg(UARTClass & sourceSerial)
 {
 	while (sourceSerial.available())
 	{	
@@ -530,4 +594,5 @@ void HandlePedaling()
 		p2_prevCounter = p2_counter;
 	}	
 }
+
 
