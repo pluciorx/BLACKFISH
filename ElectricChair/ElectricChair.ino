@@ -1,5 +1,9 @@
+#include <AccelStepper.h>
+#include <MultiStepper.h>
 #include <Arduino.h>
 
+
+//Set DEBUG 1 to test commands by sending them trough debug serial.
 #define DEBUG 1
 // Pin definitions
 //buttons (2 x 4 )
@@ -47,10 +51,12 @@ byte pedalResistance = 0;
 //Com
 #define COM_BAUD_Debug 115200
 #define COM_BAUD_PC 115200
-#define MAX_INPUT 50
+#define MAX_INPUT 50 //maximum length of the command..
 
 char input_line[MAX_INPUT] ="";
 char error[MAX_INPUT];
+
+
 //motors (4 for chairs 2 for pedals)
 //Chair 1 
 #define CHAIR1_LEFT_UPPER_LIMIT 52
@@ -58,12 +64,14 @@ char error[MAX_INPUT];
 #define CHAIR1_LEFT_EN 48
 #define CHAIR1_LEFT_STEP 44
 #define CHAIR1_LEFT_DIR 42
+#define CHAIR1_LEFT_ALARM 40
 
 #define CHAIR1_RIGHT_UPPER_LIMIT 22
 #define CHAIR1_RIGHT_LOWER_LIMIT 24
 #define CHAIR1_RIGHT_EN 26
-#define CHAIR1_RIGHT_STEP 30
-#define CHAIR1_RIGHT_DIR 32
+#define CHAIR1_RIGHT_STEP 28
+#define CHAIR1_RIGHT_DIR 30
+#define CHAIR1_RIGHT_ALARM 32
 
 //Chair 2 
 #define CHAIR2_RIGHT_UPPER_LIMIT 23
@@ -71,40 +79,62 @@ char error[MAX_INPUT];
 #define CHAIR2_RIGHT_EN 27
 #define CHAIR2_RIGHT_STEP 31
 #define CHAIR2_RIGHT_DIR 33
+#define CHAIR2_RIGHT_ALARM 35
 
 #define CHAIR2_LEFT_UPPER_LIMIT 53
 #define CHAIR2_LEFT_LOWER_LIMIT 51
 #define CHAIR2_LEFT_EN 49
-#define CHAIR2_LEFT_STEP 45
-#define CHAIR2_LEFT_DIR 43
+#define CHAIR2_LEFT_STEP 47
+#define CHAIR2_LEFT_DIR 45
+#define CHAIR2_LEFT_ALARM 43
 
-//TODO: ADD oil valve motor.
+//Resistance
+#define PEDAL_UPPER_LIMIT 41
+#define PEDAL_LOWER_LIMIT 39
+#define PEDAL_EN 37
+#define PEDAL_STEP 38
+#define PEDAL_DIR 36
 
 
 byte motorControlPins[] = { 
 	CHAIR1_LEFT_EN		,
 	CHAIR1_LEFT_STEP	, 
 	CHAIR1_LEFT_DIR		,
+	CHAIR1_LEFT_ALARM	,
+
 	CHAIR1_RIGHT_EN		,
 	CHAIR1_RIGHT_STEP	,
 	CHAIR1_RIGHT_DIR	,
+	CHAIR1_RIGHT_ALARM,
+
 	CHAIR2_LEFT_EN		,
 	CHAIR2_LEFT_STEP	,
 	CHAIR2_LEFT_DIR		,
+	CHAIR2_LEFT_ALARM	,
+
 	CHAIR2_RIGHT_EN		,
 	CHAIR2_RIGHT_STEP	,
 	CHAIR2_RIGHT_DIR	,
+	CHAIR2_RIGHT_ALARM	,
+
+	PEDAL_UPPER_LIMIT	,
+	PEDAL_LOWER_LIMIT	,
+	PEDAL_EN 			,
+	PEDAL_STEP 			,
+	PEDAL_DIR 			,
  };
+
 long maxTravel = 200000; // max distance you could be away from zero switch
 long maxBackup = 200; // max distance to correct limit switch overshoot
 
 bool IsVibrationEnabled = false;
 
 
-//AccelStepper motorC1L = AccelStepper(AccelStepper::FULL3WIRE, CHAIR1_LEFT_STEP, CHAIR1_LEFT_DIR);
-//AccelStepper motorC1R = AccelStepper(AccelStepper::FULL3WIRE, CHAIR1_RIGHT_STEP, CHAIR1_RIGHT_DIR);
-//AccelStepper motorC2L = AccelStepper(AccelStepper::FULL3WIRE, CHAIR2_LEFT_STEP, CHAIR2_LEFT_DIR);
-//AccelStepper motorC2R = AccelStepper(AccelStepper::FULL3WIRE, CHAIR2_RIGHT_STEP, CHAIR2_RIGHT_DIR);
+AccelStepper motorC1L = AccelStepper(AccelStepper::DRIVER, CHAIR1_LEFT_STEP, CHAIR1_LEFT_DIR);
+AccelStepper motorC1R = AccelStepper(AccelStepper::DRIVER, CHAIR1_RIGHT_STEP, CHAIR1_RIGHT_DIR);
+AccelStepper motorC2L = AccelStepper(AccelStepper::DRIVER, CHAIR2_LEFT_STEP, CHAIR2_LEFT_DIR);
+AccelStepper motorC2R = AccelStepper(AccelStepper::DRIVER, CHAIR2_RIGHT_STEP, CHAIR2_RIGHT_DIR);
+AccelStepper motorPedals = AccelStepper(AccelStepper::DRIVER, PEDAL_STEP, PEDAL_DIR);
 
 
 enum E_STATE {
@@ -153,8 +183,32 @@ void setup() {
 		pinMode(buttonPins[i], INPUT_PULLUP);
 		digitalWrite(buttonPins[i], HIGH); //redundant but just in case
 	}
+
+	motorC1L.setEnablePin(CHAIR1_LEFT_EN);
+	motorC1L.enableOutputs();
+	motorC1L.setMaxSpeed(500);
+	//motorC1L.setSpeed(400);
+
+	motorC1R.setEnablePin(CHAIR1_RIGHT_EN);
+	motorC1R.enableOutputs();
+	motorC1R.setMaxSpeed(500);
+
+	motorC2L.setEnablePin(CHAIR2_RIGHT_EN);
+	motorC2L.enableOutputs();
+	motorC2L.setMaxSpeed(500);
+
+	motorC1L.setEnablePin(CHAIR2_LEFT_EN);
+	motorC1L.enableOutputs();
+	motorC1L.setMaxSpeed(500);
+
+	motorPedals.setEnablePin(PEDAL_EN);
+	motorPedals.enableOutputs();
+	motorPedals.setMaxSpeed(500);
+
+	
 	//end motors
-	// 
+	
+
 	//pedals
 	pinMode(PEDAL1_A, INPUT_PULLUP);
 	pinMode(PEDAL1_B, INPUT_PULLUP);
@@ -255,6 +309,7 @@ bool ExecuteCMD(CommandType cmd)
 	}break;
 	case Ping:
 	{
+		//reserved for future use...
 		Serial.println("==>pong");
 		Serial1.println("pong");
 		return true;
@@ -354,7 +409,6 @@ bool commBuild(const char inByte, int serialNum)
 	}  // end of switch
 }
 
-
 void SetState(E_STATE newState)
 {
 
@@ -429,5 +483,4 @@ void HandlePedaling()
 		p2_prevCounter = p2_counter;
 	}	
 }
-
 
