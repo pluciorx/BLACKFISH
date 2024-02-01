@@ -34,10 +34,10 @@ int p2_prevCounter = 0;
 int p2_angle = 0;
 bool p2_prevA = 1, p2_prevB = 1;
 
-#define PEDAL1_A 31
-#define PEDAL1_B 33
-#define PEDAL2_A 35
-#define PEDAL2_B 37
+#define PEDAL1_A 28
+#define PEDAL1_B 26
+#define PEDAL2_A 24
+#define PEDAL2_B 22
 byte pedalResistance = 0; 
 
 //Com
