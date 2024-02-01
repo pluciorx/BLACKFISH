@@ -1,7 +1,4 @@
 #include <AccelStepper.h>
-#include <MultiStepper.h>
-#include <Arduino.h>
-
 
 //Set DEBUG 1 to test commands by sending them trough debug serial.
 #define DEBUG 1
