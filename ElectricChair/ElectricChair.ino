@@ -266,7 +266,7 @@ void loop() {
 			
 			HandlePanelPress();
 			HandlePedaling();
-			
+			HandleVibrations();
 			SetState(E_STATE::LISTENING);
 		}break;
 		case KILL: {
@@ -286,6 +286,23 @@ void SetError(char* errorInput )
 	Serial.print(F("Error Set:")); Serial.println(error);
 }
 
+void HandleVibrations()
+{
+#if DEBUG == 2
+	Serial.print("Vibrations:"); Serial.println(IsVibrationEnabled);
+#endif
+	if (IsVibrationEnabled)
+	{
+		//here move the motors
+
+	}
+	else
+	{
+		//stop all the motors
+		
+	}
+}
+
 bool ExecuteCMD(CommandType cmd)
 {		
 	switch (cmd)
@@ -293,11 +310,13 @@ bool ExecuteCMD(CommandType cmd)
 	case VibStart: //startVibration
 	{
 		Serial.println("Vibration ON");
+		IsVibrationEnabled = true;
 		
 	}break;
 	case VibStop://stopVibration
 	{
 		Serial.println("Vibration OFF");
+		IsVibrationEnabled = false;
 	}break;
 	case PedalResistance://pedalResistance|ID
 	{
