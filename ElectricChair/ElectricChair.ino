@@ -171,9 +171,9 @@ void setup() {
 	//motors
 	// Set limit switch inputs
 	pinMode(CHAIR2_LEFT_UPPER_LIMIT, INPUT_PULLUP);
-	pinMode(CHAIR1_LEFT_LOWER_LIMIT, INPUT_PULLUP);
+	pinMode(CHAIR1_LEFT_ALARM, INPUT_PULLUP);
 	pinMode(CHAIR2_RIGHT_UPPER_LIMIT, INPUT_PULLUP);
-	pinMode(CHAIR1_RIGHT_LOWER_LIMIT, INPUT_PULLUP);
+	pinMode(CHAIR1_RIGHT_ALARM, INPUT_PULLUP);
 
 	for (int i = 0; i < 12; i++) {
 		pinMode(motorControlPins[i], OUTPUT);
@@ -202,9 +202,13 @@ void setup() {
 	motorC1L.enableOutputs();
 	motorC1L.setMaxSpeed(500);
 
-	motorPedals.setEnablePin(PEDAL_EN);
-	motorPedals.enableOutputs();
-	motorPedals.setMaxSpeed(500);
+	motorPedalsL.setEnablePin(PEDAL1_EN);
+	motorPedalsL.enableOutputs();
+	motorPedalsL.setMaxSpeed(500);
+
+	motorPedalsR.setEnablePin(PEDAL2_EN);
+	motorPedalsR.enableOutputs();
+	motorPedalsR.setMaxSpeed(500);
 
 	//end motors
 	
