@@ -79,13 +79,11 @@ char error[MAX_INPUT];
 
 //Resistance
 #define PEDAL1_UPPER_LIMIT 34
-#define PEDAL1_ALARM 32
 #define PEDAL1_EN 30
 #define PEDAL1_STEP 10
 #define PEDAL1_DIR 11
 
 #define PEDAL2_UPPER_LIMIT 33
-#define PEDAL2_ALARM 31
 #define PEDAL2_EN 29
 #define PEDAL2_STEP 12
 #define PEDAL2_DIR 13
@@ -113,13 +111,11 @@ byte motorControlPins[] = {
 	CHAIR2_RIGHT_ALARM	,
 
 	PEDAL1_UPPER_LIMIT	,
-	PEDAL1_ALARM		,
 	PEDAL1_EN 			,
 	PEDAL1_STEP 		,
 	PEDAL1_DIR 			,
 
 	PEDAL2_UPPER_LIMIT	,
-	PEDAL2_ALARM		,
 	PEDAL2_EN 			,
 	PEDAL2_STEP 		,
 	PEDAL2_DIR 			,
