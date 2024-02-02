@@ -249,8 +249,10 @@ void loop() {
 	{
 		case HOMING:{
 			Serial.println(F("Homing started..."));
-			while (!HandlePedalsHoming());
-			while (!HandleChairsHoming());
+			if (!HandlePedalsHoming()) {
+				Serial.println("Pedals homing Failed.");
+			}
+			if (!HandleChairsHoming());
 			Serial.println(F("Homing Finished..."));
 			SetState(E_STATE::LISTENING);
 			
@@ -344,53 +346,58 @@ bool HandleChairsHoming() //can be blocking
 
 bool HandlePedalsHoming() //can be blocking
 {
-	bool IsHomingFinished = false;
+	
 #if DEBUG >= 1
 	Serial.print("Homing Pedals:");
-	IsHomingFinished = true;
+	
 #endif
 
-	Serial.println("HOMING LEFT"); //print action
 	motorPedalsL.setAcceleration(HOMING_SPEED); //defining some low acceleration
 	motorPedalsL.setMaxSpeed(HOMING_SPEED); //set speed, 100 for test purposes
 	motorPedalsL.move(-1 * PEDALS_MAX_MAXDISTANCE); ////set distance - negative value flips the direction
-	while (!IsHomingFinished ) motorPedalsL.run();
-	
 
+	motorPedalsR.setAcceleration(HOMING_SPEED); //defining some low acceleration
+	motorPedalsR.setMaxSpeed(HOMING_SPEED); //set speed, 100 for test purposes
+	motorPedalsR.move(-1 * PEDALS_MAX_MAXDISTANCE); ////set distance - negative value flips the direction
 
+	while (!IsPLHomed || !IsPRHomed) {
+		if (!IsPLHomed) motorPedalsL.run();
+		if (!IsPRHomed) motorPedalsR.run();
+	}
 
-	return IsHomingFinished;
+	//ToDo: Add move back by few steps
+	return true;
 }
 
-void stopMotorC1L()
+void stopMotorC1L() //interrupt call
 {
 	IsC1LHomed = StopMotor(motorC1L,1);
 }
 
-void stopMotorC1R()
+void stopMotorC1R() //interrupt call
 {
 	IsC1RHomed = StopMotor(motorC1R,2);
 }
-void stopMotorC2L()
+void stopMotorC2L() //interrupt call
 {
 	IsC2LHomed = StopMotor(motorC2L,3);
 }
-void stopMotorC2R()
+void stopMotorC2R() //interrupt call
 {
 	IsC2RHomed = StopMotor(motorC2R,4);
 }
 
-void stopMotorPL()
+void stopMotorPL() //interrupt call
 {
 	IsPLHomed = StopMotor(motorPedalsL,5);
 }
 
-void stopMotorPR()
+void stopMotorPR() //interrupt call
 {
-	IsPRHomed = StopMotor(motorPedalsR,6);
+	IsPRHomed = StopMotor(motorPedalsR,6); //Sub interrupt call
 }
 
-bool StopMotor(AccelStepper & stepper, byte motorNum)
+bool StopMotor(AccelStepper & stepper, byte motorNum)  //Sub interrupt call
 {
 	stepper.setCurrentPosition(0); 
 	Serial.print("STOP"); Serial.println(motorNum);
