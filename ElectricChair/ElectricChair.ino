@@ -352,13 +352,20 @@ bool HandlePedalsHoming() //can be blocking
 	
 #endif
 
-	motorPedalsL.setAcceleration(HOMING_SPEED); //defining some low acceleration
-	motorPedalsL.setMaxSpeed(HOMING_SPEED); //set speed, 100 for test purposes
-	motorPedalsL.move(-1 * PEDALS_MAX_MAXDISTANCE); ////set distance - negative value flips the direction
+	motorPedalsL.setAcceleration(HOMING_SPEED); 
+	motorPedalsL.setMaxSpeed(HOMING_SPEED); 
+	motorPedalsL.move(-1 * PEDALS_MAX_MAXDISTANCE); 
 
-	motorPedalsR.setAcceleration(HOMING_SPEED); //defining some low acceleration
-	motorPedalsR.setMaxSpeed(HOMING_SPEED); //set speed, 100 for test purposes
-	motorPedalsR.move(-1 * PEDALS_MAX_MAXDISTANCE); ////set distance - negative value flips the direction
+	motorPedalsR.setAcceleration(HOMING_SPEED);
+	motorPedalsR.setMaxSpeed(HOMING_SPEED); 
+	motorPedalsR.move(-1 * PEDALS_MAX_MAXDISTANCE); 
+
+	//in case of problems use :
+	//interrupts();
+	//int l = IsPLHomed;
+	//int r = IsPRHomed;
+	//noInterrupts();
+	// and check for l || r instead of Is Variables
 
 	while (!IsPLHomed || !IsPRHomed) {
 		if (!IsPLHomed) motorPedalsL.run();
