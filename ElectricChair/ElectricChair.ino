@@ -68,6 +68,16 @@ char error[MAX_INPUT];
 #define CHAIR_BASE_POSITION 1000
 #define MOTORS_BASE_SPEED 10000
 #define	MOTORS_ACCEL 1000
+byte vibrationfactor = 1;
+#define VIB_C1_L1_MIN = 3000
+#define VIB_C1_L1_MAX = 5000
+#define VIB_C1_L2_MIN = 2000
+#define VIB_C1_L2_MAX = 6000
+#define VIB_C1_L3_MIN = 50
+#define VIB_C1_L3_MAX = 9500
+
+
+
 
 //Chair 1 
 #define CHAIR1_LEFT_UPPER_LIMIT 48
@@ -365,7 +375,7 @@ void HandleVibrations() //none blockin
 #endif
 	if (IsVibrationEnabled)
 	{
-		//here move the motors
+		
 
 	}
 	else
@@ -554,7 +564,6 @@ bool ExecuteCMD(CommandType cmd)
 	}break;
 	case PedalResistance://pedalResistance|ID
 	{
-		
 		Serial.print(F("Pedals resistance:")); Serial.println(pedalResistance);
 		SetPedalResistance(pedalResistance);
 	}break;
@@ -773,7 +782,7 @@ void SendPedalState(byte pedalNo, int pedalAngle)
 	Serial.print(F("==>")); Serial.println(cMsg);
 
 #if DEBUG == 1 	
-	Serial.print("Position Pedal_"+String(pedalNo)+":");
+	Serial.print("Position Pedal_"+String(pedalNo)+":"); 
 	Serial.print(int(pedalAngle * (-1.8)));
 	Serial.println("deg");
 #endif
