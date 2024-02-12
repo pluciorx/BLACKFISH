@@ -5,6 +5,7 @@
 AccelStepper motor(AccelStepper::DRIVER, 10, 11);
 // the setup function runs once when you press reset or power the board
 void setup() {
+	Serial.println("Test");
   // initialize digital pin 13 as an output.
 	motor.setEnablePin(30);
 	motor.setPinsInverted(false, false, true);
