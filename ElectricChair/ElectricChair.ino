@@ -331,14 +331,13 @@ void loop() {
 				SetState(E_STATE::MOVE_MOTORS);
 #endif
 
-#if DEBUG == 1
-			if (ProcessIncommingMsgStream(SerialUSB))
+			//this will override the  commands sent from programmer
+			if (ProcessIncommingMsg(SerialUSB))
 			{
 				SetState(E_STATE::EXECUTE_CMD);
 			}
 			else 
 				SetState(E_STATE::MOVE_MOTORS);
-#endif
 
 		}break;
 		case MOVE_MOTORS: {
@@ -371,8 +370,8 @@ void loop() {
 			}
 			else C2RSubVibReady = true;
 
-		/*	if (motorPedalsL.isRunning()) motorPedalsL.run();
-			if (motorPedalsR.isRunning()) motorPedalsR.run();*/
+			if (motorPedalsL.isRunning()) motorPedalsL.run();
+			if (motorPedalsR.isRunning()) motorPedalsR.run();
 
 			SetState(E_STATE::READY);
 		}break;
@@ -416,8 +415,6 @@ void SetError(char* errorInput )
 
 void HandleVibrations() //none blockin
 {
-
-
 	if (IsVibrationEnabled)
 	{
 		long minRange, maxRange;
@@ -450,7 +447,6 @@ void HandleVibrations() //none blockin
 		}break;
 		}
 		
-
 		if (C1LSubVibReady == true && IsVibrationEnabled)
 		{
 			motorC1L.setSpeed(random(1, 4) * CHAIR_MOTORS_BASE_SPEED);
@@ -459,7 +455,6 @@ void HandleVibrations() //none blockin
 			
 			C1LSubVibReady = false;
 		}
-
 		if (C1RSubVibReady == true && IsVibrationEnabled)
 		{
 			//motorC1R.setCurrentPosition(0);
@@ -485,14 +480,28 @@ void HandleVibrations() //none blockin
 
 			C2RSubVibReady = false;
 		}
-
-
 	}
 	else
 	{
+		motorC1L.setSpeed(CHAIR_HOMING_SPEED);
+		motorC1L.setAcceleration(CHAIR_HOMING_ACCELERATION);
 		motorC1L.moveTo(0);
+		C1LSubVibReady = false;
+
+		motorC1R.setSpeed(CHAIR_HOMING_SPEED);
+		motorC1R.setAcceleration(CHAIR_HOMING_ACCELERATION);
 		motorC1R.moveTo(0);
-		
+		C1RSubVibReady = false;
+
+		motorC2L.setSpeed(CHAIR_HOMING_SPEED);
+		motorC2L.setAcceleration(CHAIR_HOMING_ACCELERATION);
+		motorC2L.moveTo(0);
+		C2LSubVibReady = false;
+
+		motorC2R.setSpeed(CHAIR_HOMING_SPEED);
+		motorC2R.setAcceleration(CHAIR_HOMING_ACCELERATION);
+		motorC2R.moveTo(0);
+		C2RSubVibReady = false;
 	}
 }
 
@@ -569,6 +578,7 @@ bool HandleChairsHoming() //can be blocking
 
 	return true;
 }
+
 void RetractMotors()
 {
 
@@ -627,7 +637,6 @@ void RetractMotors()
 	attachInterrupt(digitalPinToInterrupt(CHAIR2_LEFT_UPPER_LIMIT), stopMotorC2L, RISING);
 	Serial.println("Retracted;");	
 }
-
 
 bool HandlePedalsHoming() //can be blocking
 {	
@@ -890,7 +899,7 @@ byte stringToByte(char* src) {
 	return byte(atoi(src));
 }
 
-bool ProcessIncommingMsg(UARTClass & sourceSerial)
+bool ProcessIncommingMsg(Stream& sourceSerial)
 {
 	while (sourceSerial.available())
 	{	
@@ -902,17 +911,6 @@ bool ProcessIncommingMsg(UARTClass & sourceSerial)
 	return false;
 }
 
-bool ProcessIncommingMsgStream(Stream& sourceSerial)
-{
-	while (sourceSerial.available())
-	{
-		byte chr1 = sourceSerial.read();
-		if (commBuild(chr1, 1)) {
-			return true;
-		}
-	}
-	return false;
-}
 
 bool commBuild(const char inByte, int serialNum)
 {
