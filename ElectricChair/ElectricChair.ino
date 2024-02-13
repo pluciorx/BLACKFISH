@@ -1003,9 +1003,14 @@ void HandlePedaling()
 
 	p1_prevA = A;
 	p1_prevB = B;
-	if (p1_counter != p1_prevCounter)
+	if (p1_counter > p1_prevCounter)
 	{
-		SendPedalState(1, p1_counter);
+		int angle = int(p1_counter * (-1.8));
+		if (angle == 361) {
+			angle = 0;
+			p1_counter =0;
+		}
+		SendPedalState(1, angle);
 		p1_prevCounter = p1_counter;
 	}
 
@@ -1016,9 +1021,14 @@ void HandlePedaling()
 	p2_prevA = A;
 	p2_prevB = B;
 
-	if (p2_counter != p2_prevCounter)
+	if (p2_counter > p2_prevCounter)
 	{
-		SendPedalState(2, p2_counter);
+		int angle = int(p2_counter * (-1.8));
+		if (angle == 361) {
+			angle = 0;
+			p2_counter = 0;
+		}
+		SendPedalState(2, angle);
 		p2_prevCounter = p2_counter;
 	}	
 }
