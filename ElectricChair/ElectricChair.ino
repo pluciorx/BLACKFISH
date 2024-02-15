@@ -418,7 +418,7 @@ void HandleVibrations() //none blockin
 	if (IsVibrationEnabled)
 	{
 		long minRange, maxRange;
-		
+
 		switch (vibrationfactor)
 		{
 		case 1: {
@@ -446,18 +446,17 @@ void HandleVibrations() //none blockin
 			maxRange = 100;
 		}break;
 		}
-		
+
 		if (C1LSubVibReady == true && IsVibrationEnabled)
 		{
 			motorC1L.setSpeed(random(1, 4) * CHAIR_MOTORS_BASE_SPEED);
-			motorC1L.setAcceleration(random(1,4) * CHAIR_MOTORS_ACCEL);
+			motorC1L.setAcceleration(random(1, 4) * CHAIR_MOTORS_ACCEL);
 			motorC1L.moveTo(random(minRange, maxRange));
-			
+
 			C1LSubVibReady = false;
 		}
 		if (C1RSubVibReady == true && IsVibrationEnabled)
-		{
-			//motorC1R.setCurrentPosition(0);
+		{			
 			motorC1R.setSpeed(random(1, 4) * CHAIR_MOTORS_BASE_SPEED);
 			motorC1R.setAcceleration(random(1, 4) * CHAIR_MOTORS_ACCEL);
 			motorC1R.moveTo(random(minRange, maxRange));
@@ -480,28 +479,6 @@ void HandleVibrations() //none blockin
 
 			C2RSubVibReady = false;
 		}
-	}
-	else
-	{
-		motorC1L.setSpeed(CHAIR_HOMING_SPEED);
-		motorC1L.setAcceleration(CHAIR_HOMING_ACCELERATION);
-		motorC1L.moveTo(0);
-		C1LSubVibReady = false;
-
-		motorC1R.setSpeed(CHAIR_HOMING_SPEED);
-		motorC1R.setAcceleration(CHAIR_HOMING_ACCELERATION);
-		motorC1R.moveTo(0);
-		C1RSubVibReady = false;
-
-		motorC2L.setSpeed(CHAIR_HOMING_SPEED);
-		motorC2L.setAcceleration(CHAIR_HOMING_ACCELERATION);
-		motorC2L.moveTo(0);
-		C2LSubVibReady = false;
-
-		motorC2R.setSpeed(CHAIR_HOMING_SPEED);
-		motorC2R.setAcceleration(CHAIR_HOMING_ACCELERATION);
-		motorC2R.moveTo(0);
-		C2RSubVibReady = false;
 	}
 }
 
