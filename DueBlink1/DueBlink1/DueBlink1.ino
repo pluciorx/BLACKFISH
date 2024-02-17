@@ -16,10 +16,13 @@ void setup() {
 	pinMode(LED_BUILTIN, OUTPUT);
 	digitalWrite(LED_BUILTIN, HIGH);
 	Serial.print(",,,");
+	pinMode(48, INPUT_PULLUP);
 }
 
 // the loop function runs over and over again forever
 void loop() {
-	motor.run();
-	Serial.println("xxx");
+	bool isPressed = digitalRead(48);
+	Serial.println(isPressed);
+	delay(200);
+	
 }
