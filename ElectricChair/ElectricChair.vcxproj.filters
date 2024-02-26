@@ -13,18 +13,284 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>xml;json;txt;rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{b5dbca22-998b-4ac9-9a70-ba28ab203697}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly">
+      <UniqueIdentifier>{ccd6eb0b-0c67-4a04-ade0-137781ea0344}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core">
+      <UniqueIdentifier>{af9724cd-8c64-4a6e-8b3c-0bc7efae7c59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\avr">
+      <UniqueIdentifier>{8de0612e-bd1b-4cf9-ab55-2002504be834}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\USB">
+      <UniqueIdentifier>{5e4c7e0c-170d-4b33-88d3-840d55c85adf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\libraries">
+      <UniqueIdentifier>{f2c2ba44-b45b-4045-bf40-85203a422a79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\libraries\AccelStepper">
+      <UniqueIdentifier>{29723da1-f573-4ea7-8b18-cd7a0deedca7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\arduino folders read me.txt">
       <Filter>Misc Files</Filter>
     </None>
+    <None Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring_pulse_asm.S">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </None>
+    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\library.properties">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </None>
+    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\AccelStepper_8h-source.html">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </None>
+    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\annotated.html">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </None>
+    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\classAccelStepper-members.html">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </None>
+    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\classAccelStepper.html">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </None>
+    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\files.html">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </None>
+    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\functions.html">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </None>
+    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\functions_func.html">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </None>
+    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\index.html">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ElectricChair.ino" />
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\abi.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\cortex_handlers.c">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\hooks.c">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\iar_calls_sam3.c">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\IPAddress.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\itoa.c">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\main.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\new.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\Print.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\Reset.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\RingBuffer.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\Stream.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\syscalls_sam3.c">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\UARTClass.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\USARTClass.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\watchdog.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\WInterrupts.c">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring.c">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring_analog.c">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring_digital.c">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring_pulse.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring_shift.c">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\WMath.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\WString.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\USB\CDC.cpp">
+      <Filter>src\_micro-api-readonly\core\USB</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\USB\PluggableUSB.cpp">
+      <Filter>src\_micro-api-readonly\core\USB</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\USB\USBCore.cpp">
+      <Filter>src\_micro-api-readonly\core\USB</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\variants\arduino_due_x\variant.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\src\AccelStepper.cpp">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\src\MultiStepper.cpp">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.ElectricChair.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\Arduino.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\binary.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\Client.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\HardwareSerial.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\IPAddress.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\itoa.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\Print.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\Printable.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\Reset.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\RingBuffer.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\Server.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\Stream.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\syscalls.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\Tone.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\UARTClass.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\Udp.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\USARTClass.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\watchdog.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\WCharacter.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\WInterrupts.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring_analog.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring_constants.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring_digital.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring_private.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring_pulse.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring_shift.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\WMath.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\WString.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\avr\dtostrf.h">
+      <Filter>src\_micro-api-readonly\core\avr</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\avr\interrupt.h">
+      <Filter>src\_micro-api-readonly\core\avr</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\avr\pgmspace.h">
+      <Filter>src\_micro-api-readonly\core\avr</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\USB\PluggableUSB.h">
+      <Filter>src\_micro-api-readonly\core\USB</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\USB\USBAPI.h">
+      <Filter>src\_micro-api-readonly\core\USB</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\USB\USBCore.h">
+      <Filter>src\_micro-api-readonly\core\USB</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\USB\USBDesc.h">
+      <Filter>src\_micro-api-readonly\core\USB</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\variants\arduino_due_x\pins_arduino.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\variants\arduino_due_x\variant.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\src\AccelStepper.h">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\src\MultiStepper.h">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\keywords.txt">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </Text>
   </ItemGroup>
 </Project>
