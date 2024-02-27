@@ -14,152 +14,152 @@
       <Extensions>xml;json;txt;rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="src">
-      <UniqueIdentifier>{b5dbca22-998b-4ac9-9a70-ba28ab203697}</UniqueIdentifier>
+      <UniqueIdentifier>{864055c8-5e10-406d-a087-af8f8d98775d}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\_micro-api-readonly">
-      <UniqueIdentifier>{ccd6eb0b-0c67-4a04-ade0-137781ea0344}</UniqueIdentifier>
+      <UniqueIdentifier>{a92a6b17-0c9e-4cc7-ad73-02478f78abe3}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\_micro-api-readonly\core">
-      <UniqueIdentifier>{af9724cd-8c64-4a6e-8b3c-0bc7efae7c59}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\_micro-api-readonly\core\avr">
-      <UniqueIdentifier>{8de0612e-bd1b-4cf9-ab55-2002504be834}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\_micro-api-readonly\core\USB">
-      <UniqueIdentifier>{5e4c7e0c-170d-4b33-88d3-840d55c85adf}</UniqueIdentifier>
+      <UniqueIdentifier>{983f2f43-c515-424d-8fbb-1eb093b98df9}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\_micro-api-readonly\libraries">
-      <UniqueIdentifier>{f2c2ba44-b45b-4045-bf40-85203a422a79}</UniqueIdentifier>
+      <UniqueIdentifier>{6c2ece94-ce02-447b-8551-493faa76cee4}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\_micro-api-readonly\libraries\AccelStepper">
-      <UniqueIdentifier>{29723da1-f573-4ea7-8b18-cd7a0deedca7}</UniqueIdentifier>
+      <UniqueIdentifier>{8cb6bab0-7dd9-4610-b9f5-048e319d523c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\arduino folders read me.txt">
       <Filter>Misc Files</Filter>
     </None>
-    <None Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring_pulse_asm.S">
-      <Filter>src\_micro-api-readonly\core</Filter>
-    </None>
-    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\library.properties">
+    <None Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\library.properties">
       <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
     </None>
-    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\AccelStepper_8h-source.html">
+    <None Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\AccelStepper_8h-source.html">
       <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
     </None>
-    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\annotated.html">
+    <None Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\annotated.html">
       <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
     </None>
-    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\classAccelStepper-members.html">
+    <None Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\classAccelStepper-members.html">
       <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
     </None>
-    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\classAccelStepper.html">
+    <None Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\classAccelStepper.html">
       <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
     </None>
-    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\files.html">
+    <None Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\files.html">
       <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
     </None>
-    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\functions.html">
+    <None Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\functions.html">
       <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
     </None>
-    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\functions_func.html">
+    <None Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\functions_func.html">
       <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
     </None>
-    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\index.html">
+    <None Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\index.html">
       <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ElectricChair.ino" />
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\abi.cpp">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\abi.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\cortex_handlers.c">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\CanMsg.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\hooks.c">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\CanMsgRingbuffer.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\iar_calls_sam3.c">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\Common.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\IPAddress.cpp">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\IPAddress.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\itoa.c">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\PluggableUSB.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\main.cpp">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\Print.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\new.cpp">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\Stream.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\Print.cpp">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\String.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\Reset.cpp">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\arm_hal_random.c">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\RingBuffer.cpp">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\as_mbed_library\variant.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\Stream.cpp">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\Interrupts.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\syscalls_sam3.c">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\itoa.c">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\UARTClass.cpp">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\main.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\USARTClass.cpp">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\cxxsupport\mstd_mutex.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\watchdog.cpp">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\pinToIndex.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\WInterrupts.c">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\random_seed.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring.c">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\Serial.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring_analog.c">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\timer.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring_digital.c">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\Tone.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring_pulse.cpp">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\USB\PluggableUSBDevice.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring_shift.c">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\USB\USBCDC.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\WMath.cpp">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\USB\USBSerial.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\WString.cpp">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\wiring.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\USB\CDC.cpp">
-      <Filter>src\_micro-api-readonly\core\USB</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\wiring_analog.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\USB\PluggableUSB.cpp">
-      <Filter>src\_micro-api-readonly\core\USB</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\wiring_digital.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\USB\USBCore.cpp">
-      <Filter>src\_micro-api-readonly\core\USB</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\wiring_pulse.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\variants\arduino_due_x\variant.cpp">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\wiring_shift.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\src\AccelStepper.cpp">
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\WMath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\variants\GIGA\pure_analog_pins.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\variants\GIGA\variant.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\src\AccelStepper.cpp">
       <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
     </ClCompile>
-    <ClCompile Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\src\MultiStepper.cpp">
+    <ClCompile Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\src\MultiStepper.cpp">
       <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
     </ClCompile>
   </ItemGroup>
@@ -167,129 +167,1152 @@
     <ClInclude Include="__vm\.ElectricChair.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\Arduino.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\ArduinoAPI.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\binary.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\Binary.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\Client.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\CanMsg.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\HardwareSerial.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\CanMsgRingbuffer.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\IPAddress.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\Client.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\itoa.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\Common.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\Print.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\Compat.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\Printable.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\deprecated-avr-comp\avr\dtostrf.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\Reset.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\deprecated-avr-comp\avr\interrupt.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\RingBuffer.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\deprecated-avr-comp\avr\pgmspace.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\Server.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\deprecated\Client.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\Stream.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\deprecated\HardwareSerial.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\syscalls.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\deprecated\IPAddress.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\Tone.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\deprecated\Print.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\UARTClass.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\deprecated\Printable.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\Udp.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\deprecated\Server.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\USARTClass.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\deprecated\Stream.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\watchdog.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\deprecated\Udp.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\WCharacter.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\deprecated\WString.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\WInterrupts.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\HardwareCAN.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\HardwareI2C.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring_analog.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\HardwareSerial.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring_constants.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\HardwareSPI.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring_digital.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\Interrupts.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring_private.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\IPAddress.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring_pulse.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\itoa.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\wiring_shift.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\PluggableUSB.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\WMath.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\Print.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\WString.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\Printable.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\avr\dtostrf.h">
-      <Filter>src\_micro-api-readonly\core\avr</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\RingBuffer.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\avr\interrupt.h">
-      <Filter>src\_micro-api-readonly\core\avr</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\Server.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\avr\pgmspace.h">
-      <Filter>src\_micro-api-readonly\core\avr</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\Stream.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\USB\PluggableUSB.h">
-      <Filter>src\_micro-api-readonly\core\USB</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\String.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\USB\USBAPI.h">
-      <Filter>src\_micro-api-readonly\core\USB</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\Udp.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\USB\USBCore.h">
-      <Filter>src\_micro-api-readonly\core\USB</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\USBAPI.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino\USB\USBDesc.h">
-      <Filter>src\_micro-api-readonly\core\USB</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\api\WCharacter.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\variants\arduino_due_x\pins_arduino.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\Arduino.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\sam\1.6.12\variants\arduino_due_x\variant.h">
-      <Filter>src\_micro-api-readonly\core</Filter>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\as_mbed_library\pinmode_arduino.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\src\AccelStepper.h">
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\as_mbed_library\pins_arduino.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\macros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\cmsis\device\mbed_cmsis_conf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\connectivity\FEATURE_BLE\source\BLEInstanceBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\connectivity\lorawan\system\LoRaWANTimer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\connectivity\lorawan\system\lorawan_data_structures.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\connectivity\lwipstack\lwip-sys\lwip_random.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\connectivity\lwipstack\lwip-sys\lwip_tcp_isn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\connectivity\mbedtls\source\check_crypto_config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\connectivity\mbedtls\source\ssl_invasive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\connectivity\mbedtls\source\ssl_tls13_keys.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\connectivity\nanostack\nanostack-hal-mbed-cmsis-rtos\arm_hal_interrupt_private.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\connectivity\nanostack\nanostack-hal-mbed-cmsis-rtos\ns_event_loop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\connectivity\nanostack\nanostack-hal-mbed-cmsis-rtos\ns_event_loop_mutex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\connectivity\nanostack\nanostack-hal-mbed-cmsis-rtos\ns_file_system_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\connectivity\nanostack\nanostack-hal-mbed-cmsis-rtos\ns_hal_init.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\AnalogIn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\AnalogOut.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\BufferedSerial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\BusIn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\BusInOut.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\BusOut.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\CAN.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\DigitalIn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\DigitalInOut.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\DigitalOut.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\FlashIAP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\HighResClock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\I2C.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\I2CSlave.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\InterruptIn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\LowPowerClock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\LowPowerTicker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\LowPowerTimeout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\LowPowerTimer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\MbedCRC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\OSPI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\PortIn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\PortInOut.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\PortOut.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\PwmOut.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\QSPI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\RawCAN.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\RealTimeClock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\ResetReason.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\SerialBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\SerialWireOutput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\SPIMaster.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\SPISlave.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\Ticker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\TickerDataClock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\Timeout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\Timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\TimerEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\UnbufferedSerial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\drivers\include\drivers\Watchdog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\events\include\events\equeue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\events\include\events\Event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\events\include\events\EventQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\events\include\events\mbed_events.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\events\include\events\mbed_shared_queues.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\events\include\events\UserAllocatedEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\analogin_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\analogout_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\buffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\can_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\can_helper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\crc_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\critical_section_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\dma_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\flash_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\gpio_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\gpio_irq_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\i2c_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\itm_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\LowPowerTickerWrapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\lp_ticker_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\mbed_lp_ticker_wrapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\mpu_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\ospi_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\pinmap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\PinNameAliases.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\port_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\pwmout_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\qspi_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\reset_reason_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\rtc_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\serial_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\sleep_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\spi_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\static_pinmap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\ticker_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\trng_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\us_ticker_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\include\hal\watchdog_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\TARGET_FLASH_CMSIS_ALGO\flash_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\hal\usb\TARGET_Templates\USBPhyHw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\mbed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\ATCmdParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\Callback.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\CircularBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\CriticalSectionLock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\CThunk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\DeepSleepLock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\DirHandle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\FileBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\FileHandle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\FileLike.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\FilePath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\FileSystemHandle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\FileSystemLike.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\LocalFileSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\mbed_application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\mbed_assert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\mbed_atomic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\mbed_chrono.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\mbed_critical.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\mbed_debug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\mbed_enum_flags.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\mbed_error.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\mbed_interface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\mbed_mem_trace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\mbed_mktime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\mbed_mpu_mgmt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\mbed_poll.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\mbed_power_mgmt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\mbed_preprocessor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\mbed_retarget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\mbed_rtc_time.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\mbed_semihost_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\mbed_stats.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\mbed_thread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\mbed_toolchain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\mbed_version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\mbed_wait_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\NonCopyable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\platform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\PlatformMutex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\ScopedLock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\ScopedRamExecutionLock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\ScopedRomWriteLock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\SharedPtr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\SingletonPtr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\Span.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\Stream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\include\platform\Transaction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\source\mbed_crash_data_offsets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\platform\source\minimal-printf\mbed_printf_implementation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\rtos\include\rtos\ConditionVariable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\rtos\include\rtos\EventFlags.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\rtos\include\rtos\Kernel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\rtos\include\rtos\Mail.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\rtos\include\rtos\mbed_rtos_types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\rtos\include\rtos\MemoryPool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\rtos\include\rtos\Mutex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\rtos\include\rtos\Queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\rtos\include\rtos\rtos.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\rtos\include\rtos\Semaphore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\rtos\include\rtos\ThisThread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\rtos\include\rtos\Thread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\rtos\source\rtos_handlers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\rtos\source\rtos_idle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\gpio_object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\lp_ticker_defines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\mbed_rtx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\nvic_addr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\PeripheralPins.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\PinNamesTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\PortNames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\rtc_api_hal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\serial_api_hal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\stm32_assert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\stm_i2c_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F0\can_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F0\cmsis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F0\gpio_irq_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F0\i2c_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F0\objects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F0\PeripheralNames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F0\pin_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F0\pwmout_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F0\spi_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F0\us_ticker_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F1\can_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F1\cmsis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F1\gpio_irq_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F1\i2c_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F1\objects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F1\pin_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F1\pwmout_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F1\spi_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F1\us_ticker_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F2\can_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F2\cmsis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F2\flash_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F2\gpio_irq_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F2\i2c_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F2\objects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F2\PeripheralNames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F2\pin_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F2\pwmout_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F2\spi_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F2\us_ticker_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F3\can_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F3\cmsis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F3\gpio_irq_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F3\i2c_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F3\objects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F3\PeripheralNames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F3\pin_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F3\pwmout_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F3\spi_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F3\us_ticker_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F4\can_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F4\cmsis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F4\gpio_irq_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F4\i2c_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F4\objects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F4\PeripheralNames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F4\pin_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F4\pwmout_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F4\spi_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F4\us_ticker_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F7\can_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F7\cmsis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F7\gpio_irq_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F7\i2c_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F7\objects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F7\pin_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F7\pwmout_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F7\spi_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F7\us_ticker_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G0\cmsis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G0\gpio_irq_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G0\i2c_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G0\objects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G0\PeripheralNames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G0\pin_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G0\pwmout_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G0\spi_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G0\us_ticker_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G4\cmsis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G4\gpio_irq_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G4\i2c_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G4\objects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G4\PeripheralNames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G4\pin_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G4\pwmout_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G4\spi_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G4\us_ticker_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32H7\cmsis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32H7\gpio_irq_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32H7\i2c_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32H7\objects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32H7\PeripheralNames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32H7\pin_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32H7\pwmout_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32H7\spi_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32H7\us_ticker_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L0\cmsis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L0\gpio_irq_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L0\i2c_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L0\objects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L0\PeripheralNames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L0\pin_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L0\pwmout_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L0\spi_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L0\us_ticker_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L1\cmsis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L1\gpio_irq_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L1\i2c_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L1\objects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L1\PeripheralNames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L1\pin_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L1\pwmout_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L1\spi_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L1\us_ticker_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L4\can_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L4\cmsis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L4\gpio_irq_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L4\i2c_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L4\objects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L4\PeripheralNames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L4\pin_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L4\pwmout_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L4\spi_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L4\us_ticker_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L5\can_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L5\cmsis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L5\gpio_irq_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L5\i2c_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L5\objects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L5\PeripheralNames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L5\pin_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L5\pwmout_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L5\spi_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L5\us_ticker_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32U5\can_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32U5\cmsis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32U5\gpio_irq_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32U5\i2c_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32U5\objects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32U5\PeripheralNames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32U5\pin_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32U5\pwmout_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32U5\spi_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32U5\us_ticker_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WB\cmsis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WB\gpio_irq_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WB\i2c_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WB\objects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WB\PeripheralNames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WB\pin_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WB\pwmout_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WB\spi_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WB\us_ticker_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WL\cmsis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WL\gpio_irq_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WL\i2c_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WL\objects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WL\PeripheralNames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WL\pin_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WL\pwmout_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WL\spi_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WL\us_ticker_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\USBPhyHw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\mbed\targets\TARGET_STM\us_ticker_defines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\overloads.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\pinDefinitions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\Serial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\USB\PluggableUSBDevice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\USB\PluggableUSBSerial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\USB\USBCDC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\cores\arduino\wiring_private.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\variants\GIGA\mbed_config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\variants\GIGA\pinmode_arduino.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\variants\GIGA\pins_arduino.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\variants\GIGA\pure_analog_pins.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\src\AccelStepper.h">
       <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
     </ClInclude>
-    <ClInclude Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\src\MultiStepper.h">
+    <ClInclude Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\src\MultiStepper.h">
       <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\keywords.txt">
+    <Text Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\keywords.txt">
       <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
     </Text>
   </ItemGroup>

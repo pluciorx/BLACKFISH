@@ -26,6 +26,8 @@ bool IsVibrationEnabled = false;
 AccelStepper motorC1L(AccelStepper::DRIVER, CHAIR1_LEFT_STEP, CHAIR1_LEFT_DIR);
 // the setup function runs once when you press reset or power the board
 void setup() {
+
+
 	Serial.begin(115200);
 	for (int i = 0; i < 3; i++) {
 		pinMode(motorControlPins[i], OUTPUT);
@@ -34,6 +36,7 @@ void setup() {
 	// initialize digital pin 13 as an output.
 	motorC1L.setEnablePin(CHAIR1_LEFT_EN);
 	motorC1L.setPinsInverted(false, false, true);
+	motorC1L.setMinPulseWidth(250);
 	motorC1L.disableOutputs();
 	delay(120);
 	motorC1L.enableOutputs();
@@ -49,6 +52,7 @@ void loop() {
 		while (motorC1L.distanceToGo() != 0 )
 		{
 			motorC1L.run();
+      //delay(1);
 			if (motorC1L.distanceToGo() == 0) C1LSubVibReady = true;
 		}
 
