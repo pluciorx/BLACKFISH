@@ -2,7 +2,7 @@
 
 //Set DEBUG 1 to test commands by sending them trough debug serial.
 #define DEBUG 1
-#define PEDALS_HOMING_ENABLED 0 
+#define PEDALS_HOMING_ENABLED 0
 // Pin definitions
 //buttons (2 x 4 )
 // 
@@ -43,31 +43,37 @@ bool p2_prevA = 1, p2_prevB = 1;
 char input_line[MAX_INPUT] = "";
 char error[MAX_INPUT];
 
-#define CHAIR_MIN_PULSE_WIDTH 100
+#define CHAIR_MIN_PULSE_WIDTH 20
 
-#define CHAIR_MAX_SPEED 5600
+#define CHAIR_MAX_SPEED 5000
 
-#define CHAIR_HOMING_SPEED 2200
-#define CHAIR_HOMING_ACCELERATION 2200
+#define CHAIR_HOMING_SPEED 750
+#define CHAIR_HOMING_ACCELERATION 750
 
-#define CHAIR_BASE_SPEED 3600
-#define	CHAIR_ACCEL 2700
+#define CHAIR_BASE_SPEED 2000
+#define	CHAIR_ACCEL 8700
+
 
 //motors (4 for chairs 2 for pedals)
-#define CHAIR_MAX_DISTANCE -16000
-#define CHAIR_BASE_POSITION 8000
+#define CHAIR_MAX_DISTANCE -7500
+#define CHAIR_BASE_POSITION 3500
+// full range is 3500 / - 3500 
 
 byte vibrationfactor = 1;
-#define VIB_C1_L0_MIN -7500
-#define VIB_C1_L0_MAX 6000
-#define VIB_C1_L1_MIN -7000
-#define VIB_C1_L1_MAX 5000
-#define VIB_C1_L2_MIN -7000
-#define VIB_C1_L2_MAX 4000
-#define VIB_C1_L3_MIN -5000
-#define VIB_C1_L3_MAX 4000
-#define VIB_C1_L4_MIN -6000
-#define VIB_C1_L4_MAX 3000
+#define VIB_C1_L0_MIN -3000
+#define VIB_C1_L0_MAX 3000
+
+#define VIB_C1_L1_MIN -2000
+#define VIB_C1_L1_MAX 2000
+
+#define VIB_C1_L2_MIN -2000
+#define VIB_C1_L2_MAX 1000
+
+#define VIB_C1_L3_MIN -1500
+#define VIB_C1_L3_MAX 1500
+
+#define VIB_C1_L4_MIN -500
+#define VIB_C1_L4_MAX 1000
 
 //Chair 1 
 #define CHAIR1_LEFT_UPPER_LIMIT 48
@@ -202,7 +208,6 @@ volatile E_STATE _prevState = E_STATE::SETUP;
 void setup() {
 
 	Serial.begin(115200);
-  
 	Serial.println("<================= Starting =================>");
 
 	//motors
@@ -285,14 +290,13 @@ void setup() {
 	pinMode(PEDAL2_B, INPUT);
 
 	//DUMP whatever is in the serial and wait for the clean go.
-	Serial.flush();
-
 
 	SetState(E_STATE::HOMING);
 	pinMode(PANEL_LED, OUTPUT);
 	digitalWrite(PANEL_LED, HIGH);
 
 	Serial.println("Setup finished.");
+
 }
 
 void loop() {
@@ -307,19 +311,20 @@ void loop() {
 		Serial.println("Homing Pedals Finished...");
 #endif
 		Serial.println("Homing chairs started...");
-
+	
 
 		if (!HandleChairsHoming()) {
 			Serial.println("Chairs homing Failed.");
 		}
 
+		
 		Serial.println("Homing chairs Finished...");
-		delay(1000);
+	
 		SetState(E_STATE::LISTENING);
 
 	}break;
 	case LISTENING: {
-#if DEBUG == 1
+
 
 		if (ProcessIncommingMsg(Serial))
 		{
@@ -327,15 +332,6 @@ void loop() {
 		}
 		else
 			SetState(E_STATE::READY);
-#endif
-
-		//this will override the  commands sent from programmer
-	/*	if (ProcessIncommingMsg(SerialUSB))
-		{
-			SetState(E_STATE::EXECUTE_CMD);
-		}
-		else
-			SetState(E_STATE::MOVE_MOTORS);*/
 
 	}break;
 	case MOVE_MOTORS: {
@@ -462,11 +458,7 @@ void HandleVibrations() //none blockin
 			float speed = CHAIR_BASE_SPEED * random (1,6) ;
 			float accel = CHAIR_ACCEL / random(1, 3);
 			float newPosition = random(minRange, maxRange);
-			Serial.print("C1L New Range min/max:"); Serial.println(minRange); Serial.println(maxRange);
-			Serial.print("C1L New vibration move s/a/p:");
-			Serial.println(speed);
-			Serial.println(accel);
-			Serial.println(newPosition);
+			
 			motorC1L.enableOutputs();
 			motorC1L.setAcceleration(accel);	
 			//motorC1L.setSpeed(speed);
@@ -478,14 +470,9 @@ void HandleVibrations() //none blockin
 		if (C1RSubVibReady)
 		{
 			float speed = CHAIR_BASE_SPEED * random(1, 6);
-			float accel = CHAIR_ACCEL * random(1, 3);
+			float accel = CHAIR_ACCEL / random(1, 3);
 			float newPosition = random(minRange, maxRange);
-			Serial.println("C1R New Range min/max:"); Serial.println(minRange); Serial.println(maxRange);
-			Serial.println("C1R New vibration move s/a/p:");
-			Serial.println(speed);
-			Serial.println(accel);
-			Serial.println(newPosition);
-
+			
 			motorC1R.enableOutputs();
 			motorC1R.setAcceleration(accel);		
 			//motorC1R.setSpeed(speed);
@@ -496,13 +483,9 @@ void HandleVibrations() //none blockin
 		if (C2LSubVibReady)
 		{
 			float speed = CHAIR_BASE_SPEED * random(1, 6);
-			float accel = CHAIR_ACCEL * random(1, 3);
+			float accel = CHAIR_ACCEL / random(1, 3);
 			float newPosition = random(minRange, maxRange);
-			Serial.print("C2L New Range min/max:"); Serial.println(minRange); Serial.println(maxRange);
-			Serial.print("C2L New vibration move s/a/p:");
-			Serial.println(speed);
-			Serial.println(accel);
-			Serial.println(newPosition);
+			
 			motorC2L.enableOutputs();
 			motorC2L.setAcceleration(accel);
 			//motorC1L.setSpeed(speed);
@@ -514,14 +497,9 @@ void HandleVibrations() //none blockin
 		if (C2RSubVibReady)
 		{
 			float speed = CHAIR_BASE_SPEED * random(1, 6);
-			float accel = CHAIR_ACCEL * random(1, 3);
+			float accel = CHAIR_ACCEL / random(1, 3);
 			float newPosition = random(minRange, maxRange);
-			Serial.println("C2R New Range min/max:"); Serial.println(minRange); Serial.println(maxRange);
-			Serial.println("C2R New vibration move s/a/p:");
-			Serial.println(speed);
-			Serial.println(accel);
-			Serial.println(newPosition);
-
+			
 			motorC2R.enableOutputs();
 			motorC2R.setAcceleration(accel);
 			//motorC1R.setSpeed(speed);
@@ -529,21 +507,6 @@ void HandleVibrations() //none blockin
 
 			C2RSubVibReady = false;
 		}
-
-
-		/*if (C2LSubVibReady && IsVibrationEnabled)
-		{
-
-			motorC2L.moveTo(random(minRange, maxRange));
-			motorC2L.setSpeed(speed);
-			C2LSubVibReady = false;
-		}
-		if (C2RSubVibReady && IsVibrationEnabled)
-		{
-			motorC2R.moveTo(random(minRange, maxRange));
-			motorC2R.setSpeed(speed);
-			C2RSubVibReady = false;
-		}*/
 	}
 }
 
@@ -614,7 +577,7 @@ bool HandleChairsHoming() //can be blocking
 		}
 	}
 
-	Serial.println("all motors reached endstop or at max distance;");
+	Serial.println("All motors reached endstop or at max distance;");
 	stopMotorC1L();
 	stopMotorC1R();
 	stopMotorC2L();
@@ -692,6 +655,55 @@ void CheckAndRetractMotors()
 
 bool HandlePedalsHoming() //can be blocking
 {
+	//retract pedals if they are on the endstops
+	while (digitalRead(PEDALL_UPPER_LIMIT) == HIGH)
+	{
+
+		motorPedalsL.setCurrentPosition(0);
+		motorPedalsL.move(100000);
+		motorPedalsL.setSpeed(PEDAL_HOMING_SPEED);
+
+		while (motorPedalsL.runSpeedToPosition() || digitalRead(PEDALL_UPPER_LIMIT) == HIGH);
+		Serial.println("PEDAL L endstop off");
+		delay(500);
+		motorPedalsL.move(500);
+		motorPedalsL.setSpeed(PEDAL_HOMING_SPEED);
+
+		Serial.println("PEDAL L  move");
+		while (motorPedalsL.distanceToGo() != 0)
+		{
+			motorPedalsL.runSpeedToPosition();
+		}
+
+		motorPedalsL.setCurrentPosition(0);
+		Serial.println("PEDAL L endstop cleared;");
+
+	}
+
+	while (digitalRead(PEDALR_UPPER_LIMIT) == HIGH)
+	{
+
+		motorPedalsR.setCurrentPosition(0);
+		motorPedalsR.move(100000);
+		motorPedalsR.setSpeed(PEDAL_HOMING_SPEED);
+
+		while (motorPedalsR.runSpeedToPosition() || digitalRead(PEDALR_UPPER_LIMIT) == HIGH);
+		Serial.println("PEDAL L endstop off");
+		delay(500);
+		motorPedalsL.move(500);
+		motorPedalsL.setSpeed(PEDAL_HOMING_SPEED);
+
+		Serial.println("PEDAL L  move");
+		while (motorPedalsL.distanceToGo() != 0)
+		{
+			motorPedalsL.runSpeedToPosition();
+		}
+
+		motorPedalsL.setCurrentPosition(0);
+		Serial.println("PEDAL L endstop cleared;");
+
+	}
+
 	motorPedalsL.setAcceleration(PEDAL_HOMING_ACCELERATION);
 	motorPedalsL.moveTo(PEDALS_MAX_MAXDISTANCE);
 	motorPedalsL.setSpeed(PEDAL_HOMING_SPEED);
@@ -804,6 +816,7 @@ bool ExecuteCMD(CommandType cmd)
 	case VibStart: //startVibration
 	{
 		Serial.println(F("Vibration ON"));
+	
 		IsVibrationEnabled = true;
 		
 		SetState(E_STATE::READY);
@@ -813,12 +826,14 @@ bool ExecuteCMD(CommandType cmd)
 	{
 
 		Serial.println(F("Vibration OFF"));
+		
 		IsVibrationEnabled = false;
 		SetState(E_STATE::READY);
 	}break;
 	case PedalResistance://pedalResistance|ID
 	{
 		Serial.print(F("Pedals resistance:")); Serial.println(pedalResistance);
+		
 		SetPedalResistance(pedalResistance);
 		SetState(E_STATE::READY);
 	}break;
@@ -844,6 +859,7 @@ bool ExecuteCMD(CommandType cmd)
 	}break;
 	case Unknown:
 	{
+		
 		Serial.print(F("Unknown Command received:'")); Serial.print(input_line); Serial.println(F('\''));
 		return true;
 	}break;
@@ -860,8 +876,6 @@ void SetPedalResistance(int pedalResistance)
 
 	if (pedalPreviousResistance != pedalResistance)
 	{
-		Serial.print("Current :");
-		Serial.println(motorPedalsL.currentPosition());
 
 		int factor = 1;
 		int jump = 0;
@@ -870,23 +884,15 @@ void SetPedalResistance(int pedalResistance)
 			factor = -1;
 			jump = pedalResistance - pedalPreviousResistance;
 
-			Serial.print("Jump:"); Serial.println(jump);
 		}
 		if (pedalPreviousResistance < pedalResistance)
 		{
 			factor = 1;
 			jump = pedalPreviousResistance - pedalResistance;
-			Serial.print("Jump:"); Serial.println(jump);
-
+			
 		}
 
 		factor *= abs(jump);
-		Serial.print("Target:"); Serial.println(factor * PEDALS_LEVEL0);
-
-		Serial.println(factor);
-		Serial.println(pedalPreviousResistance);
-		Serial.println(pedalResistance);
-
 
 		motorPedalsR.setAcceleration(PEDAL_ACCEL);
 		motorPedalsL.setAcceleration(PEDAL_ACCEL);
@@ -922,14 +928,13 @@ void SetPedalResistance(int pedalResistance)
 		pedalPreviousResistance = pedalResistance;
 		vibrationfactor = pedalResistance;
 	}
-	else Serial.println("No resistance change");
-
 }
 
 CommandType GetCMDFromInput(const char* input)
 {
 	CommandType cmdFound = CommandType::Unknown;
 	Serial.print(F("<==")); Serial.println(input_line);
+	
 	if (strcmp(input, "ping") == NULL)
 	{
 		cmdFound = CommandType::Ping;
@@ -955,17 +960,8 @@ CommandType GetCMDFromInput(const char* input)
 			{
 				cmdFound = CommandType::PedalResistance;
 			}
-			else {
-#if DEBUG == 1
-				Serial.print(F("Invalid resistance range:")); Serial.println(level[0]);
-#endif
-			}
 		}
-		else {
-
-			Serial.print(F("Invalid resistance:")); Serial.println(level[0]);
-
-		}
+		
 	}
 
 	if (strcmp(input, "kill") == NULL)
@@ -1047,6 +1043,7 @@ void HandlePanelPress()
 			sprintf(cMsg, "button|%d", i + 1);
 		
 			Serial.print(F("==>")); Serial.println(cMsg);
+			
 		}
 		else
 			buttonActive[i] = false;
@@ -1062,8 +1059,8 @@ void SendPedalState(byte pedalNo, int pedalAngle)
 	char cMsg[20];
 	sprintf(cMsg, "pedal%d|%d", pedalNo, pedalAngle);
 	
-	Serial.print(F("==>")); Serial.println(cMsg);
-
+	Serial.print("==>"); Serial.println(cMsg);
+	
 	//#if DEBUG == 1 	
 	//	Serial.print("Position Pedal_"); Serial.print(pedalNo); Serial.println(":");
 	//	Serial.print(int(pedalAngle * (-1.8)));
