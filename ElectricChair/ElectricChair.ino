@@ -22,12 +22,12 @@ byte buttonActive[buttonCount];
 //Pedals
 int p1_counter = 0;
 int p1_prevCounter = 0;
-int p1_angle = 0;
+int p1_angle = 0, p1_prevAngle = 0;
 bool p1_prevA = 1, p1_prevB = 1;
 
 int p2_counter = 0;
 int p2_prevCounter = 0;
-int p2_angle = 0;
+int p2_angle = 0, p2_prevAngle = 0;
 bool p2_prevA = 1, p2_prevB = 1;
 
 #define PEDAL1_A 28
@@ -43,7 +43,7 @@ bool p2_prevA = 1, p2_prevB = 1;
 char input_line[MAX_INPUT] = "";
 char error[MAX_INPUT];
 
-#define CHAIR_MIN_PULSE_WIDTH 20
+#define CHAIR_MIN_PULSE_WIDTH 50
 
 #define CHAIR_MAX_SPEED 15000
 
@@ -121,14 +121,16 @@ volatile bool IsPLHomed = false;
 #define PEDALR_DIR 13
 volatile bool IsPRHomed = false;
 
-#define PEDAL_HOMING_SPEED 1000
-#define PEDAL_HOMING_ACCELERATION 3000
-#define PEDALS_MAX_MAXDISTANCE 8000
-#define PEDAL_BASE_POSITION -1000
+#define PEDAL_HOMING_ACCELERATION 4000
+#define PEDALS_MAX_MAXDISTANCE 15000
+#define PEDAL_BASE_POSITION 11000
+//11000 level 0
+//13000 level 1
+// 14000 level 2
+//15000 = level 3 MAX resistance 
 
-#define PEDAL_MAX_SPEED 3000
-#define PEDAL_BASE_SPEED 1000
-#define	PEDAL_ACCEL 2000
+#define PEDAL_SPEED 2000
+#define	PEDAL_ACCEL 4000
 
 #define PEDALS_LEVEL0 1000
 #define PEDALS_LEVEL1 2000
@@ -208,7 +210,11 @@ volatile E_STATE _prevState = E_STATE::SETUP;
 void setup() {
 
 	Serial.begin(115200);
-	Serial.println("<================= Starting =================>");
+	while (!Serial) {
+		; // wait for serial port to connect. Needed for native USB
+	}
+  Serial.println("<================= Starting =================>\n");
+    
 
 	//motors
 	// Set limit switch inputs
@@ -269,16 +275,20 @@ void setup() {
 	
 
 	motorPedalsL.setEnablePin(PEDALL_EN);
-	motorPedalsL.setPinsInverted(false, false, true);
+	motorPedalsL.setPinsInverted(true, false, true);
+	motorPedalsL.disableOutputs();
+	delay(120);
 	motorPedalsL.enableOutputs();
-	motorPedalsL.setMaxSpeed(PEDAL_MAX_SPEED);
-	motorPedalsL.setMinPulseWidth(CHAIR_MIN_PULSE_WIDTH);
+	motorPedalsL.setMaxSpeed(PEDAL_SPEED);
+	motorPedalsL.setMinPulseWidth(50);
 
 	motorPedalsR.setEnablePin(PEDALR_EN);
 	motorPedalsR.setPinsInverted(false, false, true);
+	motorPedalsR.disableOutputs();
+	delay(120);
 	motorPedalsR.enableOutputs();
-	motorPedalsR.setMaxSpeed(PEDAL_MAX_SPEED);
-	motorPedalsR.setMinPulseWidth(CHAIR_MIN_PULSE_WIDTH);
+	motorPedalsR.setMaxSpeed(PEDAL_SPEED);
+	motorPedalsR.setMinPulseWidth(50);
 	//end motors
 
 	//pedals
@@ -293,7 +303,8 @@ void setup() {
 	pinMode(PANEL_LED, OUTPUT);
 	digitalWrite(PANEL_LED, HIGH);
 
-	Serial.println("Setup finished.");
+	Serial.write("Setup finished.\n");
+	delay(100);
 
 }
 
@@ -511,7 +522,6 @@ void HandleVibrations() //none blockin
 
 bool HandleChairsHoming() //can be blocking
 {
-
 	//Just in case we are on the endstops
 	CheckAndRetractMotors();
 
@@ -685,21 +695,22 @@ void CheckAndRetractMotors()
 	Serial.println("Endstops clear.");
 }
 
-bool HandlePedalsHoming() //can be blocking
+
+void CheckAndRetractPedalMotors()
 {
 	//retract pedals if they are on the endstops
 	while (digitalRead(PEDALL_UPPER_LIMIT) == HIGH)
 	{
 		Serial.println("PEDAL L endstop start");
 		motorPedalsL.setCurrentPosition(0);
-		motorPedalsL.move(2000);
-		motorPedalsL.setSpeed(PEDAL_HOMING_SPEED);
+		motorPedalsL.move(5000);
+		motorPedalsL.setSpeed(PEDAL_SPEED);
 
 		while (motorPedalsL.runSpeedToPosition() || digitalRead(PEDALL_UPPER_LIMIT) == HIGH);
 		Serial.println("PEDAL L endstop off");
-		
-		motorPedalsL.move(500);
-		motorPedalsL.setSpeed(PEDAL_HOMING_SPEED);
+
+		motorPedalsL.move(1000);
+		motorPedalsL.setSpeed(PEDAL_SPEED);
 
 		while (motorPedalsL.distanceToGo() != 0)
 		{
@@ -713,50 +724,52 @@ bool HandlePedalsHoming() //can be blocking
 
 	while (digitalRead(PEDALR_UPPER_LIMIT) == HIGH)
 	{
+		Serial.println("PEDAL R endstop start");
 		motorPedalsR.setCurrentPosition(0);
-		motorPedalsR.move(2000);
-		motorPedalsR.setSpeed(PEDAL_HOMING_SPEED);
+		motorPedalsR.move(5000);
+		motorPedalsR.setAcceleration(PEDAL_HOMING_ACCELERATION);
+		motorPedalsR.setSpeed(PEDAL_SPEED);
 
 		while (motorPedalsR.runSpeedToPosition() || digitalRead(PEDALR_UPPER_LIMIT) == HIGH);
 		Serial.println("PEDAL R endstop off");
-	
-		motorPedalsL.move(500);
-		motorPedalsL.setSpeed(PEDAL_HOMING_SPEED);
 
-		while (motorPedalsL.distanceToGo() != 0)
+		motorPedalsR.move(1000);
+		motorPedalsR.setSpeed(PEDAL_SPEED);
+
+		while (motorPedalsR.distanceToGo() != 0)
 		{
-			motorPedalsL.runSpeedToPosition();
+			motorPedalsR.runSpeedToPosition();
 		}
-
-		motorPedalsL.setCurrentPosition(0);
+		motorPedalsR.setCurrentPosition(0);
 		Serial.println("PEDAL R endstop cleared;");
-
 	}
+}
 
+bool HandlePedalsHoming() //can be blocking
+{
+	CheckAndRetractPedalMotors();
+	
 	motorPedalsL.setAcceleration(PEDAL_HOMING_ACCELERATION);
-	motorPedalsL.moveTo(PEDALS_MAX_MAXDISTANCE);
-	motorPedalsL.setSpeed(PEDAL_HOMING_SPEED);
+	motorPedalsL.move(-1 * PEDALS_MAX_MAXDISTANCE);
+	motorPedalsL.setSpeed(-1 * PEDAL_SPEED);
 
 	motorPedalsR.setAcceleration(PEDAL_HOMING_ACCELERATION);
-	motorPedalsR.moveTo(PEDALS_MAX_MAXDISTANCE);
-	motorPedalsR.setSpeed(PEDAL_HOMING_SPEED);
-
-	IsPLHomed = false;
-	IsPRHomed = false;
+	motorPedalsR.move(-1 * PEDALS_MAX_MAXDISTANCE);
+	motorPedalsR.setSpeed(-1 * PEDAL_SPEED);
+	Serial.println("Moving Pedals towards endstop");
 
 	while (1)
 	{
-		if (motorPedalsL.distanceToGo() != 0)
-		{
-			motorPedalsL.runSpeed();
 
+		if (motorPedalsL.distanceToGo() != 0 && digitalRead(PEDALL_UPPER_LIMIT) == LOW)
+		{
+			motorPedalsL.runSpeedToPosition();
 		}
 		else IsPLHomed = true;
 
-		if (motorPedalsR.distanceToGo() != 0)
+		if (motorPedalsR.distanceToGo() != 0 && digitalRead(PEDALR_UPPER_LIMIT) == LOW)
 		{
-			motorPedalsR.runSpeed();
-
+			motorPedalsR.runSpeedToPosition();
 		}
 		else IsPRHomed = true;
 
@@ -768,8 +781,8 @@ bool HandlePedalsHoming() //can be blocking
 	Serial.println("Moved to endstop.");
 
 	//Retract 
-	if (motorPedalsL.distanceToGo() != 0) stopMotorPL();
-	if (motorPedalsR.distanceToGo() != 0) stopMotorPR();
+	stopMotorPL();
+	stopMotorPR();
 
 	while (motorPedalsR.distanceToGo() != 0 || motorPedalsL.distanceToGo() != 0)
 	{
@@ -814,17 +827,15 @@ void stopMotorC2R() //interrupt call
 void stopMotorPL() //interrupt call
 {
 	Serial.print("Stop PEDAL_LEFT:"); Serial.println(motorPedalsL.currentPosition());
-	//detachInterrupt(digitalPinToInterrupt(PEDALL_UPPER_LIMIT));
-	if (!IsPLHomed) HandleEndStopHitMotor(motorPedalsL, -1 * PEDAL_HOMING_SPEED, PEDAL_BASE_POSITION);
-
+	
+	HandleEndStopHitMotor(motorPedalsL, PEDAL_SPEED, PEDAL_BASE_POSITION);
 }
 
 void stopMotorPR() //interrupt call
 {
 	Serial.print("Stop PEDAL_RIGHT:"); Serial.println(motorPedalsR.currentPosition());
-	//detachInterrupt(digitalPinToInterrupt(PEDALR_UPPER_LIMIT));
-	if (!IsPRHomed) HandleEndStopHitMotor(motorPedalsR, -1 * PEDAL_HOMING_SPEED, PEDAL_BASE_POSITION);
-
+	
+	HandleEndStopHitMotor(motorPedalsR, PEDAL_SPEED, PEDAL_BASE_POSITION);
 }
 
 bool HandleEndStopHitMotor(AccelStepper& stepper, float desiredSpeed, long retraction)  //Sub interrupt call
@@ -925,8 +936,8 @@ void SetPedalResistance(int pedalResistance)
 
 		motorPedalsR.setAcceleration(PEDAL_ACCEL);
 		motorPedalsL.setAcceleration(PEDAL_ACCEL);
-		motorPedalsR.setSpeed(PEDAL_BASE_SPEED);
-		motorPedalsL.setSpeed(PEDAL_BASE_SPEED);
+		motorPedalsR.setSpeed(PEDAL_SPEED);
+		motorPedalsL.setSpeed(PEDAL_SPEED);
 
 		switch (pedalResistance)
 		{
@@ -1098,36 +1109,49 @@ void HandlePedaling()
 {
 	bool A = digitalRead(PEDAL1_A), B = digitalRead(PEDAL1_B);
 
-	p1_counter += (A ^ p1_prevA) | (B ^ p1_prevB) ? A ^ p1_prevB ? 1 : -1 : 0;
+	p1_counter += (A ^ p1_prevA) | (B ^ p1_prevB) ? A ^ p1_prevB ? -1 : 1 : 0;
 
 	p1_prevA = A;
 	p1_prevB = B;
+	
 	if (p1_counter > p1_prevCounter)
 	{
-		int angle = int(p1_counter * (1.8)); // do (-1.8) for oposit direction pedaling
-		if (angle >= 361) {
-			angle = 0;
+		p1_prevAngle = p1_angle;
+		p1_angle = int(p1_counter * (0.33)); // do (-1.8) for oposit direction pedaling
+		
+		if (p1_angle >= 361) {
+			p1_angle = 0;
 			p1_counter = 0;
 		}
-		SendPedalState(1, angle);
+
+		if (p1_prevAngle != p1_angle)
+		{
+			SendPedalState(1, p1_angle);
+		}
 		p1_prevCounter = p1_counter;
 	}
 
 	A = digitalRead(PEDAL2_A), B = digitalRead(PEDAL2_B);
 
-	p2_counter += (A ^ p2_prevA) | (B ^ p2_prevB) ? A ^ p2_prevB ? 1 : -1 : 0;
+	p2_counter += (A ^ p2_prevA) | (B ^ p2_prevB) ? A ^ p2_prevB ? -1 : 1 : 0;
 
 	p2_prevA = A;
 	p2_prevB = B;
-
+	
 	if (p2_counter > p2_prevCounter)
 	{
-		int angle = int(p2_counter * (1.8));
-		if (angle >= 361) {
-			angle = 0;
+		p2_prevAngle = p2_angle;
+		p2_angle = int(p2_counter * (0.33));
+		
+		if (p2_angle >= 361) {
+			p2_angle = 0;
 			p2_counter = 0;
 		}
-		SendPedalState(2, angle);
+
+		if (p2_prevAngle != p2_angle)
+		{
+			SendPedalState(2, p2_angle);
+		}
 		p2_prevCounter = p2_counter;
 	}
 }
