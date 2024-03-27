@@ -1117,7 +1117,7 @@ void HandlePedaling()
 	if (p1_counter > p1_prevCounter)
 	{
 		p1_prevAngle = p1_angle;
-		p1_angle = int(p1_counter * (0.33)); // do (-1.8) for oposit direction pedaling
+		p1_angle = int(p1_counter * (0.285)); // do (-1.8) for oposit direction pedaling
 		
 		if (p1_angle >= 361) {
 			p1_angle = 0;
@@ -1141,7 +1141,7 @@ void HandlePedaling()
 	if (p2_counter > p2_prevCounter)
 	{
 		p2_prevAngle = p2_angle;
-		p2_angle = int(p2_counter * (0.33));
+		p2_angle = int(p2_counter * (0.285));
 		
 		if (p2_angle >= 361) {
 			p2_angle = 0;
