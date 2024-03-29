@@ -28,6 +28,9 @@
     <Filter Include="src\_micro-api-readonly\libraries\AccelStepper">
       <UniqueIdentifier>{8cb6bab0-7dd9-4610-b9f5-048e319d523c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\_micro-api-readonly\libraries\Adafruit_Debounce">
+      <UniqueIdentifier>{8f6de115-d50e-4c0d-b79a-0d66abc5b6df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\arduino folders read me.txt">
@@ -59,6 +62,9 @@
     </None>
     <None Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\index.html">
       <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </None>
+    <None Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\Adafruit_Debounce\library.properties">
+      <Filter>src\_micro-api-readonly\libraries\Adafruit_Debounce</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +167,9 @@
     </ClCompile>
     <ClCompile Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\src\MultiStepper.cpp">
       <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\Adafruit_Debounce\Adafruit_Debounce.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Adafruit_Debounce</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1310,10 +1319,16 @@
     <ClInclude Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\src\MultiStepper.h">
       <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
     </ClInclude>
+    <ClInclude Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\Adafruit_Debounce\Adafruit_Debounce.h">
+      <Filter>src\_micro-api-readonly\libraries\Adafruit_Debounce</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\keywords.txt">
       <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </Text>
+    <Text Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\Adafruit_Debounce\LICENSE.txt">
+      <Filter>src\_micro-api-readonly\libraries\Adafruit_Debounce</Filter>
     </Text>
   </ItemGroup>
 </Project>
