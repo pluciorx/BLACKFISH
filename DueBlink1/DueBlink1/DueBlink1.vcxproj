@@ -82,7 +82,7 @@
   <ImportGroup Label="ExtensionTargets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties arduino.upload.port="COM7" config.Debug.customdebug_arduino_due_x_dbg_debugger_type="universal" />
+      <UserProperties arduino.upload.port="COM16" config.Debug.customdebug_arduino_due_x_dbg_debugger_type="universal" config.Debug.customdebug_giga_debugger_type="universal" custom_giga_split="75_25" custom_giga_target_core="cm7" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
