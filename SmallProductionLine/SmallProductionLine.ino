@@ -1,3 +1,4 @@
+#include <NewEncoder.h>
 #include <OneWire.h>
 #include <DallasTemperature.h>
 #include <Adafruit_Debounce.h>
@@ -93,6 +94,8 @@ DallasTemperature DSTemp(&oneWire);
 #define TAPE_ENGINE_INVERTER 12 
 #define SIG_TAPE_RIGHT 43
 #define SIG_TAPE_LEFT 44
+
+NewEncoder encTapeSpeed;
 #define TAPE_ENC_A 9
 #define TAPE_ENC_B 10
 #define TAPE_CURR_SENS PIN_A4
@@ -128,6 +131,7 @@ enum ES_START {
 VirtualDelay heaterStartDelay;
 VirtualDelay pneumaticDelay;
 VirtualDelay blowerSwitchOffDelay;
+VirtualDelay encoderSpeedCalcDelay;
 
 volatile ES_START _start_sub_state = ES_START::HEATERS_ON;
 volatile E_STATE _state = E_STATE::STARTING;
@@ -177,10 +181,12 @@ void setup() {
 	pinMode(FOAM_HEAT_1, OUTPUT);
 	pinMode(FOAM_HEAT_2, OUTPUT);
 
-	pinMode(PULL_FWD, OUTPUT);
-	pinMode(PULL_REV, OUTPUT);
+	pinMode(SIG_PULL_FWD, OUTPUT);
+	pinMode(SIG_PULL_REV, OUTPUT);
 
 	pinMode(BLOWER_PIN, OUTPUT);
+
+	encTapeSpeed.begin(TAPE_ENC_A, TAPE_ENC_B);
 
 	SetState(E_STATE::PIPE_LOAD);
 
@@ -233,11 +239,14 @@ void loop() {
 		DO_ONCE(heaterStartDelay.start(HEATERS_START_DELAY)); //5s Wait before heater starts
 		if(digitalRead(BLOWER_PIN) == LOW) digitalWrite(BLOWER_PIN, HIGH); // Make sure the blower is ALWAYS ON !!
 
+		lcd.setCursor(0, 0);
+		lcd.print("Starting...");
+		Serial.println("Heaters start");
 		if (heaterStartDelay.elapsed())
 		{
 			
 			DO_ONCE(pneumaticDelay.start(HEATERS_LOWERING_DELAY));
-			lcd.setCursor(0, 0);            
+			lcd.setCursor(0, 1);            
 			lcd.print("Heaters starting...");         
 			Serial.println("Heaters start");
 			digitalWrite(FOAM_HEAT_1, HIGH); 
@@ -249,23 +258,24 @@ void loop() {
 		{
 
 			Serial.println("Heaters Down");
-			lcd.setCursor(0, 1);
+			lcd.setCursor(0, 2);
 			lcd.print("Heaters down...");
 			digitalWrite(FOAM_PNEUMATIC_1, HIGH);
 			digitalWrite(FOAM_PNEUMATIC_2, HIGH);
 			SetState(E_STATE::PROCESS_RUN);
 		}
-
-		
-
+		if (btnProdEnd.isPressed())
+		{
+			SetState(E_STATE::COOLDOWN);
+		}
 	}break;
 	case PROCESS_RUN:
 	{
 
 		lcd.setCursor(0, 0);
-		lcd.print(" !! RUNNING !!..");
+		lcd.print(" !! RUNNING !! ");
 		Serial.println("RUNNING ");		
-
+		encoderSpeedCalcDelay.start(1000);
 		while (!btnProdEnd.isPressed())
 		{
 			btnProdEnd.update();
@@ -273,7 +283,13 @@ void loop() {
 			digitalWrite(SIG_TAPE_LEFT, HIGH);
 			analogWrite(TAPE_ENGINE_INVERTER, 32);// ehre we replace the value from the variable stored in eeprom .
 			lcd.setCursor(0, 1);
-			lcd.print("Speed....");
+			lcd.print("Speed:");
+
+			if (encoderSpeedCalcDelay.elapsed())
+			{
+				lcd.setCursor(0, 8);
+				lcd.print("0");
+			}
 		}
 		SetState(E_STATE::COOLDOWN);
 		
@@ -289,14 +305,12 @@ void loop() {
 		lcd.setCursor(0, 1);
 		lcd.print("Heaters STOP...");
 	
-		
+		digitalWrite(FOAM_PNEUMATIC_1, LOW);
+		digitalWrite(FOAM_PNEUMATIC_2, LOW);
+
 		digitalWrite(FOAM_HEAT_1, LOW);
 		//here we can add potential delay to second heater
 		digitalWrite(FOAM_HEAT_2, LOW);
-		
-		
-		digitalWrite(FOAM_PNEUMATIC_1, LOW);
-		digitalWrite(FOAM_PNEUMATIC_2, LOW);		
 		
 
 		DO_ONCE(blowerSwitchOffDelay.start(BLOWER_SWITCH_OFF_DELAY));
