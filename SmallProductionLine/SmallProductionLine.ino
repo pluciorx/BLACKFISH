@@ -309,8 +309,7 @@ void loop() {
 			}else 
 				digitalWrite(SIG_FOAM_HEAT_1, LOW);
 
-			if (!digitalRead(FOAM_HEAT_2_TEMP_LOW_TRIG) && digitalRead(FOAM_HEAT_2_TEMP_HIGH_TRIG))
-			{
+			if (!digitalRead(FOAM_HEAT_2_TEMP_LOW_TRIG) && digitalRead(FOAM_HEAT_2_TEMP_HIGH_TRIG)) {			
 				digitalWrite(SIG_FOAM_HEAT_2, HIGH);
 			}else 
 				digitalWrite(SIG_FOAM_HEAT_2, LOW);
