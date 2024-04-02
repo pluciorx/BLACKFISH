@@ -287,7 +287,14 @@ void loop() {
 		Serial.println("Cooldown started");
 		Serial.println("Heaters UP");
 		lcd.setCursor(0, 1);
-		lcd.print("Heaters UP...");
+		lcd.print("Heaters STOP...");
+	
+		
+		digitalWrite(FOAM_HEAT_1, LOW);
+		//here we can add potential delay to second heater
+		digitalWrite(FOAM_HEAT_2, LOW);
+		
+		
 		digitalWrite(FOAM_PNEUMATIC_1, LOW);
 		digitalWrite(FOAM_PNEUMATIC_2, LOW);		
 		
@@ -298,7 +305,6 @@ void loop() {
 			digitalWrite(BLOWER_PIN, LOW); //2 minutes after all is finished we switch BLOWER OFF
 			Serial.println("BLOWERS OFF");
 		}
-
 
 	}
 	
