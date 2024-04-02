@@ -86,8 +86,14 @@ DallasTemperature DSTemp(&oneWire);
 #define FOAM_CHILLER_SIG 37
 #define FOAM_PNEUMATIC_1 38
 #define FOAM_PNEUMATIC_2 39
-#define FOAM_HEAT_1 40
-#define FOAM_HEAT_2 41
+#define SIG_FOAM_HEAT_1 40
+#define FOAM_HEAT_1_TEMP_LOW_TRIG  PIN_A2 // alarm dolny
+#define FOAM_HEAT_1_TEMP_HIGH_TRIG  PIN_A1 // alarm gorny 
+
+#define SIG_FOAM_HEAT_2 41
+#define FOAM_HEAT_2_TEMP_LOW_TRIG  PIN_A4 //alarm dolny H2
+#define FOAM_HEAT_2_TEMP_HIGH_TRIG  PIN_A5 //alarm gorny
+
 #define FOAM_BLOWER 42
 
 //---------- Tape module ---------------
@@ -98,12 +104,12 @@ DallasTemperature DSTemp(&oneWire);
 NewEncoder encTapeSpeed;
 #define TAPE_ENC_A 9
 #define TAPE_ENC_B 10
-#define TAPE_CURR_SENS PIN_A4
+#define TAPE_CURR_SENS PIN_A6
 
 //puller SMALL
 #define SIG_PULL_FWD 45
 #define SIG_PULL_REV 46
-#define PULL_CURR_SENS PIN_A5
+#define PULL_CURR_SENS PIN_A7
 
 //BLOWER 
 #define BLOWER_PIN 49
@@ -178,8 +184,13 @@ void setup() {
 	//pin setup
 	pinMode(SPK_PIN, OUTPUT);
 
-	pinMode(FOAM_HEAT_1, OUTPUT);
-	pinMode(FOAM_HEAT_2, OUTPUT);
+	pinMode(FOAM_HEAT_1_TEMP_LOW_TRIG, INPUT_PULLUP);
+	pinMode(FOAM_HEAT_1_TEMP_HIGH_TRIG, INPUT_PULLUP);
+	pinMode(SIG_FOAM_HEAT_1, OUTPUT);
+
+	pinMode(FOAM_HEAT_2_TEMP_LOW_TRIG, INPUT_PULLUP);
+	pinMode(FOAM_HEAT_2_TEMP_HIGH_TRIG, INPUT_PULLUP);
+	pinMode(SIG_FOAM_HEAT_2, OUTPUT);
 
 	pinMode(SIG_PULL_FWD, OUTPUT);
 	pinMode(SIG_PULL_REV, OUTPUT);
@@ -208,6 +219,8 @@ void loop() {
 		{
 			Serial.println("Btn PULL IN ");
 			digitalWrite(SIG_PULL_FWD, HIGH);
+			if (analogRead(PULL_CURR_SENS));
+
 		}else digitalWrite(SIG_PULL_FWD, LOW);
 
 		if (btnPullOut.isPressed())
@@ -249,9 +262,15 @@ void loop() {
 			lcd.setCursor(0, 1);            
 			lcd.print("Heaters starting...");         
 			Serial.println("Heaters start");
-			digitalWrite(FOAM_HEAT_1, HIGH); 
+			Serial.print("PID H1 AL1-LOW"); Serial.println(digitalRead(FOAM_HEAT_1_TEMP_LOW_TRIG));
+			Serial.print("PID H1 AL2-HIGH"); Serial.println(digitalRead(FOAM_HEAT_1_TEMP_HIGH_TRIG));
+
+			if (digitalRead(FOAM_HEAT_1_TEMP_LOW_TRIG) == LOW) digitalWrite(SIG_FOAM_HEAT_1, HIGH); 
 			//here we can add potential delay to second heater
-			digitalWrite(FOAM_HEAT_2, HIGH);
+			Serial.print("PID H2 AL1-LOW"); Serial.println(digitalRead(FOAM_HEAT_1_TEMP_LOW_TRIG));
+			Serial.print("PID H2 AL2-HIGH"); Serial.println(digitalRead(FOAM_HEAT_1_TEMP_HIGH_TRIG));
+
+			if (digitalRead(FOAM_HEAT_1_TEMP_LOW_TRIG) == LOW) digitalWrite(SIG_FOAM_HEAT_2, HIGH);
 
 		}
 		if (pneumaticDelay.elapsed())
@@ -285,6 +304,18 @@ void loop() {
 			lcd.setCursor(0, 1);
 			lcd.print("Speed:");
 
+			if (!digitalRead(FOAM_HEAT_1_TEMP_LOW_TRIG) && digitalRead(FOAM_HEAT_1_TEMP_HIGH_TRIG)) {
+				digitalWrite(SIG_FOAM_HEAT_1, HIGH);
+			}else 
+				digitalWrite(SIG_FOAM_HEAT_1, LOW);
+
+			if (!digitalRead(FOAM_HEAT_2_TEMP_LOW_TRIG) && digitalRead(FOAM_HEAT_2_TEMP_HIGH_TRIG))
+			{
+				digitalWrite(SIG_FOAM_HEAT_2, HIGH);
+			}else 
+				digitalWrite(SIG_FOAM_HEAT_2, LOW);
+
+		
 			if (encoderSpeedCalcDelay.elapsed())
 			{
 				lcd.setCursor(0, 8);
