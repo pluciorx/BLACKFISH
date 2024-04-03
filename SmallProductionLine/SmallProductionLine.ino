@@ -1,4 +1,3 @@
-#include <NewEncoder.h>
 #include <OneWire.h>
 #include <DallasTemperature.h>
 #include <Adafruit_Debounce.h>
@@ -105,7 +104,7 @@ DallasTemperature DSTemp(&oneWire);
 #define SIG_TAPE_RIGHT 43
 #define SIG_TAPE_LEFT 44
 
-NewEncoder encTapeSpeed;
+
 #define TAPE_ENC_A 9
 #define TAPE_ENC_B 10
 #define TAPE_CURR_SENS PIN_A6
@@ -126,9 +125,9 @@ NewEncoder encTapeSpeed;
 #define HEATERS_LOWERING_DELAY 6000
 #define BLOWER_SWITCH_OFF_DELAY 20000  //2 minuters blower cut off time
 
-#define INPUT_PULLDOWN
+//#define INPUT_PULLDOWN
 
-void(*resetFunc) (void) = 0;
+//void(*resetFunc) (void) = 0;
 
 enum E_STATE {
 	PIPE_LOAD,
@@ -143,6 +142,7 @@ enum E_STATE {
 //};
 
 VirtualDelay heaterStartDelay;
+VirtualDelay btnStop3sCounterl;
 VirtualDelay blowerSwitchOffDelay;
 
 //volatile ES_START _start_sub_state = ES_START::HEATERS_ON;
@@ -151,18 +151,17 @@ volatile E_STATE _state = E_STATE::STARTING;
 // the setup function runs once when you press reset or power the board
 void setup() {
 	Serial.begin(115200);
-	lcd.init(); // initialize the lcd
-	lcd.clear();
+	
+	lcd.init(); // initialize the lcd	
 	lcd.backlight();
-	lcd.clear();
-	lcd.clear();
+	lcd.clear();	
 	lcd.setCursor(0, 0);            // move cursor the first row
-	lcd.print("  FOAM MASTER S  ");          // print message at the first row
+	lcd.print("     BLACKFISH   ");          // print message at the first row
 	lcd.setCursor(0, 1);            // move cursor to the second row
-	lcd.print(""); // print message at the second row
+	lcd.print("   FOAM MASTER S   "); // print message at the second row
 	lcd.setCursor(0, 2);            // move cursor to the third row
-	lcd.print("software v0.1"); // print message at the second row
-	delay(1500);
+	lcd.print("v0.5"); // print message at the second row
+	
 
 	btnPullRight.begin();
 	btnPullLeft.begin();
@@ -245,11 +244,11 @@ void setup() {
 	digitalWrite(LED_PROD_START, LOW);
 	digitalWrite(LED_PROD_END, LOW);
 	digitalWrite(FOAM_PNEUMATIC_2, LOW);
-
-	encTapeSpeed.begin(TAPE_ENC_A, TAPE_ENC_B);
+	pinMode(BTN_PROD_END, INPUT_PULLUP);
+	delay(2000);
 
 	SetState(E_STATE::PIPE_LOAD);
-
+	
 }
 
 // the loop function runs over and over again until power down or reset
@@ -397,12 +396,14 @@ void loop() {
 		
 		lcd.setCursor(0, 0);
 		lcd.print(" !! RUNNING !! ");
-		Serial.println("RUNNING ");
+		Serial.println("RUNNING");
 		digitalWrite(LED_PROD_START, HIGH);
 		digitalWrite(LED_PROD_END, LOW);
-
-		while (!btnProdEnd.isPressed())
+		int endCounter = 0;
+		
+		while (endCounter<3)
 		{
+			btnProdEnd.update();
 			digitalWrite(SIG_TAPE_LEFT, HIGH);
 			digitalWrite(SIG_TAPE_RIGHT, LOW);
 
@@ -432,7 +433,18 @@ void loop() {
 				digitalWrite(SIG_FOAM_HEAT_2, LOW);
 				digitalWrite(LED_HEAT2, LOW);
 			}
-			btnProdEnd.update();
+			
+			if (btnProdEnd.isPressed())
+			{
+				if (endCounter==0) btnStop3sCounterl.start(200);
+				if (btnStop3sCounterl.elapsed())
+				{
+					btnStop3sCounterl.start(200);
+					endCounter++;
+				}
+			}
+			if (!btnProdEnd.isPressed()) endCounter = 0;
+			
 		}
 		
 		Serial.println("btnProdEnd pressed");
@@ -447,7 +459,7 @@ void loop() {
 		lcd.setCursor(0, 0);
 		lcd.print("Cooldown starting");
 		
-		Serial.println("Cooldown started");
+		Serial.println("Cooldown star...so");
 		lcd.setCursor(0, 1);
 		lcd.print("Heaters STOP... ");
 		Serial.println("Heaters Stop");
@@ -526,6 +538,7 @@ void SetState(E_STATE newState)
 {
 	lcd.clear();
 	Beep();
+	delay(100);
 	_state = _state != newState ? newState : _state;
 }
 
