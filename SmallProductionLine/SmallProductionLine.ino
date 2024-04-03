@@ -368,22 +368,34 @@ void loop() {
 					Serial.println("Heater 2 ON");
 				}
 				Serial.println("Waiting for temp to reach treshold");
-			}
 
-			if (!digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG) && !digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG))
-			{
-				lcd.setCursor(0, 2);
-				lcd.print("Heaters starting...");
+				bool isH1Ready, isH2Ready = false;
+				
+				while (!(isH1Ready && isH2Ready))
+				{
+
+					if (!digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG))
+					{
+						digitalWrite(SIG_FOAM_HEAT_2, LOW);
+						isH2Ready = true;
+					}
+					else digitalWrite(SIG_FOAM_HEAT_2, HIGH);
+
+					if (!digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG))
+					{
+						digitalWrite(SIG_FOAM_HEAT_1, LOW);
+						isH1Ready = true;
+					}
+					else digitalWrite(SIG_FOAM_HEAT_1, HIGH);
+				}
 				Serial.println("Heaters Down");
 				lcd.setCursor(0, 2);
 				lcd.print("Heaters down...");
 				digitalWrite(FOAM_PNEUMATIC_1, HIGH);
 				digitalWrite(FOAM_PNEUMATIC_2, HIGH);
-				btnProdEnd.update();
 				SetState(E_STATE::PROCESS_RUN);
-				
-				break;
 			}
+
 			btnProdEnd.update();
 		}
 		if (btnProdEnd.isPressed()) SetState(E_STATE::PIPE_LOAD);
@@ -411,7 +423,7 @@ void loop() {
 			lcd.setCursor(0, 1);
 			lcd.print("Speed:");
 
-			if (!digitalRead(FOAM_HEAT_1_TEMP_AL2_TRIG) && digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG)) {
+			if (digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG)) {
 				Serial.println("Heater 1 ON");
 				digitalWrite(SIG_FOAM_HEAT_1, HIGH);
 				digitalWrite(LED_HEAT1, HIGH);
@@ -422,7 +434,7 @@ void loop() {
 				digitalWrite(SIG_FOAM_HEAT_1, LOW);
 			}
 
-			if (!digitalRead(FOAM_HEAT_2_TEMP_AL2_TRIG) && digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG)) {
+			if (digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG)) {
 				Serial.println("Heater 2 ON");
 				digitalWrite(SIG_FOAM_HEAT_2, HIGH);
 				digitalWrite(LED_HEAT2, HIGH);
