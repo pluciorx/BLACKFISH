@@ -12,16 +12,19 @@
 #define BTN_HEAT2 25
 #define BTN_PROD_START 26
 #define BTN_PROD_END 27
-#define BTN_TAPE_LEFT 28
-#define BTN_TAPE_RIGHT 29
+#define BTN_TAPE_LEFT 29
+#define BTN_TAPE_RIGHT 28
 #define BTN_FAIL_STOP 30
 
 Adafruit_Debounce btnPullRight(BTN_PULL_RIGHT, LOW);
 Adafruit_Debounce btnPullLeft(BTN_PULL_LEFT,LOW);
 Adafruit_Debounce btnHeat1(BTN_HEAT1, LOW);
 Adafruit_Debounce btnHeat2(BTN_HEAT2, LOW);
+
 Adafruit_Debounce btnProdStart(BTN_PROD_START, LOW);
+
 Adafruit_Debounce btnProdEnd(BTN_PROD_END, LOW);
+
 Adafruit_Debounce btnTapeRight(BTN_TAPE_RIGHT, LOW);
 Adafruit_Debounce btnTapeLeft(BTN_TAPE_LEFT, LOW);
 Adafruit_Debounce btnFailStop(BTN_FAIL_STOP, LOW);
@@ -40,6 +43,7 @@ Adafruit_Debounce btnMenuEnter(BTN_MENU_ENTER, LOW);
 //Panel Lights
 #define LED_PULL_RIGHT PIN_A8
 #define LED_PULL_LEFT PIN_A9
+
 #define LED_HEAT1 PIN_A10
 bool isHeat1ON = false;
 bool isHeat2ON = false;
@@ -65,15 +69,15 @@ bool isHeat2ON = false;
 #define REM_RESERVED_2 15
 #define REM_ALLOW_REMOTE 16
 #define REM_START_SIGNAL 17
-Adafruit_Debounce remPullOut(REM_PULL_OUT, LOW);
-Adafruit_Debounce remPullIn(REM_PULL_IN, LOW);
-Adafruit_Debounce remAllowRemote(REM_ALLOW_REMOTE, LOW);
-Adafruit_Debounce remStartSignal(REM_START_SIGNAL, LOW);
-Adafruit_Debounce remProdStart(REM_PROD_START, LOW);
-Adafruit_Debounce remProdEnd(REM_PROD_STOP, LOW);
-Adafruit_Debounce remTapeFwd(REM_TAPE_FWD, LOW);
-Adafruit_Debounce remTapeRev(REM_TAPE_REV, LOW);
-Adafruit_Debounce remFailStop(BTN_FAIL_STOP, LOW);
+//Adafruit_Debounce remPullOut(REM_PULL_OUT, LOW);
+//Adafruit_Debounce remPullIn(REM_PULL_IN, LOW);
+//Adafruit_Debounce remAllowRemote(REM_ALLOW_REMOTE, LOW);
+//Adafruit_Debounce remStartSignal(REM_START_SIGNAL, LOW);
+//Adafruit_Debounce remProdStart(REM_PROD_START, LOW);
+//Adafruit_Debounce remProdEnd(REM_PROD_STOP, LOW);
+//Adafruit_Debounce remTapeFwd(REM_TAPE_FWD, LOW);
+//Adafruit_Debounce remTapeRev(REM_TAPE_REV, LOW);
+//Adafruit_Debounce remFailStop(BTN_FAIL_STOP, LOW);
 
 
 //LCD
@@ -100,7 +104,8 @@ DallasTemperature DSTemp(&oneWire);
 
 //---------- Tape module ---------------
 #define TAPE_ENGINE_INVERTER 12 
-
+#define TAPE_SLOW_SPEED 64
+#define TAPE_PROD_SPEED 128
 #define SIG_TAPE_RIGHT 43
 #define SIG_TAPE_LEFT 44
 
@@ -123,7 +128,7 @@ DallasTemperature DSTemp(&oneWire);
 //STATIC CONFIG
 #define HEATERS_START_DELAY 5000
 #define HEATERS_LOWERING_DELAY 6000
-#define BLOWER_SWITCH_OFF_DELAY 20000  //2 minuters blower cut off time
+#define BLOWER_SWITCH_OFF_DELAY 5000  //2 minuters blower cut off time
 
 //#define INPUT_PULLDOWN
 
@@ -150,7 +155,7 @@ volatile E_STATE _state = E_STATE::STARTING;
 
 // the setup function runs once when you press reset or power the board
 void setup() {
-	Serial.begin(115200);
+	Serial.begin(9600);
 	
 	lcd.init(); // initialize the lcd	
 	lcd.backlight();
@@ -179,26 +184,29 @@ void setup() {
 	btnMenuDown.begin();
 	btnMenuEnter.begin();
 
-	remPullOut.begin();
-	remPullIn.begin();
-	remAllowRemote.begin();
-	remStartSignal.begin();
-	remProdStart.begin();
-	remProdEnd.begin();
-	remTapeFwd.begin();
-	remTapeRev.begin();
-	remFailStop.begin();
+	//remPullOut.begin();
+	//remPullIn.begin();
+	//remAllowRemote.begin();
+	//remStartSignal.begin();
+	//remProdStart.begin();
+	//remProdEnd.begin();
+	//remTapeFwd.begin();
+	//remTapeRev.begin();
+	//remFailStop.begin();
 
 	//pin setup
 	pinMode(SPK_PIN, OUTPUT);
+	digitalWrite(SPK_PIN, LOW);
 
 	pinMode(FOAM_HEAT_1_TEMP_AL1_TRIG, INPUT_PULLUP);
 	pinMode(FOAM_HEAT_1_TEMP_AL2_TRIG, INPUT_PULLUP);
+
 	pinMode(SIG_FOAM_HEAT_1, OUTPUT);
 	digitalWrite(SIG_FOAM_HEAT_1, LOW);
 
 	pinMode(FOAM_HEAT_2_TEMP_AL1_TRIG, INPUT_PULLUP);
 	pinMode(FOAM_HEAT_2_TEMP_AL2_TRIG, INPUT_PULLUP);
+
 	pinMode(SIG_FOAM_HEAT_2, OUTPUT);
 	digitalWrite(SIG_FOAM_HEAT_2, LOW);
 
@@ -237,18 +245,17 @@ void setup() {
 	pinMode(LED_PROD_END, OUTPUT);
 	pinMode(LED_TAPE_RIGHT, OUTPUT);
 	pinMode(LED_TAPE_LEFT, OUTPUT);
-
-	pinMode(TAPE_ENGINE_INVERTER, OUTPUT);  // sets the pin as output
-
-	analogWrite(TAPE_ENGINE_INVERTER, 255);
 	digitalWrite(LED_PROD_START, LOW);
 	digitalWrite(LED_PROD_END, LOW);
-	digitalWrite(FOAM_PNEUMATIC_2, LOW);
-	pinMode(BTN_PROD_END, INPUT_PULLUP);
-	delay(2000);
+	digitalWrite(LED_TAPE_RIGHT, LOW);
+	digitalWrite(LED_TAPE_LEFT, LOW);
+
+	pinMode(TAPE_ENGINE_INVERTER, OUTPUT);  // sets the pin as output
+	//analogWrite(TAPE_ENGINE_INVERTER, 255);
+
+	delay(1000);
 
 	SetState(E_STATE::PIPE_LOAD);
-	
 }
 
 // the loop function runs over and over again until power down or reset
@@ -261,72 +268,116 @@ void loop() {
 		Serial.println("Load Pipe....");
 		lcd.setCursor(0, 0);
 		lcd.print("Load Pipe...    ");          // print message at the first row
-		analogWrite(TAPE_ENGINE_INVERTER, 255);
+		analogWrite(TAPE_ENGINE_INVERTER, TAPE_SLOW_SPEED);
 
-		
 		digitalWrite(LED_PULL_RIGHT, LOW);
 		digitalWrite(LED_PULL_LEFT, LOW);
+		digitalWrite(LED_PROD_START, HIGH);
+		digitalWrite(LED_PROD_END, LOW);
+
+		delay(100);
 		
-		while (!btnProdStart.isPressed())
+		Serial.print("BTN Start state:"); Serial.println(digitalRead(BTN_PROD_START));
+		int endCounter = 0;
+		while (endCounter < 3)
 		{
 			UpdateButtons();
-			while (btnPullLeft.isPressed())
+
+			if (btnHeat1.isPressed())
+			{
+				Serial.println("btnHeat1 pressed");
+				digitalWrite(FOAM_PNEUMATIC_1, HIGH);
+				digitalWrite(LED_HEAT1, HIGH);
+			}
+			else
+			{
+				digitalWrite(FOAM_PNEUMATIC_1, LOW);
+				digitalWrite(LED_HEAT1, LOW);
+			}
+
+			if (btnHeat2.isPressed())
+			{
+				Serial.println("btnHeat2 pressed");
+				digitalWrite(FOAM_PNEUMATIC_2, HIGH);
+				digitalWrite(LED_HEAT2, HIGH);
+			}
+			else
+			{
+				digitalWrite(FOAM_PNEUMATIC_2, LOW);
+				digitalWrite(LED_HEAT2, LOW);
+			}
+
+			if (btnPullLeft.isPressed())
 			{
 				Serial.println("btnPullLeft pressed");
-				digitalWrite(SIG_PULL_RIGHT, LOW);
-				digitalWrite(LED_PULL_RIGHT, LOW);
+
 				digitalWrite(SIG_PULL_LEFT, HIGH);
+				digitalWrite(SIG_PULL_RIGHT, LOW);
 				digitalWrite(LED_PULL_LEFT, HIGH);
-
-				btnPullLeft.update();
 			}
-
-			while (btnPullRight.isPressed())
+			else
 			{
-				Serial.println("btnPullRight pressed");
 				digitalWrite(SIG_PULL_LEFT, LOW);
 				digitalWrite(LED_PULL_LEFT, LOW);
+			}
+
+			if (btnPullRight.isPressed())
+			{
+				Serial.println("btnPullRight pressed");
 				digitalWrite(SIG_PULL_RIGHT, HIGH);
 				digitalWrite(LED_PULL_RIGHT, HIGH);
-				btnPullRight.update();
 			}
+			else digitalWrite(LED_PULL_RIGHT, LOW);
 
-			while (btnTapeRight.isPressed())
+			if (btnTapeRight.isPressed())
 			{
-				analogWrite(TAPE_ENGINE_INVERTER, 255);
+				
 				Serial.println("btnTapeRight pressed");
-				digitalWrite(SIG_TAPE_LEFT, LOW);
-				digitalWrite(LED_TAPE_LEFT, LOW);
 				digitalWrite(SIG_TAPE_RIGHT, HIGH);
+				digitalWrite(SIG_TAPE_LEFT, LOW);
 				digitalWrite(LED_TAPE_RIGHT, HIGH);
-				btnTapeRight.update();
 			}
-
-			while (btnTapeLeft.isPressed())
+			else
 			{
-				analogWrite(TAPE_ENGINE_INVERTER, 255);
-				Serial.println("btnTapeLeft pressed");
 				digitalWrite(SIG_TAPE_RIGHT, LOW);
 				digitalWrite(LED_TAPE_RIGHT, LOW);
+			}
+			
+			
+			if (btnTapeLeft.isPressed())
+			{
+				
+				Serial.println("btnTapeLeft pressed");
+				digitalWrite(SIG_TAPE_RIGHT, LOW);
 				digitalWrite(SIG_TAPE_LEFT, HIGH);
 				digitalWrite(LED_TAPE_LEFT, HIGH);
-				btnTapeLeft.update();
+				
 			}
+			else {
+				digitalWrite(LED_TAPE_LEFT, LOW);
+			}
+
+			btnProdStart.update();
+			if (btnProdStart.isPressed())
+			{
+				Serial.println("Btn Start");
+				if (endCounter == 0) btnStop3sCounterl.start(500);
+				if (btnStop3sCounterl.elapsed())
+				{
+					Serial.print("Counter:"); Serial.println(endCounter);
+					btnStop3sCounterl.start(500);
+					endCounter++;
+
+				}
+			}
+			if (!btnProdStart.isPressed()) endCounter = 0;
+
 			
 		}
 
+		
 			Serial.println("btnProdStart pressed");
-			digitalWrite(SIG_TAPE_RIGHT, LOW);
-			digitalWrite(LED_TAPE_RIGHT, LOW);
-
-			digitalWrite(SIG_TAPE_LEFT, LOW);
-			digitalWrite(LED_TAPE_LEFT, LOW);
-
-			digitalWrite(SIG_PULL_LEFT, LOW);
-			digitalWrite(LED_PULL_LEFT, LOW);
-
-			digitalWrite(SIG_PULL_RIGHT, LOW);
-			digitalWrite(LED_PULL_RIGHT, LOW);
+			
 
 			SetState(E_STATE::STARTING);
 	}break;
@@ -337,6 +388,7 @@ void loop() {
 		lcd.setCursor(0, 0);
 		lcd.print("Blower starting...");
 		digitalWrite(SIG_BLOWER_PIN, HIGH); // Make sure the blower is ALWAYS ON !!
+		delay(100);
 		digitalWrite(LED_PROD_START, HIGH);
 		digitalWrite(LED_PROD_END, LOW);
 		btnProdEnd.update();
@@ -353,6 +405,7 @@ void loop() {
 
 				if (!digitalRead(FOAM_HEAT_1_TEMP_AL2_TRIG))
 				{
+					delay(50);
 					digitalWrite(SIG_FOAM_HEAT_1, HIGH);
 					isHeat1ON = true;
 					Serial.println("Heater 1 ON");
@@ -363,20 +416,22 @@ void loop() {
 
 				if (!digitalRead(FOAM_HEAT_2_TEMP_AL2_TRIG))
 				{
+					delay(50);
 					digitalWrite(SIG_FOAM_HEAT_2, HIGH);
 					isHeat2ON = true;
 					Serial.println("Heater 2 ON");
 				}
 				Serial.println("Waiting for temp to reach treshold");
 
-				bool isH1Ready, isH2Ready = false;
+				bool isH1Ready = false, isH2Ready = false;
 				
-				while (!(isH1Ready && isH2Ready))
+				while (!isH1Ready || !isH2Ready )
 				{
 
-					if (!digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG))
+					if (!digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG) )
 					{
 						digitalWrite(SIG_FOAM_HEAT_2, LOW);
+						Serial.println("H2 reached temp");
 						isH2Ready = true;
 					}
 					else digitalWrite(SIG_FOAM_HEAT_2, HIGH);
@@ -384,16 +439,16 @@ void loop() {
 					if (!digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG))
 					{
 						digitalWrite(SIG_FOAM_HEAT_1, LOW);
+						Serial.println("H1 reached temp");
 						isH1Ready = true;
 					}
 					else digitalWrite(SIG_FOAM_HEAT_1, HIGH);
 				}
-				Serial.println("Heaters Down");
-				lcd.setCursor(0, 2);
-				lcd.print("Heaters down...");
+				SetState(E_STATE::PROCESS_RUN);
+
 				digitalWrite(FOAM_PNEUMATIC_1, HIGH);
 				digitalWrite(FOAM_PNEUMATIC_2, HIGH);
-				SetState(E_STATE::PROCESS_RUN);
+				break;
 			}
 
 			btnProdEnd.update();
@@ -405,109 +460,115 @@ void loop() {
 	}break;
 	case PROCESS_RUN:
 	{
-		
+		btnProdEnd.update();
 		lcd.setCursor(0, 0);
 		lcd.print(" !! RUNNING !! ");
 		Serial.println("RUNNING");
 		digitalWrite(LED_PROD_START, HIGH);
 		digitalWrite(LED_PROD_END, LOW);
+
+		analogWrite(TAPE_ENGINE_INVERTER, TAPE_PROD_SPEED);
+		delay(200);
+		digitalWrite(SIG_TAPE_LEFT, HIGH);
+		digitalWrite(SIG_TAPE_RIGHT, LOW);
+
 		int endCounter = 0;
-		
-		while (endCounter<3)
+		while (endCounter < 3)
 		{
 			btnProdEnd.update();
-			digitalWrite(SIG_TAPE_LEFT, HIGH);
-			digitalWrite(SIG_TAPE_RIGHT, LOW);
 
-			analogWrite(TAPE_ENGINE_INVERTER, 255);
-			lcd.setCursor(0, 1);
-			lcd.print("Speed:");
-
-			if (digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG)) {
-				Serial.println("Heater 1 ON");
-				digitalWrite(SIG_FOAM_HEAT_1, HIGH);
-				digitalWrite(LED_HEAT1, HIGH);
-			}
-			else {
-				Serial.println("Heater 1 OFF");
-				digitalWrite(LED_HEAT1, LOW);
+			if (!digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG)) {
+				
 				digitalWrite(SIG_FOAM_HEAT_1, LOW);
-			}
-
-			if (digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG)) {
-				Serial.println("Heater 2 ON");
-				digitalWrite(SIG_FOAM_HEAT_2, HIGH);
-				digitalWrite(LED_HEAT2, HIGH);
-
+				digitalWrite(LED_HEAT1, LOW);
 			}
 			else {
-				Serial.println("Heater 2 OFF");
+				
+				digitalWrite(LED_HEAT1, HIGH);
+				digitalWrite(SIG_FOAM_HEAT_1, HIGH);
+			}
+
+			if (!digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG)) {
+				
 				digitalWrite(SIG_FOAM_HEAT_2, LOW);
 				digitalWrite(LED_HEAT2, LOW);
+
 			}
-			
+			else {
+				
+				digitalWrite(SIG_FOAM_HEAT_2, HIGH);
+				digitalWrite(LED_HEAT2, HIGH);
+			}
+			btnProdEnd.update();
 			if (btnProdEnd.isPressed())
 			{
-				if (endCounter==0) btnStop3sCounterl.start(200);
+				Serial.println("Btn STP");
+				if (endCounter == 0) btnStop3sCounterl.start(500);
 				if (btnStop3sCounterl.elapsed())
 				{
-					btnStop3sCounterl.start(200);
+					Serial.print("Counter:"); Serial.println(endCounter);
+					btnStop3sCounterl.start(500);
 					endCounter++;
+					
 				}
 			}
 			if (!btnProdEnd.isPressed()) endCounter = 0;
-			
+
+			btnProdEnd.update();
 		}
 		
 		Serial.println("btnProdEnd pressed");
-		
+		digitalWrite(SIG_FOAM_HEAT_1, LOW);
+		delay(200);
+		digitalWrite(SIG_FOAM_HEAT_2, LOW);
 		SetState(E_STATE::COOLDOWN);
 	
 	}
 	case COOLDOWN:
 	{
-		digitalWrite(LED_PROD_START, LOW);
-		digitalWrite(LED_PROD_END, HIGH);
-		lcd.setCursor(0, 0);
-		lcd.print("Cooldown starting");
-		
-		Serial.println("Cooldown star...so");
-		lcd.setCursor(0, 1);
-		lcd.print("Heaters STOP... ");
-		Serial.println("Heaters Stop");
+		Serial.println("Heaters OFF");
 		digitalWrite(SIG_FOAM_HEAT_1, LOW);
+		delay(200);
 		digitalWrite(SIG_FOAM_HEAT_2, LOW);
-		digitalWrite(LED_HEAT1, LOW);
-		digitalWrite(LED_HEAT2, LOW);
-	
-		
-		lcd.setCursor(0, 2);
-		lcd.print("Heaters UP... ");
+
 		Serial.println("Heaters Up");
 		digitalWrite(FOAM_PNEUMATIC_1, LOW);
 		digitalWrite(FOAM_PNEUMATIC_2, LOW);
+		delay(200);
+		Serial.println("Tape stop");
+		digitalWrite(SIG_TAPE_LEFT, LOW);
+		digitalWrite(SIG_TAPE_RIGHT, LOW);
+		
+		delay(200);
+		digitalWrite(LED_HEAT1, LOW);
+		digitalWrite(LED_HEAT2, LOW);
 
-		lcd.setCursor(0, 3);
-		lcd.print("Tape Stop... ");
-		Serial.println("Tape Stop");
-		analogWrite(TAPE_ENGINE_INVERTER, 0);
-
-		digitalWrite(LED_PROD_END, HIGH);
 		digitalWrite(LED_PROD_START, LOW);
-		btnProdStart.update();
+		digitalWrite(LED_PROD_END, HIGH);
 
 		blowerSwitchOffDelay.start(BLOWER_SWITCH_OFF_DELAY);
-		while (!blowerSwitchOffDelay.elapsed());
-		digitalWrite(SIG_BLOWER_PIN, LOW); //2 minutes after all is finished we switch BLOWER OFF
-		Serial.println("BLOWERS OFF");
+		while (1)
+		{
+			if (blowerSwitchOffDelay.elapsed())
+			{
+				digitalWrite(SIG_BLOWER_PIN, LOW); //2 minutes after all is finished we switch BLOWER OFF
+				Serial.println("BLOWERS OFF");
+				lcd.setCursor(0, 0);
+				lcd.print("Cool down complete");
 
-		while (!btnProdStart.isPressed()) {
-			
+				lcd.setCursor(0, 1);
+				lcd.print("Press start");
+
+				while (!btnProdStart.isPressed()) {
+
+					btnProdStart.update();
+
+				}
+				SetState(E_STATE::PIPE_LOAD);
+				break;
+			}
 			btnProdStart.update();
 		}
-		SetState(E_STATE::PIPE_LOAD);
-		
-		
 	}
 	
 	default:
@@ -535,15 +596,7 @@ void UpdateButtons()
 	btnMenuDown.update();
 	btnMenuEnter.update();
 
-	remPullOut.update();
-	remPullIn.update();
-	remAllowRemote.update();
-	remStartSignal.update();
-	remProdStart.update();
-	remProdEnd.update();
-	remTapeFwd.update();
-	remTapeRev.update();
-	remFailStop.update();
+
 }
 
 void SetState(E_STATE newState)
