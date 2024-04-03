@@ -104,8 +104,8 @@ DallasTemperature DSTemp(&oneWire);
 
 //---------- Tape module ---------------
 #define TAPE_ENGINE_INVERTER 12 
-#define TAPE_SLOW_SPEED 64
-#define TAPE_PROD_SPEED 128
+#define TAPE_SLOW_SPEED 32
+#define TAPE_PROD_SPEED 64
 #define SIG_TAPE_RIGHT 43
 #define SIG_TAPE_LEFT 44
 
