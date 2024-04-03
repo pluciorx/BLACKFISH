@@ -1,60 +1,41 @@
-#include <AccelStepper.h>
+/*
+  Blink
 
-#define CHAIR_MAX_SPEED 1000
-#define CHAIR_HOMING_SPEED 1000
+  Turns an LED on for one second, then off for one second, repeatedly.
 
-#define CHAIR_BASE_SPEED 1500
-#define	CHAIR_ACCEL 4000
+  Most Arduinos have an on-board LED you can control. On the UNO, MEGA and ZERO
+  it is attached to digital pin 13, on MKR1000 on pin 6. LED_BUILTIN is set to
+  the correct LED pin independent of which board is used.
+  If you want to know what pin the on-board LED is connected to on your Arduino
+  model, check the Technical Specs of your board at:
+  https://www.arduino.cc/en/Main/Products
 
-//motors (4 for chairs 2 for pedals)
-#define CHAIR_MAX_DISTANCE -16000
-#define CHAIR_BASE_POSITION 7000
-//Chair 1 
-#define CHAIR1_LEFT_UPPER_LIMIT 48
-#define CHAIR1_LEFT_EN 30
-#define CHAIR1_LEFT_STEP 10
-#define CHAIR1_LEFT_DIR 11
-volatile bool IsC1LHomed = false;
-bool C1LSubVibReady = true;
+  modified 8 May 2014
+  by Scott Fitzgerald
+  modified 2 Sep 2016
+  by Arturo Guadalupi
+  modified 8 Sep 2016
+  by Colby Newman
 
-byte motorControlPins[] = {
-	CHAIR1_LEFT_EN		,
-	CHAIR1_LEFT_STEP	,
-	CHAIR1_LEFT_DIR		
-};
-bool IsVibrationEnabled = false;
-AccelStepper motorC1L(AccelStepper::DRIVER, CHAIR1_LEFT_STEP, CHAIR1_LEFT_DIR);
+  This example code is in the public domain.
+
+  https://www.arduino.cc/en/Tutorial/BuiltInExamples/Blink
+*/
+
 // the setup function runs once when you press reset or power the board
 void setup() {
-
-
-	Serial.begin(115200);
-	for (int i = 0; i < 3; i++) {
-		pinMode(motorControlPins[i], OUTPUT);
-		digitalWrite(motorControlPins[i], LOW);
-	}
-
-
-	
-	// initialize digital pin 13 as an output.
-	motorC1L.setEnablePin(CHAIR1_LEFT_EN);
-	motorC1L.setPinsInverted(false, false, true);
-	motorC1L.setMinPulseWidth(20);
-	motorC1L.disableOutputs();
-	delay(120);
-	motorC1L.enableOutputs();
-	motorC1L.setMaxSpeed(CHAIR_MAX_SPEED);
-	motorC1L.setMaxSpeed(100);
-	motorC1L.setAcceleration(20);
-	motorC1L.moveTo(500);
-	Serial.println("Ready");
+	// initialize digital pin LED_BUILTIN as an output.
+	pinMode(LED_BUILTIN, OUTPUT);
+	pinMode(45, OUTPUT);
+	pinMode(45, OUTPUT);
+	pinMode(45, OUTPUT);
+	pinMode(45, OUTPUT);
 }
 
 // the loop function runs over and over again forever
 void loop() {
-	// If at the end of travel go to the other end
-	if (motorC1L.distanceToGo() == 0)
-		motorC1L.moveTo(-motorC1L.currentPosition());
-
-	motorC1L.run();
+	digitalWrite(LED_BUILTIN, HIGH);  // turn the LED on (HIGH is the voltage level)
+	delay(1000);                      // wait for a second
+	digitalWrite(LED_BUILTIN, LOW);   // turn the LED off by making the voltage LOW
+	delay(1000);                      // wait for a second
 }
