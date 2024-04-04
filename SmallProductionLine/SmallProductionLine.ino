@@ -396,7 +396,7 @@ void loop() {
 		{
 			if (heaterStartDelay.elapsed())
 			{
-
+				digitalWrite(SIG_BLOWER_PIN, HIGH); // Make sure the blower is ALWAYS ON !!
 				lcd.setCursor(0, 1);
 				lcd.print("Heaters starting...");
 				Serial.println("Heaters start");
@@ -475,6 +475,7 @@ void loop() {
 		int endCounter = 0;
 		while (endCounter < 3)
 		{
+			digitalWrite(SIG_BLOWER_PIN, HIGH); // Make sure the blower is ALWAYS ON !!
 			btnProdEnd.update();
 
 			if (!digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG)) {
