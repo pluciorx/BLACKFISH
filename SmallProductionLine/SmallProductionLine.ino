@@ -109,7 +109,6 @@ DallasTemperature DSTemp(&oneWire);
 #define SIG_TAPE_RIGHT 43
 #define SIG_TAPE_LEFT 44
 
-
 #define TAPE_ENC_A 9
 #define TAPE_ENC_B 10
 #define TAPE_CURR_SENS PIN_A6
@@ -167,7 +166,6 @@ void setup() {
 	lcd.setCursor(0, 2);            // move cursor to the third row
 	lcd.print("v0.5"); // print message at the second row
 	
-
 	btnPullRight.begin();
 	btnPullLeft.begin();
 	btnHeat1.begin();
@@ -215,12 +213,10 @@ void setup() {
 	digitalWrite(SIG_PULL_LEFT, LOW);
 	digitalWrite(SIG_PULL_RIGHT, LOW);
 
-
 	pinMode(SIG_TAPE_RIGHT, OUTPUT);
 	pinMode(SIG_TAPE_LEFT, OUTPUT);
 	digitalWrite(SIG_TAPE_RIGHT, LOW);
 	digitalWrite(SIG_TAPE_RIGHT, LOW);
-
 
 	pinMode(SIG_BLOWER_PIN, OUTPUT);
 	pinMode(FOAM_PNEUMATIC_1, OUTPUT);
@@ -234,7 +230,6 @@ void setup() {
 	pinMode(LED_PULL_LEFT, OUTPUT);
 	digitalWrite(LED_PULL_RIGHT, LOW);
 	digitalWrite(LED_PULL_LEFT, LOW);
-
 
 	pinMode(LED_HEAT1, OUTPUT);
 	pinMode(LED_HEAT2, OUTPUT);
@@ -311,7 +306,7 @@ void loop() {
 			{
 				Serial.println("btnPullLeft pressed");
 
-				digitalWrite(SIG_PULL_LEFT, HIGH);
+				digitalWrite(SIG_PULL_RIGHT, LOW);
 				digitalWrite(SIG_PULL_RIGHT, LOW);
 				digitalWrite(LED_PULL_LEFT, HIGH);
 			}
@@ -323,11 +318,16 @@ void loop() {
 
 			if (btnPullRight.isPressed())
 			{
+				digitalWrite(SIG_PULL_LEFT, LOW);
 				Serial.println("btnPullRight pressed");
 				digitalWrite(SIG_PULL_RIGHT, HIGH);
 				digitalWrite(LED_PULL_RIGHT, HIGH);
 			}
-			else digitalWrite(LED_PULL_RIGHT, LOW);
+			else
+			{
+				digitalWrite(SIG_PULL_RIGHT, LOW);
+				digitalWrite(LED_PULL_RIGHT, LOW);
+			}
 
 			if (btnTapeRight.isPressed())
 			{
@@ -354,6 +354,7 @@ void loop() {
 				
 			}
 			else {
+				digitalWrite(SIG_TAPE_LEFT, LOW);
 				digitalWrite(LED_TAPE_LEFT, LOW);
 			}
 
