@@ -164,7 +164,7 @@ void setup() {
 	lcd.setCursor(0, 1);            // move cursor to the second row
 	lcd.print("   FOAM MASTER S   "); // print message at the second row
 	lcd.setCursor(0, 2);            // move cursor to the third row
-	lcd.print("v0.5"); // print message at the second row
+	lcd.print("v0.51"); // print message at the second row
 	
 	btnPullRight.begin();
 	btnPullLeft.begin();
@@ -371,16 +371,10 @@ void loop() {
 
 				}
 			}
-			if (!btnProdStart.isPressed()) endCounter = 0;
-
-			
+			if (!btnProdStart.isPressed()) endCounter = 0;			
 		}
-
-		
-			Serial.println("btnProdStart pressed");
-			
-
-			SetState(E_STATE::STARTING);
+		Serial.println("btnProdStart pressed");
+		SetState(E_STATE::STARTING);
 	}break;
 	case STARTING: {
 		
