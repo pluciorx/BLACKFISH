@@ -69,15 +69,16 @@ bool isHeat2ON = false;
 #define REM_RESERVED_2 15
 #define REM_ALLOW_REMOTE 16
 #define REM_START_SIGNAL 17
-//Adafruit_Debounce remPullOut(REM_PULL_OUT, LOW);
-//Adafruit_Debounce remPullIn(REM_PULL_IN, LOW);
+
+Adafruit_Debounce remPullOut(REM_PULL_OUT, LOW);
+Adafruit_Debounce remPullIn(REM_PULL_IN, LOW);
 //Adafruit_Debounce remAllowRemote(REM_ALLOW_REMOTE, LOW);
-//Adafruit_Debounce remStartSignal(REM_START_SIGNAL, LOW);
-//Adafruit_Debounce remProdStart(REM_PROD_START, LOW);
-//Adafruit_Debounce remProdEnd(REM_PROD_STOP, LOW);
-//Adafruit_Debounce remTapeFwd(REM_TAPE_FWD, LOW);
-//Adafruit_Debounce remTapeRev(REM_TAPE_REV, LOW);
-//Adafruit_Debounce remFailStop(BTN_FAIL_STOP, LOW);
+Adafruit_Debounce remStartSignal(REM_START_SIGNAL, LOW);
+Adafruit_Debounce remProdStart(REM_PROD_START, LOW);
+Adafruit_Debounce remProdEnd(REM_PROD_STOP, LOW);
+Adafruit_Debounce remTapeFwd(REM_TAPE_FWD, LOW);
+Adafruit_Debounce remTapeRev(REM_TAPE_REV, LOW);
+Adafruit_Debounce remFailStop(BTN_FAIL_STOP, LOW);
 
 
 //LCD
@@ -182,15 +183,15 @@ void setup() {
 	btnMenuDown.begin();
 	btnMenuEnter.begin();
 
-	//remPullOut.begin();
-	//remPullIn.begin();
+	remPullOut.begin();
+	remPullIn.begin();
 	//remAllowRemote.begin();
-	//remStartSignal.begin();
-	//remProdStart.begin();
-	//remProdEnd.begin();
-	//remTapeFwd.begin();
-	//remTapeRev.begin();
-	//remFailStop.begin();
+	remStartSignal.begin();
+	remProdStart.begin();
+	remProdEnd.begin();
+	remTapeFwd.begin();
+	remTapeRev.begin();
+	remFailStop.begin();
 
 	//pin setup
 	pinMode(SPK_PIN, OUTPUT);
@@ -509,8 +510,6 @@ void loop() {
 				}
 			}
 			if (!btnProdEnd.isPressed()) endCounter = 0;
-
-			btnProdEnd.update();
 		}
 		
 		Serial.println("btnProdEnd pressed");
@@ -573,6 +572,28 @@ void loop() {
 	
 }
 
+void UpdateRemoteButtons()
+{
+	//Adafruit_Debounce remPullOut(REM_PULL_OUT, LOW);
+	//Adafruit_Debounce remPullIn(REM_PULL_IN, LOW);
+	//Adafruit_Debounce remAllowRemote(REM_ALLOW_REMOTE, LOW);
+	//Adafruit_Debounce remStartSignal(REM_START_SIGNAL, LOW);
+	//Adafruit_Debounce remProdStart(REM_PROD_START, LOW);
+	//Adafruit_Debounce remProdEnd(REM_PROD_STOP, LOW);
+	//Adafruit_Debounce remTapeFwd(REM_TAPE_FWD, LOW);
+	//Adafruit_Debounce remTapeRev(REM_TAPE_REV, LOW);
+	//Adafruit_Debounce remFailStop(BTN_FAIL_STOP, LOW);
+
+	remPullOut.update();
+	remPullIn.update();
+	remStartSignal.update();
+	remProdStart.update();
+	remProdEnd.update();
+	remTapeFwd.update();
+	remTapeRev.update();
+	remFailStop.update();
+
+}
 
 void UpdateButtons()
 {
