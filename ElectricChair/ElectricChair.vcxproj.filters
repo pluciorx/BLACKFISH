@@ -66,6 +66,7 @@
     <None Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\Adafruit_Debounce\library.properties">
       <Filter>src\_micro-api-readonly\libraries\Adafruit_Debounce</Filter>
     </None>
+    <None Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\ezButton\library.properties" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ElectricChair.ino" />
@@ -170,6 +171,9 @@
     </ClCompile>
     <ClCompile Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\Adafruit_Debounce\Adafruit_Debounce.cpp">
       <Filter>src\_micro-api-readonly\libraries\Adafruit_Debounce</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\ezButton\src\ezButton.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1322,6 +1326,9 @@
     <ClInclude Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\Adafruit_Debounce\Adafruit_Debounce.h">
       <Filter>src\_micro-api-readonly\libraries\Adafruit_Debounce</Filter>
     </ClInclude>
+    <ClInclude Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\ezButton\src\ezButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\keywords.txt">
@@ -1329,6 +1336,9 @@
     </Text>
     <Text Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\Adafruit_Debounce\LICENSE.txt">
       <Filter>src\_micro-api-readonly\libraries\Adafruit_Debounce</Filter>
+    </Text>
+    <Text Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\ezButton\keywords.txt">
+      <Filter>Misc Files</Filter>
     </Text>
   </ItemGroup>
 </Project>

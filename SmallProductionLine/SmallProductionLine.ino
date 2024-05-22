@@ -44,10 +44,11 @@ Adafruit_Debounce btnMenuEnter(BTN_MENU_ENTER, LOW);
 #define LED_PULL_RIGHT PIN_A8
 #define LED_PULL_LEFT PIN_A9
 
-#define LED_HEAT1 PIN_A10
+
 bool isHeat1ON = false;
 bool isHeat2ON = false;
 
+#define LED_HEAT1 PIN_A10
 #define LED_HEAT2 PIN_A11
 #define LED_PROD_START PIN_A12
 #define LED_PROD_END PIN_A13
@@ -268,9 +269,13 @@ void loop() {
 
 		digitalWrite(LED_PULL_RIGHT, LOW);
 		digitalWrite(LED_PULL_LEFT, LOW);
-		digitalWrite(LED_PROD_START, HIGH);
-		digitalWrite(LED_PROD_END, LOW);
+		digitalWrite(LED_PROD_START, LOW);
+		digitalWrite(LED_PROD_END, HIGH);
+		digitalWrite(SIG_FOAM_HEAT_2, LOW);
 
+		digitalWrite(LED_HEAT2, LOW);
+		digitalWrite(SIG_FOAM_HEAT_1, LOW);
+		digitalWrite(LED_HEAT1, LOW);
 		delay(100);
 		
 		Serial.print("BTN Start state:"); Serial.println(digitalRead(BTN_PROD_START));
@@ -399,48 +404,74 @@ void loop() {
 				Serial.print("PID H1 (A2) AL1:"); Serial.println(digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG));
 				Serial.print("PID H1 (A1) AL2:"); Serial.println(digitalRead(FOAM_HEAT_1_TEMP_AL2_TRIG));
 
-				if (!digitalRead(FOAM_HEAT_1_TEMP_AL2_TRIG))
+				if (digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG))
 				{
-					delay(50);
+					
 					digitalWrite(SIG_FOAM_HEAT_1, HIGH);
+					digitalWrite(LED_HEAT2, HIGH);
 					isHeat1ON = true;
 					Serial.println("Heater 1 ON");
+				}
+				else
+				{
+					digitalWrite(LED_HEAT2, LOW);
 				}
 				//here we can add potential delay to second heater
 				Serial.print("PID H2 (A4) AL1:"); Serial.println(digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG));
 				Serial.print("PID H2 (A5) AL2:"); Serial.println(digitalRead(FOAM_HEAT_2_TEMP_AL2_TRIG));
 
-				if (!digitalRead(FOAM_HEAT_2_TEMP_AL2_TRIG))
+				if (digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG))
 				{
-					delay(50);
+					
 					digitalWrite(SIG_FOAM_HEAT_2, HIGH);
+					digitalWrite(LED_HEAT1, HIGH);
 					isHeat2ON = true;
 					Serial.println("Heater 2 ON");
+				}
+				else
+				{
+					digitalWrite(LED_HEAT1, HIGH);
 				}
 				Serial.println("Waiting for temp to reach treshold");
 
 				bool isH1Ready = false, isH2Ready = false;
-				
-				while (!isH1Ready || !isH2Ready )
+				E_STATE nextState = E_STATE::PROCESS_RUN;
+				while ((!isH1Ready || !isH2Ready) && !btnProdEnd.isPressed())
 				{
-
-					if (!digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG) )
+					if (btnProdEnd.isPressed())
+					{
+						nextState = E_STATE::PIPE_LOAD;
+						break;
+					}
+					if (digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG))
 					{
 						digitalWrite(SIG_FOAM_HEAT_2, LOW);
+						digitalWrite(LED_HEAT1, LOW);
 						Serial.println("H2 reached temp");
 						isH2Ready = true;
 					}
-					else digitalWrite(SIG_FOAM_HEAT_2, HIGH);
+					else
+					{
+						digitalWrite(SIG_FOAM_HEAT_2, HIGH);
+						digitalWrite(LED_HEAT1, HIGH);
+					}
 
-					if (!digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG))
+					if (digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG))
 					{
 						digitalWrite(SIG_FOAM_HEAT_1, LOW);
+						digitalWrite(LED_HEAT2, LOW);
 						Serial.println("H1 reached temp");
 						isH1Ready = true;
 					}
-					else digitalWrite(SIG_FOAM_HEAT_1, HIGH);
+					else
+					{
+						digitalWrite(SIG_FOAM_HEAT_1, HIGH);
+						digitalWrite(LED_HEAT2, HIGH);
+					}
+					btnProdEnd.update();
 				}
-				SetState(E_STATE::PROCESS_RUN);
+
+				SetState(nextState);
 
 				digitalWrite(FOAM_PNEUMATIC_1, HIGH);
 				digitalWrite(FOAM_PNEUMATIC_2, HIGH);
@@ -474,27 +505,27 @@ void loop() {
 			digitalWrite(SIG_BLOWER_PIN, HIGH); // Make sure the blower is ALWAYS ON !!
 			btnProdEnd.update();
 
-			if (!digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG)) {
+			if (digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG)) {
 				
 				digitalWrite(SIG_FOAM_HEAT_1, LOW);
-				digitalWrite(LED_HEAT1, LOW);
+				digitalWrite(LED_HEAT2, LOW);
 			}
 			else {
 				
-				digitalWrite(LED_HEAT1, HIGH);
+				digitalWrite(LED_HEAT2, HIGH);
 				digitalWrite(SIG_FOAM_HEAT_1, HIGH);
 			}
 
-			if (!digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG)) {
+			if (digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG)) {
 				
 				digitalWrite(SIG_FOAM_HEAT_2, LOW);
-				digitalWrite(LED_HEAT2, LOW);
+				digitalWrite(LED_HEAT1, LOW);
 
 			}
 			else {
 				
 				digitalWrite(SIG_FOAM_HEAT_2, HIGH);
-				digitalWrite(LED_HEAT2, HIGH);
+				digitalWrite(LED_HEAT1, HIGH);
 			}
 			btnProdEnd.update();
 			if (btnProdEnd.isPressed())
@@ -512,42 +543,49 @@ void loop() {
 			if (!btnProdEnd.isPressed()) endCounter = 0;
 		}
 		
-		Serial.println("btnProdEnd pressed");
-		digitalWrite(SIG_FOAM_HEAT_1, LOW);
-		delay(200);
-		digitalWrite(SIG_FOAM_HEAT_2, LOW);
+		Serial.println("btnProdEnd pressed");		
 		SetState(E_STATE::COOLDOWN);
 	
 	}
 	case COOLDOWN:
 	{
+		lcd.setCursor(0, 0);
+		lcd.print("Cool down started");
+;
 		Serial.println("Heaters OFF");
-		digitalWrite(SIG_FOAM_HEAT_1, LOW);
-		delay(200);
+		digitalWrite(SIG_FOAM_HEAT_1, LOW);		
 		digitalWrite(SIG_FOAM_HEAT_2, LOW);
+		delay(200);
 
 		Serial.println("Heaters Up");
 		digitalWrite(FOAM_PNEUMATIC_1, LOW);
 		digitalWrite(FOAM_PNEUMATIC_2, LOW);
-		delay(200);
-		Serial.println("Tape stop");
-		digitalWrite(SIG_TAPE_LEFT, LOW);
-		digitalWrite(SIG_TAPE_RIGHT, LOW);
-		
-		delay(200);
 		digitalWrite(LED_HEAT1, LOW);
 		digitalWrite(LED_HEAT2, LOW);
+		lcd.setCursor(0, 1);
+		lcd.print("Heaters off");
+		delay(200);
+
+		Serial.println("Tape stop");
+		digitalWrite(SIG_TAPE_LEFT, LOW);
+		digitalWrite(SIG_TAPE_RIGHT, LOW);	
+		lcd.setCursor(0, 2);
+		lcd.print("Tape stop");
+		delay(200);
 
 		digitalWrite(LED_PROD_START, LOW);
 		digitalWrite(LED_PROD_END, HIGH);
 
 		blowerSwitchOffDelay.start(BLOWER_SWITCH_OFF_DELAY);
+	
 		while (1)
 		{
+			
 			if (blowerSwitchOffDelay.elapsed())
 			{
+				lcd.clear();
 				digitalWrite(SIG_BLOWER_PIN, LOW); //2 minutes after all is finished we switch BLOWER OFF
-				Serial.println("BLOWERS OFF");
+				Serial.println("Blower off");
 				lcd.setCursor(0, 0);
 				lcd.print("Cool down complete");
 
@@ -561,8 +599,7 @@ void loop() {
 				}
 				SetState(E_STATE::PIPE_LOAD);
 				break;
-			}
-			btnProdStart.update();
+			}			
 		}
 	}
 	
@@ -574,6 +611,7 @@ void loop() {
 
 void UpdateRemoteButtons()
 {
+	if (digitalRead(REM_ALLOW_REMOTE)) return;
 	//Adafruit_Debounce remPullOut(REM_PULL_OUT, LOW);
 	//Adafruit_Debounce remPullIn(REM_PULL_IN, LOW);
 	//Adafruit_Debounce remAllowRemote(REM_ALLOW_REMOTE, LOW);
@@ -634,7 +672,6 @@ void Beep()
 		analogWrite(SPK_PIN, 0);
 		x++;
 		delay(1);
-
 	}
 }
 
