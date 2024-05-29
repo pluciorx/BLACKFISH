@@ -62,16 +62,16 @@ char error[MAX_INPUT];
 // full range is 3500 / - 3500
 
 byte vibrationfactor = 1;
-#define VIB_C1_L0_MIN -6000
-#define VIB_C1_L0_MAX 5000
+#define VIB_C1_L0_MIN -4000
+#define VIB_C1_L0_MAX 3000
 
-#define VIB_C1_L1_MIN -4000
-#define VIB_C1_L1_MAX 3000
+#define VIB_C1_L1_MIN -3000
+#define VIB_C1_L1_MAX 2000
 
-#define VIB_C1_L2_MIN -4000
-#define VIB_C1_L2_MAX 3000
+#define VIB_C1_L2_MIN -2000
+#define VIB_C1_L2_MAX 1500
 
-#define VIB_C1_L3_MIN -2000
+#define VIB_C1_L3_MIN -1000
 #define VIB_C1_L3_MAX 1500
 
 #define VIB_C1_L4_MIN -1000
@@ -123,8 +123,8 @@ volatile bool IsPLHomed = false;
 #define PEDALR_DIR 13
 volatile bool IsPRHomed = false;
 
-#define PEDAL_HOMING_ACCELERATION 4000
-#define PEDALS_MAX_MAXDISTANCE 15000
+#define PEDAL_HOMING_ACCELERATION 3000
+#define PEDALS_MAX_MAXDISTANCE 13000
 #define PEDAL_BASE_POSITION 11000
 //11000 level 0
 //13000 level 1
@@ -137,7 +137,7 @@ volatile bool IsPRHomed = false;
 #define PEDALS_LEVEL0 1000
 #define PEDALS_LEVEL1 2000
 #define PEDALS_LEVEL2 3000
-#define PEDALS_LEVEL3 4000
+#define PEDALS_LEVEL3 3750
 byte pedalResistance = 0;
 byte pedalPreviousResistance = 0;
 
@@ -314,13 +314,15 @@ void loop() {
     switch (_state) {
     case HOMING:
     {
-
+        IsVibrationEnabled = false;
         Serial.println("Homing pedals started...");
-
+        IsPLHomed = false;
+        IsPRHomed = false;
         if (!HandlePedalsHoming()) {
             Serial.println("Pedals homing Failed.");
         }
         Serial.println("Homing Pedals Finished...");
+
 
         Serial.println("Homing chairs started...");
 
@@ -403,22 +405,7 @@ void loop() {
     break;
     case MOTOR_RST:
     {
-        motorC1L.disableOutputs();
-        delay(120);
-        motorC1L.enableOutputs();
-
-        motorC1R.disableOutputs();
-        delay(120);
-        motorC1R.enableOutputs();
-
-        motorC2L.disableOutputs();
-        delay(120);
-        motorC2L.enableOutputs();
-
-        motorC2R.disableOutputs();
-        delay(120);
-        motorC2R.enableOutputs();
-        SetState(E_STATE::LISTENING);
+        SetState(E_STATE::HOMING);
     }
     break;
     case S_ERROR:
@@ -534,6 +521,20 @@ void HandleVibrations()  //none blockin
 
 bool HandleChairsHoming()  //can be blocking
 {
+    IsC1LHomed = IsC1RHomed = IsC2LHomed = IsC2RHomed = false;
+    motorC1L.enableOutputs();
+    motorC1R.enableOutputs();
+    motorC2L.enableOutputs();
+    motorC2R.enableOutputs();
+    Serial.println("Motors Enabled;");
+
+    motorC1L.setCurrentPosition(0);
+    motorC1R.setCurrentPosition(0);
+
+    motorC2L.setCurrentPosition(0);
+    motorC2R.setCurrentPosition(0);
+    Serial.println("Motors Position Set to 0;");
+
     //Just in case we are on the endstops
     CheckAndRetractMotors();
 
@@ -559,6 +560,7 @@ bool HandleChairsHoming()  //can be blocking
             motorC1L.runSpeedToPosition();
         }
         else {
+            //Serial.println("C1L Homed");
             IsC1LHomed = true;
         }
 
@@ -566,6 +568,7 @@ bool HandleChairsHoming()  //can be blocking
             motorC1R.runSpeedToPosition();
         }
         else {
+            //Serial.println("C1R Homed");
             IsC1RHomed = true;
         }
 
@@ -573,6 +576,7 @@ bool HandleChairsHoming()  //can be blocking
             motorC2L.runSpeedToPosition();
         }
         else {
+            //Serial.println("C2L Homed");
             IsC2LHomed = true;
         }
 
@@ -580,15 +584,17 @@ bool HandleChairsHoming()  //can be blocking
             motorC2R.runSpeedToPosition();
         }
         else {
+            // Serial.println("C2R Homed");
             IsC2RHomed = true;
         }
 
         if (IsC1LHomed && IsC1RHomed && IsC2LHomed && IsC2RHomed) {
+            Serial.println("All motors reached endstop or at max distance;");
             break;
         }
     }
 
-    Serial.println("All motors reached endstop or at max distance;");
+
     stopMotorC1L();
     stopMotorC1R();
     stopMotorC2L();
@@ -738,6 +744,8 @@ void CheckAndRetractPedalMotors() {
 
 bool HandlePedalsHoming()  //can be blocking
 {
+    IsPLHomed = false;
+    IsPRHomed = false;
     CheckAndRetractPedalMotors();
 
     motorPedalsL.setAcceleration(PEDAL_HOMING_ACCELERATION);
@@ -982,7 +990,7 @@ CommandType GetCMDFromInput(const char* input) {
 
     if (strcmp(input, "ping") == NULL) {
         cmdFound = CommandType::Ping;
-        
+
     }
 
     if (strcmp(input, "startVibration") == NULL) {
@@ -1008,9 +1016,9 @@ CommandType GetCMDFromInput(const char* input) {
         cmdFound = CommandType::Kill;
     }
 
-    if (strcmp(input, "motorReset") == NULL) {
+    if (strcmp(input, "homing") == NULL) {
         cmdFound = CommandType::MotorReset;
-        
+
     }
     input_line[0] = '\0';
     return cmdFound;
