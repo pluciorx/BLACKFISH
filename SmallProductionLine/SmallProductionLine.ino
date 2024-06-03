@@ -1,4 +1,3 @@
-#include <OneWire.h>
 #include <DallasTemperature.h>
 #include <Adafruit_Debounce.h>
 #include <LiquidCrystal_I2C.h>
