@@ -200,14 +200,14 @@ void setup() {
 	pinMode(SPK_PIN, OUTPUT);
 	digitalWrite(SPK_PIN, LOW);
 
-	pinMode(FOAM_HEAT_1_TEMP_AL1_TRIG, INPUT_PULLUP);
-	pinMode(FOAM_HEAT_1_TEMP_AL2_TRIG, INPUT_PULLUP);
+	pinMode(FOAM_HEAT_1_TEMP_AL1_TRIG, INPUT);
+	pinMode(FOAM_HEAT_1_TEMP_AL2_TRIG, INPUT);
 
 	pinMode(SIG_FOAM_HEAT_1, OUTPUT);
 	digitalWrite(SIG_FOAM_HEAT_1, LOW);
 
-	pinMode(FOAM_HEAT_2_TEMP_AL1_TRIG, INPUT_PULLUP);
-	pinMode(FOAM_HEAT_2_TEMP_AL2_TRIG, INPUT_PULLUP);
+	pinMode(FOAM_HEAT_2_TEMP_AL1_TRIG, INPUT);
+	pinMode(FOAM_HEAT_2_TEMP_AL2_TRIG, INPUT);
 
 	pinMode(SIG_FOAM_HEAT_2, OUTPUT);
 	digitalWrite(SIG_FOAM_HEAT_2, LOW);
@@ -407,7 +407,7 @@ void loop() {
 				Serial.print("PID H1 (A2) AL1:"); Serial.println(digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG));
 				Serial.print("PID H1 (A1) AL2:"); Serial.println(digitalRead(FOAM_HEAT_1_TEMP_AL2_TRIG));
 
-				if (digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG))
+				if (digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG) == LOW)
 				{
 
 					digitalWrite(SIG_FOAM_HEAT_1, HIGH);
@@ -423,7 +423,7 @@ void loop() {
 				Serial.print("PID H2 (A4) AL1:"); Serial.println(digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG));
 				Serial.print("PID H2 (A5) AL2:"); Serial.println(digitalRead(FOAM_HEAT_2_TEMP_AL2_TRIG));
 
-				if (digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG))
+				if (digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG) == LOW)
 				{
 
 					digitalWrite(SIG_FOAM_HEAT_2, HIGH);
@@ -469,37 +469,47 @@ void loop() {
 				E_STATE nextState = E_STATE::PROCESS_RUN;
 				while ((!isH1Ready || !isH2Ready) && !btnProdEnd.isPressed())
 				{
+
+					if (!isH1Ready && digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG) == LOW)
+					{
+						
+							digitalWrite(SIG_FOAM_HEAT_2, LOW);
+							digitalWrite(LED_HEAT1, LOW);
+							Serial.println("H2 reached temp");
+							isH2Ready = true;
+						
+					}
+					else
+					{
+						isH2Ready = false;
+						digitalWrite(SIG_FOAM_HEAT_2, HIGH);
+						digitalWrite(LED_HEAT1, HIGH);
+					}
+
+					if (!isH1Ready && digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG) == LOW)
+					{
+						
+							digitalWrite(SIG_FOAM_HEAT_1, LOW);
+							digitalWrite(LED_HEAT2, LOW);
+							Serial.println("H1 reached temp");
+							isH1Ready = true;
+						
+					}
+					else
+					{
+						isH1Ready = false;
+						digitalWrite(SIG_FOAM_HEAT_1, HIGH);
+						digitalWrite(LED_HEAT2, HIGH);
+					}
+
+
 					UpdateButtons();
 					if (btnProdEnd.isPressed())
 					{
 						nextState = E_STATE::PIPE_LOAD;
 						break;
 					}
-					if (digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG))
-					{
-						digitalWrite(SIG_FOAM_HEAT_2, LOW);
-						digitalWrite(LED_HEAT1, LOW);
-						Serial.println("H2 reached temp");
-						isH2Ready = true;
-					}
-					else
-					{
-						digitalWrite(SIG_FOAM_HEAT_2, HIGH);
-						digitalWrite(LED_HEAT1, HIGH);
-					}
 
-					if (digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG))
-					{
-						digitalWrite(SIG_FOAM_HEAT_1, LOW);
-						digitalWrite(LED_HEAT2, LOW);
-						Serial.println("H1 reached temp");
-						isH1Ready = true;
-					}
-					else
-					{
-						digitalWrite(SIG_FOAM_HEAT_1, HIGH);
-						digitalWrite(LED_HEAT2, HIGH);
-					}
 					if (btnTapeRight.isPressed())
 					{
 
@@ -511,6 +521,7 @@ void loop() {
 					else
 					{
 						digitalWrite(SIG_TAPE_RIGHT, LOW);
+						//digitalWrite(SIG_TAPE_LEFT, LOW);
 						digitalWrite(LED_TAPE_RIGHT, LOW);
 					}
 
@@ -524,11 +535,12 @@ void loop() {
 
 					}
 					else {
+						//digitalWrite(SIG_TAPE_RIGHT, LOW);
 						digitalWrite(SIG_TAPE_LEFT, LOW);
 						digitalWrite(LED_TAPE_LEFT, LOW);
 					}
 
-
+					///delay(5);
 				}
 
 				SetState(nextState);
@@ -560,11 +572,11 @@ void loop() {
 
 		digitalWrite(SIG_BLOWER_PIN, HIGH); // Make sure the blower is ALWAYS ON !!		
 
-		float endCounter = 0;
-		while (endCounter < 3)
+		long endCounter = 0;
+		while (endCounter < 2)
 		{
 			if (digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG)) {
-
+				Serial.println("H1 AL1 TRIGGERED");
 				digitalWrite(SIG_FOAM_HEAT_1, LOW);
 				digitalWrite(LED_HEAT2, LOW);
 			}
@@ -575,7 +587,7 @@ void loop() {
 			}
 
 			if (digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG)) {
-
+				Serial.println("H2 AL1 TRIGGERED");
 				digitalWrite(SIG_FOAM_HEAT_2, LOW);
 				digitalWrite(LED_HEAT1, LOW);
 
@@ -603,6 +615,8 @@ void loop() {
 		}
 
 		Serial.println("btnProdEnd pressed");
+		digitalWrite(SIG_TAPE_LEFT, LOW);
+		digitalWrite(SIG_TAPE_RIGHT, LOW);
 
 		digitalWrite(FOAM_PNEUMATIC_1, LOW);
 		digitalWrite(FOAM_PNEUMATIC_2, LOW);
@@ -613,9 +627,6 @@ void loop() {
 		digitalWrite(SIG_BLOWER_PIN, LOW);
 		delay(500);
 
-		digitalWrite(SIG_TAPE_LEFT, LOW);
-		digitalWrite(SIG_TAPE_RIGHT, LOW);
-		delay(1000);
 		SetState(E_STATE::COOLDOWN);
 
 	}break;
