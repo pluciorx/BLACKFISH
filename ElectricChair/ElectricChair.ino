@@ -69,13 +69,13 @@ byte vibrationfactor = 1;
 #define VIB_C1_L1_MAX 2000
 
 #define VIB_C1_L2_MIN -2000
-#define VIB_C1_L2_MAX 1500
+#define VIB_C1_L2_MAX 2000
 
-#define VIB_C1_L3_MIN -1000
+#define VIB_C1_L3_MIN -1500
 #define VIB_C1_L3_MAX 1500
 
-#define VIB_C1_L4_MIN -1000
-#define VIB_C1_L4_MAX 1000
+#define VIB_C1_L4_MIN -1300
+#define VIB_C1_L4_MAX 1400
 
 //Chair 1
 #define CHAIR1_LEFT_UPPER_LIMIT 48
