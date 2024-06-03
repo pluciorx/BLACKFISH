@@ -15,19 +15,21 @@
 #define BTN_TAPE_LEFT 29
 #define BTN_TAPE_RIGHT 28
 #define BTN_FAIL_STOP 30
+#define INPUT_PULLDOWN
 
-Adafruit_Debounce btnPullRight(BTN_PULL_RIGHT, LOW);
-Adafruit_Debounce btnPullLeft(BTN_PULL_LEFT, LOW);
-Adafruit_Debounce btnHeat1(BTN_HEAT1, LOW);
-Adafruit_Debounce btnHeat2(BTN_HEAT2, LOW);
+Adafruit_Debounce btnPullRight(BTN_PULL_RIGHT,HIGH);
+Adafruit_Debounce btnPullLeft(BTN_PULL_LEFT, HIGH);
+Adafruit_Debounce btnHeat1(BTN_HEAT1, HIGH);
+Adafruit_Debounce btnHeat2(BTN_HEAT2, HIGH);
 
-Adafruit_Debounce btnProdStart(BTN_PROD_START, LOW);
+Adafruit_Debounce btnProdStart(BTN_PROD_START, HIGH);
 
-Adafruit_Debounce btnProdEnd(BTN_PROD_END, LOW);
+Adafruit_Debounce btnProdEnd(BTN_PROD_END, HIGH);
 
-Adafruit_Debounce btnTapeRight(BTN_TAPE_RIGHT, LOW);
-Adafruit_Debounce btnTapeLeft(BTN_TAPE_LEFT, LOW);
-Adafruit_Debounce btnFailStop(BTN_FAIL_STOP, LOW);
+Adafruit_Debounce btnTapeRight(BTN_TAPE_RIGHT, HIGH);
+Adafruit_Debounce btnTapeLeft(BTN_TAPE_LEFT, HIGH);
+Adafruit_Debounce btnFailStop(BTN_FAIL_STOP, HIGH);
+
 
 #define BTN_MENU_RIGHT 31
 #define BTN_MENU_LEFT 32
@@ -131,7 +133,7 @@ DallasTemperature DSTemp(&oneWire);
 #define HEATERS_LOWERING_DELAY 6000
 #define BLOWER_SWITCH_OFF_DELAY 5000  //2 minuters blower cut off time
 
-//#define INPUT_PULLDOWN
+
 
 void(*resetFunc) (void) = 0;
 
@@ -153,6 +155,7 @@ VirtualDelay blowerSwitchOffDelay;
 
 //volatile ES_START _start_sub_state = ES_START::HEATERS_ON;
 volatile E_STATE _state = E_STATE::STARTING;
+
 
 // the setup function runs once when you press reset or power the board
 void setup() {
