@@ -89,9 +89,9 @@ LiquidCrystal_I2C lcd(0x27, 20, 4);
 
 //------------ FOAM forming module -----------------
 //DS18B20
-#define DALLAS_SENSOR 36
-OneWire oneWire(DALLAS_SENSOR);
-DallasTemperature DSTemp(&oneWire);
+//#define DALLAS_SENSOR 36
+//OneWire oneWire(DALLAS_SENSOR);
+//DallasTemperature DSTemp(&oneWire);
 
 #define FOAM_CHILLER_SIG 37
 #define FOAM_PNEUMATIC_1 38
