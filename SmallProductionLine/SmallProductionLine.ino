@@ -97,11 +97,9 @@ LiquidCrystal_I2C lcd(0x27, 20, 4);
 #define FOAM_PNEUMATIC_2 39
 #define SIG_FOAM_HEAT_1 40
 #define FOAM_HEAT_1_TEMP_AL1_TRIG  PIN_A1 // alarm dolny
-#define FOAM_HEAT_1_TEMP_AL2_TRIG  PIN_A2 // alarm gorny 
 
 #define SIG_FOAM_HEAT_2 41
 #define FOAM_HEAT_2_TEMP_AL1_TRIG  PIN_A4 //alarm dolny H2
-#define FOAM_HEAT_2_TEMP_AL2_TRIG  PIN_A5 //alarm gorny
 
 #define FOAM_BLOWER 42
 
@@ -133,7 +131,7 @@ LiquidCrystal_I2C lcd(0x27, 20, 4);
 #define BLOWER_SWITCH_OFF_DELAY 5000  //2 minuters blower cut off time
 
 
-#define SIG_TAPE_BREAK_PIN 1
+#define SIG_TAPE_BREAK_PIN PIN_A7
 //ENCODERS 
 #define ENC_TAPE_A 2
 #define ENC_TAPE_B 3
@@ -228,13 +226,11 @@ void setup() {
 
 	pinMode(HEATERS_EN, OUTPUT);
 	pinMode(FOAM_HEAT_1_TEMP_AL1_TRIG, INPUT);
-	pinMode(FOAM_HEAT_1_TEMP_AL2_TRIG, INPUT);
-
+	
 	pinMode(SIG_FOAM_HEAT_1, OUTPUT);
 	digitalWrite(SIG_FOAM_HEAT_1, LOW);
 
 	pinMode(FOAM_HEAT_2_TEMP_AL1_TRIG, INPUT);
-	pinMode(FOAM_HEAT_2_TEMP_AL2_TRIG, INPUT);
 
 	pinMode(SIG_FOAM_HEAT_2, OUTPUT);
 	digitalWrite(SIG_FOAM_HEAT_2, LOW);
@@ -281,6 +277,7 @@ void setup() {
 
 	pinMode(SIG_TAPE_BREAK_PIN, INPUT);
 
+	//pinMode(SIG_TAPE_BREAK_PIN, INPUT);
 	delay(200);
 
 	SetState(E_STATE::PIPE_LOAD);
@@ -293,9 +290,9 @@ void loop() {
 	{
 	case PIPE_LOAD:
 	{
+		UpdateButtons();
 		lcd.clear();
 		lcd.backlight();
-		
 		lcd.setCursor(0, 0);
 		lcd.print("Please press START");          // print message at the first row
 		analogWrite(TAPE_ENGINE_INVERTER, TAPE_SLOW_SPEED);
@@ -399,19 +396,34 @@ void loop() {
 			if (btnProdStart.isPressed())
 			{
 				
-				if (endCounter == 0) btnStop3sCounterl.start(500);
+				if (endCounter == 0) btnStop3sCounterl.start(300);
 				if (btnStop3sCounterl.elapsed())
 				{
 
-					btnStop3sCounterl.start(500);
+					btnStop3sCounterl.start(300);
 					endCounter++;
 
 				}
 			}
 			if (!btnProdStart.isPressed()) endCounter = 0;
 		}
+		delay(100);
+
+		bool isFoamDetected = !IsTapeBreakDetectedOnLaser();
+		E_STATE nextState = E_STATE::STARTING;
+		if (!isFoamDetected)
+		{
+			lcd.clear();
+			lcd.setCursor(0, 0);
+			lcd.print("Insert Foam");
+			nextState = E_STATE::PIPE_LOAD;
+		}
+
+		while (IsTapeBreakDetectedOnLaser());
+
 		Serial.println("btnProdStart pressed");
-		SetState(E_STATE::STARTING);
+		SetState(nextState);
+		
 	}break;
 	case STARTING: {
 		lcd.clear();
@@ -436,7 +448,6 @@ void loop() {
 				lcd.print("Heaters starting...");
 				Serial.println("Heaters start");
 				Serial.print("PID H1 (A1) AL1:"); Serial.println(digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG));
-				Serial.print("PID H1 (A2) AL2:"); Serial.println(digitalRead(FOAM_HEAT_1_TEMP_AL2_TRIG));
 
 				if (digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG) == LOW)
 				{
@@ -452,7 +463,6 @@ void loop() {
 				}
 				//here we can add potential delay to second heater
 				Serial.print("PID H2 (A4) AL1:"); Serial.println(digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG));
-				Serial.print("PID H2 (A5) AL2:"); Serial.println(digitalRead(FOAM_HEAT_2_TEMP_AL2_TRIG));
 
 				if (digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG) == LOW)
 				{
@@ -604,7 +614,8 @@ void loop() {
 
 		long endCounter = 0;
 		pipePresenceDelay.start(200);
-		while (endCounter < 2 || !IsPipeEndDetected)
+
+		while (endCounter < 2 && !IsTapeBreakDetectedOnLaser())
 		{
 			if (pipePresenceDelay.elapsed())
 			{
@@ -615,8 +626,8 @@ void loop() {
 			}
 
 			if (digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG)) {
-				Serial.println("H1 AL1 TRIGGERED");
-				digitalWrite(SIG_FOAM_HEAT_1, LOW);
+				//Serial.println("H1 AL1 TRIGGERED");
+				//digitalWrite(SIG_FOAM_HEAT_1, LOW);
 				digitalWrite(LED_HEAT_1, LOW);
 			}
 			else {
@@ -626,8 +637,8 @@ void loop() {
 			}
 
 			if (digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG)) {
-				Serial.println("H2 AL1 TRIGGERED");
-				digitalWrite(SIG_FOAM_HEAT_2, LOW);
+				//Serial.println("H2 AL1 TRIGGERED");
+				//digitalWrite(SIG_FOAM_HEAT_2, LOW);
 				digitalWrite(LED_HEAT_2, LOW);
 
 			}
@@ -711,7 +722,15 @@ void loop() {
 
 bool IsTapeBreakDetectedOnLaser()
 {
-	return digitalRead(SIG_TAPE_BREAK_PIN);
+	
+	if (digitalRead(SIG_TAPE_BREAK_PIN))
+	{
+		Serial.println("TAPE BREAK DETECTED");
+		return true;
+	}
+	
+	return false;
+		
 }
 
 bool IsTapeBreakDetectedOnEncoder()
