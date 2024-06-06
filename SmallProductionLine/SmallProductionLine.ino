@@ -92,7 +92,7 @@ LiquidCrystal_I2C lcd(0x27, 20, 4);
 //OneWire oneWire(DALLAS_SENSOR);
 //DallasTemperature DSTemp(&oneWire);
 
-#define FOAM_CHILLER_SIG 37
+#define HEATERS_EN 37
 #define FOAM_PNEUMATIC_1 38
 #define FOAM_PNEUMATIC_2 39
 #define SIG_FOAM_HEAT_1 40
@@ -133,6 +133,31 @@ LiquidCrystal_I2C lcd(0x27, 20, 4);
 #define BLOWER_SWITCH_OFF_DELAY 5000  //2 minuters blower cut off time
 
 
+#define SIG_TAPE_BREAK_PIN 1
+//ENCODERS 
+#define ENC_TAPE_A 2
+#define ENC_TAPE_B 3
+#define ENC_PIPE_A 9
+#define ENC_PIPE_B 10
+
+//pipe end detection
+long e1_revs = 0;
+long e1_prev_revs = 0;
+int e1_counter = 0;
+int e1_prevCounter = 0;
+int e1_angle = 0, e1_prevAngle = 0;
+bool e1_prevA = 1, e1_prevB = 1;
+
+
+//tape end detection
+long e2_revs = 0;
+long e2_prev_revs = 0;
+int e2_counter = 0;
+int e2_prevCounter = 0;
+int e2_angle = 0, e2_prevAngle = 0;
+bool e2_prevA = 1, e2_prevB = 1;
+
+
 
 void(*resetFunc) (void) = 0;
 
@@ -151,6 +176,7 @@ enum E_STATE {
 VirtualDelay heaterStartDelay;
 VirtualDelay btnStop3sCounterl;
 VirtualDelay blowerSwitchOffDelay;
+VirtualDelay pipePresenceDelay;
 
 //volatile ES_START _start_sub_state = ES_START::HEATERS_ON;
 volatile E_STATE _state = E_STATE::STARTING;
@@ -163,12 +189,12 @@ void setup() {
 	lcd.init(); // initialize the lcd	
 	lcd.backlight();
 	lcd.clear();
-	//lcd.setCursor(0, 0);            // move cursor the first row
-	//lcd.print("     BLACKFISH   ");          // print message at the first row
-	//lcd.setCursor(0, 1);            // move cursor to the second row
-	//lcd.print("   FOAM MASTER S   "); // print message at the second row
-	//lcd.setCursor(0, 2);            // move cursor to the third row
-	//lcd.print("v0.51"); // print message at the second row
+	lcd.setCursor(0, 0);            // move cursor the first row
+	lcd.print("     BLACKFISH   ");          // print message at the first row
+	lcd.setCursor(0, 1);            // move cursor to the second row
+	lcd.print("   FOAM MASTER S   "); // print message at the second row
+	lcd.setCursor(0, 2);            // move cursor to the third row
+	lcd.print("V 2024.06.06"); // print message at the second row
 
 	btnPullRight.begin();
 	btnPullLeft.begin();
@@ -200,6 +226,7 @@ void setup() {
 	pinMode(SPK_PIN, OUTPUT);
 	digitalWrite(SPK_PIN, LOW);
 
+	pinMode(HEATERS_EN, OUTPUT);
 	pinMode(FOAM_HEAT_1_TEMP_AL1_TRIG, INPUT);
 	pinMode(FOAM_HEAT_1_TEMP_AL2_TRIG, INPUT);
 
@@ -251,6 +278,8 @@ void setup() {
 
 	pinMode(TAPE_ENGINE_INVERTER, OUTPUT);  // sets the pin as output
 	//analogWrite(TAPE_ENGINE_INVERTER, 255);
+
+	pinMode(SIG_TAPE_BREAK_PIN, INPUT);
 
 	delay(200);
 
@@ -391,6 +420,8 @@ void loop() {
 		lcd.setCursor(0, 0);
 		lcd.print("Blower starting...");
 		digitalWrite(SIG_BLOWER_PIN, HIGH); // Make sure the blower is ALWAYS ON !!
+		digitalWrite(HEATERS_EN, HIGH); // Make sure the blower is ALWAYS ON !!
+		delay(100);
 		delay(100);
 		digitalWrite(LED_PROD_START, HIGH);
 		digitalWrite(LED_PROD_END, LOW);
@@ -401,6 +432,7 @@ void loop() {
 			if (heaterStartDelay.elapsed())
 			{
 				digitalWrite(SIG_BLOWER_PIN, HIGH); // Make sure the blower is ALWAYS ON !!
+				digitalWrite(HEATERS_EN, HIGH); // Make sure the blower is ALWAYS ON !!
 				lcd.setCursor(0, 1);
 				lcd.print("Heaters starting...");
 				Serial.println("Heaters start");
@@ -571,10 +603,20 @@ void loop() {
 		digitalWrite(SIG_TAPE_RIGHT, LOW);
 
 		digitalWrite(SIG_BLOWER_PIN, HIGH); // Make sure the blower is ALWAYS ON !!		
+		digitalWrite(HEATERS_EN, HIGH); // Make sure the blower is ALWAYS ON !!
 
 		long endCounter = 0;
-		while (endCounter < 2)
+		pipePresenceDelay.start(200);
+		while (endCounter < 2 || !IsPipeEndDetected)
 		{
+			if (pipePresenceDelay.elapsed())
+			{
+				if (IsTapeBreakDetectedOnEncoder() || IsPipeEndDetected()) {
+					break;
+				}
+				
+			}
+
 			if (digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG)) {
 				Serial.println("H1 AL1 TRIGGERED");
 				digitalWrite(SIG_FOAM_HEAT_1, LOW);
@@ -612,6 +654,7 @@ void loop() {
 			}
 			if (!btnProdEnd.isPressed()) endCounter = 0;
 			btnProdEnd.update();
+			
 		}
 
 		Serial.println("btnProdEnd pressed");
@@ -625,6 +668,7 @@ void loop() {
 		digitalWrite(SIG_FOAM_HEAT_2, LOW);
 
 		digitalWrite(SIG_BLOWER_PIN, LOW);
+		digitalWrite(HEATERS_EN, LOW); // Make sure the blower is ALWAYS ON !!
 		delay(500);
 
 		SetState(E_STATE::COOLDOWN);
@@ -665,6 +709,30 @@ void loop() {
 	}
 	}
 
+}
+
+
+bool IsTapeBreakDetectedOnLaser()
+{
+	return digitalRead(SIG_TAPE_BREAK_PIN);
+}
+
+bool IsTapeBreakDetectedOnEncoder()
+{
+	if (e1_revs - e1_prevCounter > 50)
+	{
+		Serial.println("TAPE BREAK DETECTED");
+		return true;
+	 }
+}
+
+bool IsPipeEndDetected()
+{
+	if (e2_revs - e2_prevCounter > 50)
+	{
+		Serial.println("PIPE END DETECTED");
+		return true;
+	}
 }
 
 void UpdateRemoteButtons()
@@ -728,6 +796,57 @@ void Beep()
 		analogWrite(SPK_PIN, 0);
 		x++;
 		delay(1);
+	}
+}
+
+static bool IsPipeEncRotating() {
+	bool A = digitalRead(ENC_PIPE_A), B = digitalRead(ENC_PIPE_B);
+
+	e1_counter += (A ^ e1_prevA) | (B ^ e1_prevB) ? A ^ e1_prevB ? -1 : 1 : 0;
+
+	e1_prevA = A;
+	e1_prevB = B;
+
+	if (e1_counter > e1_prevCounter) {
+		e1_prevAngle = e1_angle;
+		e1_angle = int(e1_counter * (0.285));  // do (-1.8) for oposit direction pedaling
+
+		if (e1_angle >= 361) {
+			e1_angle = 0;
+			e1_counter = 0;
+			e1_revs++;
+			Serial.print("EncPipeRevs:"); Serial.println(e1_revs);
+		}
+		
+		e1_prevCounter = e1_counter;
+
+		return e1_prevAngle != e1_angle;
+		
+	}
+}
+
+static bool IsTapeEncRotating() {
+
+	bool A = digitalRead(TAPE_ENC_A), B = digitalRead(TAPE_ENC_B);
+
+	e2_counter += (A ^ e2_prevA) | (B ^ e2_prevB) ? A ^ e2_prevB ? -1 : 1 : 0;
+
+	e2_prevA = A;
+	e2_prevB = B;
+
+	if (e2_counter > e2_prevCounter) {
+		e2_prevAngle = e2_angle;
+		e2_angle = int(e2_counter * (0.285));
+
+		if (e2_angle >= 361) {
+			e2_angle = 0;
+			e2_counter = 0;
+			e2_revs++;
+			Serial.print("EncTapeRev:"); Serial.println(e2_revs);
+		}
+		
+		e2_prevCounter = e2_counter;
+		return e2_prevAngle != e2_angle;
 	}
 }
 
