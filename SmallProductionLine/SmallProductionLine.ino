@@ -49,8 +49,8 @@ Adafruit_Debounce btnMenuEnter(BTN_MENU_ENTER, LOW);
 bool isHeat1ON = false;
 bool isHeat2ON = false;
 
-#define LED_HEAT1 PIN_A10
-#define LED_HEAT2 PIN_A11
+#define LED_HEAT_2 PIN_A10
+#define LED_HEAT_1 PIN_A11
 #define LED_PROD_START PIN_A12
 #define LED_PROD_END PIN_A13
 #define LED_TAPE_RIGHT PIN_A14
@@ -262,10 +262,10 @@ void setup() {
 	digitalWrite(LED_PULL_RIGHT, LOW);
 	digitalWrite(LED_PULL_LEFT, LOW);
 
-	pinMode(LED_HEAT1, OUTPUT);
-	pinMode(LED_HEAT2, OUTPUT);
-	digitalWrite(LED_HEAT1, LOW);
-	digitalWrite(LED_HEAT2, LOW);
+	pinMode(LED_HEAT_2, OUTPUT);
+	pinMode(LED_HEAT_1, OUTPUT);
+	digitalWrite(LED_HEAT_2, LOW);
+	digitalWrite(LED_HEAT_1, LOW);
 
 	pinMode(LED_PROD_START, OUTPUT);
 	pinMode(LED_PROD_END, OUTPUT);
@@ -306,9 +306,9 @@ void loop() {
 		digitalWrite(LED_PROD_END, HIGH);
 		digitalWrite(SIG_FOAM_HEAT_2, LOW);
 
-		digitalWrite(LED_HEAT2, LOW);
+		digitalWrite(LED_HEAT_1, LOW);
 		digitalWrite(SIG_FOAM_HEAT_1, LOW);
-		digitalWrite(LED_HEAT1, LOW);
+		digitalWrite(LED_HEAT_2, LOW);
 		delay(100);
 
 		int endCounter = 0;
@@ -320,24 +320,24 @@ void loop() {
 			{
 				Serial.println("btnHeat1 pressed");
 				digitalWrite(FOAM_PNEUMATIC_1, HIGH);
-				digitalWrite(LED_HEAT1, HIGH);
+				digitalWrite(LED_HEAT_2, HIGH);
 			}
 			else
 			{
 				digitalWrite(FOAM_PNEUMATIC_1, LOW);
-				digitalWrite(LED_HEAT1, LOW);
+				digitalWrite(LED_HEAT_2, LOW);
 			}
 
 			if (btnHeat2.isPressed())
 			{
 				Serial.println("btnHeat2 pressed");
 				digitalWrite(FOAM_PNEUMATIC_2, HIGH);
-				digitalWrite(LED_HEAT2, HIGH);
+				digitalWrite(LED_HEAT_1, HIGH);
 			}
 			else
 			{
 				digitalWrite(FOAM_PNEUMATIC_2, LOW);
-				digitalWrite(LED_HEAT2, LOW);
+				digitalWrite(LED_HEAT_1, LOW);
 			}
 
 			if (btnPullLeft.isPressed())
@@ -398,7 +398,7 @@ void loop() {
 			btnProdStart.update();
 			if (btnProdStart.isPressed())
 			{
-				Serial.println("Btn Start");
+				
 				if (endCounter == 0) btnStop3sCounterl.start(500);
 				if (btnStop3sCounterl.elapsed())
 				{
@@ -420,9 +420,8 @@ void loop() {
 		lcd.setCursor(0, 0);
 		lcd.print("Blower starting...");
 		digitalWrite(SIG_BLOWER_PIN, HIGH); // Make sure the blower is ALWAYS ON !!
+		delay(500);
 		digitalWrite(HEATERS_EN, HIGH); // Make sure the blower is ALWAYS ON !!
-		delay(100);
-		delay(100);
 		digitalWrite(LED_PROD_START, HIGH);
 		digitalWrite(LED_PROD_END, LOW);
 
@@ -436,20 +435,20 @@ void loop() {
 				lcd.setCursor(0, 1);
 				lcd.print("Heaters starting...");
 				Serial.println("Heaters start");
-				Serial.print("PID H1 (A2) AL1:"); Serial.println(digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG));
-				Serial.print("PID H1 (A1) AL2:"); Serial.println(digitalRead(FOAM_HEAT_1_TEMP_AL2_TRIG));
+				Serial.print("PID H1 (A1) AL1:"); Serial.println(digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG));
+				Serial.print("PID H1 (A2) AL2:"); Serial.println(digitalRead(FOAM_HEAT_1_TEMP_AL2_TRIG));
 
 				if (digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG) == LOW)
 				{
 
 					digitalWrite(SIG_FOAM_HEAT_1, HIGH);
-					digitalWrite(LED_HEAT2, HIGH);
+					digitalWrite(LED_HEAT_1, HIGH);
 					isHeat1ON = true;
 					Serial.println("Heater 1 ON");
 				}
 				else
 				{
-					digitalWrite(LED_HEAT2, LOW);
+					digitalWrite(LED_HEAT_1, LOW);
 				}
 				//here we can add potential delay to second heater
 				Serial.print("PID H2 (A4) AL1:"); Serial.println(digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG));
@@ -459,13 +458,13 @@ void loop() {
 				{
 
 					digitalWrite(SIG_FOAM_HEAT_2, HIGH);
-					digitalWrite(LED_HEAT1, HIGH);
+					digitalWrite(LED_HEAT_2, HIGH);
 					isHeat2ON = true;
 					Serial.println("Heater 2 ON");
 				}
 				else
 				{
-					digitalWrite(LED_HEAT1, HIGH);
+					digitalWrite(LED_HEAT_2, HIGH);
 				}
 				Serial.println("Waiting for temp to reach treshold");
 
@@ -502,11 +501,11 @@ void loop() {
 				while ((!isH1Ready || !isH2Ready) && !btnProdEnd.isPressed())
 				{
 
-					if (!isH1Ready && digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG) == LOW)
+					if (!isH2Ready && digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG) == HIGH)
 					{
 						
 							digitalWrite(SIG_FOAM_HEAT_2, LOW);
-							digitalWrite(LED_HEAT1, LOW);
+							digitalWrite(LED_HEAT_2, LOW);
 							Serial.println("H2 reached temp");
 							isH2Ready = true;
 						
@@ -515,14 +514,14 @@ void loop() {
 					{
 						isH2Ready = false;
 						digitalWrite(SIG_FOAM_HEAT_2, HIGH);
-						digitalWrite(LED_HEAT1, HIGH);
+						digitalWrite(LED_HEAT_2, HIGH);
 					}
 
-					if (!isH1Ready && digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG) == LOW)
+					if (!isH1Ready && digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG) == HIGH)
 					{
 						
 							digitalWrite(SIG_FOAM_HEAT_1, LOW);
-							digitalWrite(LED_HEAT2, LOW);
+							digitalWrite(LED_HEAT_1, LOW);
 							Serial.println("H1 reached temp");
 							isH1Ready = true;
 						
@@ -531,7 +530,7 @@ void loop() {
 					{
 						isH1Ready = false;
 						digitalWrite(SIG_FOAM_HEAT_1, HIGH);
-						digitalWrite(LED_HEAT2, HIGH);
+						digitalWrite(LED_HEAT_1, HIGH);
 					}
 
 
@@ -584,8 +583,6 @@ void loop() {
 		}
 		if (btnProdEnd.isPressed()) SetState(E_STATE::PIPE_LOAD);
 
-
-
 	}break;
 	case PROCESS_RUN:
 	{
@@ -620,24 +617,24 @@ void loop() {
 			if (digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG)) {
 				Serial.println("H1 AL1 TRIGGERED");
 				digitalWrite(SIG_FOAM_HEAT_1, LOW);
-				digitalWrite(LED_HEAT2, LOW);
+				digitalWrite(LED_HEAT_1, LOW);
 			}
 			else {
 
-				digitalWrite(LED_HEAT2, HIGH);
+				digitalWrite(LED_HEAT_1, HIGH);
 				digitalWrite(SIG_FOAM_HEAT_1, HIGH);
 			}
 
 			if (digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG)) {
 				Serial.println("H2 AL1 TRIGGERED");
 				digitalWrite(SIG_FOAM_HEAT_2, LOW);
-				digitalWrite(LED_HEAT1, LOW);
+				digitalWrite(LED_HEAT_2, LOW);
 
 			}
 			else {
 
 				digitalWrite(SIG_FOAM_HEAT_2, HIGH);
-				digitalWrite(LED_HEAT1, HIGH);
+				digitalWrite(LED_HEAT_2, HIGH);
 			}
 
 			btnProdEnd.update();
@@ -690,7 +687,7 @@ void loop() {
 			UpdateButtons();
 			if (btnProdStart.isPressed())
 			{
-				Serial.println("Btn Start");
+				
 				if (endCounter == 0) btnStop3sCounterl.start(200);
 				if (btnStop3sCounterl.elapsed())
 				{
