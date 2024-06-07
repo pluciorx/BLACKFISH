@@ -16,7 +16,7 @@
 #define BTN_FAIL_STOP 30
 #define INPUT_PULLDOWN
 
-Adafruit_Debounce btnPullRight(BTN_PULL_RIGHT,HIGH);
+Adafruit_Debounce btnPullRight(BTN_PULL_RIGHT, HIGH);
 Adafruit_Debounce btnPullLeft(BTN_PULL_LEFT, HIGH);
 Adafruit_Debounce btnHeat1(BTN_HEAT1, HIGH);
 Adafruit_Debounce btnHeat2(BTN_HEAT2, HIGH);
@@ -110,8 +110,6 @@ LiquidCrystal_I2C lcd(0x27, 20, 4);
 #define SIG_TAPE_RIGHT 43
 #define SIG_TAPE_LEFT 44
 
-#define TAPE_ENC_A 9
-#define TAPE_ENC_B 10
 #define TAPE_CURR_SENS PIN_A6
 
 //puller SMALL
@@ -139,37 +137,27 @@ LiquidCrystal_I2C lcd(0x27, 20, 4);
 #define ENC_PIPE_B 10
 
 //pipe end detection
-long e1_revs = 0;
-long e1_prev_revs = 0;
-int e1_counter = 0;
-int e1_prevCounter = 0;
-int e1_angle = 0, e1_prevAngle = 0;
-bool e1_prevA = 1, e1_prevB = 1;
+long prev_Enc_Tape_Counter = 360;
+long Enc_Tape_counter = 0;
+int Enc_Tape_aState;
+int Enc_Tape_aLastState;
 
-
-//tape end detection
-long e2_revs = 0;
-long e2_prev_revs = 0;
-int e2_counter = 0;
-int e2_prevCounter = 0;
-int e2_angle = 0, e2_prevAngle = 0;
-bool e2_prevA = 1, e2_prevB = 1;
-
+long prev_Enc_Pipe_Counter = 360;
+long Enc_Pipe_counter = 0;
+int Enc_Pipe_aState;
+int Enc_Pipe_aLastState;
 
 
 void(*resetFunc) (void) = 0;
 
 enum E_STATE {
 	PIPE_LOAD,
+	PIPE_END,
 	STARTING,
 	PROCESS_RUN,
 	COOLDOWN,
 
 };
-//enum ES_START {
-//	HEATERS_ON,
-//	HEATERS_DOWN
-//};
 
 VirtualDelay heaterStartDelay;
 VirtualDelay btnStop3sCounterl;
@@ -192,8 +180,8 @@ void setup() {
 	lcd.setCursor(0, 1);            // move cursor to the second row
 	lcd.print("   FOAM MASTER S   "); // print message at the second row
 	lcd.setCursor(0, 2);            // move cursor to the third row
-	lcd.print("V 2024.06.06"); // print message at the second row
-
+	lcd.print("V 2024.06.07"); // print message at the second row
+	delay(250);
 	btnPullRight.begin();
 	btnPullLeft.begin();
 	btnHeat1.begin();
@@ -226,7 +214,7 @@ void setup() {
 
 	pinMode(HEATERS_EN, OUTPUT);
 	pinMode(FOAM_HEAT_1_TEMP_AL1_TRIG, INPUT);
-	
+
 	pinMode(SIG_FOAM_HEAT_1, OUTPUT);
 	digitalWrite(SIG_FOAM_HEAT_1, LOW);
 
@@ -276,6 +264,13 @@ void setup() {
 	//analogWrite(TAPE_ENGINE_INVERTER, 255);
 
 	pinMode(SIG_TAPE_BREAK_PIN, INPUT);
+	pinMode(ENC_PIPE_A, INPUT);
+	pinMode(ENC_PIPE_B, INPUT);
+	Enc_Pipe_aLastState = digitalRead(ENC_PIPE_A);
+
+	pinMode(ENC_TAPE_A, INPUT);
+	pinMode(ENC_TAPE_B, INPUT);
+	Enc_Tape_aLastState = digitalRead(ENC_TAPE_A);
 
 	//pinMode(SIG_TAPE_BREAK_PIN, INPUT);
 	delay(200);
@@ -395,7 +390,7 @@ void loop() {
 			btnProdStart.update();
 			if (btnProdStart.isPressed())
 			{
-				
+
 				if (endCounter == 0) btnStop3sCounterl.start(300);
 				if (btnStop3sCounterl.elapsed())
 				{
@@ -423,7 +418,7 @@ void loop() {
 
 		Serial.println("btnProdStart pressed");
 		SetState(nextState);
-		
+
 	}break;
 	case STARTING: {
 		lcd.clear();
@@ -480,7 +475,6 @@ void loop() {
 
 				if (btnTapeRight.isPressed())
 				{
-
 					Serial.println("btnTapeRight pressed");
 					digitalWrite(SIG_TAPE_RIGHT, HIGH);
 					digitalWrite(SIG_TAPE_LEFT, LOW);
@@ -494,7 +488,6 @@ void loop() {
 
 				if (btnTapeLeft.isPressed())
 				{
-
 					Serial.println("btnTapeLeft pressed");
 					digitalWrite(SIG_TAPE_RIGHT, LOW);
 					digitalWrite(SIG_TAPE_LEFT, HIGH);
@@ -513,38 +506,57 @@ void loop() {
 
 					if (!isH2Ready && digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG) == HIGH)
 					{
-						
-							digitalWrite(SIG_FOAM_HEAT_2, LOW);
-							digitalWrite(LED_HEAT_2, LOW);
-							Serial.println("H2 reached temp");
-							isH2Ready = true;
-						
+						digitalWrite(SIG_FOAM_HEAT_2, LOW);
+						digitalWrite(LED_HEAT_2, LOW);
+						Serial.println("H2 reached temp");
+						isH2Ready = true;
 					}
 					else
 					{
-						isH2Ready = false;
+						//isH2Ready = false;
 						digitalWrite(SIG_FOAM_HEAT_2, HIGH);
 						digitalWrite(LED_HEAT_2, HIGH);
 					}
 
 					if (!isH1Ready && digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG) == HIGH)
 					{
-						
-							digitalWrite(SIG_FOAM_HEAT_1, LOW);
-							digitalWrite(LED_HEAT_1, LOW);
-							Serial.println("H1 reached temp");
-							isH1Ready = true;
-						
+						digitalWrite(SIG_FOAM_HEAT_1, LOW);
+						digitalWrite(LED_HEAT_1, LOW);
+						Serial.println("H1 reached temp");
+						isH1Ready = true;
 					}
 					else
 					{
-						isH1Ready = false;
+						//isH1Ready = false;
 						digitalWrite(SIG_FOAM_HEAT_1, HIGH);
 						digitalWrite(LED_HEAT_1, HIGH);
 					}
 
-
 					UpdateButtons();
+					if (btnHeat1.isPressed())
+					{
+						Serial.println("btnHeat1 pressed");
+						digitalWrite(FOAM_PNEUMATIC_1, HIGH);
+						digitalWrite(LED_HEAT_2, HIGH);
+					}
+					else
+					{
+						digitalWrite(FOAM_PNEUMATIC_1, LOW);
+						digitalWrite(LED_HEAT_2, LOW);
+					}
+
+					if (btnHeat2.isPressed())
+					{
+						Serial.println("btnHeat2 pressed");
+						digitalWrite(FOAM_PNEUMATIC_2, HIGH);
+						digitalWrite(LED_HEAT_1, HIGH);
+					}
+					else
+					{
+						digitalWrite(FOAM_PNEUMATIC_2, LOW);
+						digitalWrite(LED_HEAT_1, LOW);
+					}
+
 					if (btnProdEnd.isPressed())
 					{
 						nextState = E_STATE::PIPE_LOAD;
@@ -553,7 +565,6 @@ void loop() {
 
 					if (btnTapeRight.isPressed())
 					{
-
 						Serial.println("btnTapeRight pressed");
 						digitalWrite(SIG_TAPE_RIGHT, HIGH);
 						digitalWrite(SIG_TAPE_LEFT, LOW);
@@ -562,32 +573,71 @@ void loop() {
 					else
 					{
 						digitalWrite(SIG_TAPE_RIGHT, LOW);
-						//digitalWrite(SIG_TAPE_LEFT, LOW);
 						digitalWrite(LED_TAPE_RIGHT, LOW);
 					}
 
 					if (btnTapeLeft.isPressed())
 					{
-
 						Serial.println("btnTapeLeft pressed");
 						digitalWrite(SIG_TAPE_RIGHT, LOW);
 						digitalWrite(SIG_TAPE_LEFT, HIGH);
 						digitalWrite(LED_TAPE_LEFT, HIGH);
-
 					}
 					else {
-						//digitalWrite(SIG_TAPE_RIGHT, LOW);
+						
 						digitalWrite(SIG_TAPE_LEFT, LOW);
 						digitalWrite(LED_TAPE_LEFT, LOW);
 					}
-
-					///delay(5);
 				}
 
-				SetState(nextState);
+				if (nextState == E_STATE::PROCESS_RUN)
+				{
+					lcd.clear();
+					btnProdEnd.update();
+					lcd.setCursor(0, 1);
+					lcd.print(" READY TO START ?");
+					while (1)
+					{
+						UpdateButtons();
+						if (btnProdStart.isPressed()) {
+							
+							nextState = E_STATE::PROCESS_RUN;
+							break;
+						}
+						if (btnProdEnd.isPressed()) {
 
-				digitalWrite(FOAM_PNEUMATIC_1, HIGH);
-				digitalWrite(FOAM_PNEUMATIC_2, HIGH);
+							nextState = E_STATE::PIPE_LOAD;
+							break;
+						}
+
+						if (btnTapeRight.isPressed())
+						{
+							Serial.println("btnTapeRight pressed");
+							digitalWrite(SIG_TAPE_RIGHT, HIGH);
+							digitalWrite(SIG_TAPE_LEFT, LOW);
+							digitalWrite(LED_TAPE_RIGHT, HIGH);
+						}
+						else
+						{
+							digitalWrite(SIG_TAPE_RIGHT, LOW);
+							digitalWrite(LED_TAPE_RIGHT, LOW);
+						}
+
+						if (btnTapeLeft.isPressed())
+						{
+							Serial.println("btnTapeLeft pressed");
+							digitalWrite(SIG_TAPE_RIGHT, LOW);
+							digitalWrite(SIG_TAPE_LEFT, HIGH);
+							digitalWrite(LED_TAPE_LEFT, HIGH);
+						}
+						else {
+
+							digitalWrite(SIG_TAPE_LEFT, LOW);
+							digitalWrite(LED_TAPE_LEFT, LOW);
+						}
+					}
+				}
+				SetState(nextState);
 				break;
 			}
 		}
@@ -601,6 +651,9 @@ void loop() {
 		lcd.setCursor(0, 0);
 		lcd.print(" !! RUNNING !! ");
 		Serial.println("RUNNING");
+		digitalWrite(FOAM_PNEUMATIC_1, HIGH);
+		digitalWrite(FOAM_PNEUMATIC_2, HIGH);
+
 		digitalWrite(LED_PROD_START, HIGH);
 		digitalWrite(LED_PROD_END, LOW);
 
@@ -613,45 +666,49 @@ void loop() {
 		digitalWrite(HEATERS_EN, HIGH); // Make sure the blower is ALWAYS ON !!
 
 		long endCounter = 0;
-		pipePresenceDelay.start(200);
+		delay(400);
+		pipePresenceDelay.start(1000);
 
+		prev_Enc_Pipe_Counter = -50; // we will stop only after full rotation has passed.
+		prev_Enc_Tape_Counter = -50;
+		Enc_Pipe_counter = 0;
+		Enc_Tape_counter = 0;
+		E_STATE nextState = E_STATE::COOLDOWN;
 		while (endCounter < 2 && !IsTapeBreakDetectedOnLaser())
 		{
+			IsPipeEncRotating();
+			IsTapeEncRotating();
+		
 			if (pipePresenceDelay.elapsed())
 			{
-				if (IsTapeBreakDetectedOnEncoder() || IsPipeEndDetected()) {
+				if (IsPipeEndDetectedOnEncoder() || IsTapeBreakDetectedOnEncoder()){
+
+					nextState = E_STATE::PIPE_END;
 					break;
-				}
-				
+				} 
+				pipePresenceDelay.start(500);
 			}
 
-			if (digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG)) {
-				//Serial.println("H1 AL1 TRIGGERED");
-				//digitalWrite(SIG_FOAM_HEAT_1, LOW);
+			/*if (digitalRead(FOAM_HEAT_1_TEMP_AL1_TRIG)) {
 				digitalWrite(LED_HEAT_1, LOW);
 			}
 			else {
-
 				digitalWrite(LED_HEAT_1, HIGH);
 				digitalWrite(SIG_FOAM_HEAT_1, HIGH);
 			}
 
 			if (digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG)) {
-				//Serial.println("H2 AL1 TRIGGERED");
-				//digitalWrite(SIG_FOAM_HEAT_2, LOW);
 				digitalWrite(LED_HEAT_2, LOW);
-
 			}
 			else {
 
 				digitalWrite(SIG_FOAM_HEAT_2, HIGH);
 				digitalWrite(LED_HEAT_2, HIGH);
-			}
+			}*/
 
 			btnProdEnd.update();
 			if (btnProdEnd.isPressed())
 			{
-				Serial.println("Btn STP");
 				if (endCounter == 0) btnStop3sCounterl.start(100);
 				if (btnStop3sCounterl.elapsed())
 				{
@@ -662,23 +719,10 @@ void loop() {
 			}
 			if (!btnProdEnd.isPressed()) endCounter = 0;
 			btnProdEnd.update();
-			
 		}
 
 		Serial.println("btnProdEnd pressed");
-		digitalWrite(SIG_TAPE_LEFT, LOW);
-		digitalWrite(SIG_TAPE_RIGHT, LOW);
-
-		digitalWrite(FOAM_PNEUMATIC_1, LOW);
-		digitalWrite(FOAM_PNEUMATIC_2, LOW);
-
-		digitalWrite(SIG_FOAM_HEAT_1, LOW);
-		digitalWrite(SIG_FOAM_HEAT_2, LOW);
-
-		digitalWrite(SIG_BLOWER_PIN, LOW);
-		digitalWrite(HEATERS_EN, LOW); // Make sure the blower is ALWAYS ON !!
-		delay(500);
-
+		
 		SetState(E_STATE::COOLDOWN);
 
 	}break;
@@ -686,9 +730,8 @@ void loop() {
 	{
 		lcd.clear();
 		lcd.setCursor(0, 0);
-		lcd.print("Cool down started");
-		lcd.setCursor(0, 1);
-		lcd.print("Cool down complete");
+		lcd.print("COOL DOWN COMPLETE");
+		DoCoolDownAndStopTape();
 
 		lcd.setCursor(0, 3);
 		lcd.print("--- Press start ---");
@@ -698,57 +741,105 @@ void loop() {
 			UpdateButtons();
 			if (btnProdStart.isPressed())
 			{
-				
 				if (endCounter == 0) btnStop3sCounterl.start(200);
 				if (btnStop3sCounterl.elapsed())
 				{
-
 					btnStop3sCounterl.start(200);
 					endCounter++;
-
 				}
 			}
 			if (!btnProdStart.isPressed()) endCounter = 0;
 		}
 		SetState(E_STATE::PIPE_LOAD);
 	}break;
+	case PIPE_END:
+	{
+		lcd.clear();
+		lcd.setCursor(0, 0);
+		lcd.print("- MATERIAL MISSING -");
+		lcd.print("  PLEASE LOAD  ");
+		lcd.print("  AND PRESS START  ");
+
+		DoCoolDownAndStopTape();
+
+		int endCounter = 0;
+		while (endCounter < 3)
+		{
+			UpdateButtons();
+			if (btnProdStart.isPressed())
+			{
+				if (endCounter == 0) btnStop3sCounterl.start(200);
+				if (btnStop3sCounterl.elapsed())
+				{
+					btnStop3sCounterl.start(200);
+					endCounter++;
+				}
+			}
+			if (!btnProdStart.isPressed()) endCounter = 0;
+		}
+
+	}break;
 	default: {
 		SetState(E_STATE::PIPE_LOAD);
 	}
 	}
+}
 
+
+void DoCoolDownAndStopTape()
+{
+	digitalWrite(SIG_TAPE_LEFT, LOW);
+	digitalWrite(SIG_TAPE_RIGHT, LOW);
+
+	digitalWrite(FOAM_PNEUMATIC_1, LOW);
+	digitalWrite(FOAM_PNEUMATIC_2, LOW);
+
+	digitalWrite(SIG_FOAM_HEAT_1, LOW);
+	digitalWrite(SIG_FOAM_HEAT_2, LOW);
+
+	digitalWrite(SIG_BLOWER_PIN, LOW);
+	digitalWrite(HEATERS_EN, LOW); // Make sure the blower is ALWAYS ON !!
+	delay(500);	//Leave it here
 }
 
 
 bool IsTapeBreakDetectedOnLaser()
 {
-	
+
 	if (digitalRead(SIG_TAPE_BREAK_PIN))
+	{
+		Serial.println("TAPE BREAK DETECTED L");
+		return true;
+	}
+
+	return false;
+
+}
+
+static bool IsTapeBreakDetectedOnEncoder()
+{
+	/*Serial.print("Tape counter:"); Serial.println(Enc_Tape_counter);
+	Serial.print("Tape prev counter:"); Serial.println(prev_Enc_Tape_Counter);*/
+	Serial.print("Tape Diff:"); Serial.println(Enc_Tape_counter - prev_Enc_Tape_Counter);
+	if (Enc_Tape_counter - prev_Enc_Tape_Counter < 10)
 	{
 		Serial.println("TAPE BREAK DETECTED");
 		return true;
 	}
-	
-	return false;
-		
+	prev_Enc_Tape_Counter = Enc_Tape_counter;
 }
 
-bool IsTapeBreakDetectedOnEncoder()
+static bool IsPipeEndDetectedOnEncoder()
 {
-	if (e1_revs - e1_prevCounter > 50)
-	{
-		Serial.println("TAPE BREAK DETECTED");
-		return true;
-	 }
-}
-
-bool IsPipeEndDetected()
-{
-	if (e2_revs - e2_prevCounter > 50)
+	/*Serial.print("Pipe counter:"); Serial.println(Enc_Pipe_counter);
+	Serial.print("Pipe prev counter:"); Serial.println(prev_Enc_Pipe_Counter);*/
+	Serial.print("Pipe Diff:"); Serial.println(Enc_Pipe_counter - prev_Enc_Pipe_Counter);
+	if (Enc_Pipe_counter - prev_Enc_Pipe_Counter  < 10 )
 	{
 		Serial.println("PIPE END DETECTED");
 		return true;
 	}
+	prev_Enc_Pipe_Counter = Enc_Pipe_counter;
 }
 
 void UpdateRemoteButtons()
@@ -816,53 +907,37 @@ void Beep()
 }
 
 static bool IsPipeEncRotating() {
-	bool A = digitalRead(ENC_PIPE_A), B = digitalRead(ENC_PIPE_B);
-
-	e1_counter += (A ^ e1_prevA) | (B ^ e1_prevB) ? A ^ e1_prevB ? -1 : 1 : 0;
-
-	e1_prevA = A;
-	e1_prevB = B;
-
-	if (e1_counter > e1_prevCounter) {
-		e1_prevAngle = e1_angle;
-		e1_angle = int(e1_counter * (0.285));  // do (-1.8) for oposit direction pedaling
-
-		if (e1_angle >= 361) {
-			e1_angle = 0;
-			e1_counter = 0;
-			e1_revs++;
-			Serial.print("EncPipeRevs:"); Serial.println(e1_revs);
+	Enc_Pipe_aState = digitalRead(ENC_PIPE_A); // Reads the "current" state of the outputA
+	// If the previous and the current state of the outputA are different, that means a Pulse has occured
+	if (Enc_Pipe_aState != Enc_Pipe_aLastState) {
+		// If the outputB state is different to the outputA state, that means the encoder is rotating clockwise
+		if (digitalRead(ENC_PIPE_B) != Enc_Pipe_aState) {
+			Enc_Pipe_counter++;
 		}
-		
-		e1_prevCounter = e1_counter;
-
-		return e1_prevAngle != e1_angle;
-		
+		/*else {
+			Enc_Pipe_counter--;
+		}*/
+		/*Serial.print("Enc Pipe Position: ");
+		Serial.println(Enc_Pipe_counter);*/
 	}
+	Enc_Pipe_aLastState = Enc_Pipe_aState; // Updates the previous state of the outputA with the current state
 }
 
 static bool IsTapeEncRotating() {
-
-	bool A = digitalRead(TAPE_ENC_A), B = digitalRead(TAPE_ENC_B);
-
-	e2_counter += (A ^ e2_prevA) | (B ^ e2_prevB) ? A ^ e2_prevB ? -1 : 1 : 0;
-
-	e2_prevA = A;
-	e2_prevB = B;
-
-	if (e2_counter > e2_prevCounter) {
-		e2_prevAngle = e2_angle;
-		e2_angle = int(e2_counter * (0.285));
-
-		if (e2_angle >= 361) {
-			e2_angle = 0;
-			e2_counter = 0;
-			e2_revs++;
-			Serial.print("EncTapeRev:"); Serial.println(e2_revs);
+	Enc_Tape_aState = digitalRead(ENC_TAPE_A); // Reads the "current" state of the outputA
+	// If the previous and the current state of the outputA are different, that means a Pulse has occured
+	if (Enc_Tape_aState != Enc_Tape_aLastState) {
+		// If the outputB state is different to the outputA state, that means the encoder is rotating clockwise
+		if (digitalRead(ENC_TAPE_B) != Enc_Tape_aState) {
+			Enc_Tape_counter++;
 		}
-		
-		e2_prevCounter = e2_counter;
-		return e2_prevAngle != e2_angle;
+		/*else {
+			Enc_Tape_counter--;
+		}*/
+		/*Serial.print("Enc Type Position: ");
+		Serial.println(Enc_Tape_counter);*/
 	}
+	Enc_Tape_aLastState = Enc_Tape_aState; // Updates the previous state of the outputA with the current state
+
 }
 
