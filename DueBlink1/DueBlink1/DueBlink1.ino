@@ -1,28 +1,32 @@
+#define outputA 9
+#define outputB 10
 
-#define BTN_PULL_RIGHT 22
-#define BTN_PULL_LEFT 23
-#define BTN_HEAT1 24
-#define BTN_HEAT2 25
-#define BTN_PROD_START 26
-#define BTN_PROD_END A7
-#define BTN_TAPE_LEFT 28
-#define BTN_TAPE_RIGHT 29
-#define BTN_FAIL_STOP 30
+int counter = 0;
+int aState;
+int aLastState;
 
-// the setup function runs once when you press reset or power the board
 void setup() {
-	Serial.begin(115200);
+    pinMode(outputA, INPUT);
+    pinMode(outputB, INPUT);
 
-	pinMode(BTN_PROD_START, INPUT);
-	pinMode(BTN_PROD_END, INPUT_PULLUP);
-	Serial.println("GO");
-	delay(5000);
-	
+    Serial.begin(9600);
+    // Reads the initial state of the outputA
+    aLastState = digitalRead(outputA);
 }
 
-// the loop function runs over and over again forever
 void loop() {
-
-	Serial.println(digitalRead(BTN_PROD_END));
-	delay(5);
+    aState = digitalRead(outputA); // Reads the "current" state of the outputA
+    // If the previous and the current state of the outputA are different, that means a Pulse has occured
+    if (aState != aLastState) {
+        // If the outputB state is different to the outputA state, that means the encoder is rotating clockwise
+        if (digitalRead(outputB) != aState) {
+            counter++;
+        }
+        else {
+            counter--;
+        }
+        Serial.print("Position: ");
+        Serial.println(counter);
+    }
+    aLastState = aState; // Updates the previous state of the outputA with the current state
 }
