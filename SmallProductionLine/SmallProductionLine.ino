@@ -130,6 +130,7 @@ LiquidCrystal_I2C lcd(0x27, 20, 4);
 
 
 #define SIG_TAPE_BREAK_PIN PIN_A7
+#define SIG_PIPE_BREAK_PIN PIN_A6
 //ENCODERS 
 #define ENC_TAPE_A 2
 #define ENC_TAPE_B 3
@@ -153,6 +154,7 @@ void(*resetFunc) (void) = 0;
 enum E_STATE {
 	PIPE_LOAD,
 	PIPE_END,
+	FOAM_END,
 	STARTING,
 	PROCESS_RUN,
 	COOLDOWN,
@@ -180,7 +182,7 @@ void setup() {
 	lcd.setCursor(0, 1);            // move cursor to the second row
 	lcd.print("   FOAM MASTER S   "); // print message at the second row
 	lcd.setCursor(0, 2);            // move cursor to the third row
-	lcd.print("V 2024.06.07"); // print message at the second row
+	lcd.print("V 2024.09.20"); // print message at the second row
 	delay(250);
 	btnPullRight.begin();
 	btnPullLeft.begin();
@@ -264,6 +266,7 @@ void setup() {
 	//analogWrite(TAPE_ENGINE_INVERTER, 255);
 
 	pinMode(SIG_TAPE_BREAK_PIN, INPUT);
+	pinMode(SIG_PIPE_BREAK_PIN, INPUT);
 	pinMode(ENC_PIPE_A, INPUT);
 	pinMode(ENC_PIPE_B, INPUT);
 	Enc_Pipe_aLastState = digitalRead(ENC_PIPE_A);
@@ -578,7 +581,7 @@ void loop() {
 		E_STATE nextState = E_STATE::COOLDOWN;
 		long endCounter = 0;
 		
-		while (endCounter < 2 && !IsTapeBreakDetectedOnLaser())
+		while (endCounter < 2)
 		{
 			IsPipeEncRotating();
 			IsTapeEncRotating();
@@ -586,10 +589,17 @@ void loop() {
 			if (pipePresenceDelay.elapsed())
 			{
 				//if (IsPipeEndDetectedOnEncoder() || IsTapeBreakDetectedOnEncoder()) {
-				if (IsPipeEndDetectedOnEncoder()){
+				
+				if (IsTapeBreakDetectedOnLaser()) {
+
+					nextState = E_STATE::FOAM_END;
+					Serial.println("Foam Missing;");
+					break;
+				}
+				if (IsPipeBreakDetectedOnLaser()){
 
 					nextState = E_STATE::PIPE_END;
-					Serial.println("Material Missing;");
+					Serial.println("Pipe Missing;");
 					break;
 				} 
 				pipePresenceDelay.start(300);
@@ -658,13 +668,17 @@ void loop() {
 		}
 		SetState(E_STATE::PIPE_LOAD);
 	}break;
+	case FOAM_END:
 	case PIPE_END:
 	{
 		lcd.clear();
 		lcd.setCursor(0, 0);
-		lcd.print("- MATERIAL MISSING -");
-		lcd.print("PLEASE LOAD MATERIAL ");
-		lcd.print("  AND PRESS START  ");
+		if (_state == E_STATE::FOAM_END) lcd.print("-  FOAM END FOUND  -");
+		if (_state == E_STATE::PIPE_END) lcd.print("-  PIPE END FOUND  -");
+		lcd.setCursor(0, 1);
+		lcd.print(" PLEASE LOAD...   ");
+		lcd.setCursor(0, 2);
+		lcd.print(" AND PRESS START  ");
 
 		DoCoolDownAndStopTape();
 
@@ -719,7 +733,20 @@ bool IsTapeBreakDetectedOnLaser()
 
 	if (digitalRead(SIG_TAPE_BREAK_PIN))
 	{
-		Serial.println("TAPE BREAK DETECTED L");
+		Serial.println("TAPE BREAK DETECTED ");
+		return true;
+	}
+
+	return false;
+
+}
+
+bool IsPipeBreakDetectedOnLaser()
+{
+
+	if (digitalRead(SIG_PIPE_BREAK_PIN))
+	{
+		Serial.println("PIPE BREAK DETECTED L");
 		return true;
 	}
 
