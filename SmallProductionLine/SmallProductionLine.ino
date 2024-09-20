@@ -180,10 +180,10 @@ void setup() {
 	lcd.setCursor(0, 0);            // move cursor the first row
 	lcd.print("     BLACKFISH   ");          // print message at the first row
 	lcd.setCursor(0, 1);            // move cursor to the second row
-	lcd.print("   FOAM MASTER S   "); // print message at the second row
+	lcd.print("    FOAM MASTER S  "); // print message at the second row
 	lcd.setCursor(0, 2);            // move cursor to the third row
-	lcd.print("V 2024.09.20"); // print message at the second row
-	delay(250);
+	lcd.print("     V2024.09.20"); // print message at the second row
+	delay(1500);
 	btnPullRight.begin();
 	btnPullLeft.begin();
 	btnHeat1.begin();
@@ -292,7 +292,9 @@ void loop() {
 		lcd.clear();
 		lcd.backlight();
 		lcd.setCursor(0, 0);
-		lcd.print("Please press START");          // print message at the first row
+		lcd.print("-   System ready   -");          // print message at the first row
+		lcd.setCursor(0, 3);
+		lcd.print("    Press START    ");
 		analogWrite(TAPE_ENGINE_INVERTER, TAPE_SLOW_SPEED);
 
 		digitalWrite(LED_PULL_RIGHT, LOW);
@@ -387,7 +389,9 @@ void loop() {
 		{
 			lcd.clear();
 			lcd.setCursor(0, 0);
-			lcd.print("Insert Foam");
+			lcd.print("-   System hold    -");
+			lcd.setCursor(0, 2);
+			lcd.print("    LOAD FOAM  ");
 			nextState = E_STATE::PIPE_LOAD;
 		}
 
@@ -454,7 +458,7 @@ void loop() {
 
 				bool isH1Ready = false, isH2Ready = false;
 				E_STATE nextState = E_STATE::PROCESS_RUN;
-				while ((!isH1Ready || !isH2Ready) && !btnProdEnd.isPressed())
+				while (!isH1Ready || !isH2Ready)
 				{
 
 					if (!isH2Ready && digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG) == HIGH)
@@ -512,7 +516,8 @@ void loop() {
 
 					if (btnProdEnd.isPressed())
 					{
-						nextState = E_STATE::PIPE_LOAD;
+						Serial.println("Warmup interrupted");
+						nextState = E_STATE::COOLDOWN;
 						break;
 					}
 
@@ -524,7 +529,7 @@ void loop() {
 					lcd.clear();
 					btnProdEnd.update();
 					lcd.setCursor(0, 1);
-					lcd.print(" READY TO START ?");
+					lcd.print("  READY TO START ?");
 					while (1)
 					{
 						UpdateButtons();
@@ -546,7 +551,7 @@ void loop() {
 				break;
 			}
 		}
-		if (btnProdEnd.isPressed()) SetState(E_STATE::PIPE_LOAD);
+		//if (btnProdEnd.isPressed()) SetState(E_STATE::PIPE_LOAD);
 
 	}break;
 	case PROCESS_RUN:
@@ -554,7 +559,7 @@ void loop() {
 		lcd.clear();
 		btnProdEnd.update();
 		lcd.setCursor(0, 0);
-		lcd.print(" !! RUNNING !! ");
+		lcd.print("   !! RUNNING !! ");
 		Serial.println("RUNNING");
 		
 		DoHeaters(HIGH);
@@ -646,11 +651,11 @@ void loop() {
 	{
 		lcd.clear();
 		lcd.setCursor(0, 0);
-		lcd.print("COOL DOWN COMPLETE");
+		lcd.print("-  System stopped  -");
 		DoCoolDownAndStopTape();
 
 		lcd.setCursor(0, 3);
-		lcd.print("--- Press start ---");
+		lcd.print("    Press START   ");
 		int endCounter = 0;
 		while (endCounter < 3)
 		{
@@ -673,12 +678,12 @@ void loop() {
 	{
 		lcd.clear();
 		lcd.setCursor(0, 0);
-		if (_state == E_STATE::FOAM_END) lcd.print("-  FOAM END FOUND  -");
-		if (_state == E_STATE::PIPE_END) lcd.print("-  PIPE END FOUND  -");
-		lcd.setCursor(0, 1);
-		lcd.print(" PLEASE LOAD...   ");
+		if (_state == E_STATE::FOAM_END) lcd.print("-  Foam end found  -");
+		if (_state == E_STATE::PIPE_END) lcd.print("-  Pipe end found  -");
 		lcd.setCursor(0, 2);
-		lcd.print(" AND PRESS START  ");
+		lcd.print("    Please load  ");
+		lcd.setCursor(0, 3);
+		lcd.print("    Press START     ");
 
 		DoCoolDownAndStopTape();
 
