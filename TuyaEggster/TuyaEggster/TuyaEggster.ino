@@ -8,7 +8,6 @@
 #include <vs1053_SdFat.h>
 #include <avdweb_VirtualDelay.h>
 
-
 #if defined(USE_MP3_REFILL_MEANS) && USE_MP3_REFILL_MEANS == USE_MP3_Timer1
 #include <TimerOne.h>
 #elif defined(USE_MP3_REFILL_MEANS) && USE_MP3_REFILL_MEANS == USE_MP3_SimpleTimer
@@ -25,14 +24,12 @@ uint16_t prevVolume = 50;
 uint16_t currLowTone = 50;
 uint16_t prevLowTone = 50;
 
-
 bool isPlaying = false;
 bool isTuyaInit = false;
 bool isSensorInit = false;
 #define PIN_PLAY_SENSOR 22
 //ezButton btnHumanSensor(PIN_PLAY_SENSOR);
 Adafruit_Debounce  btnPlay(PIN_PLAY_SENSOR);
-
 
 enum E_STATE {
 	Playing,
@@ -69,7 +66,7 @@ void setup()
 	tuyav.setDigitalInputs(22, PIN_UNUSED, PIN_UNUSED);
 	tuyav.setAnalogInputs(PIN_UNUSED, PIN_UNUSED, PIN_UNUSED);
 	tuyav.setDigitalOutputs(4, 5, 23, 25, PIN_UNUSED);
-	tuyav.setAnalogOutputs(A15, A14, PIN_UNUSED);
+	tuyav.setAnalogOutputs(PIN_UNUSED, PIN_UNUSED, PIN_UNUSED);
 	tuyav.initialize();
 
 
@@ -106,12 +103,8 @@ void loop()
 		file.getName(filename, sizeof(filename));
 		Serial.print("Playing:"); Serial.println(filename);
 		if (isFnMusic(filename) && !MP3player.isPlaying()) {
-
-			
 			int8_t result = MP3player.playMP3(filename);
-
 			Serial.print("Play result:"); Serial.println(result);
-
 		}
 
 		tuyav.tuyaUpdate();
@@ -122,11 +115,9 @@ void loop()
 			updateVolume();
 			updateLowTone();
 			tuyaYpdateDelay.start(2000);
-
 			
 			if (tuyaYpdateDelay.elapsed())
 			{
-
 				updateUpTime();
 				tuyav.setAV9(String(currVolume) + "/" + String(currLowTone));
 
@@ -184,7 +175,6 @@ void loop()
 				tuyav.setUserValue(AV8, "Idle");
 				tuyav.setAV9(String(currVolume) + "/" + String(currLowTone));
 				
-
 				tuyav.tuyaUpdate();
 				tuyaYpdateDelay.start(3000);
 			}
