@@ -8,10 +8,11 @@
 //buttons (2 x 4 )
 //
 
+#define EXTERNAL_PULLUP 
 #define P1_B1 52
-#define P1_B2 53
-#define P1_B3 50
-#define P1_B4 51
+#define P1_B2 39 //prev 52
+#define P1_B3 38 //prev 50
+#define P1_B4 42 //prev 51
 #define PANEL_LED 20
 
 ezButton btnB1(P1_B1);
@@ -79,7 +80,6 @@ byte vibrationfactor = 1;
 
 //Chair 1
 #define CHAIR1_LEFT_UPPER_LIMIT 48
-#define CHAIR1_LEFT_ALARM 46
 #define CHAIR1_LEFT_EN 44
 #define CHAIR1_LEFT_STEP 2
 #define CHAIR1_LEFT_DIR 3
@@ -87,7 +87,6 @@ volatile bool IsC1LHomed = false;
 bool C1LSubVibReady = true;
 
 #define CHAIR1_RIGHT_UPPER_LIMIT 49
-#define CHAIR1_RIGHT_ALARM 47
 #define CHAIR1_RIGHT_EN 45
 #define CHAIR1_RIGHT_STEP 4
 #define CHAIR1_RIGHT_DIR 5
@@ -95,7 +94,7 @@ volatile bool IsC1RHomed = false;
 bool C1RSubVibReady = true;
 //Chair 2
 #define CHAIR2_RIGHT_UPPER_LIMIT 40
-#define CHAIR2_RIGHT_ALARM 38
+
 #define CHAIR2_RIGHT_EN 36
 #define CHAIR2_RIGHT_STEP 6
 #define CHAIR2_RIGHT_DIR 7
@@ -103,7 +102,6 @@ volatile bool IsC2RHomed = false;
 bool C2LSubVibReady = true;
 
 #define CHAIR2_LEFT_UPPER_LIMIT 41
-#define CHAIR2_LEFT_ALARM 39
 #define CHAIR2_LEFT_EN 37
 #define CHAIR2_LEFT_STEP 8
 #define CHAIR2_LEFT_DIR 9
@@ -146,22 +144,18 @@ byte motorControlPins[] = {
   CHAIR1_LEFT_EN,
   CHAIR1_LEFT_STEP,
   CHAIR1_LEFT_DIR,
-  CHAIR1_LEFT_ALARM,
 
   CHAIR1_RIGHT_EN,
   CHAIR1_RIGHT_STEP,
   CHAIR1_RIGHT_DIR,
-  CHAIR1_RIGHT_ALARM,
 
   CHAIR2_LEFT_EN,
   CHAIR2_LEFT_STEP,
   CHAIR2_LEFT_DIR,
-  CHAIR2_LEFT_ALARM,
 
   CHAIR2_RIGHT_EN,
   CHAIR2_RIGHT_STEP,
   CHAIR2_RIGHT_DIR,
-  CHAIR2_RIGHT_ALARM,
 
   PEDALL_EN,
   PEDALL_STEP,
@@ -231,9 +225,6 @@ void setup() {
 
     pinMode(CHAIR2_LEFT_UPPER_LIMIT, INPUT);
     pinMode(CHAIR2_RIGHT_UPPER_LIMIT, INPUT);
-
-    pinMode(CHAIR1_LEFT_ALARM, INPUT);
-    pinMode(CHAIR1_RIGHT_ALARM, INPUT);
 
     pinMode(PEDALL_UPPER_LIMIT, INPUT);
     pinMode(PEDALR_UPPER_LIMIT, INPUT);
@@ -855,7 +846,7 @@ bool ExecuteCMD(CommandType cmd) {
     case VibStart:  //startVibration
     {
         Serial.println(F("Vibration ON"));
-
+       
         IsVibrationEnabled = true;
 
         SetState(E_STATE::READY);

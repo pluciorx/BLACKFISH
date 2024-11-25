@@ -132,7 +132,7 @@
       <CLanguageStandard>gnu11</CLanguageStandard>
       <CAdditionalWarning />
       <CppAdditionalWarning />
-      <ForcedIncludeFiles>c:\program files\microsoft visual studio\2022\enterprise\common7\ide\extensions\54nfnzpu.boe\Micro Platforms\default\vm-intelli-pre.h;C:\Users\pluci\AppData\Local\Temp\VMBuilds\SmallProductionLine\mega_atmega2560\Debug\.vmintelli\92cc06b8256c73ff2a32dab86534f784\vm-intelli-gcc-defines.h;c:\program files\microsoft visual studio\2022\enterprise\common7\ide\extensions\54nfnzpu.boe\Micro Platforms\default\vm-intelli-post.h;$(ProjectDir)__vm\.SmallProductionLine.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles>c:\program files\microsoft visual studio\2022\enterprise\common7\ide\extensions\1uhdb54f.02w\Micro Platforms\default\vm-intelli-pre.h;C:\Users\pluci\AppData\Local\Temp\VMBuilds\SmallProductionLine\mega_atmega2560\Debug\.vmintelli\07e172e5d235b15b20004cb0700c8321\vm-intelli-gcc-defines.h;c:\program files\microsoft visual studio\2022\enterprise\common7\ide\extensions\1uhdb54f.02w\Micro Platforms\default\vm-intelli-post.h;$(ProjectDir)__vm\.SmallProductionLine.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <UndefineAllPreprocessorDefinitions>true</UndefineAllPreprocessorDefinitions>
       <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
       <PreprocessorDefinitions>_VMICRO_INTELLISENSE;__AVR_atmega2560__;__AVR_ATmega2560__;_VMDEBUG=1;F_CPU=16000000L;ARDUINO=108010;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;%(PreprocessorDefinitions)</PreprocessorDefinitions>

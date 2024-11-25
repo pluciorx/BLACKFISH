@@ -552,7 +552,7 @@
       <CLanguageStandard>gnu11</CLanguageStandard>
       <CAdditionalWarning />
       <CppAdditionalWarning />
-      <ForcedIncludeFiles>c:\program files\microsoft visual studio\2022\enterprise\common7\ide\extensions\54nfnzpu.boe\Micro Platforms\default\vm-intelli-pre.h;C:\Users\pluci\AppData\Local\Temp\VMBuilds\ElectricChair\giga\Debug\.vmintelli\c816c4855cb0a733746f9707c54e68fd\vm-intelli-gcc-defines.h;c:\program files\microsoft visual studio\2022\enterprise\common7\ide\extensions\54nfnzpu.boe\Micro Platforms\default\vm-intelli-post.h;$(ProjectDir)__vm\.ElectricChair.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles>c:\program files\microsoft visual studio\2022\enterprise\common7\ide\extensions\1uhdb54f.02w\Micro Platforms\default\vm-intelli-pre.h;C:\Users\pluci\AppData\Local\Temp\VMBuilds\ElectricChair\giga\Debug\.vmintelli\ae7b7e789cf880cb695fae90ec128bd6\vm-intelli-gcc-defines.h;c:\program files\microsoft visual studio\2022\enterprise\common7\ide\extensions\1uhdb54f.02w\Micro Platforms\default\vm-intelli-post.h;$(ProjectDir)__vm\.ElectricChair.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <UndefineAllPreprocessorDefinitions>true</UndefineAllPreprocessorDefinitions>
       <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
       <PreprocessorDefinitions>_VMICRO_INTELLISENSE;_VMDEBUG=1;ARDUINO=108010;ARDUINO_GIGA;ARDUINO_ARCH_MBED_GIGA;ARDUINO_ARCH_MBED;ARDUINO_LIBRARY_DISCOVERY_PHASE=0;CM4_BINARY_START=0x08180000;CM4_BINARY_END=0x08200000;%(PreprocessorDefinitions)</PreprocessorDefinitions>
