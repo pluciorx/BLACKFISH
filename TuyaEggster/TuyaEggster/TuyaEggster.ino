@@ -8,7 +8,6 @@
 #include <vs1053_SdFat.h>
 #include <avdweb_VirtualDelay.h>
 
-
 #if defined(USE_MP3_REFILL_MEANS) && USE_MP3_REFILL_MEANS == USE_MP3_Timer1
 #include <TimerOne.h>
 #elif defined(USE_MP3_REFILL_MEANS) && USE_MP3_REFILL_MEANS == USE_MP3_SimpleTimer
@@ -19,12 +18,15 @@ SdFat sd;
 vs1053 MP3player;
 Tuyav tuyav(&Serial1);
 VirtualDelay tuyaYpdateDelay;
+VirtualDelay stopDelay;
 
 uint16_t currVolume = 50;
 uint16_t prevVolume = 50;
 uint16_t currLowTone = 50;
 uint16_t prevLowTone = 50;
 
+uint16_t currHighTone = 50;
+uint16_t prevHighTone = 50;
 
 bool isPlaying = false;
 bool isTuyaInit = false;
@@ -32,7 +34,6 @@ bool isSensorInit = false;
 #define PIN_PLAY_SENSOR 22
 //ezButton btnHumanSensor(PIN_PLAY_SENSOR);
 Adafruit_Debounce  btnPlay(PIN_PLAY_SENSOR);
-
 
 enum E_STATE {
 	Playing,
@@ -69,7 +70,7 @@ void setup()
 	tuyav.setDigitalInputs(22, PIN_UNUSED, PIN_UNUSED);
 	tuyav.setAnalogInputs(PIN_UNUSED, PIN_UNUSED, PIN_UNUSED);
 	tuyav.setDigitalOutputs(4, 5, 23, 25, PIN_UNUSED);
-	tuyav.setAnalogOutputs(A15, A14, PIN_UNUSED);
+	tuyav.setAnalogOutputs(PIN_UNUSED, PIN_UNUSED, PIN_UNUSED);
 	tuyav.initialize();
 
 
@@ -106,12 +107,8 @@ void loop()
 		file.getName(filename, sizeof(filename));
 		Serial.print("Playing:"); Serial.println(filename);
 		if (isFnMusic(filename) && !MP3player.isPlaying()) {
-
-			
 			int8_t result = MP3player.playMP3(filename);
-
 			Serial.print("Play result:"); Serial.println(result);
-
 		}
 
 		tuyav.tuyaUpdate();
@@ -121,12 +118,11 @@ void loop()
 			btnPlay.update();
 			updateVolume();
 			updateLowTone();
+			updateHighTone();
 			tuyaYpdateDelay.start(2000);
-
 			
 			if (tuyaYpdateDelay.elapsed())
 			{
-
 				updateUpTime();
 				tuyav.setAV9(String(currVolume) + "/" + String(currLowTone));
 
@@ -140,11 +136,21 @@ void loop()
 
 			if (isSensorInit && btnPlay.isReleased())
 			{
-				Serial.println("Human out stopping sound");
-				MP3player.stopTrack();
-				isPlaying = false;
-				_state = E_STATE::Idle;
-				break;
+				stopDelay.start(60000);
+				Serial.println("Human out stopping sound in 2 minutes");
+				while (1) {
+					
+					if (stopDelay.elapsed())
+					{
+						Serial.println("stopping");
+						MP3player.stopTrack();
+						isPlaying = false;
+						_state = E_STATE::Idle;
+
+						break;
+					}
+				}
+				
 			}
 
 			if (isTuyaInit && tuyav.DIGITAL_OUT[4] == LOW)
@@ -184,7 +190,6 @@ void loop()
 				tuyav.setUserValue(AV8, "Idle");
 				tuyav.setAV9(String(currVolume) + "/" + String(currLowTone));
 				
-
 				tuyav.tuyaUpdate();
 				tuyaYpdateDelay.start(3000);
 			}
@@ -213,6 +218,7 @@ void loop()
 
 			updateVolume();
 			updateLowTone();
+			updateHighTone();
 		}
 
 	}break;
@@ -232,6 +238,7 @@ void setupMp3Player()
 
 	//Initialize the MP3 Player Shield
 	uint8_t result = MP3player.begin();
+	MP3P
 	//check result, see readme for error codes.
 	if (result != 0) {
 		Serial.print(F("Error code: "));
@@ -272,5 +279,16 @@ void updateLowTone()
 		Serial.print("New Bas Amplitude:"); Serial.println(currLowTone);
 		MP3player.setBassAmplitude(currLowTone);
 		prevLowTone = currLowTone;
+	}
+}
+
+void updateHighTone()
+{
+	currHighTone = constrain(tuyav.ANALOG_OUT[2], 0, 255);
+	if (currHighTone != prevHighTone)
+	{
+		Serial.print("New high Amplitude:"); Serial.println(currHighTone);
+		MP3player.setTrebleAmplitude(currHighTone);
+		prevHighTone = currHighTone;
 	}
 }
