@@ -14,59 +14,884 @@
       <Extensions>xml;json;txt;rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="src">
-      <UniqueIdentifier>{864055c8-5e10-406d-a087-af8f8d98775d}</UniqueIdentifier>
+      <UniqueIdentifier>{940743fa-293f-41ed-afef-3ce8240fdd90}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\_micro-api-readonly">
-      <UniqueIdentifier>{a92a6b17-0c9e-4cc7-ad73-02478f78abe3}</UniqueIdentifier>
+      <UniqueIdentifier>{fdd0877b-12f5-4bcb-9c66-d1ff7680fa40}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\_micro-api-readonly\core">
-      <UniqueIdentifier>{983f2f43-c515-424d-8fbb-1eb093b98df9}</UniqueIdentifier>
+      <UniqueIdentifier>{134f7570-e36d-46c4-8615-fc84c1c0d7bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\api">
+      <UniqueIdentifier>{f0f94160-7ea0-4882-ab3d-900381b14dc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\api\deprecated">
+      <UniqueIdentifier>{6bfd417f-92ba-4d5b-a0f9-a55535bf0945}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\api\deprecated-avr-comp">
+      <UniqueIdentifier>{c92678bf-e332-45e7-998c-283039189554}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\api\deprecated-avr-comp\avr">
+      <UniqueIdentifier>{708c020e-479a-4ba1-bdf3-9c12e37b121a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\as_mbed_library">
+      <UniqueIdentifier>{da8ed2bc-1c07-491e-a444-49e46012f8d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed">
+      <UniqueIdentifier>{44d59886-fb85-46b9-898f-65975127bfd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\cmsis">
+      <UniqueIdentifier>{30efd411-c9e3-4d1c-a3cb-638a46a137e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\cmsis\CMSIS_5">
+      <UniqueIdentifier>{d7d50a1d-eb68-422a-bba5-eb8c1e8b90d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\cmsis\CMSIS_5\CMSIS">
+      <UniqueIdentifier>{fc2fa637-9d7e-4af8-ab34-0034da9d847c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\cmsis\device">
+      <UniqueIdentifier>{6703efc7-10c4-4d25-a0c4-59c86b1e6e74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\cmsis\device\RTE">
+      <UniqueIdentifier>{fa1f35f2-e0d0-4011-820a-1bebfcaf011c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\cmsis\device\rtos">
+      <UniqueIdentifier>{414e9d0b-2157-44d7-9572-bcc81e8f4de5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\cmsis\tests">
+      <UniqueIdentifier>{d13e590c-fecc-4718-84c1-564570ff1a3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity">
+      <UniqueIdentifier>{0750dc56-ff07-4f17-80c8-cebb83c4cc44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\cellular">
+      <UniqueIdentifier>{1b2410f3-432b-4e28-bfe0-86e85186a92d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\cellular\include">
+      <UniqueIdentifier>{0c8958d4-2ce8-4d96-823a-711c43d81d18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\cellular\source">
+      <UniqueIdentifier>{50c077db-31a2-437d-969f-b3f9f9819d21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\cellular\tests">
+      <UniqueIdentifier>{a5f287a2-b5cd-434a-b60e-432ebd7f3110}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\docs">
+      <UniqueIdentifier>{c3cea27b-2fe1-4950-b8f2-e8872f8adb17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\drivers">
+      <UniqueIdentifier>{13873442-5bdd-41ea-9f78-13944c6f321f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\drivers\ble">
+      <UniqueIdentifier>{2d43afc9-0450-4d27-a6be-5eb10ba81f07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\drivers\cellular">
+      <UniqueIdentifier>{ef2a6789-14fe-4d36-adc7-ca467f0654db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\drivers\emac">
+      <UniqueIdentifier>{65a64e04-ad3f-45f1-abd6-a908e7fba317}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\drivers\lora">
+      <UniqueIdentifier>{30965733-9f35-4c03-a631-46676745f70b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\drivers\mbedtls">
+      <UniqueIdentifier>{d5b900f2-a718-4989-a026-7280eeb7c9b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\drivers\nfc">
+      <UniqueIdentifier>{5e98caea-d723-49f1-b9bb-b6c8199209b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\drivers\wifi">
+      <UniqueIdentifier>{b137f1bf-dead-4209-ad41-f0cb305cfed4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\FEATURE_BLE">
+      <UniqueIdentifier>{26440620-2ac9-4c31-8fb9-4f532de3acb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\FEATURE_BLE\include">
+      <UniqueIdentifier>{6526872b-d34c-47dc-9fcf-2ac3d3d1e73d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\FEATURE_BLE\libraries">
+      <UniqueIdentifier>{f7ab823e-c7ad-4465-8e16-b3d2fb350b17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\FEATURE_BLE\source">
+      <UniqueIdentifier>{1b4caa24-9510-444c-9a0e-22b3d8e2971b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\FEATURE_BLE\tests">
+      <UniqueIdentifier>{e6d15c2b-3a87-4fdc-b337-6d1a9e411fed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\libraries">
+      <UniqueIdentifier>{050e00dc-47ca-4cc7-83d5-69b6af1d6c38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\libraries\mbed-coap">
+      <UniqueIdentifier>{73519641-d7bb-4b24-9af5-fd3d443f0bcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\libraries\nanostack-libservice">
+      <UniqueIdentifier>{0cbe9ced-578a-4732-8671-9bba30abb9e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\libraries\ppp">
+      <UniqueIdentifier>{ea35b5d1-6d3e-4113-a16c-4468b869d32d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\libraries\tests">
+      <UniqueIdentifier>{2cb2b2c1-ce54-43c7-a62c-8eb5f2d081ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\lorawan">
+      <UniqueIdentifier>{06e3176f-b80e-4c49-b751-d18df3a2249e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\lorawan\include">
+      <UniqueIdentifier>{4ae01bef-6c64-497b-be9e-004244a66e70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\lorawan\lorastack">
+      <UniqueIdentifier>{5cb2aad4-9bf1-49a4-8ee0-4dac967255f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\lorawan\source">
+      <UniqueIdentifier>{5c0cbc70-cb22-4b43-b359-72c418c52059}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\lorawan\system">
+      <UniqueIdentifier>{1e4157b2-7043-4bd4-b041-e0f1897ca773}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\lorawan\tests">
+      <UniqueIdentifier>{91dc4c78-e7da-4778-b198-3826a75c8f4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\lwipstack">
+      <UniqueIdentifier>{2c19b98a-bae2-4c58-8288-25e26bf97dd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\lwipstack\include">
+      <UniqueIdentifier>{ea32a90d-ca41-477e-81c8-abdf04a1f8cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\lwipstack\lwip">
+      <UniqueIdentifier>{202db9eb-ad56-438d-8202-43e7deb88f27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\lwipstack\lwip-sys">
+      <UniqueIdentifier>{dc853ce3-ffce-44fd-8c38-9d5c289c82b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\lwipstack\source">
+      <UniqueIdentifier>{14faf885-9fbe-4348-af2b-18417fe4a102}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\mbedtls">
+      <UniqueIdentifier>{49bbf911-59a7-4056-86b9-25d57e623f10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\mbedtls\include">
+      <UniqueIdentifier>{c84e592a-a020-4543-bc64-6e7b7095420f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\mbedtls\platform">
+      <UniqueIdentifier>{3a04bc47-c20c-4cbc-9d3d-75c9d0537861}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\mbedtls\source">
+      <UniqueIdentifier>{7e33ce43-622b-4793-a33d-0bc5c06df5be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\mbedtls\tests">
+      <UniqueIdentifier>{ef49cfd6-e69f-4922-8725-ede8d3d9ca84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\mbedtls\tools">
+      <UniqueIdentifier>{189334c6-e3c1-4e96-8757-6902eb9842bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\nanostack">
+      <UniqueIdentifier>{0b48855e-b443-4620-8f79-0749200289f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\nanostack\coap-service">
+      <UniqueIdentifier>{7b1ff6d9-f33f-4773-9d33-ab2fe24c92b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\nanostack\include">
+      <UniqueIdentifier>{a031079b-bf2b-40a0-9b00-a90b2fe92206}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\nanostack\mbed-mesh-api">
+      <UniqueIdentifier>{1b6d1ee9-2d45-43d2-ba37-12fc0e53ef39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\nanostack\nanostack-hal-mbed-cmsis-rtos">
+      <UniqueIdentifier>{b0c04612-ebeb-4abb-987d-7d075ac3ce9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\nanostack\sal-stack-nanostack">
+      <UniqueIdentifier>{231f0dce-1e4d-4234-9c20-48e99c621cf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\nanostack\sal-stack-nanostack-eventloop">
+      <UniqueIdentifier>{45049a7b-e3e7-40f6-b7b5-72d3f5f9dd31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\nanostack\source">
+      <UniqueIdentifier>{96890d51-ba3f-4c01-969b-f7f52df73ecb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\netsocket">
+      <UniqueIdentifier>{8a6eb87d-eb0a-4164-b9ba-24b0e9b4dcc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\netsocket\include">
+      <UniqueIdentifier>{7627200e-c83b-4d7e-9268-7b2a0214b2ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\netsocket\source">
+      <UniqueIdentifier>{32aa21c7-57bb-4389-8e6b-089d3abf393c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\netsocket\tests">
+      <UniqueIdentifier>{4f0557b8-ce55-4ce2-b844-3e9727554673}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\nfc">
+      <UniqueIdentifier>{fac78869-49bd-4c93-a691-7e41e7d78f56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\nfc\docs">
+      <UniqueIdentifier>{3126490a-b86c-4dc8-a377-c2c2b36c5435}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\nfc\include">
+      <UniqueIdentifier>{3621983c-cf48-4bfe-a05f-730015027733}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\nfc\libraries">
+      <UniqueIdentifier>{30022a8d-4c9f-4f75-b3e3-6a578f101463}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\nfc\source">
+      <UniqueIdentifier>{f07864b7-959a-49eb-add8-7e6b338c2892}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\connectivity\nfc\tests">
+      <UniqueIdentifier>{565d39a2-658e-4a98-b029-158656920b26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\docker_images">
+      <UniqueIdentifier>{22d5f999-6117-4e26-a60a-9d2766e1b88d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\docker_images\mbed-os-env">
+      <UniqueIdentifier>{b368e5c8-9083-47dc-a5f9-d3b4e2871c0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\docs">
+      <UniqueIdentifier>{747195db-81db-4d77-b12b-a7df52926647}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\docs\adr">
+      <UniqueIdentifier>{856d8e65-30b8-478a-8db4-c47f045b97da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\docs\design-documents">
+      <UniqueIdentifier>{31448488-c7f6-4c70-b3fc-87e3618baa79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\docs\design-documents\diagram_examples">
+      <UniqueIdentifier>{8a591d38-714e-4ada-9fb1-6139e3bec085}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\docs\design-documents\docker_management">
+      <UniqueIdentifier>{43e8bed4-2d2a-417b-8ec7-8b1ab90e99a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\docs\design-documents\example_design">
+      <UniqueIdentifier>{6c532770-80aa-4f06-9ea5-ca140280de19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\docs\design-documents\tools">
+      <UniqueIdentifier>{207215b9-2083-44cc-b03f-a5d8260a166b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\drivers">
+      <UniqueIdentifier>{41bf78d5-81b8-4a60-989c-85d9ca32e5de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\drivers\device_key">
+      <UniqueIdentifier>{e7e2105d-1a17-4ece-8039-f4ae2455b516}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\drivers\device_key\include">
+      <UniqueIdentifier>{952c7885-13f8-4859-8d68-a47e3feeb617}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\drivers\device_key\source">
+      <UniqueIdentifier>{d784a17d-1b3d-4ee6-b6cc-6ffb4ac25df1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\drivers\device_key\tests">
+      <UniqueIdentifier>{f253c02d-8acd-4d49-ab0b-5910439735f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\drivers\docs">
+      <UniqueIdentifier>{6dec8996-06d6-4d56-bffb-ac4fff26c951}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\drivers\docs\serial">
+      <UniqueIdentifier>{dcc9dc5d-31ca-4936-8540-ffcd54b25bba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\drivers\include">
+      <UniqueIdentifier>{a93b2750-c8ef-4eec-961a-3520e1f3700f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\drivers\include\drivers">
+      <UniqueIdentifier>{13854bb5-7368-4f9b-a367-14597a085e72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\drivers\source">
+      <UniqueIdentifier>{d28a6687-d1cb-4993-acdc-8a09b3e53371}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\drivers\tests">
+      <UniqueIdentifier>{53c1ff8c-2fea-4378-bb8f-c9dc87594077}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\drivers\usb">
+      <UniqueIdentifier>{61533722-2b3b-4942-96f0-6a7f2d0a7ee8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\drivers\usb\include">
+      <UniqueIdentifier>{9a2f3e9b-8237-46da-8d9a-688c3bf97b5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\drivers\usb\source">
+      <UniqueIdentifier>{85489065-1790-4c6f-855f-db3b9f80d963}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\drivers\usb\tests">
+      <UniqueIdentifier>{005ca9af-5e87-4489-8c14-4068a61ba490}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\events">
+      <UniqueIdentifier>{78794086-52d3-4581-a22f-2acb96b65f39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\events\include">
+      <UniqueIdentifier>{1fc369a0-7ccc-445d-bd0f-aefaca0c390c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\events\include\events">
+      <UniqueIdentifier>{7b2b2d9d-0f70-4376-bfa9-72be67bf9588}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\events\source">
+      <UniqueIdentifier>{3c9002ca-f252-4812-8502-b41b26728387}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\events\tests">
+      <UniqueIdentifier>{f39f4c9a-62eb-475a-b4f7-6f886c965d7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\events\tests\unit">
+      <UniqueIdentifier>{d885ee75-bde3-474c-b812-e80976ebf462}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\extern">
+      <UniqueIdentifier>{0d593144-73ec-4528-8f89-848c3d646626}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\features">
+      <UniqueIdentifier>{6969f96c-3e11-4134-969a-502d07d52db5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\features\deprecated_warnings">
+      <UniqueIdentifier>{5887fe01-0ce6-47d1-b99e-4259901ac854}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\features\deprecated_warnings\FEATURE_LWIP">
+      <UniqueIdentifier>{dd73717b-be2d-4535-b7ba-9ae5a76d1eff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\features\deprecated_warnings\FEATURE_NANOSTACK">
+      <UniqueIdentifier>{87f5cd87-5463-4331-a1f2-61c084dc03b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\features\FEATURE_BOOTLOADER">
+      <UniqueIdentifier>{565c84c6-6141-4cdc-909c-f5b9eabc545e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\features\frameworks">
+      <UniqueIdentifier>{2b0c88a2-7f2b-487d-85e0-dead39acb2e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\features\frameworks\greentea-client">
+      <UniqueIdentifier>{2a6b5f0a-0908-4ed9-9d88-a8e8ef670af5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\features\frameworks\mbed-client-cli">
+      <UniqueIdentifier>{f0bb38c3-570e-4703-888e-da3ce1d35525}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\features\frameworks\mbed-greentea-io">
+      <UniqueIdentifier>{79aaa0ba-27d7-4c31-adc4-2484f57345fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\features\frameworks\unity">
+      <UniqueIdentifier>{d0428320-2169-4630-846d-172257301bc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\features\frameworks\utest">
+      <UniqueIdentifier>{715fecb9-79b9-4f62-80e3-be5960d24373}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\hal">
+      <UniqueIdentifier>{87a7f4ce-69ca-4e71-a847-fe64765d5399}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\hal\docs">
+      <UniqueIdentifier>{eadcf176-1c4a-4439-ab5b-8e6c59a80aaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\hal\docs\img">
+      <UniqueIdentifier>{3b5af5fa-ffe4-40e9-a28a-005b90a69c85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\hal\include">
+      <UniqueIdentifier>{743902a4-38e0-4593-8365-9efada4fe271}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\hal\include\hal">
+      <UniqueIdentifier>{de195e04-b620-4a79-90f6-9f3435720bf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\hal\source">
+      <UniqueIdentifier>{1154ffd9-002d-4feb-a3e2-8d7119b20eb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\hal\source\mpu">
+      <UniqueIdentifier>{408e94f9-2ac0-493c-9d17-e22b11c7c871}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\hal\TARGET_FLASH_CMSIS_ALGO">
+      <UniqueIdentifier>{661864fd-cbcf-4a51-bd31-b3f6dcd97011}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\hal\tests">
+      <UniqueIdentifier>{56bcf785-15c8-4a72-9edc-d3f6b2b64fd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\hal\tests\pinvalidate">
+      <UniqueIdentifier>{5ed0119b-8600-453c-8a74-b44acd4962c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\hal\usb">
+      <UniqueIdentifier>{26791920-358e-48bf-a98c-b0ffaabacc1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\hal\usb\include">
+      <UniqueIdentifier>{87d78b80-f4bb-43e5-be05-4bb947ea3a89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\hal\usb\source">
+      <UniqueIdentifier>{652de830-5c36-412c-a25c-a8af5b2ca653}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\hal\usb\TARGET_Templates">
+      <UniqueIdentifier>{ae5007f8-aeba-42cf-b1a9-6eb3c505daf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\platform">
+      <UniqueIdentifier>{71e53cb1-106e-41b5-ad43-1715bb211a8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\platform\bare_metal">
+      <UniqueIdentifier>{28939be3-59f7-49af-8937-e603059e40a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\platform\cxxsupport">
+      <UniqueIdentifier>{379d08fc-d9fe-4d0b-ba3c-5a1ce00a1d0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\platform\docs">
+      <UniqueIdentifier>{6e906190-4559-4400-b0f2-c73d7d21f910}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\platform\docs\clocks">
+      <UniqueIdentifier>{535ac3ec-0241-440d-98f1-53553823c510}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\platform\docs\crash-reporting">
+      <UniqueIdentifier>{ea2434fe-722b-47b5-821c-785bb7dd173d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\platform\docs\memory-model">
+      <UniqueIdentifier>{aab63ac2-e085-43d9-9f74-a3d5cbea29aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\platform\FEATURE_EXPERIMENTAL_API">
+      <UniqueIdentifier>{9a230311-2ac7-4d1f-a270-394ccd84ee6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\platform\FEATURE_EXPERIMENTAL_API\FEATURE_PSA">
+      <UniqueIdentifier>{0a5045a4-4d89-40b3-bb0b-83f2f54838db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\platform\include">
+      <UniqueIdentifier>{70c22df4-58ef-4438-bdc9-a3d0cc6514ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\platform\include\platform">
+      <UniqueIdentifier>{7317b5d6-4ff7-46b5-9726-c0bd9e5337ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\platform\mbed-trace">
+      <UniqueIdentifier>{b7790464-0765-4269-9160-e2ba318a9aad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\platform\mbed-trace\include">
+      <UniqueIdentifier>{16000222-cf74-4e95-be2f-c3f3ebe26738}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\platform\mbed-trace\source">
+      <UniqueIdentifier>{54501852-bed6-446f-805d-95797708c9f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\platform\randlib">
+      <UniqueIdentifier>{fe4b8bb6-97b0-4fb7-bec8-f88aa01e76cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\platform\randlib\include">
+      <UniqueIdentifier>{90186ce9-73a3-4f47-9b35-8b2937e42888}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\platform\randlib\source">
+      <UniqueIdentifier>{d1c08c86-12d7-4586-b22b-37ae8faa2a10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\platform\randlib\tests">
+      <UniqueIdentifier>{bd894908-6c77-48d0-aff5-d6ea04d9fa5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\platform\source">
+      <UniqueIdentifier>{814ec040-e72e-4d95-8221-48c58477c404}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\platform\source\minimal-printf">
+      <UniqueIdentifier>{8ed050d1-f86c-436a-9389-65455091fc8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\platform\source\TARGET_CORTEX_A">
+      <UniqueIdentifier>{b7b9263c-1ba8-4927-a516-b92c7882ec39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\platform\source\TARGET_CORTEX_M">
+      <UniqueIdentifier>{cb1f4898-bcb9-44d0-a4ab-befe705d7a72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\platform\tests">
+      <UniqueIdentifier>{972b038f-e50e-4bdc-869c-fac96caa46a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\rtos">
+      <UniqueIdentifier>{38755eb1-7044-4fee-9736-d0427437b1d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\rtos\include">
+      <UniqueIdentifier>{05ba64c5-b8a3-429d-8012-16bab1633b2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\rtos\include\rtos">
+      <UniqueIdentifier>{4edcd583-b351-473e-aef3-907140d57d4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\rtos\source">
+      <UniqueIdentifier>{711bf43b-9369-44eb-9d10-94ce2c5e9812}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\rtos\tests">
+      <UniqueIdentifier>{7caabec9-1ff3-476f-a90b-4a8f3c8f1e3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage">
+      <UniqueIdentifier>{4bcaf23d-5e10-442a-9bb0-5c03d30ba342}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\blockdevice">
+      <UniqueIdentifier>{5f72fa5d-0941-43fa-9da2-955d44d05970}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\blockdevice\COMPONENT_DATAFLASH">
+      <UniqueIdentifier>{6e80486b-6443-49b4-ade5-53f4a7109e71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\blockdevice\COMPONENT_FLASHIAP">
+      <UniqueIdentifier>{e993c9fa-8dec-4540-ba27-7eaef5d91f1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\blockdevice\COMPONENT_I2CEE">
+      <UniqueIdentifier>{122ee796-b700-4bb6-a223-183f108a0bd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\blockdevice\COMPONENT_OSPIF">
+      <UniqueIdentifier>{4e95e8c9-1232-4931-afdc-79c0471a337e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\blockdevice\COMPONENT_QSPIF">
+      <UniqueIdentifier>{6380f8bb-06c5-4fc7-8dd1-3c8af52d2c86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\blockdevice\COMPONENT_SD">
+      <UniqueIdentifier>{8c55fa42-fa17-4e71-acfe-c454af1498e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\blockdevice\COMPONENT_SPIF">
+      <UniqueIdentifier>{3c42bcfd-9d87-495b-a1f0-9426194dc9dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\blockdevice\COMPONENT_SPINAND">
+      <UniqueIdentifier>{ef8a2ac1-d6a9-4a57-baac-7f80fde890c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\blockdevice\include">
+      <UniqueIdentifier>{fe1d01ff-4163-4438-8991-87e477bd0b43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\blockdevice\source">
+      <UniqueIdentifier>{4d751c2c-aecd-4f0d-8aae-6f80712cc004}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\blockdevice\tests">
+      <UniqueIdentifier>{ce57e9c1-bcf0-4396-910d-da23c63d3f71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\docs">
+      <UniqueIdentifier>{8218179d-61ef-4b11-bee7-6920832b3ed5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\docs\BlockDevices">
+      <UniqueIdentifier>{e5956511-e54a-4f0a-9d2c-6e5b9465b837}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\docs\Configuration">
+      <UniqueIdentifier>{3d4351c5-5024-4d24-94e6-0e7c8a78624a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\docs\FileSystemStore">
+      <UniqueIdentifier>{e6499244-5483-4ecc-8a3c-95c12f78e4ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\docs\KVStore">
+      <UniqueIdentifier>{48bacaaf-79cc-4e30-b2b0-52386538ac8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\docs\SecureStore">
+      <UniqueIdentifier>{ca07f697-879e-4227-853e-65766a46d55d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\docs\TDBStore">
+      <UniqueIdentifier>{7079a651-558a-4a57-aa60-b29c880dbdf4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\filesystem">
+      <UniqueIdentifier>{a099f1b1-7d68-422b-9152-9bc1c2df1dc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\filesystem\fat">
+      <UniqueIdentifier>{dc62c06a-3e61-4df3-8554-7417b50cb886}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\filesystem\include">
+      <UniqueIdentifier>{15837b41-4c21-4420-aeca-ea09a9c67128}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\filesystem\littlefs">
+      <UniqueIdentifier>{33dd45d4-a645-4628-9ed5-6f3d36357ddb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\filesystem\littlefsv2">
+      <UniqueIdentifier>{5e6149ae-3651-4084-8daf-b31dac924b5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\filesystem\source">
+      <UniqueIdentifier>{1c8cc2c8-4745-44b7-8e62-2f12fdc9216e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\filesystem\tests">
+      <UniqueIdentifier>{209c2573-5759-4f17-8e77-6c7858b585e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\kvstore">
+      <UniqueIdentifier>{cee4be44-464d-4207-8c12-844e056f7121}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\kvstore\direct_access_devicekey">
+      <UniqueIdentifier>{a05fc9f0-bb32-42b9-82f7-702c9a3a01eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\kvstore\filesystemstore">
+      <UniqueIdentifier>{76df3a85-2881-4bfb-bbe9-3dcc03f8dbc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\kvstore\include">
+      <UniqueIdentifier>{b224d3d3-2ecf-487c-be04-32a511425c54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\kvstore\kvstore_global_api">
+      <UniqueIdentifier>{668690b7-49f3-463a-97fa-246ec1fa4401}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\kvstore\kv_config">
+      <UniqueIdentifier>{cdc79bf3-e85c-420f-b9b7-ecceeae81dec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\kvstore\securestore">
+      <UniqueIdentifier>{278c9a3c-8796-45b9-8040-bb6ddd2608a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\kvstore\tdbstore">
+      <UniqueIdentifier>{24eca045-747d-4abe-bb52-b54769161433}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\kvstore\tests">
+      <UniqueIdentifier>{617cb70d-427d-46fc-be82-9466e1c658a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\platform">
+      <UniqueIdentifier>{be9613b5-17f5-4b1a-92dc-0fd7e3888ce0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\storage\platform\source">
+      <UniqueIdentifier>{685bb8a3-3640-4c77-a432-d25b7d44cc07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\targets">
+      <UniqueIdentifier>{500b078f-5741-4549-9a97-2240e4eaf79e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\targets\TARGET_STM">
+      <UniqueIdentifier>{4bde5139-8d7c-4c8d-ad9f-ad488bd043ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F0">
+      <UniqueIdentifier>{53bd7cdb-0cbe-4fe3-bf68-2f83adf4571b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F1">
+      <UniqueIdentifier>{8076416c-0c4a-4790-8a81-ef9996b7334c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F2">
+      <UniqueIdentifier>{41a6350a-b85b-4b9d-a1c0-59121cf36464}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F3">
+      <UniqueIdentifier>{606e43b9-efaf-44cc-b9b0-90c08c645f96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F4">
+      <UniqueIdentifier>{cfc4353f-b97b-454d-8c4d-e301d18abe2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F7">
+      <UniqueIdentifier>{a1aefaa3-ee99-4d03-bb23-189cfb595e0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32G0">
+      <UniqueIdentifier>{0e424dee-6323-4ee9-af68-16b269665df6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32G4">
+      <UniqueIdentifier>{22f900ec-5053-44b9-911c-ae1cef28abf4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32H7">
+      <UniqueIdentifier>{f1870ee8-3e03-49e6-9d2e-c8135776333e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L0">
+      <UniqueIdentifier>{98fb6ba2-3cf8-4bc7-b246-d94472fe7ce4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L1">
+      <UniqueIdentifier>{8a66d5d5-5de7-423c-8660-fd784bac5dfe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L4">
+      <UniqueIdentifier>{2fec8052-c83d-4bc0-8a08-9294c60462b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L5">
+      <UniqueIdentifier>{06c4bbf8-1eac-472d-bd03-50ff21619b15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32U5">
+      <UniqueIdentifier>{d2e210be-54d5-4b0d-9332-df2f41c3b3dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32WB">
+      <UniqueIdentifier>{3bbfab01-3ba8-4a70-a200-1528a8d9c5ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32WL">
+      <UniqueIdentifier>{a08cd1e2-fc57-4ea1-9e98-a6c9c6824a26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools">
+      <UniqueIdentifier>{e8c2274f-76c0-4815-bec0-1ac851c6de49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\arm_pack_manager">
+      <UniqueIdentifier>{d5978375-0b70-49c3-8037-5184f05b1b88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\arm_pack_manager\__pycache__">
+      <UniqueIdentifier>{e33e2131-17cc-49c2-bf41-a4019f7fff12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\bootloaders">
+      <UniqueIdentifier>{09685302-4b2e-42cc-8815-d6f86383de9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\bootloaders\MTS_DRAGONFLY_F411RE">
+      <UniqueIdentifier>{291b2c75-1782-418b-8591-81a6b011b571}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\bootloaders\MTS_MDOT_F411RE">
+      <UniqueIdentifier>{3a09caec-5b51-496b-a1b4-80e4a64550a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\cmake">
+      <UniqueIdentifier>{01d4863a-b6de-4466-8757-941df4f1ba82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\cmake\cores">
+      <UniqueIdentifier>{e613d215-9e10-4657-9750-1a172a874b1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\cmake\profiles">
+      <UniqueIdentifier>{07acbb9f-5301-4131-add0-7fc839725471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\cmake\tests">
+      <UniqueIdentifier>{db6876f8-89c0-4bba-afe1-d8bec912b018}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\cmake\toolchains">
+      <UniqueIdentifier>{f9542957-472a-4df3-ae7f-c094cefc2f22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\config">
+      <UniqueIdentifier>{391dac68-bc1c-46ad-9708-9db53631eb60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\config\__pycache__">
+      <UniqueIdentifier>{a3cfe6e1-a394-495f-818c-1f5e7463f606}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\debug_tools">
+      <UniqueIdentifier>{e52ae433-e174-4ada-a44b-533abad5d6f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\debug_tools\crash_log_parser">
+      <UniqueIdentifier>{15a39d42-f9ed-4619-a12a-24699ebac6be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\export">
+      <UniqueIdentifier>{3b8e54fd-e9cb-482f-b5e3-ca194b15caaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\export\atmelstudio">
+      <UniqueIdentifier>{c6116777-118f-4da1-9c06-b0b5a486c769}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\export\cces">
+      <UniqueIdentifier>{dcccf13a-2a00-4c80-8600-05b459938f67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\export\cdt">
+      <UniqueIdentifier>{bba4ad74-303d-4ca9-98cc-42014a972aeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\export\cmake">
+      <UniqueIdentifier>{f14f629f-5b05-4979-bbfb-2e4b371508b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\export\cmsis">
+      <UniqueIdentifier>{bd69f802-6d83-46b6-8568-c557d8c66fcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\export\codeblocks">
+      <UniqueIdentifier>{ea9a2c27-12db-4c6a-98f1-560beef19e93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\export\coide">
+      <UniqueIdentifier>{f483ee41-e26f-49d9-84e8-062c593fe21c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\export\e2studio">
+      <UniqueIdentifier>{c0f5320c-e09d-495f-a9b7-d84e64edf4b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\export\embitz">
+      <UniqueIdentifier>{4c15c371-5cd8-4a9e-9ce9-2eb6fc40da2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\export\gnuarmeclipse">
+      <UniqueIdentifier>{203fa83f-8059-4812-bf60-ee7aed672465}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\export\iar">
+      <UniqueIdentifier>{946efb85-d01c-4114-9c24-b2febd43a7c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\export\kds">
+      <UniqueIdentifier>{8856d523-71a4-4d23-9207-0f60a86f86b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\export\lpcxpresso">
+      <UniqueIdentifier>{3f7713d0-80a7-4c7c-b657-3e9baf5009a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\export\makefile">
+      <UniqueIdentifier>{cf19b470-d62b-4e83-a52b-1ed65607686b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\export\mcuxpresso">
+      <UniqueIdentifier>{72089839-9115-48ab-8dc8-40a23d5f6898}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\export\nb">
+      <UniqueIdentifier>{4cafe4b9-6747-47f2-bb42-ff174ce7e177}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\export\qtcreator">
+      <UniqueIdentifier>{e123312b-0744-4130-88ed-712a1becadd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\export\simplicity">
+      <UniqueIdentifier>{d676e6d1-4975-4a63-b293-d47f2ada5bbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\export\sw4stm32">
+      <UniqueIdentifier>{7b4c8865-03f1-42d6-acae-034021402391}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\export\uvision">
+      <UniqueIdentifier>{5a6ef3c0-a46b-4d9f-972d-d0fb0fadea7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\export\vscode">
+      <UniqueIdentifier>{01a60696-a742-41c3-9ad9-25eff249e6da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\export\zip">
+      <UniqueIdentifier>{bd62701e-5174-435b-98fe-c0b001afff22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\flash_algo">
+      <UniqueIdentifier>{8fc0480d-d1d8-4fd6-9da8-9d703a6b3ecc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\flash_algo\__pycache__">
+      <UniqueIdentifier>{be5558c5-464d-43db-89b5-1f8cf027d28e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\importer">
+      <UniqueIdentifier>{e3df52dd-ab65-442d-a8e9-c38b580acc26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\notifier">
+      <UniqueIdentifier>{66a88ef1-80a2-411f-baa9-4fc5c1e2c4c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\notifier\__pycache__">
+      <UniqueIdentifier>{cc4b4a42-06fc-45fd-a8bb-a5c2fc2b90fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\profiles">
+      <UniqueIdentifier>{0c25dfd4-f06d-4c55-970a-bfc00e1c710c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\profiles\extensions">
+      <UniqueIdentifier>{3c42932c-f774-4367-8c0c-cd582bfbcac6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\psa">
+      <UniqueIdentifier>{3d408306-b99c-4972-9098-0346060b5c77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\psa\tfm">
+      <UniqueIdentifier>{fc8b6dda-c85f-4289-8925-00475e9ed24f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\resources">
+      <UniqueIdentifier>{94ae3d03-11d5-48d4-9d78-4411a1e4a024}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\resources\__pycache__">
+      <UniqueIdentifier>{4e89bb83-b128-4b2c-80d6-432142ef0da5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\test">
+      <UniqueIdentifier>{02d976fb-8230-4b4c-822d-881abff36db9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\test\build_api">
+      <UniqueIdentifier>{58d297f2-87ed-4701-b9df-bc17cb80dfba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\test\ci">
+      <UniqueIdentifier>{c2fb1c41-a8c3-4d01-808c-913ae2995d45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\test\config">
+      <UniqueIdentifier>{4e2297cd-bcc0-43da-af16-665e8148dce3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\test\examples">
+      <UniqueIdentifier>{ab222c43-ec17-4085-bc0d-dd27d6169112}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\test\memap">
+      <UniqueIdentifier>{ae96ef64-18df-47a4-943f-f3f767b741e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\test\psa">
+      <UniqueIdentifier>{f7da330f-7977-41c8-aeb5-fed2cc47a8ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\test\resources">
+      <UniqueIdentifier>{4ad672f7-e4d3-4521-ac9a-f5a762ebb98e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\test\test_api">
+      <UniqueIdentifier>{36c96b52-e5e3-4437-8bce-dd06bd00716a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\test\toolchains">
+      <UniqueIdentifier>{3972b148-8748-4f8a-a79d-133762b65c6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\test_configs">
+      <UniqueIdentifier>{fc47ac4d-172c-4141-9cc2-9b44d8608aaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\toolchains">
+      <UniqueIdentifier>{6b372c55-170f-457a-baf1-c5921d38b586}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\toolchains\__pycache__">
+      <UniqueIdentifier>{83c651e1-80c8-41c1-a585-be37a89d4fbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\mbed\tools\__pycache__">
+      <UniqueIdentifier>{cdd9703b-087e-4374-8ba3-278d161a5401}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core\USB">
+      <UniqueIdentifier>{a65abf88-3b4c-4b79-bb69-dd18d1fd81aa}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\_micro-api-readonly\libraries">
-      <UniqueIdentifier>{6c2ece94-ce02-447b-8551-493faa76cee4}</UniqueIdentifier>
+      <UniqueIdentifier>{d396808e-ac88-48b4-a4f6-9247055752a9}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\_micro-api-readonly\libraries\AccelStepper">
-      <UniqueIdentifier>{8cb6bab0-7dd9-4610-b9f5-048e319d523c}</UniqueIdentifier>
+      <UniqueIdentifier>{0e5d6771-a876-45f2-9e2e-340466c79bf4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\_micro-api-readonly\libraries\Adafruit_Debounce">
-      <UniqueIdentifier>{8f6de115-d50e-4c0d-b79a-0d66abc5b6df}</UniqueIdentifier>
+    <Filter Include="src\_micro-api-readonly\libraries\ezButton">
+      <UniqueIdentifier>{60c1ac1f-0b13-4e38-a8cf-dfbdff69442f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\arduino folders read me.txt">
       <Filter>Misc Files</Filter>
     </None>
-    <None Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\library.properties">
-      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
-    </None>
-    <None Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\AccelStepper_8h-source.html">
-      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
-    </None>
-    <None Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\annotated.html">
-      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
-    </None>
-    <None Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\classAccelStepper-members.html">
-      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
-    </None>
-    <None Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\classAccelStepper.html">
-      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
-    </None>
-    <None Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\files.html">
-      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
-    </None>
-    <None Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\functions.html">
-      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
-    </None>
-    <None Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\functions_func.html">
-      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
-    </None>
-    <None Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\index.html">
-      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
-    </None>
-    <None Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\Adafruit_Debounce\library.properties">
-      <Filter>src\_micro-api-readonly\libraries\Adafruit_Debounce</Filter>
-    </None>
     <None Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\ezButton\library.properties" />
+    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\library.properties">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </None>
+    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\AccelStepper_8h-source.html">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </None>
+    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\annotated.html">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </None>
+    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\classAccelStepper-members.html">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </None>
+    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\classAccelStepper.html">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </None>
+    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\files.html">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </None>
+    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\functions.html">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </None>
+    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\functions_func.html">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </None>
+    <None Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\extras\doc\index.html">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ElectricChair.ino" />
@@ -163,17 +988,107 @@
     <ClCompile Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\variants\GIGA\variant.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\src\AccelStepper.cpp">
-      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\src\MultiStepper.cpp">
-      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\Adafruit_Debounce\Adafruit_Debounce.cpp">
-      <Filter>src\_micro-api-readonly\libraries\Adafruit_Debounce</Filter>
-    </ClCompile>
     <ClCompile Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\ezButton\src\ezButton.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\abi.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\arm_hal_random.c">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\Interrupts.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\itoa.c">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\main.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\pinToIndex.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\random_seed.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\Serial.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\timer.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\Tone.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\wiring.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\wiring_analog.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\wiring_digital.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\wiring_pulse.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\wiring_shift.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\WMath.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\CanMsg.cpp">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\CanMsgRingbuffer.cpp">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\Common.cpp">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\IPAddress.cpp">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\PluggableUSB.cpp">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\Print.cpp">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\Stream.cpp">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\String.cpp">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\as_mbed_library\variant.cpp">
+      <Filter>src\_micro-api-readonly\core\as_mbed_library</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\cxxsupport\mstd_mutex.cpp">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\cxxsupport</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\USB\PluggableUSBDevice.cpp">
+      <Filter>src\_micro-api-readonly\core\USB</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\USB\USBCDC.cpp">
+      <Filter>src\_micro-api-readonly\core\USB</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\USB\USBSerial.cpp">
+      <Filter>src\_micro-api-readonly\core\USB</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\variants\GIGA\pure_analog_pins.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\variants\GIGA\variant.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\src\AccelStepper.cpp">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\src\MultiStepper.cpp">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1317,28 +2232,1162 @@
     <ClInclude Include="c:\Users\pluci\AppData\Local\Arduino15\packages\arduino\hardware\mbed_giga\4.1.1\variants\GIGA\pure_analog_pins.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\src\AccelStepper.h">
-      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
-    </ClInclude>
-    <ClInclude Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\src\MultiStepper.h">
-      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
-    </ClInclude>
-    <ClInclude Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\Adafruit_Debounce\Adafruit_Debounce.h">
-      <Filter>src\_micro-api-readonly\libraries\Adafruit_Debounce</Filter>
-    </ClInclude>
     <ClInclude Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\ezButton\src\ezButton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\Arduino.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\macros.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\overloads.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\pinDefinitions.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\Serial.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\timer.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\wiring_private.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\ArduinoAPI.h">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\Binary.h">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\CanMsg.h">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\CanMsgRingbuffer.h">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\Client.h">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\Common.h">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\Compat.h">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\DMAPool.h">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\HardwareCAN.h">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\HardwareI2C.h">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\HardwareSerial.h">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\HardwareSPI.h">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\Interrupts.h">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\IPAddress.h">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\itoa.h">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\PluggableUSB.h">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\Print.h">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\Printable.h">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\RingBuffer.h">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\Server.h">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\Stream.h">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\String.h">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\Udp.h">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\USBAPI.h">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\WCharacter.h">
+      <Filter>src\_micro-api-readonly\core\api</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\deprecated\Client.h">
+      <Filter>src\_micro-api-readonly\core\api\deprecated</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\deprecated\HardwareSerial.h">
+      <Filter>src\_micro-api-readonly\core\api\deprecated</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\deprecated\IPAddress.h">
+      <Filter>src\_micro-api-readonly\core\api\deprecated</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\deprecated\Print.h">
+      <Filter>src\_micro-api-readonly\core\api\deprecated</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\deprecated\Printable.h">
+      <Filter>src\_micro-api-readonly\core\api\deprecated</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\deprecated\Server.h">
+      <Filter>src\_micro-api-readonly\core\api\deprecated</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\deprecated\Stream.h">
+      <Filter>src\_micro-api-readonly\core\api\deprecated</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\deprecated\Udp.h">
+      <Filter>src\_micro-api-readonly\core\api\deprecated</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\deprecated\WString.h">
+      <Filter>src\_micro-api-readonly\core\api\deprecated</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\deprecated-avr-comp\avr\dtostrf.h">
+      <Filter>src\_micro-api-readonly\core\api\deprecated-avr-comp\avr</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\deprecated-avr-comp\avr\interrupt.h">
+      <Filter>src\_micro-api-readonly\core\api\deprecated-avr-comp\avr</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\api\deprecated-avr-comp\avr\pgmspace.h">
+      <Filter>src\_micro-api-readonly\core\api\deprecated-avr-comp\avr</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\as_mbed_library\pinmode_arduino.h">
+      <Filter>src\_micro-api-readonly\core\as_mbed_library</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\as_mbed_library\pins_arduino.h">
+      <Filter>src\_micro-api-readonly\core\as_mbed_library</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\mbed.h">
+      <Filter>src\_micro-api-readonly\core\mbed</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\cmsis\device\mbed_cmsis_conf.h">
+      <Filter>src\_micro-api-readonly\core\mbed\cmsis\device</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\connectivity\FEATURE_BLE\source\BLEInstanceBase.h">
+      <Filter>src\_micro-api-readonly\core\mbed\connectivity\FEATURE_BLE\source</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\connectivity\lorawan\system\LoRaWANTimer.h">
+      <Filter>src\_micro-api-readonly\core\mbed\connectivity\lorawan\system</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\connectivity\lorawan\system\lorawan_data_structures.h">
+      <Filter>src\_micro-api-readonly\core\mbed\connectivity\lorawan\system</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\connectivity\lwipstack\lwip-sys\lwip_random.h">
+      <Filter>src\_micro-api-readonly\core\mbed\connectivity\lwipstack\lwip-sys</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\connectivity\lwipstack\lwip-sys\lwip_tcp_isn.h">
+      <Filter>src\_micro-api-readonly\core\mbed\connectivity\lwipstack\lwip-sys</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\connectivity\mbedtls\source\check_crypto_config.h">
+      <Filter>src\_micro-api-readonly\core\mbed\connectivity\mbedtls\source</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\connectivity\mbedtls\source\ssl_invasive.h">
+      <Filter>src\_micro-api-readonly\core\mbed\connectivity\mbedtls\source</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\connectivity\mbedtls\source\ssl_tls13_keys.h">
+      <Filter>src\_micro-api-readonly\core\mbed\connectivity\mbedtls\source</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\connectivity\nanostack\nanostack-hal-mbed-cmsis-rtos\arm_hal_interrupt_private.h">
+      <Filter>src\_micro-api-readonly\core\mbed\connectivity\nanostack\nanostack-hal-mbed-cmsis-rtos</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\connectivity\nanostack\nanostack-hal-mbed-cmsis-rtos\ns_event_loop.h">
+      <Filter>src\_micro-api-readonly\core\mbed\connectivity\nanostack\nanostack-hal-mbed-cmsis-rtos</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\connectivity\nanostack\nanostack-hal-mbed-cmsis-rtos\ns_event_loop_mutex.h">
+      <Filter>src\_micro-api-readonly\core\mbed\connectivity\nanostack\nanostack-hal-mbed-cmsis-rtos</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\connectivity\nanostack\nanostack-hal-mbed-cmsis-rtos\ns_file_system_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\connectivity\nanostack\nanostack-hal-mbed-cmsis-rtos</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\connectivity\nanostack\nanostack-hal-mbed-cmsis-rtos\ns_hal_init.h">
+      <Filter>src\_micro-api-readonly\core\mbed\connectivity\nanostack\nanostack-hal-mbed-cmsis-rtos</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\AnalogIn.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\AnalogOut.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\BufferedSerial.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\BusIn.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\BusInOut.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\BusOut.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\CAN.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\DigitalIn.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\DigitalInOut.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\DigitalOut.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\FlashIAP.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\HighResClock.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\I2C.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\I2CSlave.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\InterruptIn.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\LowPowerClock.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\LowPowerTicker.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\LowPowerTimeout.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\LowPowerTimer.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\MbedCRC.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\OSPI.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\PortIn.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\PortInOut.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\PortOut.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\PwmOut.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\QSPI.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\RawCAN.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\RealTimeClock.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\ResetReason.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\SerialBase.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\SerialWireOutput.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\SPIMaster.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\SPISlave.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\Ticker.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\TickerDataClock.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\Timeout.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\Timer.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\TimerEvent.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\UnbufferedSerial.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\drivers\include\drivers\Watchdog.h">
+      <Filter>src\_micro-api-readonly\core\mbed\drivers\include\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\events\include\events\equeue.h">
+      <Filter>src\_micro-api-readonly\core\mbed\events\include\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\events\include\events\Event.h">
+      <Filter>src\_micro-api-readonly\core\mbed\events\include\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\events\include\events\EventQueue.h">
+      <Filter>src\_micro-api-readonly\core\mbed\events\include\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\events\include\events\mbed_events.h">
+      <Filter>src\_micro-api-readonly\core\mbed\events\include\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\events\include\events\mbed_shared_queues.h">
+      <Filter>src\_micro-api-readonly\core\mbed\events\include\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\events\include\events\UserAllocatedEvent.h">
+      <Filter>src\_micro-api-readonly\core\mbed\events\include\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\analogin_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\analogout_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\buffer.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\can_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\can_helper.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\crc_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\critical_section_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\dma_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\flash_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\gpio_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\gpio_irq_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\i2c_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\itm_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\LowPowerTickerWrapper.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\lp_ticker_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\mbed_lp_ticker_wrapper.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\mpu_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\ospi_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\pinmap.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\PinNameAliases.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\port_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\pwmout_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\qspi_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\reset_reason_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\rtc_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\serial_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\sleep_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\spi_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\static_pinmap.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\ticker_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\trng_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\us_ticker_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\include\hal\watchdog_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\include\hal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\TARGET_FLASH_CMSIS_ALGO\flash_data.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\TARGET_FLASH_CMSIS_ALGO</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\hal\usb\TARGET_Templates\USBPhyHw.h">
+      <Filter>src\_micro-api-readonly\core\mbed\hal\usb\TARGET_Templates</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\ATCmdParser.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\Callback.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\CircularBuffer.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\CriticalSectionLock.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\CThunk.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\DeepSleepLock.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\DirHandle.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\FileBase.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\FileHandle.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\FileLike.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\FilePath.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\FileSystemHandle.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\FileSystemLike.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\LocalFileSystem.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\mbed_application.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\mbed_assert.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\mbed_atomic.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\mbed_chrono.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\mbed_critical.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\mbed_debug.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\mbed_enum_flags.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\mbed_error.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\mbed_interface.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\mbed_mem_trace.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\mbed_mktime.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\mbed_mpu_mgmt.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\mbed_poll.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\mbed_power_mgmt.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\mbed_preprocessor.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\mbed_retarget.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\mbed_rtc_time.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\mbed_semihost_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\mbed_stats.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\mbed_thread.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\mbed_toolchain.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\mbed_version.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\mbed_wait_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\NonCopyable.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\platform.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\PlatformMutex.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\ScopedLock.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\ScopedRamExecutionLock.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\ScopedRomWriteLock.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\SharedPtr.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\SingletonPtr.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\Span.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\Stream.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\include\platform\Transaction.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\include\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\source\mbed_crash_data_offsets.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\source</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\platform\source\minimal-printf\mbed_printf_implementation.h">
+      <Filter>src\_micro-api-readonly\core\mbed\platform\source\minimal-printf</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\rtos\include\rtos\ConditionVariable.h">
+      <Filter>src\_micro-api-readonly\core\mbed\rtos\include\rtos</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\rtos\include\rtos\EventFlags.h">
+      <Filter>src\_micro-api-readonly\core\mbed\rtos\include\rtos</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\rtos\include\rtos\Kernel.h">
+      <Filter>src\_micro-api-readonly\core\mbed\rtos\include\rtos</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\rtos\include\rtos\Mail.h">
+      <Filter>src\_micro-api-readonly\core\mbed\rtos\include\rtos</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\rtos\include\rtos\mbed_rtos_types.h">
+      <Filter>src\_micro-api-readonly\core\mbed\rtos\include\rtos</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\rtos\include\rtos\MemoryPool.h">
+      <Filter>src\_micro-api-readonly\core\mbed\rtos\include\rtos</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\rtos\include\rtos\Mutex.h">
+      <Filter>src\_micro-api-readonly\core\mbed\rtos\include\rtos</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\rtos\include\rtos\Queue.h">
+      <Filter>src\_micro-api-readonly\core\mbed\rtos\include\rtos</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\rtos\include\rtos\rtos.h">
+      <Filter>src\_micro-api-readonly\core\mbed\rtos\include\rtos</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\rtos\include\rtos\Semaphore.h">
+      <Filter>src\_micro-api-readonly\core\mbed\rtos\include\rtos</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\rtos\include\rtos\ThisThread.h">
+      <Filter>src\_micro-api-readonly\core\mbed\rtos\include\rtos</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\rtos\include\rtos\Thread.h">
+      <Filter>src\_micro-api-readonly\core\mbed\rtos\include\rtos</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\rtos\source\rtos_handlers.h">
+      <Filter>src\_micro-api-readonly\core\mbed\rtos\source</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\rtos\source\rtos_idle.h">
+      <Filter>src\_micro-api-readonly\core\mbed\rtos\source</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\gpio_object.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\lp_ticker_defines.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\mbed_rtx.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\nvic_addr.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\PeripheralPins.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\PinNamesTypes.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\PortNames.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\rtc_api_hal.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\serial_api_hal.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\stm32_assert.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\stm_i2c_api.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\USBPhyHw.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\us_ticker_defines.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F0\can_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F0\cmsis.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F0\gpio_irq_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F0\i2c_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F0\objects.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F0\PeripheralNames.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F0\pin_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F0\pwmout_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F0\spi_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F0\us_ticker_data.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F1\can_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F1</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F1\cmsis.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F1</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F1\gpio_irq_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F1</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F1\i2c_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F1</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F1\objects.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F1</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F1\pin_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F1</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F1\pwmout_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F1</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F1\spi_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F1</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F1\us_ticker_data.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F1</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F2\can_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F2</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F2\cmsis.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F2</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F2\flash_data.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F2</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F2\gpio_irq_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F2</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F2\i2c_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F2</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F2\objects.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F2</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F2\PeripheralNames.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F2</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F2\pin_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F2</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F2\pwmout_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F2</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F2\spi_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F2</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F2\us_ticker_data.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F2</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F3\can_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F3\cmsis.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F3\gpio_irq_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F3\i2c_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F3\objects.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F3\PeripheralNames.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F3\pin_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F3\pwmout_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F3\spi_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F3\us_ticker_data.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F4\can_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F4\cmsis.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F4\gpio_irq_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F4\i2c_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F4\objects.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F4\PeripheralNames.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F4\pin_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F4\pwmout_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F4\spi_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F4\us_ticker_data.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F7\can_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F7</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F7\cmsis.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F7</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F7\gpio_irq_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F7</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F7\i2c_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F7</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F7\objects.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F7</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F7\pin_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F7</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F7\pwmout_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F7</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F7\spi_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F7</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32F7\us_ticker_data.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32F7</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G0\cmsis.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32G0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G0\gpio_irq_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32G0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G0\i2c_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32G0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G0\objects.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32G0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G0\PeripheralNames.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32G0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G0\pin_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32G0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G0\pwmout_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32G0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G0\spi_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32G0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G0\us_ticker_data.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32G0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G4\cmsis.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32G4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G4\gpio_irq_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32G4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G4\i2c_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32G4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G4\objects.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32G4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G4\PeripheralNames.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32G4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G4\pin_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32G4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G4\pwmout_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32G4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G4\spi_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32G4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32G4\us_ticker_data.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32G4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32H7\cmsis.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32H7</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32H7\gpio_irq_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32H7</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32H7\i2c_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32H7</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32H7\objects.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32H7</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32H7\PeripheralNames.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32H7</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32H7\pin_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32H7</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32H7\pwmout_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32H7</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32H7\spi_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32H7</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32H7\us_ticker_data.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32H7</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L0\cmsis.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L0\gpio_irq_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L0\i2c_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L0\objects.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L0\PeripheralNames.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L0\pin_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L0\pwmout_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L0\spi_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L0\us_ticker_data.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L0</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L1\cmsis.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L1</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L1\gpio_irq_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L1</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L1\i2c_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L1</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L1\objects.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L1</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L1\PeripheralNames.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L1</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L1\pin_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L1</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L1\pwmout_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L1</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L1\spi_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L1</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L1\us_ticker_data.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L1</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L4\can_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L4\cmsis.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L4\gpio_irq_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L4\i2c_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L4\objects.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L4\PeripheralNames.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L4\pin_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L4\pwmout_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L4\spi_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L4\us_ticker_data.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L5\can_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L5</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L5\cmsis.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L5</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L5\gpio_irq_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L5</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L5\i2c_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L5</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L5\objects.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L5</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L5\PeripheralNames.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L5</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L5\pin_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L5</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L5\pwmout_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L5</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L5\spi_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L5</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32L5\us_ticker_data.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32L5</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32U5\can_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32U5</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32U5\cmsis.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32U5</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32U5\gpio_irq_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32U5</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32U5\i2c_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32U5</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32U5\objects.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32U5</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32U5\PeripheralNames.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32U5</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32U5\pin_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32U5</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32U5\pwmout_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32U5</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32U5\spi_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32U5</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32U5\us_ticker_data.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32U5</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WB\cmsis.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32WB</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WB\gpio_irq_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32WB</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WB\i2c_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32WB</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WB\objects.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32WB</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WB\PeripheralNames.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32WB</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WB\pin_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32WB</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WB\pwmout_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32WB</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WB\spi_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32WB</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WB\us_ticker_data.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32WB</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WL\cmsis.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32WL</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WL\gpio_irq_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32WL</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WL\i2c_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32WL</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WL\objects.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32WL</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WL\PeripheralNames.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32WL</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WL\pin_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32WL</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WL\pwmout_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32WL</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WL\spi_device.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32WL</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\mbed\targets\TARGET_STM\TARGET_STM32WL\us_ticker_data.h">
+      <Filter>src\_micro-api-readonly\core\mbed\targets\TARGET_STM\TARGET_STM32WL</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\USB\PluggableUSBDevice.h">
+      <Filter>src\_micro-api-readonly\core\USB</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\USB\PluggableUSBSerial.h">
+      <Filter>src\_micro-api-readonly\core\USB</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\cores\arduino\USB\USBCDC.h">
+      <Filter>src\_micro-api-readonly\core\USB</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\variants\GIGA\mbed_config.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\variants\GIGA\pinmode_arduino.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\variants\GIGA\pins_arduino.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pluci\AppData\Local\arduino15\packages\arduino\hardware\mbed_giga\4.2.2\variants\GIGA\pure_analog_pins.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\src\AccelStepper.h">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\src\MultiStepper.h">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\keywords.txt">
-      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
-    </Text>
-    <Text Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\Adafruit_Debounce\LICENSE.txt">
-      <Filter>src\_micro-api-readonly\libraries\Adafruit_Debounce</Filter>
-    </Text>
     <Text Include="C:\Users\pluci\OneDrive\Documents\Arduino\libraries\ezButton\keywords.txt">
       <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="c:\Users\pluci\OneDrive\Documents\Arduino\libraries\AccelStepper\keywords.txt">
+      <Filter>src\_micro-api-readonly\libraries\AccelStepper</Filter>
     </Text>
   </ItemGroup>
 </Project>

@@ -13,11 +13,13 @@
 
 #ifndef _VSARDUINO_H_
 #define _VSARDUINO_H_
+#pragma diag_suppress 338
+// User Defined Errors to Ignore below... [vm.intellisense.ignore-error-codes]
 #include <arduino.h>
 #include <elc_defines.h> 
 #include <pins_arduino.h> 
 #include <tusb_config.h> 
 #include <variant.cpp> 
-#include "..\LongLine.ino"
+#include "..\LongLineSlave.ino"
 #endif
 #endif

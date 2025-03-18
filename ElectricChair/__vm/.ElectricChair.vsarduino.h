@@ -13,6 +13,8 @@
 
 #ifndef _VSARDUINO_H_
 #define _VSARDUINO_H_
+#pragma diag_suppress 338
+// User Defined Errors to Ignore below... [vm.intellisense.ignore-error-codes]
 #include <arduino.h>
 #include <mbed_config.h> 
 #include <pinmode_arduino.h> 

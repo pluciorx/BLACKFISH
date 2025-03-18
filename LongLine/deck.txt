@@ -1,0 +1,8 @@
+HA - Hyper Automation
+TDE - Transformation and Delivery Enablement 
+STP - Straight Trough Processing
+COI - Customer Onboarding Interactions quest
+
+2% velocity increase where our Squad has HCL strength of 40% or higher of HCL engineers
+100% deliverable qualities - 0 Major/ or high sev
+100% sec result is based on HCL App scan 
