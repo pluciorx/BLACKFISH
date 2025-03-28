@@ -12,17 +12,16 @@
 #define RELAY4_PIN D7
 #define LED_PIN 13 // Pin for the blinking LED
 
+const char* fv = "     V 2025.03.28";
 String uniqueID;
 #define SL_TYPE_ROLL 0x1
 #define SL_TYPE_MAIN 0x2
-
-
 
 enum SlaveState { IDLE, SEND_SENSOR_DATA, RECEIVE_COMMAND,DEREG };
 SlaveState slaveState = SlaveState::IDLE;
 bool isRegisteredWithHost = false;
 long lastHostUpdate = 0;
-
+const unsigned long healthCheckInterval = 10000; //10s TTL check 
 
 void setup() {
 
@@ -47,6 +46,8 @@ void setup() {
         uniqueID += OpenCyphalUniqueId[i];
     }
 
+    Serial.println();
+	delay(250);
     Serial.println("Unique ID: " + uniqueID);
     Serial.println("Slave Node Setup Ready");
     
@@ -71,7 +72,8 @@ void loop() {
         slaveState = SlaveState::IDLE;
     }break;
     case IDLE: {
-        unsigned long now = millis();
+
+
         if (digitalRead(SENSOR1_PIN) == LOW) {
             slaveState = SlaveState::SEND_SENSOR_DATA;
             sendSensorTriggered("SENSOR1");
@@ -92,8 +94,8 @@ void loop() {
             slaveState = SlaveState::RECEIVE_COMMAND;
         }
 
-        if (now - lastHostUpdate >= 5000) {
-            Serial.println("No communication with host for 5 seconds. Going to DEREG.");
+        if (millis() - lastHostUpdate >= healthCheckInterval) {
+            Serial.println("No communication with host for 10 seconds. Going to DEREG.");
             slaveState = SlaveState::DEREG;
             isRegisteredWithHost = false;
         }

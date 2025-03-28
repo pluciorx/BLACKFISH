@@ -3,6 +3,7 @@
 #include <LiquidCrystal_I2C.h>
 #include <avdweb_VirtualDelay.h>
 #include <Wire.h>
+const char* fv = "     V 2025.03.28";
 
 //#define RS485_CONTROL D2
 
@@ -56,6 +57,8 @@ struct SlaveInfo {
     String ID;
     bool isHealthy;
     unsigned long lastCheckedTime; // Timestamp of last health check
+    unsigned long lastOkTime; // Timestamp of last health check
+
     byte slaveType;
 };
 
@@ -65,7 +68,7 @@ bool isRollRegistered = false;
 
 int numRegisteredSlaves = 0;
 
-const unsigned long healthCheckInterval = 5000; //1s TTL check 
+const unsigned long healthCheckInterval = 2000; //10s TTL check 
 
 enum MasterState { IDLE, PROCESS_COMMAND, RECEIVE_DATA, HEALTH_CHECK };
 
@@ -97,7 +100,7 @@ void setup() {
     for (int i = 0; i < OpenCyphalUniqueId.ID_SIZE; i++) {
         uniqueID += OpenCyphalUniqueId[i];
     }
-
+    
     lcd.init(); // initialize the lcd	
     lcd.backlight();
     lcd.clear();
@@ -106,15 +109,14 @@ void setup() {
     lcd.setCursor(0, 1);            // move cursor to the second row
     lcd.print("    Doner Roller   "); // print message at the second row
     lcd.setCursor(0, 2);            // move cursor to the third row
-    lcd.print("     V 2025.03.20"); // print message at the second row
+    lcd.print(fv); // print message at the second row
     
     lcd.setCursor(0, 3);
     lcd.print("ZW:-");
     lcd.setCursor(8, 3);
     lcd.print("CTRL:-");
     delay(500);
-    Serial.println("Host Node setup ready");
-
+   
     Serial1.begin(115200);
 
     // Initialize registered slaves array
@@ -126,6 +128,7 @@ void setup() {
     }
 
     Serial.println("Host Node Setup Ready");
+    Serial.print(fv); // print message at the second row
 }
 
 void loop() {
@@ -143,6 +146,7 @@ void loop() {
             // Iterate through registered slaves to see if any need a health check
             for (int i = 0; i < numRegisteredSlaves; i++) {
                 if (millis() - registeredSlaves[i].lastCheckedTime >= healthCheckInterval) {
+
                     masterState = MasterState::HEALTH_CHECK;
                     break;
                 }
@@ -198,7 +202,6 @@ void loop() {
             Serial.println(slaveID + " => ACK");
         }
 
-
         masterState = MasterState::IDLE;
     } break;
 
@@ -206,30 +209,32 @@ void loop() {
         // Send a ping to any slave that is overdue for a health check
         for (int i = 0; i < numRegisteredSlaves; i++) {
             if (millis() - registeredSlaves[i].lastCheckedTime >= healthCheckInterval) {
-                registeredSlaves[i].isHealthy = false;
                 
-
                 if (registeredSlaves[i].slaveType == SL_TYPE_MAIN)
                 {
-                    Serial.println("Expired MAIN");
                     isMainRegistered = false;
-                   
-                    lcd.setCursor(8, 3);
-                    lcd.print("CTRL:-");
+                    if (millis() - registeredSlaves[i].lastOkTime >= healthCheckInterval * 2 )
+                    {
+                        Serial.println("Slave " + registeredSlaves[i].ID + " is not responding. Deregistering...");
+                        lcd.setCursor(8, 3);
+                        lcd.print("CTRL:- ");
+                    }
                 }
                 if (registeredSlaves[i].slaveType == SL_TYPE_ROLL)
                 {
-                    Serial.println("Expired ROLL");
-                    isRollRegistered = true;
-
-                    lcd.setCursor(0, 3);
-                    lcd.print("ZW:-");
-                   
+                    
+                    isRollRegistered = false;
+                    if (millis() - registeredSlaves[i].lastOkTime >= healthCheckInterval * 2)
+                    {
+						Serial.println("Slave " + registeredSlaves[i].ID + " is not responding. Deregistering...");
+                        lcd.setCursor(0, 3);
+                        lcd.print("ZW:- ");
+                    }
                 }
 
-
+                registeredSlaves[i].isHealthy == false;
                 SendPing(registeredSlaves[i].ID);
-               
+                registeredSlaves[i].lastCheckedTime = millis();
             }
         }
         masterState = MasterState::IDLE;
@@ -253,18 +258,6 @@ void sendCommand(String cmd) {
     Serial.println(cmd);
   
 }
-
-void UpdateSlaveStatusByID(String id, bool isHealthy) {
-    for (int i = 0; i < maxSlaves; i++) {
-        if (registeredSlaves[i].ID == id) {
-            registeredSlaves[i].isHealthy = isHealthy;
-            registeredSlaves[i].lastCheckedTime = millis();  // or another time source           
-            return;
-        }
-    }
-
-    Serial.println("Slave not found: " + id);
-}
 bool registerSlave(String slaveID, byte type) {
     // Check if the slave is already registered
     for (int i = 0; i < maxSlaves; i++) {
@@ -276,13 +269,15 @@ bool registerSlave(String slaveID, byte type) {
     for (int i = 0; i < maxSlaves; i++) {
         if (registeredSlaves[i].ID == "") {
             registeredSlaves[i].ID = slaveID;
-            registeredSlaves[i].isHealthy = true; // Assume healthy when initially registered
+            registeredSlaves[i].isHealthy = true; 
             registeredSlaves[i].lastCheckedTime = millis();
+            registeredSlaves[i].lastOkTime = millis();
             registeredSlaves[i].slaveType = type;
             
             numRegisteredSlaves++;
-            return true; // Slave registered successfully
             SendPing(slaveID);
+            return true; // Slave registered successfully
+            
         }
     }
     
@@ -298,7 +293,10 @@ void SendPing(String slaveID)
 void updateSlaveHealth(String slaveID, bool isHealthy) {
     for (int i = 0; i < maxSlaves; i++) {
         if (registeredSlaves[i].ID == slaveID) {
+
             registeredSlaves[i].isHealthy = isHealthy;
+            if (isHealthy) registeredSlaves[i].lastOkTime = millis();
+            
             break;
         }
     }
