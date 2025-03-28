@@ -846,7 +846,7 @@ bool ExecuteCMD(CommandType cmd) {
     case VibStart:  //startVibration
     {
         Serial.println(F("Vibration ON"));
-
+       
         IsVibrationEnabled = true;
 
         SetState(E_STATE::READY);
