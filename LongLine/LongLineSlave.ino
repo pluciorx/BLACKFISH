@@ -1,7 +1,7 @@
 #include <107-Arduino-UniqueId.h>
 #include <SoftwareSerial.h>
 
-#define RS485_CONTROL 2
+//#define RS485_CONTROL D2
 #define SENSOR1_PIN D9
 #define SENSOR2_PIN D8
 #define SENSOR3_PIN D10
@@ -13,13 +13,18 @@
 #define LED_PIN 13 // Pin for the blinking LED
 
 String uniqueID;
+#define SL_TYPE_ROLL 0x1
+#define SL_TYPE_MAIN 0x2
 
-enum SlaveState { IDLE, SEND_SENSOR_DATA, RECEIVE_COMMAND };
+
+
+enum SlaveState { IDLE, SEND_SENSOR_DATA, RECEIVE_COMMAND,DEREG };
 SlaveState slaveState = SlaveState::IDLE;
+bool isRegisteredWithHost = false;
+long lastHostUpdate = 0;
+
 
 void setup() {
-    pinMode(RS485_CONTROL, OUTPUT);
-    digitalWrite(RS485_CONTROL, LOW); // Set to receive mode
 
     pinMode(SENSOR1_PIN, INPUT_PULLUP);
     pinMode(SENSOR2_PIN, INPUT_PULLUP);
@@ -34,7 +39,7 @@ void setup() {
     pinMode(LED_PIN, OUTPUT);
 
     Serial1.begin(115200);
-    Serial.begin(9600);
+    Serial.begin(115200);
     Serial.println("");
 
     // Build the uniqueID from OpenCyphalUniqueId
@@ -44,14 +49,29 @@ void setup() {
 
     Serial.println("Unique ID: " + uniqueID);
     Serial.println("Slave Node Setup Ready");
-    RegisterNode();
+    
     selfTestRelays();
-    slaveState = SlaveState::IDLE;
+    slaveState = SlaveState::DEREG;
 }
 
 void loop() {
     switch (slaveState) {
-    case IDLE:
+    case DEREG:
+    {       
+        while (!isRegisteredWithHost) {
+            RegisterNode();
+            slaveState == SlaveState::RECEIVE_COMMAND;
+            if (Serial1.available())
+            {
+                String c = Serial1.readStringUntil('\n');
+                processCommand(c);
+            }
+        }
+        Serial.println("Registered going idle;");
+        slaveState = SlaveState::IDLE;
+    }break;
+    case IDLE: {
+        unsigned long now = millis();
         if (digitalRead(SENSOR1_PIN) == LOW) {
             slaveState = SlaveState::SEND_SENSOR_DATA;
             sendSensorTriggered("SENSOR1");
@@ -71,7 +91,14 @@ void loop() {
         else if (Serial1.available()) {
             slaveState = SlaveState::RECEIVE_COMMAND;
         }
-        break;
+
+        if (now - lastHostUpdate >= 5000) {
+            Serial.println("No communication with host for 5 seconds. Going to DEREG.");
+            slaveState = SlaveState::DEREG;
+            isRegisteredWithHost = false;
+        }
+        
+    }break;
 
     case SEND_SENSOR_DATA:
         // After sending, return to IDLE state
@@ -79,7 +106,7 @@ void loop() {
         break;
 
     case RECEIVE_COMMAND: {
-        String command = Serial1.readStringUntil(';');
+        String command = Serial1.readStringUntil('\n');
 		Serial1.flush();
         processCommand(command);
 
@@ -114,49 +141,63 @@ void selfTestRelays() {
 }
 
 void RegisterNode() {
-    digitalWrite(RS485_CONTROL, HIGH); // Set to transmit mode
-    Serial1.print("REG:" + uniqueID);
-	Serial1.println(';');
-    Serial1.flush();
-    digitalWrite(RS485_CONTROL, LOW); // Back to receive mode
+    static unsigned long lastAttempt = 0;
+    unsigned long now = millis();
+
+    if (now - lastAttempt >= 2000) {  // every 2 seconds
+        Serial1.println("REG_ROLL:" + uniqueID);
+        Serial1.flush();
+        Serial.println("Attempting registration...");
+        lastAttempt = now;
+    }
 }
 
 void sendSensorTriggered(String sensor) {
-    digitalWrite(RS485_CONTROL, HIGH); // Set to transmit mode
+    
     // Send the unique ID and sensor info
     Serial1.print(uniqueID);
     Serial1.print(": ");
-    Serial1.print(sensor);
-	Serial1.println(';');
+    Serial1.println(sensor);	
     Serial1.flush();
-    digitalWrite(RS485_CONTROL, LOW); // Back to receive mode
+   
 }
 
 void sendPong() {
-    Serial.println("PONG>:" + uniqueID);
-    digitalWrite(RS485_CONTROL, HIGH); // Set to transmit mode
-    Serial1.print("PONG:" + uniqueID);
-    Serial1.println(';');
-    Serial1.flush();
-    digitalWrite(RS485_CONTROL, LOW); // Back to receive mode
+    Serial.println("PONG>:" + uniqueID);  
+    Serial1.println("PONG:" + uniqueID);    
+    Serial1.flush();  
 }
 
 void ackCommand(String cmd) {
     Serial.println("ACK>:" + uniqueID);
-	digitalWrite(RS485_CONTROL, HIGH); // Set to transmit mode
 	Serial1.print("ACK:" + uniqueID);
-    Serial1.print(cmd);
-	Serial1.println(';');
+    Serial1.println(cmd);	
 	Serial1.flush();
-	digitalWrite(RS485_CONTROL, LOW); // Back to receive mode
+	
 }
 
+void sendResponse(String cmd) {
+    Serial.println("ACK>:" + uniqueID);
+    Serial1.print("ACK:" + uniqueID);
+    Serial1.println(cmd);
+    Serial1.flush();
+
+}
+void processPingCommand()
+{
+    isRegisteredWithHost = true;
+    lastHostUpdate = millis();
+    sendPong();
+}
 void processCommand(String cmd) {
-    delay(5);
+  
+    cmd.trim();
     // Process commands addressed to this slave (relay controls)
     if (cmd.startsWith(uniqueID)) {
+        lastHostUpdate = millis();
         if (cmd.endsWith(":PING")) {
-            sendPong();
+    
+            processPingCommand();
             return;
 		}
 		else
@@ -193,15 +234,35 @@ void processCommand(String cmd) {
             digitalWrite(RELAY4_PIN, LOW);
             ackCommand(cmd);
         }
+        else if (cmd.endsWith("_AREAD")) {
+            int colonIndex = cmd.lastIndexOf(':');
+            if (colonIndex != -1) {
+                String pinStr = cmd.substring(colonIndex + 1, cmd.indexOf('_', colonIndex));
+               
+                if (pinStr.charAt(0) == 'A') {
+                    int pinNumber = pinStr.substring(1).toInt(); // Extract number part
+
+                    // Construct Arduino A pin constant (e.g. A1, A2, etc.)
+                    int analogPin = A0 + pinNumber; // This works for A0 to A7
+                    int analogValue = analogRead(analogPin);
+
+                    Serial.print("Reading from ");
+                    Serial.print(pinStr);
+                    Serial.print(": ");
+                    Serial.println(analogValue);
+                    
+                }
+            }
+        }
         else {
-            Serial.print("Unrecognized command for this node:(");
-			Serial.print(cmd);
-            Serial.println(")");
+            Serial.print("Unrecognized command for this node:");
+			Serial.println(cmd);
+           
         }
     }
     else {
-        Serial.print("Invalid re(");
-        Serial.print(cmd);
-        Serial.println(")");
+        Serial.print("Foreign command:");
+        Serial.println(cmd);
+        
     }
 }
