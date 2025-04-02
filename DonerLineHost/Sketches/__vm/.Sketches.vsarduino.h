@@ -20,7 +20,6 @@
 #include <pins_arduino.h> 
 #include <tusb_config.h> 
 #include <variant.cpp> 
-#include "..\LongLineSlave.ino"
-#include "..\helpers.ino"
+#include "..\Sketches.ino"
 #endif
 #endif

@@ -20,11 +20,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="LongLineSlave.ino" />
-    <ClCompile Include="helpers.ino" />
+    <ClCompile Include="Sketches.ino" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="__vm\.LongLine.vsarduino.h">
+    <ClInclude Include="__vm\.Sketches.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

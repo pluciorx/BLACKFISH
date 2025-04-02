@@ -1,74 +1,107 @@
-#include <107-Arduino-UniqueId.h>
+/*"BlackFish Doner roller line steering panel
+ * This program should be installed only on the control panel of the roller.
+ */
+
 #include <Adafruit_Debounce.h>
 #include <LiquidCrystal_I2C.h>
-#include <avdweb_VirtualDelay.h>
+
 #include <Wire.h>
-const char* fv = "     V 2025.03.28";
+const char* fv = "     V 2025.03.31";
+
 
 //#define RS485_CONTROL D2
-
 LiquidCrystal_I2C lcd(0x27, 20, 4);
-
-String uniqueID;
 
 // Kierunek obrotów
 #define BUTTON_RIGHT_ROTATE  D2  // Przycisk chwilowy obroty w prawo
+Adafruit_Debounce buttonRightRotate(BUTTON_RIGHT_ROTATE, HIGH);
 #define BUTTON_LEFT_ROTATE   D3  // Przycisk chwilowy obroty w lewo
+Adafruit_Debounce buttonLeftRotate(BUTTON_LEFT_ROTATE, HIGH);
 
-// Regulacja prêdkoœci
+// Regulacja predkosci
 #define POT_SPEED_CONTROL    A3  // Potencjometr regulacji obrotów
-
-// Tryb funkcji ci¹g³ej
+int speed = 0;
+int _prevSpeed = 0;
+// Tryb funkcji ciaglej
 #define BUTTON_FUNCTION      A1  // Przycisk chwilowy FUNKCYJNY
+Adafruit_Debounce buttonFunction(BUTTON_FUNCTION, HIGH);
 
-// Zmiana œrednicy
-#define BUTTON_DIAMETER_UP   D4  // Przycisk chwilowy zmiany œrednicy na plus
-#define BUTTON_DIAMETER_DOWN D5  // Przycisk chwilowy zmiany œrednicy na minus
+// Zmiana srednicy
+#define BUTTON_DIAMETER_UP   D4  // Przycisk chwilowy zmiany srednicy na plus
+Adafruit_Debounce btnDiameterUp(BUTTON_DIAMETER_UP, HIGH);
+#define BUTTON_DIAMETER_DOWN D5  // Przycisk chwilowy zmiany srednicy na minus
+Adafruit_Debounce btnDiameterDown(BUTTON_DIAMETER_DOWN, HIGH);
 
-// Zmiana gruboœci
-#define BUTTON_THICKNESS_UP   D6  // Przycisk chwilowy zmiany gruboœci na plus
-#define BUTTON_THICKNESS_DOWN D7  // Przycisk chwilowy zmiany gruboœci na minus
+#define DIAMETER_MIN 0
+#define DIAMETER_MAX 100
+int diameter = DIAMETER_MIN;
+
+// Zmiana grubosci
+#define BUTTON_THICKNESS_UP   D6  // Przycisk chwilowy zmiany grubosci na plus
+Adafruit_Debounce btnThicknessUp(BUTTON_THICKNESS_UP, HIGH);
+#define BUTTON_THICKNESS_DOWN D7  // Przycisk chwilowy zmiany grubosci na minus
+Adafruit_Debounce btnThicknessDown(BUTTON_THICKNESS_DOWN, HIGH);
+
+#define THICKNESS_MIN 0
+#define THICKNESS_MAX 100
+int thickness = THICKNESS_MIN;
 
 // Blokada trzymacza rury
 #define BUTTON_PIPE_LOCK     D8  // Przycisk blokady trzymacza rury
+Adafruit_Debounce buttonPipeLock(BUTTON_PIPE_LOCK, HIGH);
 
 // Procedura zsuniêcia rury
 #define BUTTON_PIPE_RELEASE  D9  // Przycisk procedury zsuniêcia rury
+Adafruit_Debounce buttonPipeRelease(BUTTON_PIPE_RELEASE, HIGH);
 
 // Presety
 #define BUTTON_PRESET_1      D10 // Przycisk PRESET 1
+Adafruit_Debounce buttonPreset1(BUTTON_PRESET_1, HIGH);
 #define BUTTON_PRESET_2      D11 // Przycisk PRESET 2
+Adafruit_Debounce buttonPreset2(BUTTON_PRESET_2, HIGH);
 #define BUTTON_PRESET_3      D12 // Przycisk PRESET 3
+Adafruit_Debounce buttonPreset3(BUTTON_PRESET_3, HIGH);
 #define BUTTON_PRESET_4      D13 // Przycisk PRESET 4
+Adafruit_Debounce buttonPreset4(BUTTON_PRESET_4, HIGH);
 
-// Wy³¹cznik bezpieczeñstwa
-#define BUTTON_STOP          A2  // Przycisk STOP wy³¹czaj¹cy zasilanie silnika
-
-//define the suitable types of the slaves for this host.
-#define SL_TYPE_ROLL 0x1
-#define SL_TYPE_MAIN 0x2
+// Wylacznik bezpieczeñstwa
+#define BUTTON_STOP          A2  // Przycisk STOP
+Adafruit_Debounce buttonStop(BUTTON_STOP, HIGH);
 
 String commandBuffer;
 
-const int maxSlaves = 2; // Adjust the maximum number of slaves as needed 
-                         //for doner line only two slaves are needed
+//for doner line only two slaves are needed
+const int maxSlaves = 2;
+
+//define the suitable types of the slaves for this host.
+#define ADDR_PANEL '0'
+#define ADDR_ROLL '1'
+#define ADDR_CTRL '2'
+
+#define ADDR_DEREG 'F'
+const char nodeAddr = ADDR_PANEL;
 
 struct SlaveInfo {
-    String ID;
-    bool isHealthy;
-    unsigned long lastCheckedTime; // Timestamp of last health check
-    unsigned long lastOkTime; // Timestamp of last health check
+	char ID;
+	bool isHealthy;
+	unsigned long lastCheckedTime; // Timestamp of last health check
+	unsigned long lastOkTime; // Timestamp of last health check
 
-    byte slaveType;
+	byte slaveType;
 };
+
+
 
 SlaveInfo registeredSlaves[maxSlaves];
 bool isMainRegistered = false;
 bool isRollRegistered = false;
 
+int currentSlaveIndex = -1;
+unsigned long pingSentTime = 0;
+
 int numRegisteredSlaves = 0;
 
-const unsigned long healthCheckInterval = 2000; //10s TTL check 
+const int healthCheckInterval = 1500; //10s TTL check 
 
 enum MasterState { IDLE, PROCESS_COMMAND, RECEIVE_DATA, HEALTH_CHECK };
 
@@ -76,228 +109,428 @@ MasterState masterState = MasterState::IDLE;
 
 
 void setup() {
-    Serial.begin(115200);
-    Serial.println("");
 
-    pinMode(BUTTON_RIGHT_ROTATE, INPUT_PULLUP);
-    pinMode(BUTTON_LEFT_ROTATE, INPUT_PULLUP);
-    pinMode(BUTTON_FUNCTION, INPUT_PULLUP);
-    pinMode(BUTTON_DIAMETER_UP, INPUT_PULLUP);
-    pinMode(BUTTON_DIAMETER_DOWN, INPUT_PULLUP);
-    pinMode(BUTTON_THICKNESS_UP, INPUT_PULLUP);
-    pinMode(BUTTON_THICKNESS_DOWN, INPUT_PULLUP);
-    pinMode(BUTTON_PIPE_LOCK, INPUT_PULLUP);
-    pinMode(BUTTON_PIPE_RELEASE, INPUT_PULLUP);
-    pinMode(BUTTON_PRESET_1, INPUT_PULLUP);
-    pinMode(BUTTON_PRESET_2, INPUT_PULLUP);
-    pinMode(BUTTON_PRESET_3, INPUT_PULLUP);
-    pinMode(BUTTON_PRESET_4, INPUT_PULLUP);
-    pinMode(BUTTON_STOP, INPUT_PULLUP);
 
-    // Potencjometr jako wejœcie analogowe (nie wymaga INPUT_PULLUP)
-    pinMode(POT_SPEED_CONTROL, INPUT);
+	//pinMode(BUTTON_RIGHT_ROTATE, INPUT_PULLUP);
+	//pinMode(BUTTON_LEFT_ROTATE, INPUT_PULLUP);
+	//pinMode(BUTTON_FUNCTION, INPUT_PULLUP);
+	pinMode(BUTTON_DIAMETER_UP, INPUT);
+	pinMode(BUTTON_DIAMETER_DOWN, INPUT);
+	pinMode(BUTTON_THICKNESS_UP, INPUT);
+	pinMode(BUTTON_THICKNESS_DOWN, INPUT);
+	//pinMode(BUTTON_PIPE_LOCK, INPUT_PULLUP);
+	//pinMode(BUTTON_PIPE_RELEASE, INPUT_PULLUP);
+	//pinMode(BUTTON_PRESET_1, INPUT_PULLUP);
+	//pinMode(BUTTON_PRESET_2, INPUT_PULLUP);
+	//pinMode(BUTTON_PRESET_3, INPUT_PULLUP);
+	//pinMode(BUTTON_PRESET_4, INPUT_PULLUP);
+	//pinMode(BUTTON_STOP, INPUT_PULLUP);
+	InitButtons();
+	// Potencjometr jako wejœcie analogowe (nie wymaga INPUT_PULLUP)
+	//pinMode(POT_SPEED_CONTROL, INPUT);
 
-    for (int i = 0; i < OpenCyphalUniqueId.ID_SIZE; i++) {
-        uniqueID += OpenCyphalUniqueId[i];
-    }
-    
-    lcd.init(); // initialize the lcd	
-    lcd.backlight();
-    lcd.clear();
-    lcd.setCursor(0, 0);            // move cursor the first row
-    lcd.print("      BLACKFISH   ");          // print message at the first row
-    lcd.setCursor(0, 1);            // move cursor to the second row
-    lcd.print("    Doner Roller   "); // print message at the second row
-    lcd.setCursor(0, 2);            // move cursor to the third row
-    lcd.print(fv); // print message at the second row
-    
-    lcd.setCursor(0, 3);
-    lcd.print("ZW:-");
-    lcd.setCursor(8, 3);
-    lcd.print("CTRL:-");
-    delay(500);
-   
-    Serial1.begin(115200);
+	lcd.init();
+	lcd.backlight();
+	lcd.clear();
+	lcd.setCursor(0, 0);
+	lcd.print("      BLACKFISH   ");
+	lcd.setCursor(0, 1);
+	lcd.print("    Doner Roller   ");
+	lcd.setCursor(0, 2);
+	lcd.print(fv);
+	delay(1000);
 
-    // Initialize registered slaves array
-    for (int i = 0; i < maxSlaves; i++) {
-        registeredSlaves[i].ID = "";
-        registeredSlaves[i].isHealthy = false;
-        registeredSlaves[i].lastCheckedTime = 0;
-        
-    }
+	lcd.clear();
 
-    Serial.println("Host Node Setup Ready");
-    Serial.print(fv); // print message at the second row
+	lcd.setCursor(0, 0);
+	lcd.print("THI:-");
+	lcd.setCursor(0, 1);
+	lcd.print("DIA:-");
+
+	lcd.setCursor(0, 2);
+	lcd.print("                 ");
+	lcd.setCursor(0, 2);
+	lcd.print("SPD:");
+	lcd.setCursor(0, 3);
+	lcd.print("ZW:-");
+	lcd.setCursor(8, 3);
+	lcd.print("CTRL:-");
+	
+	// Initialize registered slaves array
+	for (int i = 0; i < maxSlaves; i++) {
+		registeredSlaves[i].ID = ADDR_DEREG;
+		registeredSlaves[i].isHealthy = false;
+		registeredSlaves[i].lastCheckedTime = 0;
+		registeredSlaves[i].lastOkTime = 0;
+	}
+	Serial1.begin(19200);
+	Serial.begin(115200);
+	Serial.println("");
+
+	Serial.println("Host Node Setup Ready");
+	Serial.print("Host ID: ");
+	Serial.println(nodeAddr);
+	Serial.println(fv); // print message at the second row
+	ReadAndUpdateSpeed();
+	RequestDiameterAndThickness();
 }
 
 void loop() {
-    switch (masterState)
-    {
-    case IDLE: {
-        if (Serial1.available()) {
-            masterState = MasterState::RECEIVE_DATA;
-        }
-        else if (Serial.available()) {
-            commandBuffer = Serial.readStringUntil(';');
-            masterState = MasterState::PROCESS_COMMAND;
-        }
-        else {
-            // Iterate through registered slaves to see if any need a health check
-            for (int i = 0; i < numRegisteredSlaves; i++) {
-                if (millis() - registeredSlaves[i].lastCheckedTime >= healthCheckInterval) {
+	CheckSlaves();
+	checkAndDeregisterSlaves();
+	updateButtons();
+	HandleButtonPresses();
+	switch (masterState)
+	{
+	case IDLE: {
 
-                    masterState = MasterState::HEALTH_CHECK;
-                    break;
-                }
-            }
-        }
+		if (Serial1.available()) {
+			masterState = MasterState::RECEIVE_DATA;
 
-    } break;
+		}
 
-    case PROCESS_COMMAND: {
-        sendCommand(commandBuffer);
-        masterState = MasterState::IDLE;
-    }break;
+		if (Serial.available()) {
+			commandBuffer = Serial.readStringUntil('\n');
+			masterState = MasterState::PROCESS_COMMAND;
+		}
 
-    case RECEIVE_DATA: {
-        String data = Serial1.readStringUntil('\n');
-        Serial1.flush();
-        if (data.startsWith("REG_ROLL:")) {
-            String slaveID = data.substring(9);
-            if (registerSlave(slaveID, SL_TYPE_ROLL)) {
-                Serial.println("Slave " + slaveID + " registered successfully as ROLL");
-            }
-            else {
-                Serial.println("Slave " + slaveID + " already registered.");
-            }
-            isRollRegistered = true;
-            lcd.setCursor(0, 3);
-            lcd.print("ZW:OK");
-            
-        }
-        if (data.startsWith("REG_MAIN:")) {
-            String slaveID = data.substring(9);
-            if (registerSlave(slaveID, SL_TYPE_MAIN)) {
-                Serial.println("Slave " + slaveID + " registered successfully as MAIN");
-            }
-            else {
-                Serial.println("Slave " + slaveID + " already registered.");
-            }
-            isMainRegistered = true;
-            lcd.setCursor(8, 3);
-            lcd.print("CTRL:OK");
-            
-        }
-        else if (data.startsWith("PONG:")) {
-            // For a PONG message, the expected format is "PONG:slaveID"
-            String slaveID = data.substring(5); // Remove "PONG:" (5 characters)
-            Serial.println(slaveID + " => Pong");
-            updateSlaveHealth(slaveID, true);
-        }
-        else if (data.startsWith("ACK:")) {
-            // For a ACK message, the expected format is "ACK:slaveID:command"
-            String slaveID = data.substring(4);
-            updateSlaveHealth(slaveID, true);
-            Serial.println(slaveID + " => ACK");
-        }
+		//handle the inputs 
+		ReadAndUpdateSpeed();
+		HandleButtonPresses();
 
-        masterState = MasterState::IDLE;
-    } break;
+	} break;
 
-    case HEALTH_CHECK: {
-        // Send a ping to any slave that is overdue for a health check
-        for (int i = 0; i < numRegisteredSlaves; i++) {
-            if (millis() - registeredSlaves[i].lastCheckedTime >= healthCheckInterval) {
-                
-                if (registeredSlaves[i].slaveType == SL_TYPE_MAIN)
-                {
-                    isMainRegistered = false;
-                    if (millis() - registeredSlaves[i].lastOkTime >= healthCheckInterval * 2 )
-                    {
-                        Serial.println("Slave " + registeredSlaves[i].ID + " is not responding. Deregistering...");
-                        lcd.setCursor(8, 3);
-                        lcd.print("CTRL:- ");
-                    }
-                }
-                if (registeredSlaves[i].slaveType == SL_TYPE_ROLL)
-                {
-                    
-                    isRollRegistered = false;
-                    if (millis() - registeredSlaves[i].lastOkTime >= healthCheckInterval * 2)
-                    {
-						Serial.println("Slave " + registeredSlaves[i].ID + " is not responding. Deregistering...");
-                        lcd.setCursor(0, 3);
-                        lcd.print("ZW:- ");
-                    }
-                }
+	case PROCESS_COMMAND: {
 
-                registeredSlaves[i].isHealthy == false;
-                SendPing(registeredSlaves[i].ID);
-                registeredSlaves[i].lastCheckedTime = millis();
-            }
-        }
-        masterState = MasterState::IDLE;
-    } break;
-    }
-}
-void sendCommand(String id, String cmd) {
-    String cmd2 = id + ":" + cmd;
-    Serial1.println(cmd2);
-    Serial1.flush();
-    Serial.print("=>");
-    Serial.println(cmd2);
+		sendCommand(ADDR_ROLL, commandBuffer);
+		masterState = MasterState::IDLE;
+	}break;
 
+	case RECEIVE_DATA: {
+		String data = Serial1.readStringUntil('\n');
+
+		if (data.length() < 2) {
+			Serial.println("Invalid data received: " + data);
+			masterState = MasterState::IDLE;
+			break;
+		}
+
+		char slaveID = data.charAt(0);
+		String message = data.substring(1);
+
+		/*Serial.println("Received data: " + data);
+		Serial.println("Slave ID: " + slaveID);
+		Serial.println("Message: " + message);*/
+
+		if (message.startsWith("REG_ROLL")) {
+			if (registerSlave(slaveID, ADDR_ROLL)) {
+				Serial.println("Slave registered successfully ROLL node: " + String(slaveID));
+				RequestDiameterAndThickness();
+			}
+			else {
+				Serial.println("Can't register node: " + String(slaveID));
+			}
+			isRollRegistered = true;
+			lcd.setCursor(0, 3);
+			lcd.print("ZW:OK");
+		}
+		else if (message.startsWith("REG_CTRL")) {
+			if (registerSlave(slaveID, ADDR_CTRL)) {
+				Serial.println("Slave registered successfully REG_CTRL node: " + String(slaveID));
+			}
+			else {
+				Serial.println("Can't register node: " + String(slaveID));
+			}
+			isMainRegistered = true;
+			lcd.setCursor(8, 3);
+			lcd.print("CTRL:OK");
+		}
+		else if (message.startsWith("PONG")) {
+			//Serial.println("=> Pong received");
+			updateSlaveHealth(slaveID, true);
+		}
+		else if (message.startsWith("ACK")) {
+			//Serial.println(" = > ACK received");
+			updateSlaveHealth(slaveID, true);
+
+		}
+		else if (message.startsWith("AREAD")) {
+			//Serial.println("=> AREAD received");
+			updateSlaveHealth(slaveID, true);
+
+		}
+		else {
+			Serial.println("Unknown message received: " + message);
+		}
+
+		masterState = MasterState::IDLE;
+	} break;
+
+	}
 }
 
-void sendCommand(String cmd) {
-   
-    Serial1.println(cmd);
-    Serial1.flush();
-    Serial.print("=>");
-    Serial.println(cmd);
-  
-}
-bool registerSlave(String slaveID, byte type) {
-    // Check if the slave is already registered
-    for (int i = 0; i < maxSlaves; i++) {
-        if (registeredSlaves[i].ID == slaveID) {
-            return false; // Slave already registered
-        }
-    }
-    // Find an empty slot in the array
-    for (int i = 0; i < maxSlaves; i++) {
-        if (registeredSlaves[i].ID == "") {
-            registeredSlaves[i].ID = slaveID;
-            registeredSlaves[i].isHealthy = true; 
-            registeredSlaves[i].lastCheckedTime = millis();
-            registeredSlaves[i].lastOkTime = millis();
-            registeredSlaves[i].slaveType = type;
-            
-            numRegisteredSlaves++;
-            SendPing(slaveID);
-            return true; // Slave registered successfully
-            
-        }
-    }
-    
-    return false; // No available slots
-}
-
-
-void SendPing(String slaveID)
+void InitButtons()
 {
-    sendCommand(slaveID + ":PING");
+	buttonRightRotate.begin();
+	buttonLeftRotate.begin();
+	buttonFunction.begin();
+	btnDiameterUp.begin();
+	btnDiameterDown.begin();
+	btnThicknessUp.begin();
+	btnThicknessDown.begin();
+	buttonPipeLock.begin();
+	buttonPipeRelease.begin();
+	buttonPreset1.begin();
+	buttonPreset2.begin();
+	buttonPreset3.begin();
+	buttonPreset4.begin();
+	buttonStop.begin();
+}
+void HandleButtonPresses()
+{
+	if (btnDiameterDown.isPressed()) {
+		Serial.print("Diameter down");
+		DecreaseDiameter();
+	}
+	if (btnDiameterUp.isPressed()) {
+		Serial.print("Diameter up");
+		IncreaseDiameter();
+	}
+	if(btnThicknessDown.isPressed())
+	{
+		Serial.print("Thickness down");
+		DecreaseThickness();
+	}
+	if (btnThicknessUp.isPressed())
+	{
+		Serial.print("Thickness up");
+		IncreaseThickness();
+	}
 }
 
-void updateSlaveHealth(String slaveID, bool isHealthy) {
-    for (int i = 0; i < maxSlaves; i++) {
-        if (registeredSlaves[i].ID == slaveID) {
+void CheckSlaves() {
+	for (int i = 0; i < maxSlaves; i++) {
+		if (millis() - registeredSlaves[i].lastCheckedTime >= healthCheckInterval) {
+			if (registeredSlaves[i].ID != ADDR_DEREG) {
+				SendPing(registeredSlaves[i].ID);
+				registeredSlaves[i].lastCheckedTime = millis();
+			}
+		}
+		updateSlaveScreen(i);
+	}
+}
 
-            registeredSlaves[i].isHealthy = isHealthy;
-            if (isHealthy) registeredSlaves[i].lastOkTime = millis();
-            
-            break;
-        }
-    }
+void sendCommand(char slave_id, String cmd) {
+	String message = String(slave_id) + cmd;
+	Serial1.println(message);
+	Serial1.flush();
+	Serial.println("=>" + message);
+}
+
+
+bool deregisterSlave(char slaveID) {
+	for (int i = 0; i < maxSlaves; i++) {
+		if (registeredSlaves[i].ID == slaveID) {
+			registeredSlaves[i].ID = ADDR_DEREG;
+			registeredSlaves[i].isHealthy = false;
+			registeredSlaves[i].lastCheckedTime = 0;
+			registeredSlaves[i].lastOkTime = 0;
+			numRegisteredSlaves--;
+			return true;
+		}
+	}
+	return false;
+}
+
+bool registerSlave(char slaveID, byte type) {
+	// Check if the slave is already registered
+	for (int i = 0; i < maxSlaves; i++) {
+		if (registeredSlaves[i].ID == slaveID) {
+			Serial.println("Slave " + String(slaveID) + " is already registered.");
+			updateSlaveHealth(slaveID, true);
+			RequestDiameterAndThickness();
+			return true; // Slave already registered
+		}
+	}
+	// Find an empty slot in the array
+	for (int i = 0; i < maxSlaves; i++) {
+		if (registeredSlaves[i].ID == ADDR_DEREG) {
+			registeredSlaves[i].ID = slaveID;
+			registeredSlaves[i].isHealthy = true;
+			registeredSlaves[i].lastCheckedTime = millis();
+			registeredSlaves[i].lastOkTime = millis();
+			registeredSlaves[i].slaveType = type;
+
+			numRegisteredSlaves++;
+			Serial.println("Slave " + String(slaveID) + " registered successfully.");
+			SendPing(slaveID);
+			RequestDiameterAndThickness();
+			return true; // Slave registered successfully
+
+		}
+	}
+	Serial.println("No available slots for new slave.");
+	return false; // No available slots
+}
+
+
+
+void SendPing(char slaveID)
+{
+	sendCommand(slaveID, "PING");
+}
+
+
+void updateSlaveScreen(int slaveIndex) {
+	if (millis() - registeredSlaves[slaveIndex].lastOkTime > healthCheckInterval * 2) {
+
+		switch (registeredSlaves[slaveIndex].slaveType) {
+		case ADDR_CTRL:
+			isMainRegistered = false;
+			lcd.setCursor(8, 3);
+			lcd.print("CTRL:- ");
+			break;
+		case ADDR_ROLL:
+			isRollRegistered = false;
+			lcd.setCursor(0, 3);
+			lcd.print("ZW:- ");
+			break;
+		}
+	}
+	else {
+		switch (registeredSlaves[slaveIndex].slaveType) {
+		case ADDR_CTRL:
+			isMainRegistered = true;
+			lcd.setCursor(8, 3);
+			lcd.print("CTRL:OK");
+			break;
+		case ADDR_ROLL:
+			isRollRegistered = true;
+			lcd.setCursor(0, 3);
+			lcd.print("ZW:OK");
+			break;
+		}
+	}
+}
+
+
+void checkAndDeregisterSlaves() {
+	for (int i = 0; i < maxSlaves; i++) {
+		if (registeredSlaves[i].ID != ADDR_DEREG &&
+			millis() - registeredSlaves[i].lastOkTime > healthCheckInterval * 2) {
+			Serial.println("Deregistering slave " + String(registeredSlaves[i].ID));
+			deregisterSlave(registeredSlaves[i].ID);
+
+		}
+	}
+}
+void updateSlaveHealth(char slaveID, bool isHealthy) {
+	for (int i = 0; i < maxSlaves; i++) {
+		if (registeredSlaves[i].ID == slaveID) {
+			registeredSlaves[i].isHealthy = isHealthy;
+			registeredSlaves[i].lastCheckedTime = millis();
+			if (isHealthy) registeredSlaves[i].lastOkTime = millis();
+			break;
+		}
+	}
+}
+
+
+static void RequestAnalogRead(char slaveID, int analogPin) {
+	sendCommand(slaveID, String(analogPin) + "_AREAD");
+
+}
+
+void updateButtons()
+{
+	buttonRightRotate.update();
+	buttonLeftRotate.update();
+	buttonFunction.update();
+	btnDiameterUp.update();
+	btnDiameterDown.update();
+	btnThicknessUp.update();
+	btnThicknessDown.update();
+	buttonPipeLock.update();
+	buttonPipeRelease.update();
+	buttonPreset1.update();
+	buttonPreset2.update();
+	buttonPreset3.update();
+	buttonPreset4.update();
+	buttonStop.update();
+}
+
+static void IncreaseDiameter() {
+	if (!isRollRegistered) return;
+	diameter++;
+	updateDiameter(diameter);
+	sendCommand(ADDR_ROLL, "SETDIAM:" + String(diameter));
+	RequestDiameterAndThickness();
+}
+
+static void DecreaseDiameter() {
+	if (!isRollRegistered) return;
+	diameter--;
+	updateDiameter(diameter);
+	sendCommand(ADDR_ROLL, "SETDIAM:" + String(diameter));
+	RequestDiameterAndThickness();
+}
+
+
+static void IncreaseThickness() {
+	if (!isRollRegistered) return;
+	thickness++;
+	updateThickness(thickness);
+	sendCommand(ADDR_ROLL, "SETTHICK:" + String(thickness));
+	RequestDiameterAndThickness();
+}
+
+static void DecreaseThickness() {
+	if (!isRollRegistered) return;
+	thickness--;
+	updateThickness(thickness);
+	sendCommand(ADDR_ROLL, "SETTHICK:" + String(thickness));
+	RequestDiameterAndThickness();
+}
+
+
+static void RequestDiameterAndThickness() {
+	if (!isRollRegistered) return;
+
+	RequestAnalogRead(ADDR_ROLL, 0); // Diameter
+	RequestAnalogRead(ADDR_ROLL, 1); // Thickness
+}
+
+
+void updateDiameter(int value) {
+	
+	lcd.setCursor(0, 1);
+	lcd.print("        ");
+	lcd.setCursor(0, 1);
+	lcd.print("DIA:" + String(diameter));
+}
+void updateThickness(int value) {
+	
+	lcd.setCursor(0, 0);
+	lcd.print("        ");
+	lcd.setCursor(0, 0);
+	lcd.print("THI:" + String(thickness));
+}
+
+
+static int ReadAndUpdateSpeed() {
+	speed = constrain(1024 - analogRead(POT_SPEED_CONTROL),0,1023);
+	if (speed != _prevSpeed && abs(_prevSpeed - speed) >= 32) {
+		_prevSpeed = speed;
+
+		String message = "SETRSPD:" + String(speed);
+		sendCommand(ADDR_ROLL, message);
+
+		lcd.setCursor(4, 2);
+		lcd.print(map(speed, 0, 1024, 0, 100));
+		lcd.print("% ");
+
+		return speed;
+
+	}
+	return _prevSpeed;
 }
