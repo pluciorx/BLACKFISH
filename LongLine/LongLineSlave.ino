@@ -13,14 +13,14 @@ int diameter = DIAMETER_MIN;
 #define THICKNESS_MAX 100
 int thickness = THICKNESS_MIN;
 
-#define ACCEL 500
+#define ACCEL 200
 #define MAX_SPD 50
 
 //#define RS485_CONTROL D2
 FlexyStepper motorThickness;
 #define PIN_POT_THICKNESS A2
-#define STEP_THICKNESS D2
-#define DIR_THICKNESS D3
+#define STEP_THICKNESS D6
+#define DIR_THICKNESS D7
 
 FlexyStepper motorDiameter;
 #define PIN_POT_DIAMETER A3
@@ -56,7 +56,7 @@ void setup() {
 
 	pinMode(LED_PIN, OUTPUT);
 
-	Serial1.begin(14400);
+	Serial1.begin(19200);
 	Serial.begin(115200);
 	Serial.println("");
 
@@ -69,38 +69,11 @@ void setup() {
 
 	
 	slaveState = SlaveState::DEREG;
-	TestMotors();
-	while (1);
+	//TestMotors();
+	//while (1);
 }
 
-void TestMotors()
-{
-	motorDiameter.setCurrentPositionInSteps(0);
-	motorDiameter.setSpeedInStepsPerSecond(MAX_SPD);
-	motorDiameter.setAccelerationInStepsPerSecondPerSecond(ACCEL);
 
-	motorThickness.setCurrentPositionInSteps(0);
-	motorThickness.setSpeedInStepsPerSecond(MAX_SPD);
-	motorThickness.setAccelerationInStepsPerSecondPerSecond(ACCEL);
-
-	motorDiameter.moveToPositionInSteps(100);
-	motorThickness.moveToPositionInSteps(100);
-
-	while (!motorDiameter.motionComplete() && !motorThickness.motionComplete())
-	{
-		motorDiameter.processMovement();
-		motorThickness.processMovement();
-	}
-	motorDiameter.moveToPositionInSteps(0);
-	motorThickness.moveToPositionInSteps(0);
-
-	while (!motorDiameter.motionComplete() && !motorThickness.motionComplete())
-	{
-		motorDiameter.processMovement();
-		motorThickness.processMovement();
-	}
-
-}
 
 
 void loop() {

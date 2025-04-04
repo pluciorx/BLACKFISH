@@ -195,7 +195,7 @@ void loop() {
 		}
 
 		//handle the inputs 
-		ReadAndUpdateSpeed();
+		if (isMainRegistered) ReadAndUpdateSpeed();
 		HandleButtonPresses();
 
 	} break;
@@ -437,7 +437,7 @@ void updateSlaveHealth(char slaveID, bool isHealthy) {
 
 
 static void RequestAnalogRead(char slaveID, int analogPin) {
-	sendCommand(slaveID, String(analogPin) + "_AREAD");
+	sendCommand(slaveID, "AREAD_"+ String(analogPin));
 
 }
 
@@ -463,7 +463,7 @@ static void IncreaseDiameter() {
 	if (!isRollRegistered) return;
 	diameter++;
 	updateDiameter(diameter);
-	sendCommand(ADDR_ROLL, "SETDIAM:" + String(diameter));
+	sendCommand(ADDR_ROLL, "SETDIA:" + String(diameter));
 	RequestDiameterAndThickness();
 }
 
@@ -471,7 +471,7 @@ static void DecreaseDiameter() {
 	if (!isRollRegistered) return;
 	diameter--;
 	updateDiameter(diameter);
-	sendCommand(ADDR_ROLL, "SETDIAM:" + String(diameter));
+	sendCommand(ADDR_ROLL, "SETDIA:" + String(diameter));
 	RequestDiameterAndThickness();
 }
 
@@ -480,7 +480,7 @@ static void IncreaseThickness() {
 	if (!isRollRegistered) return;
 	thickness++;
 	updateThickness(thickness);
-	sendCommand(ADDR_ROLL, "SETTHICK:" + String(thickness));
+	sendCommand(ADDR_ROLL, "SETTHI:" + String(thickness));
 	RequestDiameterAndThickness();
 }
 
@@ -488,14 +488,14 @@ static void DecreaseThickness() {
 	if (!isRollRegistered) return;
 	thickness--;
 	updateThickness(thickness);
-	sendCommand(ADDR_ROLL, "SETTHICK:" + String(thickness));
+	sendCommand(ADDR_ROLL, "SETTHI:" + String(thickness));
 	RequestDiameterAndThickness();
 }
 
 
 static void RequestDiameterAndThickness() {
 	if (!isRollRegistered) return;
-
+	Serial.println("Requesting diameter and thickness from slave...");
 	RequestAnalogRead(ADDR_ROLL, 0); // Diameter
 	RequestAnalogRead(ADDR_ROLL, 1); // Thickness
 }
@@ -518,6 +518,7 @@ void updateThickness(int value) {
 
 
 static int ReadAndUpdateSpeed() {
+	
 	speed = constrain(1024 - analogRead(POT_SPEED_CONTROL),0,1023);
 	if (speed != _prevSpeed && abs(_prevSpeed - speed) >= 32) {
 		_prevSpeed = speed;

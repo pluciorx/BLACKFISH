@@ -63,3 +63,33 @@ void processPingCommand()
 	Serial1.flush();
 	Serial.println("=>:" + message);
 }
+
+
+void TestMotors()
+{
+	motorDiameter.setCurrentPositionInSteps(0);
+	motorDiameter.setSpeedInStepsPerSecond(MAX_SPD);
+	motorDiameter.setAccelerationInStepsPerSecondPerSecond(ACCEL);
+
+	motorThickness.setCurrentPositionInSteps(0);
+	motorThickness.setSpeedInStepsPerSecond(MAX_SPD);
+	motorThickness.setAccelerationInStepsPerSecondPerSecond(ACCEL);
+
+	motorDiameter.moveToPositionInSteps(100);
+	motorThickness.moveToPositionInSteps(100);
+
+	while (!motorDiameter.motionComplete() && !motorThickness.motionComplete())
+	{
+		motorDiameter.processMovement();
+		motorThickness.processMovement();
+	}
+	motorDiameter.moveToPositionInSteps(0);
+	motorThickness.moveToPositionInSteps(0);
+
+	while (!motorDiameter.motionComplete() && !motorThickness.motionComplete())
+	{
+		motorDiameter.processMovement();
+		motorThickness.processMovement();
+	}
+
+}
