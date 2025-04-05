@@ -8,8 +8,6 @@
 #include <Wire.h>
 const char* fv = "     V 2025.03.31";
 
-
-//#define RS485_CONTROL D2
 LiquidCrystal_I2C lcd(0x27, 20, 4);
 
 // Kierunek obrotów

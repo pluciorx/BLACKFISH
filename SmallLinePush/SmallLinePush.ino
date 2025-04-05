@@ -1,61 +1,59 @@
-/* 
-* This program should be installed only on the rotary elements of the roller.
-*/
-
-#include <FlexyStepper.h>
+// SmallLinePush.ino
+#include <Adafruit_Debounce.h>
 #include <SoftwareSerial.h>
-
-#define DIAMETER_MIN 0
-#define DIAMETER_MAX 100
-int diameter = DIAMETER_MIN;
-
-#define THICKNESS_MIN 0
-#define THICKNESS_MAX 100
-int thickness = THICKNESS_MIN;
-
-#define ACCEL 200
-#define MAX_SPD 50
-
-//#define RS485_CONTROL D2
-FlexyStepper motorThickness;
-#define PIN_POT_THICKNESS A2
-#define STEP_THICKNESS D6
-#define DIR_THICKNESS D7
-
-FlexyStepper motorDiameter;
-#define PIN_POT_DIAMETER A3
-#define STEP_DIAMETER D4
-#define DIR_DIAMETER D5
-
-
-#define LED_PIN 13 // Pin for the blinking LED
-
-const char* fv = "     V 2025.03.29";
-
 #define ADDR_PANEL '0'
 #define ADDR_ROLL '1'
 #define ADDR_CTRL '2'
 #define ADDR_PULL '3'
-#define ADDR_PUsh '4'
+#define ADDR_PUSH '4'
 #define ADDR_DEREG 'F'
+const char nodeAddr = ADDR_PUSH;
 
-const char nodeAddr = ADDR_ROLL;
+#define PIN_BTN_LEFT D10
+Adafruit_Debounce btnLeft(PIN_BTN_LEFT, HIGH);
+#define PIN_BTN_RIGHT D11
+Adafruit_Debounce btnRigh(PIN_BTN_RIGHT, HIGH);
+#define PIN_BTN_UP D8
+Adafruit_Debounce btnUp(PIN_BTN_UP, HIGH);
+#define PIN_BTN_DOWN D9	
+Adafruit_Debounce btnDown(PIN_BTN_DOWN, HIGH);
+#define INPUT_PULLDOWN
+
+
+#define PIN_SENSOR_IN  D3
+#define PIN_SENSOR_OUT D4
+
+#define PIN_MOTOR_SPD A0
+int motorSPDValue = 0;
+
+#define PIN_RL1  D4
+#define PIN_RL2  D5
+#define PIN_VALVE D7
 
 enum SlaveState { IDLE, SEND_SENSOR_DATA, RECEIVE_COMMAND, DEREG };
 SlaveState slaveState = SlaveState::IDLE;
 
+enum TapeDirection { FORWARD, BACKWARD };
+
 unsigned long lastHostUpdate = 0;
 const unsigned long healthCheckInterval = 2000UL; //3S TTL check 
 
+bool isProductionRunning = false;
+
 void setup() {
 
-	pinMode(PIN_POT_DIAMETER, INPUT);
-	pinMode(PIN_POT_THICKNESS, INPUT);
-	
-	motorDiameter.connectToPins(STEP_DIAMETER, DIR_DIAMETER);
-	motorThickness.connectToPins(STEP_THICKNESS, DIR_THICKNESS);	
+	pinMode(PIN_RL1, OUTPUT);
+	pinMode(PIN_RL2, OUTPUT);
+	pinMode(PIN_SENSOR_IN, INPUT);
+	pinMode(PIN_SENSOR_OUT, INPUT);
 
-	pinMode(LED_PIN, OUTPUT);
+	pinMode(PIN_MOTOR_SPD, OUTPUT);
+	pinMode(PIN_VALVE, OUTPUT);
+
+	btnDown.begin();
+	btnUp.begin();
+	btnLeft.begin();
+	btnRigh.begin();
 
 	Serial1.begin(19200);
 	Serial.begin(115200);
@@ -63,20 +61,17 @@ void setup() {
 
 	Serial.println();
 	delay(250);
-	
-	Serial.println("Slave Roller Node Setup Ready");
+
+	Serial.println("Pusher node setup ready");
 	Serial.print("Slave node Addr: ");
 	Serial.println(nodeAddr);
 
-	
+	setMotorSpeed(0);
 	slaveState = SlaveState::DEREG;
-	//TestMotors();
-	//while (1);
+
 }
 
-
-
-
+// the loop function runs over and over again until power down or reset
 void loop() {
 	if (Serial1.available()) {
 		slaveState = SlaveState::RECEIVE_COMMAND;
@@ -86,6 +81,8 @@ void loop() {
 	case DEREG:
 	{
 		RegisterRollerNode();
+
+
 
 	}break;
 	case IDLE: {
@@ -114,10 +111,10 @@ void loop() {
 
 	// Blink the LED: HIGH when idle, LOW otherwise
 	if (slaveState == IDLE) {
-		digitalWrite(LED_PIN, HIGH);
+		digitalWrite(PIN_LED, HIGH);
 	}
 	else {
-		digitalWrite(LED_PIN, LOW);
+		digitalWrite(PIN_LED, LOW);
 	}
 }
 
@@ -130,10 +127,10 @@ void RegisterRollerNode() {
 		Serial1.println(message);
 		Serial1.flush();
 		Serial.println("=>:" + message);
-		
+
 		lastAttempt = now;
 	}
-	
+
 }
 
 void sendSensorTriggered(String sensor) {
@@ -146,14 +143,14 @@ void sendSensorTriggered(String sensor) {
 void processCommand(String cmd) {
 	cmd.trim();
 	if (cmd.length() == 0 || cmd.charAt(0) != nodeAddr) {
-		
+
 		Serial.print("Foreign command:");
 		Serial.println(cmd);
 		return;
 	}
 	lastHostUpdate = millis();
 	String message = cmd.substring(1);
-	
+
 	if (message.startsWith("PING")) {
 		processPingCommand();
 		return;
@@ -167,13 +164,43 @@ void processCommand(String cmd) {
 	//	processRSPEED(message);
 	//	return;
 	//}
-	
+
 	if (processAnalogReadCommand(cmd)) return;
-	
+
 
 	Serial.print("Unrecognized command for this node:");
 	Serial.println(cmd);
 }
 
+void setMotorSpeed(int speed) {
+	// Set the motor speed
+	// speed should be between 0 and 255
+	Serial.println("Set motor speed: " + String(speed));
+	analogWrite(PIN_MOTOR_SPD, speed);
+}
 
+void updateButtons() {
+	if (isProductionRunning) return;
+	btnLeft.update();
+	btnRigh.update();
+	btnUp.update();
+	btnDown.update();
 
+}
+
+void setmMotorDir(TapeDirection direction) {
+	digitalWrite(PIN_RL1, direction == FORWARD ? HIGH : LOW);
+	digitalWrite(PIN_RL2, direction == FORWARD ? LOW : HIGH);
+}
+
+void openValve() {
+	// Open the valve
+	Serial.println("Open valve");
+	digitalWrite(PIN_VALVE, HIGH);
+
+}
+
+void closeValve() {
+	Serial.println("Close valve");
+	digitalWrite(PIN_VALVE, LOW);
+}

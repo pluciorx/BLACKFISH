@@ -16,6 +16,10 @@
 #define BTN_FAIL_STOP 30
 #define INPUT_PULLDOWN
 
+#define POT_SPEED_CONTROL    A3  // Potencjometr regulacji obrotów
+int pp_PipeSpeed = 0;
+int _prev_pp_PipesSpeed = 0;
+
 Adafruit_Debounce btnPullRight(BTN_PULL_RIGHT, HIGH);
 Adafruit_Debounce btnPullLeft(BTN_PULL_LEFT, HIGH);
 Adafruit_Debounce btnHeat1(BTN_HEAT1, HIGH);
