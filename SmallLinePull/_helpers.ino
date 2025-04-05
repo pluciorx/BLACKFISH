@@ -61,3 +61,7 @@ void processPingCommand()
 	Serial1.flush();
 	Serial.println("=>:" + message);
 }
+
+
+//komendy
+//ping 

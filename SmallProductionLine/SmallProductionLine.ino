@@ -2,6 +2,7 @@
 #include <Adafruit_Debounce.h>
 #include <LiquidCrystal_I2C.h>
 #include <avdweb_VirtualDelay.h>
+#include <SoftwareSerial.h>
 
 //---------- Control Panel Module ---------------
 // PANEL BUTTONS
@@ -152,6 +153,31 @@ long Enc_Pipe_counter = 0;
 int Enc_Pipe_aState;
 int Enc_Pipe_aLastState;
 
+String commandBuffer;
+
+//for production line we have: push and pull
+const int maxSlaves = 4;
+struct SlaveInfo {
+	char ID;
+	bool isHealthy;
+	unsigned long lastCheckedTime; // Timestamp of last health check
+	unsigned long lastOkTime; // Timestamp of last health check
+
+	byte slaveType;
+};
+
+SlaveInfo registeredSlaves[maxSlaves];
+bool isMainRegistered = false;
+bool isRollRegistered = false;
+
+int currentSlaveIndex = -1;
+unsigned long pingSentTime = 0;
+
+int numRegisteredSlaves = 0;
+
+const int healthCheckInterval = 1500; //10s TTL check 
+
+
 
 void(*resetFunc) (void) = 0;
 
@@ -176,7 +202,10 @@ volatile E_STATE _state = E_STATE::STARTING;
 
 // the setup function runs once when you press reset or power the board
 void setup() {
+	
 	Serial.begin(115200);
+	Serial.println("Foam Master V2024.09.20");
+	Serial1.begin(19200);
 
 	lcd.init(); // initialize the lcd	
 	lcd.backlight();
@@ -315,6 +344,7 @@ void loop() {
 		int endCounter = 0;
 		while (endCounter < 3)
 		{
+			CheckRS485Data();
 			UpdateButtons();
 
 			if (btnHeat1.isPressed())
@@ -918,4 +948,21 @@ static bool IsTapeEncRotating() {
 	Enc_Tape_aLastState = Enc_Tape_aState; // Updates the previous state of the outputA with the current state
 
 }
+
+void CheckRS485Data()
+{
+	if (Serial1.available())
+	{
+		String cmd = Serial1.readStringUntil('\n');
+		Serial.println("RS485: " + cmd);
+		//processCommand(cmd);
+	}
+	if (Serial.available())
+	{
+		String cmd = Serial.readStringUntil('\n');
+		Serial.println("RS232: " + cmd);
+		//processCommand(cmd);
+	}
+}
+
 
