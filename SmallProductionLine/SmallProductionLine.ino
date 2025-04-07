@@ -4,6 +4,13 @@
 #include <avdweb_VirtualDelay.h>
 #include <SoftwareSerial.h>
 
+#define ADDR_PANEL '0'
+#define ADDR_ROLL '1'
+#define ADDR_CTRL '2'
+#define ADDR_PULL '3'
+#define ADDR_PUSH '4'
+#define ADDR_DEREG 'F'
+
 //---------- Control Panel Module ---------------
 // PANEL BUTTONS
 #define BTN_PULL_RIGHT 22
@@ -16,10 +23,6 @@
 #define BTN_TAPE_RIGHT 28
 #define BTN_FAIL_STOP 30
 #define INPUT_PULLDOWN
-
-#define POT_SPEED_CONTROL    A3  // Potencjometr regulacji obrotów
-int pp_PipeSpeed = 0;
-int _prev_pp_PipesSpeed = 0;
 
 Adafruit_Debounce btnPullRight(BTN_PULL_RIGHT, HIGH);
 Adafruit_Debounce btnPullLeft(BTN_PULL_LEFT, HIGH);
@@ -142,6 +145,11 @@ LiquidCrystal_I2C lcd(0x27, 20, 4);
 #define ENC_PIPE_A 9
 #define ENC_PIPE_B 10
 
+//MOTOR SPD POT
+#define PIN_MOTOR_SPD A0
+int speed = 0;
+int _prevSpeed = 0;
+
 //pipe end detection
 long prev_Enc_Tape_Counter = 360;
 long Enc_Tape_counter = 0;
@@ -167,8 +175,11 @@ struct SlaveInfo {
 };
 
 SlaveInfo registeredSlaves[maxSlaves];
-bool isMainRegistered = false;
-bool isRollRegistered = false;
+bool isPushRegistered = false;
+bool isPullRegistered = false;
+
+bool isPullStateReadyToStart = false;
+bool isPushStateReadyToStart = false;
 
 int currentSlaveIndex = -1;
 unsigned long pingSentTime = 0;
@@ -182,6 +193,7 @@ const int healthCheckInterval = 1500; //10s TTL check
 void(*resetFunc) (void) = 0;
 
 enum E_STATE {
+	COMMS_CHECK,
 	PIPE_LOAD,
 	PIPE_END,
 	FOAM_END,
@@ -204,7 +216,7 @@ volatile E_STATE _state = E_STATE::STARTING;
 void setup() {
 	
 	Serial.begin(115200);
-	Serial.println("Foam Master V2024.09.20");
+	Serial.println("Foam Master V2025.04.05");
 	Serial1.begin(19200);
 
 	lcd.init(); // initialize the lcd	
@@ -213,9 +225,9 @@ void setup() {
 	lcd.setCursor(0, 0);            // move cursor the first row
 	lcd.print("     BLACKFISH   ");          // print message at the first row
 	lcd.setCursor(0, 1);            // move cursor to the second row
-	lcd.print("    FOAM MASTER S  "); // print message at the second row
+	lcd.print("   FOAM MASTER PRO  "); // print message at the second row
 	lcd.setCursor(0, 2);            // move cursor to the third row
-	lcd.print("     V2024.09.20"); // print message at the second row
+	lcd.print("     V2025.04.05"); // print message at the second row
 	delay(1500);
 	btnPullRight.begin();
 	btnPullLeft.begin();
@@ -311,7 +323,14 @@ void setup() {
 	//pinMode(SIG_TAPE_BREAK_PIN, INPUT);
 	delay(200);
 
-	SetState(E_STATE::PIPE_LOAD);
+	for (int i = 0; i < maxSlaves; i++) {
+		registeredSlaves[i].ID = ADDR_DEREG;
+		registeredSlaves[i].isHealthy = false;
+		registeredSlaves[i].lastCheckedTime = 0;
+		registeredSlaves[i].lastOkTime = 0;
+	}
+
+	SetState(E_STATE::COMMS_CHECK);
 }
 
 // the loop function runs over and over again until power down or reset
@@ -319,6 +338,33 @@ void loop() {
 	UpdateButtons();
 	switch (_state)
 	{
+	case E_STATE::COMMS_CHECK:
+	{
+		lcd.clear();
+		lcd.backlight();
+		lcd.setCursor(0, 0);
+		lcd.print("-  LINE NOT READY  -");          // print message at the first row
+	
+		lcd.setCursor(0, 1);
+		lcd.print("PUSH:- ");
+		lcd.setCursor(8, 1);
+		lcd.print("PULL:- ");
+
+
+		while (1)
+		{
+			if (isPullStateReadyToStart && isPushStateReadyToStart)
+			{
+				break;
+			}
+
+			CheckSlaves();
+		}
+		
+
+		SetState(E_STATE::PIPE_LOAD);
+
+	}break;
 	case PIPE_LOAD:
 	{
 		UpdateButtons();
@@ -326,6 +372,10 @@ void loop() {
 		lcd.backlight();
 		lcd.setCursor(0, 0);
 		lcd.print("-   System ready   -");          // print message at the first row
+		CheckSlaves();
+
+		lcd.setCursor(0, 2);
+		lcd.print("SPD:");
 		lcd.setCursor(0, 3);
 		lcd.print("    Press START    ");
 		analogWrite(TAPE_ENGINE_INVERTER, TAPE_SLOW_SPEED);
@@ -344,9 +394,9 @@ void loop() {
 		int endCounter = 0;
 		while (endCounter < 3)
 		{
-			CheckRS485Data();
+			HandleComms();
 			UpdateButtons();
-
+			ReadAndUpdateSpeed();
 			if (btnHeat1.isPressed())
 			{
 				Serial.println("btnHeat1 pressed");
@@ -745,6 +795,71 @@ void loop() {
 	}
 }
 
+
+bool HandleComms()
+{
+	if (Serial1.available()) {
+		String data = Serial1.readStringUntil('\n');
+
+		if (data.length() < 2) {
+			Serial.println("Invalid data received: " + data);
+			
+		}
+
+		char slaveID = data.charAt(0);
+		String message = data.substring(1);
+
+		/*Serial.println("Received data: " + data);
+		Serial.println("Slave ID: " + slaveID);
+		Serial.println("Message: " + message);*/
+
+		if (message.startsWith("REG_PUSH")) {
+			if (registerSlave(slaveID, ADDR_PUSH)) {
+				Serial.println("Slave registered successfully REG_PUSH node: " + String(slaveID));
+				
+			}
+			else {
+				Serial.println("Can't register node: " + String(slaveID));
+			}
+			isPushRegistered = true;
+			lcd.setCursor(0, 3);
+			lcd.print("PUSH:OK");
+		}
+		else if (message.startsWith("REG_PULL")) {
+			if (registerSlave(slaveID, ADDR_PULL)) {
+				Serial.println("Slave registered successfully REG_PULL node: " + String(slaveID));
+			}
+			else {
+				Serial.println("Can't register node: " + String(slaveID));
+			}
+
+			isPullRegistered = true;
+			lcd.setCursor(8, 3);
+			lcd.print("PULL:OK");
+		}
+
+
+		else if (message.startsWith("PONG")) {
+			//Serial.println("=> Pong received");
+			updateSlaveHealth(slaveID, true);
+		}
+		else if (message.startsWith("ACK")) {
+			//Serial.println(" = > ACK received");
+			updateSlaveHealth(slaveID, true);
+
+		}
+		else if (message.startsWith("AREAD")) {
+			//Serial.println("=> AREAD received");
+			updateSlaveHealth(slaveID, true);
+
+		}
+		else {
+			Serial.println("Unknown message received: " + message);
+		}
+
+	}
+}
+
 void DoHeaters(bool state)
 {
 	digitalWrite(FOAM_PNEUMATIC_1, state);
@@ -876,6 +991,7 @@ void UpdateRemoteButtons()
 
 void UpdateButtons()
 {
+	ReadAndUpdateSpeed();
 	btnPullRight.update();
 	btnPullLeft.update();
 	btnHeat1.update();
@@ -949,20 +1065,6 @@ static bool IsTapeEncRotating() {
 
 }
 
-void CheckRS485Data()
-{
-	if (Serial1.available())
-	{
-		String cmd = Serial1.readStringUntil('\n');
-		Serial.println("RS485: " + cmd);
-		//processCommand(cmd);
-	}
-	if (Serial.available())
-	{
-		String cmd = Serial.readStringUntil('\n');
-		Serial.println("RS232: " + cmd);
-		//processCommand(cmd);
-	}
-}
+
 
 
