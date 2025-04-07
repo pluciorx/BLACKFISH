@@ -85,7 +85,7 @@ void SendPing(char slaveID)
 }
 
 
-static void updateSlaveScreen(int slaveIndex) {
+static void backup (int slaveIndex) {
 	if (millis() - registeredSlaves[slaveIndex].lastOkTime > healthCheckInterval * 2) {
 
 		switch (registeredSlaves[slaveIndex].slaveType) {

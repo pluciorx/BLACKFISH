@@ -1,4 +1,3 @@
-#include <DallasTemperature.h>
 #include <Adafruit_Debounce.h>
 #include <LiquidCrystal_I2C.h>
 #include <avdweb_VirtualDelay.h>
@@ -200,6 +199,7 @@ enum E_STATE {
 	STARTING,
 	PROCESS_RUN,
 	COOLDOWN,
+	EMERGENCY_STOP,
 
 };
 
@@ -214,9 +214,10 @@ volatile E_STATE _state = E_STATE::STARTING;
 
 // the setup function runs once when you press reset or power the board
 void setup() {
-	
+
 	Serial.begin(115200);
-	Serial.println("Foam Master V2025.04.05");
+	Serial.println("Foam Master V2025.04.07");
+	//Serial1.is RS485
 	Serial1.begin(19200);
 
 	lcd.init(); // initialize the lcd	
@@ -336,6 +337,7 @@ void setup() {
 // the loop function runs over and over again until power down or reset
 void loop() {
 	UpdateButtons();
+	HandleComms();
 	switch (_state)
 	{
 	case E_STATE::COMMS_CHECK:
@@ -344,7 +346,7 @@ void loop() {
 		lcd.backlight();
 		lcd.setCursor(0, 0);
 		lcd.print("-  LINE NOT READY  -");          // print message at the first row
-	
+
 		lcd.setCursor(0, 1);
 		lcd.print("PUSH:- ");
 		lcd.setCursor(8, 1);
@@ -353,6 +355,7 @@ void loop() {
 
 		while (1)
 		{
+			HandleEmergency();
 			if (isPullStateReadyToStart && isPushStateReadyToStart)
 			{
 				break;
@@ -360,7 +363,7 @@ void loop() {
 
 			CheckSlaves();
 		}
-		
+
 
 		SetState(E_STATE::PIPE_LOAD);
 
@@ -390,7 +393,7 @@ void loop() {
 		digitalWrite(SIG_FOAM_HEAT_1, LOW);
 		digitalWrite(LED_HEAT_2, LOW);
 		delay(100);
-
+		HandleComms();
 		int endCounter = 0;
 		while (endCounter < 3)
 		{
@@ -497,7 +500,7 @@ void loop() {
 		digitalWrite(LED_PROD_START, HIGH);
 		digitalWrite(LED_PROD_END, LOW);
 
-		while (!btnProdEnd.isPressed() )
+		while (!btnProdEnd.isPressed())
 		{
 			UpdateButtons();
 			if (heaterStartDelay.elapsed())
@@ -618,7 +621,7 @@ void loop() {
 					{
 						UpdateButtons();
 						if (btnProdStart.isPressed()) {
-							
+
 							nextState = E_STATE::PROCESS_RUN;
 							break;
 						}
@@ -645,7 +648,7 @@ void loop() {
 		lcd.setCursor(0, 0);
 		lcd.print("   !! RUNNING !! ");
 		Serial.println("RUNNING");
-		
+
 		DoHeaters(HIGH);
 
 		digitalWrite(LED_PROD_START, HIGH);
@@ -669,28 +672,28 @@ void loop() {
 
 		E_STATE nextState = E_STATE::COOLDOWN;
 		long endCounter = 0;
-		
+
 		while (endCounter < 2)
 		{
 			IsPipeEncRotating();
 			IsTapeEncRotating();
-		
+
 			if (pipePresenceDelay.elapsed())
 			{
 				//if (IsPipeEndDetectedOnEncoder() || IsTapeBreakDetectedOnEncoder()) {
-				
+
 				if (IsTapeBreakDetectedOnLaser()) {
 
 					nextState = E_STATE::FOAM_END;
 					Serial.println("Foam Missing;");
 					break;
 				}
-				if (IsPipeBreakDetectedOnLaser()){
+				if (IsPipeBreakDetectedOnLaser()) {
 
 					nextState = E_STATE::PIPE_END;
 					Serial.println("Pipe Missing;");
 					break;
-				} 
+				}
 				pipePresenceDelay.start(300);
 			}
 
@@ -727,7 +730,7 @@ void loop() {
 		}
 
 		Serial.println("btnProdEnd pressed");
-		
+
 		SetState(nextState);
 
 	}break;
@@ -803,20 +806,20 @@ bool HandleComms()
 
 		if (data.length() < 2) {
 			Serial.println("Invalid data received: " + data);
-			
+
 		}
 
 		char slaveID = data.charAt(0);
 		String message = data.substring(1);
 
-		/*Serial.println("Received data: " + data);
+		Serial.println("Received data: " + data);
 		Serial.println("Slave ID: " + slaveID);
-		Serial.println("Message: " + message);*/
+		Serial.println("Message: " + message);
 
 		if (message.startsWith("REG_PUSH")) {
 			if (registerSlave(slaveID, ADDR_PUSH)) {
 				Serial.println("Slave registered successfully REG_PUSH node: " + String(slaveID));
-				
+
 			}
 			else {
 				Serial.println("Can't register node: " + String(slaveID));
@@ -865,6 +868,31 @@ void DoHeaters(bool state)
 	digitalWrite(FOAM_PNEUMATIC_1, state);
 	digitalWrite(FOAM_PNEUMATIC_2, state);
 }
+
+void HandleEmergency()
+{
+	btnFailStop.update();
+	if (btnFailStop.isPressed())
+	{
+
+		Serial.println("EMERGENCY STOP");
+		lcd.clear();
+		lcd.setCursor(0, 0);
+		lcd.print("-     EMERGENCY!   -");
+		lcd.setCursor(0, 1);
+		lcd.print("        STOP     ");
+		
+		DoCoolDownAndStopTape();
+		sendCommand(-1, "EMERGENCY STOP");
+		while (digitalRead(BTN_FAIL_STOP) != HIGH) {
+			delay(10);
+		}
+		Serial.println("EMERGENCY STOP released");
+		resetFunc();
+	}
+
+}
+
 void DoCoolDownAndStopTape()
 {
 	digitalWrite(SIG_TAPE_LEFT, LOW);
@@ -991,6 +1019,7 @@ void UpdateRemoteButtons()
 
 void UpdateButtons()
 {
+	HandleEmergency();
 	ReadAndUpdateSpeed();
 	btnPullRight.update();
 	btnPullLeft.update();

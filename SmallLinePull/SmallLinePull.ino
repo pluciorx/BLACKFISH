@@ -139,7 +139,7 @@ void RegisterNode() {
 	unsigned long now = millis();
 
 	if (now - lastAttempt >= 500) {  // every 2 seconds
-		String message = String(nodeAddr) + "REG_PULL";
+		String message = "REG_PULL"+ String(nodeAddr) ;
 		Serial1.println(message);
 		Serial1.flush();
 		Serial.println("=>:" + message);
