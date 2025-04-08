@@ -85,7 +85,14 @@ void SendPing(char slaveID)
 }
 
 
-static void backup (int slaveIndex) {
+void sendCommand(char slave_id, String cmd) {
+	String message = cmd + ":" + String(slave_id);
+	Serial1.println(message);
+	Serial1.flush();
+	Serial.println("=>" + message);
+}
+
+static void updateSlaveScreen(int slaveIndex) {
 	if (millis() - registeredSlaves[slaveIndex].lastOkTime > healthCheckInterval * 2) {
 
 		switch (registeredSlaves[slaveIndex].slaveType) {
@@ -137,16 +144,4 @@ void updateSlaveHealth(char slaveID, bool isHealthy) {
 			break;
 		}
 	}
-}
-
-/// <summary>
-/// 
-/// </summary>
-/// <param name="slave_id">the destination of the message (only this slave should act on the message)</param>
-/// <param name="cmd">Command to be executed</param>
-void sendCommand(char slave_id, String cmd) {
-	String message = String(slave_id) + cmd;
-	Serial1.println(message);
-	Serial1.flush();
-	Serial.println("=>" + message);
 }

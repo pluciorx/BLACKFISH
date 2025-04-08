@@ -1,16 +1,15 @@
 void SetRollerSpeed(int speed) {
-	
+
 }
 
 void ackCommand(String cmd) {
-	String message = String(nodeAddr) + "ACK:" + cmd;
-	Serial1.println(message);
-	Serial1.flush();
+	String message = "ACK:" + cmd;
+	sendCommand(nodeAddr, message);
 	Serial.println("=>:" + message);
 
 }
 void sendCommand(char slave_id, String cmd) {
-	String message = String(slave_id) + cmd;
+	String message = cmd + ":" + String(slave_id);
 	Serial1.println(message);
 	Serial1.flush();
 	Serial.println("=>" + message);
@@ -56,10 +55,10 @@ bool processAnalogReadCommand(String cmd) {
 
 void processPingCommand()
 {
-	String message = String(nodeAddr) + "PONG";
-	Serial1.println(message);
-	Serial1.flush();
+	String message = "PONG";
+	sendCommand(nodeAddr, message);
 	Serial.println("=>:" + message);
+	
 }
 
 

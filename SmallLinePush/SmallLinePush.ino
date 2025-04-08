@@ -5,8 +5,9 @@
 #define ADDR_PANEL '0'
 #define ADDR_ROLL '1'
 #define ADDR_CTRL '2'
-#define ADDR_PULL '3'
-#define ADDR_PUSH '4'
+#define ADDR_PUSH '3'
+#define ADDR_PULL '4'
+
 #define ADDR_DEREG 'F'
 const char nodeAddr = ADDR_PUSH;
 
@@ -139,9 +140,8 @@ void RegisterNode() {
 	unsigned long now = millis();
 
 	if (now - lastAttempt >= 500) {  // every 2 seconds
-		String message = "REG_PUSH"+ String(nodeAddr);
-		Serial1.println(message);
-		Serial1.flush();
+		String message = "REG_PUSH";
+		sendCommand(nodeAddr, message);
 		Serial.println("=>:" + message);
 
 		lastAttempt = now;
@@ -161,8 +161,8 @@ void processCommand(String cmd) {
 	cmd.trim();
 	if (cmd.length() == 0 || cmd.charAt(0) != nodeAddr) {
 
-		Serial.print("Foreign command:");
-		Serial.println(cmd);
+		//Serial.print("Foreign command:");
+		//Serial.println(cmd);
 		return;
 	}
 	lastHostUpdate = millis();

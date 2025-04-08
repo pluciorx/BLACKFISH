@@ -6,8 +6,9 @@
 #define ADDR_PANEL '0'
 #define ADDR_ROLL '1'
 #define ADDR_CTRL '2'
-#define ADDR_PULL '3'
-#define ADDR_PUSH '4'
+#define ADDR_PUSH '3'
+#define ADDR_PULL '4'
+
 #define ADDR_DEREG 'F'
 
 //---------- Control Panel Module ---------------
@@ -352,16 +353,20 @@ void loop() {
 		lcd.setCursor(8, 1);
 		lcd.print("PULL:- ");
 
-
+		//CheckSlaves();
 		while (1)
 		{
-			HandleEmergency();
+			HandleComms();
+			CheckSlaves();
+			checkAndDeregisterSlaves();			
+			UpdateButtons();
+			
 			if (isPullStateReadyToStart && isPushStateReadyToStart)
 			{
 				break;
 			}
 
-			CheckSlaves();
+			
 		}
 
 
@@ -803,14 +808,14 @@ bool HandleComms()
 {
 	if (Serial1.available()) {
 		String data = Serial1.readStringUntil('\n');
-
+		//data = data.trim(); // Remove any leading or trailing whitespace
 		if (data.length() < 2) {
 			Serial.println("Invalid data received: " + data);
 
 		}
 
-		char slaveID = data.charAt(0);
-		String message = data.substring(1);
+		char slaveID = data.charAt(data.lastIndexOf(':')+1);
+		String message = data.substring(0, data.lastIndexOf(':'));
 
 		Serial.println("Received data: " + data);
 		Serial.println("Slave ID: " + slaveID);
@@ -825,7 +830,7 @@ bool HandleComms()
 				Serial.println("Can't register node: " + String(slaveID));
 			}
 			isPushRegistered = true;
-			lcd.setCursor(0, 3);
+			lcd.setCursor(0, 1);
 			lcd.print("PUSH:OK");
 		}
 		else if (message.startsWith("REG_PULL")) {
@@ -837,7 +842,7 @@ bool HandleComms()
 			}
 
 			isPullRegistered = true;
-			lcd.setCursor(8, 3);
+			lcd.setCursor(8, 1);
 			lcd.print("PULL:OK");
 		}
 
@@ -1021,6 +1026,7 @@ void UpdateButtons()
 {
 	HandleEmergency();
 	ReadAndUpdateSpeed();
+
 	btnPullRight.update();
 	btnPullLeft.update();
 	btnHeat1.update();
