@@ -677,10 +677,8 @@ void loop() {
 		digitalWrite(LED_PROD_START, HIGH);
 		digitalWrite(LED_PROD_END, LOW);
 
-		
 		SendEngineForwardRequest();
 		
-
 		delay(200);
 		digitalWrite(SIG_TAPE_LEFT, HIGH);
 		digitalWrite(SIG_TAPE_RIGHT, LOW);
@@ -887,6 +885,14 @@ bool HandleComms()
 			updateSlaveHealth(slaveID, true);
 
 		}
+		else if (message.startsWith("HOLD")) {
+
+			HandleEmergency(true);
+			updateSlaveHealth(slaveID, true);
+
+		}
+
+
 
 		else {
 			Serial.println("Unknown message received: " + message);
@@ -922,11 +928,11 @@ void DoHeaters(bool state)
 	digitalWrite(FOAM_PNEUMATIC_2, state);
 }
 
-void HandleEmergency()
+void HandleEmergency(bool force)
 {
 	btnFailStop.update();
 	
-	if (btnFailStop.isPressed())
+	if (btnFailStop.isPressed() || force)
 	{
 
 		Serial.println("EMERGENCY STOP");
@@ -1079,7 +1085,7 @@ void UpdateRemoteButtons()
 
 void UpdateButtons()
 {
-	HandleEmergency();
+	HandleEmergency(false);
 	ReadAndUpdateSpeed();
 
 	btnPullRight.update();

@@ -244,10 +244,19 @@ void UpdateReadyState()
 		isProdReadyState = true;
 	}
 	else {
+
+		engineStop();
+		if (isProdReadyState != isProdReadyStatePrev) SendHold();
 		isProdReadyStatePrev = isProdReadyState;
 
 	}
 
+}
+
+void SendHold()
+{
+	sendCommand(nodeAddr, "HOLD");
+	sendCommand(ADDR_PUSH, "ENG:S");
 }
 
 void SendReadyStateToHost()

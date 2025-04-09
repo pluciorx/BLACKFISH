@@ -227,6 +227,12 @@ void setMotorSpeed(int speed) {
 	analogWrite(PIN_MOTOR_SPD, speed);
 }
 
+
+void SendHold()
+{
+	sendCommand(nodeAddr, "HOLD");
+	sendCommand(ADDR_PULL, "ENG:S");
+}
 void UpdateReadyState()
 {
 	
@@ -243,6 +249,7 @@ void UpdateReadyState()
 		isProdReadyState = true;
 	}
 	else {
+		if (isProdReadyState != isProdReadyStatePrev) SendHold();
 		isProdReadyStatePrev = isProdReadyState;
 
 	}
