@@ -64,3 +64,20 @@ void processPingCommand()
 	
 }
 
+void engineMoveForward()
+{
+	digitalWrite(PIN_RL_FORWARD, HIGH);
+	digitalWrite(PIN_RL_BACKWARD, LOW);
+}
+
+void engineMoveBackward()
+{
+	digitalWrite(PIN_RL_FORWARD, LOW);
+	digitalWrite(PIN_RL_BACKWARD, HIGH);
+}
+
+void engineStop()
+{
+	digitalWrite(PIN_RL_FORWARD, LOW);
+	digitalWrite(PIN_RL_BACKWARD, LOW);
+}

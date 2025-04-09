@@ -150,6 +150,28 @@ void RegisterNode() {
 
 }
 
+void processEngineCommand(String cmd)
+{
+	int colonIndex = cmd.indexOf(':');
+	if (colonIndex == -1) {
+		Serial.println("Invalid ENG command format.");
+		return;
+	}
+
+	String engineDir = cmd.substring(colonIndex + 1);
+	if (engineDir.startsWith("F"))
+	{
+		engineMoveForward();
+	}
+	if (engineDir.startsWith("B"))
+	{
+		engineMoveForward();
+	}
+	if (engineDir.startsWith("F"))
+	{
+		engineStop();
+	}
+}
 
 void sendSensorState(String sensor,bool state) {	
 	String message = sensor + ":" + String(state);
@@ -180,7 +202,13 @@ void processCommand(String cmd) {
 		return;
 	}
 
-	if (message.startsWith("SETRSPD")) {
+	if (message.startsWith("ENG")) {
+		// Send the readiness state to the host
+		processEngineCommand(cmd);
+		return;
+	}
+
+	if (message.startsWith("ESPD")) {
 		processRSPEED(message);
 		return;
 	}

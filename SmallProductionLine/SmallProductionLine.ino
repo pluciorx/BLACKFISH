@@ -677,6 +677,7 @@ void loop() {
 		digitalWrite(LED_PROD_START, HIGH);
 		digitalWrite(LED_PROD_END, LOW);
 
+		
 		analogWrite(TAPE_ENGINE_INVERTER, TAPE_PROD_SPEED);
 		delay(200);
 		digitalWrite(SIG_TAPE_LEFT, HIGH);
@@ -985,6 +986,7 @@ bool IsPipeBreakDetectedOnLaser()
 	return false;
 
 }
+
 
 bool IsTapeBreakDetectedOnEncoder()
 {

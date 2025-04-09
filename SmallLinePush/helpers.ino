@@ -1,5 +1,21 @@
+void SendEngineForwardRequest()
+{
+	sendCommand(ADDR_PULL, "ENG:F");
+	sendCommand(ADDR_PUSH, "ENG:F");
+}
 
+void SendEngineBackwardRequest()
+{
+	sendCommand(ADDR_PULL, "ENG:B");
+	sendCommand(ADDR_PUSH, "ENG:B");
+}
 
+void SendEngineStopRequest()
+{
+	sendCommand(ADDR_PULL, "ENG:S");
+	
+	sendCommand(ADDR_PUSH, "ENG:S");
+}
 
 void CheckSlaves() {
 	for (int i = 0; i < maxSlaves; i++) {
@@ -16,11 +32,12 @@ void CheckSlaves() {
 static int ReadAndUpdateSpeed() {
 	
 	speed = constrain(1024 - analogRead(PIN_MOTOR_SPD), 0, 1023);
-	if (speed != _prevSpeed && abs(_prevSpeed - speed) >= 32) {
+	if (speed != _prevSpeed && abs(_prevSpeed - speed) >= 64) {
 		_prevSpeed = speed;
 
-		String message = "SETRSPD:" + String(speed);
+		String message = "ESPD:" + String(speed);
 		if (isPushRegistered) sendCommand(ADDR_PUSH, message);
+		delay(10);
 		if (isPullRegistered) sendCommand(ADDR_PULL, message);
 		
 		lcd.setCursor(4, 2);
