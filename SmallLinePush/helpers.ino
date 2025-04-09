@@ -1,5 +1,6 @@
 void SendEngineForwardRequest()
-{
+{ 
+	
 	sendCommand(ADDR_PULL, "ENG:F");
 	sendCommand(ADDR_PUSH, "ENG:F");
 }
@@ -107,6 +108,7 @@ void sendCommand(char slave_id, String cmd) {
 	String message = cmd + ":" + String(slave_id);
 	Serial1.println(message);
 	Serial1.flush();
+	delay(10);
 	Serial.println("=>" + message);
 }
 

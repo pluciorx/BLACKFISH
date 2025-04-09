@@ -678,7 +678,9 @@ void loop() {
 		digitalWrite(LED_PROD_END, LOW);
 
 		
-		analogWrite(TAPE_ENGINE_INVERTER, TAPE_PROD_SPEED);
+		SendEngineForwardRequest();
+		
+
 		delay(200);
 		digitalWrite(SIG_TAPE_LEFT, HIGH);
 		digitalWrite(SIG_TAPE_RIGHT, LOW);
@@ -923,6 +925,7 @@ void DoHeaters(bool state)
 void HandleEmergency()
 {
 	btnFailStop.update();
+	
 	if (btnFailStop.isPressed())
 	{
 
@@ -935,8 +938,10 @@ void HandleEmergency()
 
 		DoCoolDownAndStopTape();
 		sendCommand(-1, "EMERGENCY STOP");
+		SendEngineStopRequest();
 		while (digitalRead(BTN_FAIL_STOP) != HIGH) {
 			delay(10);
+
 		}
 		Serial.println("EMERGENCY STOP released");
 		resetFunc();
@@ -946,9 +951,8 @@ void HandleEmergency()
 
 void DoCoolDownAndStopTape()
 {
-	digitalWrite(SIG_TAPE_LEFT, LOW);
-	digitalWrite(SIG_TAPE_RIGHT, LOW);
-
+	SendEngineStopRequest();
+	
 	digitalWrite(FOAM_PNEUMATIC_1, LOW);
 	digitalWrite(FOAM_PNEUMATIC_2, LOW);
 
@@ -1021,25 +1025,29 @@ void HandleTapeMovement()
 	if (btnTapeRight.isPressed())
 	{
 		Serial.println("btnTapeRight pressed");
+		SendEngineForwardRequest();
+		
 		digitalWrite(SIG_TAPE_RIGHT, HIGH);
 		digitalWrite(SIG_TAPE_LEFT, LOW);
 		digitalWrite(LED_TAPE_RIGHT, HIGH);
 	}
 	else
 	{
+		SendEngineStopRequest();
 		digitalWrite(SIG_TAPE_RIGHT, LOW);
 		digitalWrite(LED_TAPE_RIGHT, LOW);
 	}
 
 	if (btnTapeLeft.isPressed())
 	{
+		SendEngineBackwardRequest();
 		Serial.println("btnTapeLeft pressed");
 		digitalWrite(SIG_TAPE_RIGHT, LOW);
 		digitalWrite(SIG_TAPE_LEFT, HIGH);
 		digitalWrite(LED_TAPE_LEFT, HIGH);
 	}
 	else {
-
+		SendEngineStopRequest();
 		digitalWrite(SIG_TAPE_LEFT, LOW);
 		digitalWrite(LED_TAPE_LEFT, LOW);
 	}
