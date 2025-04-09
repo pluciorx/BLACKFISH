@@ -1,19 +1,22 @@
 void SetRollerSpeed(int speed) {
-
+		
+	analogWrite(PIN_MOTOR_SPD, speed);
 }
 
 void ackCommand(String cmd) {
 	String message = "ACK:" + cmd;
 	sendCommand(nodeAddr, message);
-	Serial.println("=>:" + message);
-
 }
+
+
 void sendCommand(char slave_id, String cmd) {
 	String message = cmd + ":" + String(slave_id);
 	Serial1.println(message);
 	Serial1.flush();
 	Serial.println("=>" + message);
 }
+
+
 
 bool processRSPEED(String cmd) {
 	int colonIndex = cmd.indexOf(':');
@@ -31,7 +34,7 @@ bool processRSPEED(String cmd) {
 	Serial.println(speedValue);
 
 	// Acknowledge the command
-	ackCommand(cmd);
+	//ackCommand(cmd);
 	return true;
 }
 
@@ -57,10 +60,7 @@ void processPingCommand()
 {
 	String message = "PONG";
 	sendCommand(nodeAddr, message);
-	Serial.println("=>:" + message);
+	//Serial.println("=>:" + message);
 	
 }
 
-
-//komendy
-//ping 

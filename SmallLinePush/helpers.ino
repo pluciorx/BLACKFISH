@@ -8,6 +8,7 @@ void CheckSlaves() {
 				SendPing(registeredSlaves[i].ID);
 				registeredSlaves[i].lastCheckedTime = millis();
 			}
+			
 		}
 		updateSlaveScreen(i);
 	}
@@ -124,6 +125,10 @@ static void updateSlaveScreen(int slaveIndex) {
 	}
 }
 
+void sendReadinesRequest(char slaveID) {
+	String message = "ISRREQ";
+	sendCommand(slaveID, message);
+}
 
 void checkAndDeregisterSlaves() {
 	for (int i = 0; i < maxSlaves; i++) {

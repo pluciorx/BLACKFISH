@@ -48,9 +48,10 @@ SlaveState slaveState = SlaveState::IDLE;
 enum TapeDirection { FORWARD, BACKWARD, STOP };
 
 unsigned long lastHostUpdate = 0;
-const unsigned long healthCheckInterval = 2000UL; //3S TTL check 
+const unsigned long healthCheckInterval = 3000UL; //3S TTL check 
 
-bool isProductionRunning = false;
+bool isProdReadyState = false;
+bool isProdReadyStatePrev = false;
 bool isValveUp = false;
 
 void setup() {
@@ -71,7 +72,7 @@ void setup() {
 	btnForward.begin();
 	btnBackward.begin();
 
-	Serial1.begin(19200);
+	Serial1.begin(14400);
 	Serial.begin(115200);
 	Serial.println("");
 
@@ -91,7 +92,7 @@ void setup() {
 // the loop function runs over and over again until power down or reset
 void loop() {
 	updateButtons();
-	ReadINOUTSensors();
+	UpdateReadyState();
 	if (Serial1.available()) {
 		slaveState = SlaveState::RECEIVE_COMMAND;
 	}
@@ -104,7 +105,7 @@ void loop() {
 	}break;
 	case IDLE: {
 		if (millis() - lastHostUpdate > healthCheckInterval) {
-			Serial.println("No communication with host for 3 seconds. Going to DEREG.");
+			Serial.println("PUSH going DEREG.");
 			slaveState = SlaveState::DEREG;
 
 		}
@@ -118,7 +119,7 @@ void loop() {
 
 	case RECEIVE_COMMAND: {
 		String command = Serial1.readStringUntil('\n');
-		Serial1.flush();
+		
 		processCommand(command);
 
 		slaveState = SlaveState::IDLE;
@@ -149,44 +150,44 @@ void RegisterNode() {
 
 }
 
-void sendSensorTriggered(String sensor) {
-	Serial.println("Sensor triggered: " + sensor);
-	String message = String(nodeAddr) + sensor;
-	Serial1.println(message);
-	Serial1.flush();
+void sendSensorState(String sensor, bool state) {
+	String message = sensor + ":" + String(state);
+	sendCommand(nodeAddr, message);
+
 }
 
 
 void processCommand(String cmd) {
 	cmd.trim();
-	if (cmd.length() == 0 || cmd.charAt(0) != nodeAddr) {
 
-		//Serial.print("Foreign command:");
-		//Serial.println(cmd);
+	char slaveID = cmd.charAt(cmd.lastIndexOf(':') + 1);
+	if (slaveID != nodeAddr) {
+		
 		return;
 	}
+
 	lastHostUpdate = millis();
-	String message = cmd.substring(1);
+	delay(100);
+	String message = cmd.substring(0, cmd.lastIndexOf(':'));
 
 	if (message.startsWith("PING")) {
 		processPingCommand();
 		return;
 	}
 
-	//if (message.startsWith("RL")) {
-	//	//Relay command
-	//	return;
-	//}
-	//if (message.startsWith("SETRSPD")) {
-	//	processRSPEED(message);
-	//	return;
-	//}
+	if (message.startsWith("ISRREQ")) {
+		// Send the readiness state to the host
+		SendReadyStateToHost();
+		return;
+	}
+
+	if (message.startsWith("SETRSPD")) {
+		processRSPEED(message);
+		return;
+	}
 
 	if (processAnalogReadCommand(cmd)) return;
 
-
-	Serial.print("Unrecognized command for this node:");
-	Serial.println(cmd);
 }
 
 void setMotorSpeed(int speed) {
@@ -197,10 +198,9 @@ void setMotorSpeed(int speed) {
 	analogWrite(PIN_MOTOR_SPD, speed);
 }
 
-
-
-void ReadINOUTSensors()
+void UpdateReadyState()
 {
+	
 	sensorInState = digitalRead(PIN_SEN_IN);
 
 	sensorOutState = digitalRead(PIN_SEN_OUT);
@@ -208,25 +208,28 @@ void ReadINOUTSensors()
 	sensorDoor1State = digitalRead(PIN_SEN_DOOR1);
 
 	sensorDoor2State = digitalRead(PIN_SEN_DOOR2);
-
-	if (sensorDoor1State != sensorDoor1StatePrev) {
-
-		sendSensorTriggered("SENSOR_DOOR1");
-		sensorDoor1StatePrev = sensorDoor1State;
+	//we are responding to the host request if the module is ready to be operated.
+	if (sensorDoor1State == LOW && sensorDoor2State == LOW && sensorInState == LOW && sensorOutState) {
+		//both doors are closed
+		isProdReadyState = true;
 	}
-	if (sensorDoor2State != sensorDoor2StatePrev) {
+	else {
+		isProdReadyStatePrev = isProdReadyState;
 
-		sendSensorTriggered("SENSOR_DOOR2");
-		sensorDoor2StatePrev = sensorDoor2State;
 	}
+	
+}
 
-	if (sensorInState != sensorInStatePrev) {
-		sendSensorTriggered("SENSOR_IN");
-		sensorInStatePrev = sensorInState;
+void SendReadyStateToHost()
+{
+	if (isProdReadyState) {
+
+		String message = "ISRREP:1";
+		sendCommand(nodeAddr, message);
 	}
-	if (sensorOutState != sensorOutStatePrev) {
-		sendSensorTriggered("SENSOR_OUT");
-		sensorOutStatePrev = sensorOutState;
+	else {
+		String message = "ISRREP:0";
+		sendCommand(nodeAddr, message);
 	}
 }
 

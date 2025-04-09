@@ -181,12 +181,18 @@ bool isPullRegistered = false;
 bool isPullStateReadyToStart = false;
 bool isPushStateReadyToStart = false;
 
+
+
 int currentSlaveIndex = -1;
 unsigned long pingSentTime = 0;
 
 int numRegisteredSlaves = 0;
 
-const int healthCheckInterval = 1500; //10s TTL check 
+//Timers
+unsigned long lastReadinessRequestTime = 0; // Tracks the last time the readiness request was sent
+const unsigned long readinessRequestInterval = 1500; // Interval in milliseconds (1.5 seconds)
+
+const int healthCheckInterval = 2500; //10s TTL check 
 
 
 
@@ -217,9 +223,10 @@ volatile E_STATE _state = E_STATE::STARTING;
 void setup() {
 
 	Serial.begin(115200);
+	Serial.println("");
 	Serial.println("Foam Master V2025.04.07");
 	//Serial1.is RS485
-	Serial1.begin(19200);
+	Serial1.begin(14400);
 
 	lcd.init(); // initialize the lcd	
 	lcd.backlight();
@@ -229,7 +236,7 @@ void setup() {
 	lcd.setCursor(0, 1);            // move cursor to the second row
 	lcd.print("   FOAM MASTER PRO  "); // print message at the second row
 	lcd.setCursor(0, 2);            // move cursor to the third row
-	lcd.print("     V2025.04.05"); // print message at the second row
+	lcd.print("     V2025.04.09"); // print message at the second row
 	delay(1500);
 	btnPullRight.begin();
 	btnPullLeft.begin();
@@ -352,23 +359,34 @@ void loop() {
 		lcd.print("PUSH:- ");
 		lcd.setCursor(8, 1);
 		lcd.print("PULL:- ");
-
-		//CheckSlaves();
-		while (1)
+		lcd.setCursor(0, 2);
+		lcd.print("SPD:");
+		lcd.setCursor(4, 2);
+		lcd.print(map(speed, 0, 1024, 0, 100));
+		lcd.print("% ");
+		
+		while (!isPullStateReadyToStart || !isPushStateReadyToStart)
 		{
-			HandleComms();
-			CheckSlaves();
-			checkAndDeregisterSlaves();			
-			UpdateButtons();
-			
-			if (isPullStateReadyToStart && isPushStateReadyToStart)
+			unsigned long currentTime = millis();
+
+			// Check if 1.5 seconds have passed since the last readiness request
+			if (currentTime - lastReadinessRequestTime >= readinessRequestInterval)
 			{
-				break;
+				if (isPushRegistered) sendReadinesRequest(ADDR_PUSH);
+				delay(20);
+				if (isPullRegistered) sendReadinesRequest(ADDR_PULL);
+				lastReadinessRequestTime = currentTime; // Update the last request time
 			}
 
-			
+			HandleComms();
+			CheckSlaves();
+			checkAndDeregisterSlaves();
+			UpdateButtons();
 		}
-
+		lcd.setCursor(0, 3);
+		lcd.print("  SYSTEM READY   ");
+		delay(2000);
+	
 
 		SetState(E_STATE::PIPE_LOAD);
 
@@ -807,19 +825,20 @@ void loop() {
 bool HandleComms()
 {
 	if (Serial1.available()) {
-		String data = Serial1.readStringUntil('\n');
+		String data = "";
+		data = Serial1.readStringUntil('\n');
+		Serial1.flush();
 		//data = data.trim(); // Remove any leading or trailing whitespace
 		if (data.length() < 2) {
 			Serial.println("Invalid data received: " + data);
-
+			return false;
 		}
 
-		char slaveID = data.charAt(data.lastIndexOf(':')+1);
-		String message = data.substring(0, data.lastIndexOf(':'));
+		char slaveID = data.charAt(data.lastIndexOf(':') + 1);
 
-		Serial.println("Received data: " + data);
-		Serial.println("Slave ID: " + slaveID);
-		Serial.println("Message: " + message);
+		//Serial.println("SlaveID: " + String(slaveID));
+
+		String message = data.substring(0, data.lastIndexOf(':'));
 
 		if (message.startsWith("REG_PUSH")) {
 			if (registerSlave(slaveID, ADDR_PUSH)) {
@@ -845,8 +864,6 @@ bool HandleComms()
 			lcd.setCursor(8, 1);
 			lcd.print("PULL:OK");
 		}
-
-
 		else if (message.startsWith("PONG")) {
 			//Serial.println("=> Pong received");
 			updateSlaveHealth(slaveID, true);
@@ -861,11 +878,39 @@ bool HandleComms()
 			updateSlaveHealth(slaveID, true);
 
 		}
+		else if (message.startsWith("ISRREP")) {
+
+			HandleIRREP(slaveID, message);
+			updateSlaveHealth(slaveID, true);
+
+		}
+
 		else {
 			Serial.println("Unknown message received: " + message);
 		}
 
 	}
+}
+
+void HandleIRREP(int slaveID, String message)
+{
+
+	char readiness = message.charAt(message.lastIndexOf(':') + 1);
+	updateSlaveHealth(slaveID, true);
+	updateSlaveScreen(slaveID);
+	if (slaveID == ADDR_PUSH ) {
+		isPushStateReadyToStart = (readiness == '1');
+		Serial.println("Push node readiness: " + String(isPushStateReadyToStart ? "Ready" : "Not Ready"));
+	}
+	else if (slaveID == ADDR_PULL) {
+		isPullStateReadyToStart = (readiness == '1');
+		Serial.println("Pull node readiness: " + String(isPullStateReadyToStart ? "Ready" : "Not Ready"));
+
+	}
+	else {
+		Serial.println("Unknown slave ID in ISRREP message.");
+	}
+
 }
 
 void DoHeaters(bool state)
@@ -886,7 +931,7 @@ void HandleEmergency()
 		lcd.print("-     EMERGENCY!   -");
 		lcd.setCursor(0, 1);
 		lcd.print("        STOP     ");
-		
+
 		DoCoolDownAndStopTape();
 		sendCommand(-1, "EMERGENCY STOP");
 		while (digitalRead(BTN_FAIL_STOP) != HIGH) {
