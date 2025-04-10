@@ -1,21 +1,34 @@
 void SendEngineForwardRequest()
 { 
+	if (!isEngRotating) {
+		sendCommand(ADDR_PULL, "ENG:F");
+		delay(10);
+		sendCommand(ADDR_PUSH, "ENG:F");
+		isEngRotating = true;
+	}
 	
-	sendCommand(ADDR_PULL, "ENG:F");
-	sendCommand(ADDR_PUSH, "ENG:F");
 }
 
 void SendEngineBackwardRequest()
 {
-	sendCommand(ADDR_PULL, "ENG:B");
-	sendCommand(ADDR_PUSH, "ENG:B");
+	if (!isEngRotating) {
+		sendCommand(ADDR_PULL, "ENG:B");
+		delay(10);
+		sendCommand(ADDR_PUSH, "ENG:B");
+		isEngRotating = true;
+	}
+	
 }
 
 void SendEngineStopRequest()
 {
-	sendCommand(ADDR_PULL, "ENG:S");
+	if (isEngRotating) {
+		sendCommand(ADDR_PULL, "ENG:S");
+		delay(10);
+		sendCommand(ADDR_PUSH, "ENG:S");
+		isEngRotating = false;
+	}
 	
-	sendCommand(ADDR_PUSH, "ENG:S");
 }
 
 void CheckSlaves() {
@@ -30,9 +43,9 @@ void CheckSlaves() {
 		updateSlaveScreen(i);
 	}
 }
-static int ReadAndUpdateSpeed() {
+ int ReadAndUpdateSpeed() {
 	
-	speed = constrain(1024 - analogRead(PIN_MOTOR_SPD), 0, 1023);
+	/*speed = constrain(1024 - analogRead(PIN_MOTOR_SPD), 0, 1023);
 	if (speed != _prevSpeed && abs(_prevSpeed - speed) >= 64) {
 		_prevSpeed = speed;
 
@@ -48,7 +61,7 @@ static int ReadAndUpdateSpeed() {
 		return speed;
 
 	}
-	return _prevSpeed;
+	return _prevSpeed;*/
 }
 
 bool deregisterSlave(char slaveID) {
@@ -108,7 +121,7 @@ void sendCommand(char slave_id, String cmd) {
 	String message = cmd + ":" + String(slave_id);
 	Serial1.println(message);
 	Serial1.flush();
-	delay(10);
+	delay(5);
 	Serial.println("=>" + message);
 }
 

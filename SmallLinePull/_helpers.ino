@@ -28,13 +28,10 @@ bool processRSPEED(String cmd) {
 	String speedStr = cmd.substring(colonIndex + 1);
 	int speedValue = speedStr.toInt();
 	SetRollerSpeed(speedValue);
-	// Perform the necessary actions to set the speed
-	// For example, you can set a global variable or control a motor
+
 	Serial.print("Setting speed to: ");
 	Serial.println(speedValue);
 
-	// Acknowledge the command
-	//ackCommand(cmd);
 	return true;
 }
 
@@ -64,20 +61,30 @@ void processPingCommand()
 	
 }
 
-void engineMoveForward()
-{
-	digitalWrite(PIN_RL_FORWARD, HIGH);
-	digitalWrite(PIN_RL_BACKWARD, LOW);
-}
-
 void engineMoveBackward()
 {
-	digitalWrite(PIN_RL_FORWARD, LOW);
-	digitalWrite(PIN_RL_BACKWARD, HIGH);
+	if (!isEngineRotating) {
+		digitalWrite(PIN_RL_FORWARD, LOW);
+		digitalWrite(PIN_RL_BACKWARD, HIGH);
+		isEngineRotating = true;
+	}
+}
+
+void engineMoveForward()
+{
+	if (!isEngineRotating) {
+		digitalWrite(PIN_RL_FORWARD, HIGH);
+		digitalWrite(PIN_RL_BACKWARD, LOW);
+		isEngineRotating = true;
+	}
 }
 
 void engineStop()
 {
-	digitalWrite(PIN_RL_FORWARD, LOW);
-	digitalWrite(PIN_RL_BACKWARD, LOW);
+	if (isEngineRotating)
+	{
+		digitalWrite(PIN_RL_FORWARD, LOW);
+		digitalWrite(PIN_RL_BACKWARD, LOW);
+		isEngineRotating = false;
+	}
 }

@@ -53,6 +53,8 @@ const unsigned long healthCheckInterval = 3000UL; //3S TTL check
 bool isProdReadyState = false;
 bool isProdReadyStatePrev = false;
 bool isValveUp = false;
+bool isEngineRotating = false;
+
 
 void setup() {
 
@@ -143,8 +145,6 @@ void RegisterNode() {
 	if (now - lastAttempt >= 500) {  // every 2 seconds
 		String message = "REG_PUSH";
 		sendCommand(nodeAddr, message);
-		Serial.println("=>:" + message);
-
 		lastAttempt = now;
 	}
 
@@ -183,7 +183,7 @@ void processCommand(String cmd) {
 
 	if (message.startsWith("ENG")) {
 		// Send the readiness state to the host
-		processEngineCommand(cmd);
+		processEngineCommand(message);
 		return;
 	}
 
@@ -200,20 +200,20 @@ void processEngineCommand(String cmd)
 {
 	int colonIndex = cmd.indexOf(':');
 	if (colonIndex == -1) {
-		Serial.println("Invalid SETRSPD command format.");
+		Serial.println("Invalid ENG command format.");
 		return;
 	}
 
 	String engineDir = cmd.substring(colonIndex + 1);
-	if (engineDir.startsWith("F"))
+	if (engineDir.startsWith("F") )
 	{
 		engineMoveForward();
 	}
 	if (engineDir.startsWith("B"))
 	{
-		engineMoveForward();
+		engineMoveBackward();
 	}
-	if (engineDir.startsWith("F"))
+	if (engineDir.startsWith("S"))
 	{
 		engineStop();
 	}
@@ -233,9 +233,10 @@ void SendHold()
 	sendCommand(nodeAddr, "HOLD");
 	sendCommand(ADDR_PULL, "ENG:S");
 }
+
 void UpdateReadyState()
 {
-	
+
 	sensorInState = digitalRead(PIN_SEN_IN);
 
 	sensorOutState = digitalRead(PIN_SEN_OUT);
@@ -244,16 +245,23 @@ void UpdateReadyState()
 
 	sensorDoor2State = digitalRead(PIN_SEN_DOOR2);
 	//we are responding to the host request if the module is ready to be operated.
-	if (sensorDoor1State == LOW && sensorDoor2State == LOW && sensorInState == LOW && sensorOutState) {
+	if (sensorDoor1State == LOW && sensorDoor2State == LOW && sensorInState == LOW && sensorOutState == LOW) {
 		//both doors are closed
+		if (isProdReadyState != isProdReadyStatePrev) Serial.println("Module Ready");
 		isProdReadyState = true;
-	}
-	else {
-		if (isProdReadyState != isProdReadyStatePrev) SendHold();
-		isProdReadyStatePrev = isProdReadyState;
 
 	}
-	
+	else {
+
+		//engineStop();
+		if (isProdReadyState != isProdReadyStatePrev) {
+			SendHold();
+		}
+
+
+	}
+
+	isProdReadyStatePrev = isProdReadyState;
 }
 
 void SendReadyStateToHost()
@@ -284,6 +292,7 @@ void updateButtons() {
 	if (btnUp.justReleased()) {
 		openValve();
 	}
+
 	if (btnForward.isPressed()) {
 		digitalWrite(PIN_RL_FORWARD, HIGH);
 		//setmMotorDir(TapeDirection::FORWARD);
@@ -291,6 +300,7 @@ void updateButtons() {
 	}
 	else
 	{
+		if (!isEngineRotating)
 		digitalWrite(PIN_RL_FORWARD, LOW);
 
 	}
@@ -301,6 +311,7 @@ void updateButtons() {
 	}
 	else
 	{
+		if (!isEngineRotating)
 		digitalWrite(PIN_RL_BACKWARD, LOW);
 
 	}

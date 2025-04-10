@@ -149,6 +149,7 @@ LiquidCrystal_I2C lcd(0x27, 20, 4);
 #define PIN_MOTOR_SPD A0
 int speed = 0;
 int _prevSpeed = 0;
+bool isEngRotating = false;
 
 //pipe end detection
 long prev_Enc_Tape_Counter = 360;
@@ -357,18 +358,20 @@ void loop() {
 
 		lcd.setCursor(0, 1);
 		lcd.print("PUSH:- ");
-		lcd.setCursor(8, 1);
+		lcd.setCursor(9, 1);
 		lcd.print("PULL:- ");
 		lcd.setCursor(0, 2);
 		lcd.print("SPD:");
 		lcd.setCursor(4, 2);
 		lcd.print(map(speed, 0, 1024, 0, 100));
 		lcd.print("% ");
+		lcd.setCursor(0, 3);
+		lcd.println("PIPE NOT DETECTED");
 		
 		while (!isPullStateReadyToStart || !isPushStateReadyToStart)
 		{
 			unsigned long currentTime = millis();
-
+			
 			// Check if 1.5 seconds have passed since the last readiness request
 			if (currentTime - lastReadinessRequestTime >= readinessRequestInterval)
 			{
@@ -377,17 +380,18 @@ void loop() {
 				if (isPullRegistered) sendReadinesRequest(ADDR_PULL);
 				lastReadinessRequestTime = currentTime; // Update the last request time
 			}
-
+			
 			HandleComms();
 			CheckSlaves();
 			checkAndDeregisterSlaves();
 			UpdateButtons();
+			HandleTapeMovement();
 		}
 		lcd.setCursor(0, 3);
 		lcd.print("  SYSTEM READY   ");
 		delay(2000);
 	
-
+		SendEngineStopRequest();
 		SetState(E_STATE::PIPE_LOAD);
 
 	}break;
@@ -677,7 +681,7 @@ void loop() {
 		digitalWrite(LED_PROD_START, HIGH);
 		digitalWrite(LED_PROD_END, LOW);
 
-		SendEngineForwardRequest();
+		SendEngineBackwardRequest();
 		
 		delay(200);
 		digitalWrite(SIG_TAPE_LEFT, HIGH);
@@ -843,11 +847,11 @@ bool HandleComms()
 
 		if (message.startsWith("REG_PUSH")) {
 			if (registerSlave(slaveID, ADDR_PUSH)) {
-				Serial.println("Slave registered successfully REG_PUSH node: " + String(slaveID));
+				//Serial.println("Slave registered successfully REG_PUSH node: " + String(slaveID));
 
 			}
 			else {
-				Serial.println("Can't register node: " + String(slaveID));
+				//Serial.println("Can't register node: " + String(slaveID));
 			}
 			isPushRegistered = true;
 			lcd.setCursor(0, 1);
@@ -855,10 +859,10 @@ bool HandleComms()
 		}
 		else if (message.startsWith("REG_PULL")) {
 			if (registerSlave(slaveID, ADDR_PULL)) {
-				Serial.println("Slave registered successfully REG_PULL node: " + String(slaveID));
+				//Serial.println("Slave registered successfully REG_PULL node: " + String(slaveID));
 			}
 			else {
-				Serial.println("Can't register node: " + String(slaveID));
+				//Serial.println("Can't register node: " + String(slaveID));
 			}
 
 			isPullRegistered = true;
@@ -1030,7 +1034,7 @@ void HandleTapeMovement()
 {
 	if (btnTapeRight.isPressed())
 	{
-		Serial.println("btnTapeRight pressed");
+		//Serial.println("btnTapeRight pressed");
 		SendEngineForwardRequest();
 		
 		digitalWrite(SIG_TAPE_RIGHT, HIGH);
@@ -1039,7 +1043,7 @@ void HandleTapeMovement()
 	}
 	else
 	{
-		SendEngineStopRequest();
+		
 		digitalWrite(SIG_TAPE_RIGHT, LOW);
 		digitalWrite(LED_TAPE_RIGHT, LOW);
 	}
@@ -1047,15 +1051,21 @@ void HandleTapeMovement()
 	if (btnTapeLeft.isPressed())
 	{
 		SendEngineBackwardRequest();
-		Serial.println("btnTapeLeft pressed");
+		//Serial.println("btnTapeLeft pressed");
 		digitalWrite(SIG_TAPE_RIGHT, LOW);
 		digitalWrite(SIG_TAPE_LEFT, HIGH);
 		digitalWrite(LED_TAPE_LEFT, HIGH);
 	}
 	else {
-		SendEngineStopRequest();
+		
 		digitalWrite(SIG_TAPE_LEFT, LOW);
 		digitalWrite(LED_TAPE_LEFT, LOW);
+	}
+
+	if (btnTapeLeft.isReleased() && btnTapeRight.isReleased() && isEngRotating)
+	{
+		
+		SendEngineStopRequest();
 	}
 }
 
