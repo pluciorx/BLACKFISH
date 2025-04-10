@@ -266,6 +266,7 @@ void UpdateReadyState()
 
 void SendReadyStateToHost()
 {
+	UpdateReadyState();
 	if (isProdReadyState) {
 
 		String message = "ISRREP:1";
