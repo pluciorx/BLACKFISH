@@ -18,6 +18,6 @@
 #include <arduino.h>
 #include <pins_arduino.h> 
 #include "..\SmallProductionLine.ino"
-#include "..\..\SmallLinePush\helpers.ino"
+#include "..\helpers.ino"
 #endif
 #endif

@@ -21,7 +21,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SmallProductionLine.ino" />
-    <ClCompile Include="..\SmallLinePush\helpers.ino" />
+    <ClCompile Include="helpers.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.SmallProductionLine.vsarduino.h">

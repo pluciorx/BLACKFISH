@@ -244,7 +244,7 @@ void UpdateReadyState()
 	sensorDoor1State = digitalRead(PIN_SEN_DOOR1);
 
 	sensorDoor2State = digitalRead(PIN_SEN_DOOR2);
-	//we are responding to the host request if the module is ready to be operated.
+ 	//we are responding to the host request if the module is ready to be operated.
 	if (sensorDoor1State == LOW && sensorDoor2State == LOW && sensorInState == LOW && sensorOutState == LOW) {
 		//both doors are closed
 		if (isProdReadyState != isProdReadyStatePrev) Serial.println("Module Ready");
