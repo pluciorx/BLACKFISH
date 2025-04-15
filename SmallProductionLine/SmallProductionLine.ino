@@ -237,7 +237,7 @@ void setup() {
 	lcd.setCursor(0, 1);            // move cursor to the second row
 	lcd.print("   FOAM MASTER PRO  "); // print message at the second row
 	lcd.setCursor(0, 2);            // move cursor to the third row
-	lcd.print("     V2025.04.09"); // print message at the second row
+	lcd.print("     V2025.04.14"); // print message at the second row
 	delay(1500);
 	btnPullRight.begin();
 	btnPullLeft.begin();

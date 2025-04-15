@@ -45,7 +45,7 @@ void CheckSlaves() {
 }
  int ReadAndUpdateSpeed() {
 	
-	/*speed = constrain(1024 - analogRead(PIN_MOTOR_SPD), 0, 1023);
+	speed = constrain(1024 - analogRead(PIN_MOTOR_SPD), 0, 1023);
 	if (speed != _prevSpeed && abs(_prevSpeed - speed) >= 64) {
 		_prevSpeed = speed;
 
@@ -61,7 +61,7 @@ void CheckSlaves() {
 		return speed;
 
 	}
-	return _prevSpeed;*/
+	return _prevSpeed;
 }
 
 bool deregisterSlave(char slaveID) {

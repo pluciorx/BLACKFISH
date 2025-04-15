@@ -21,10 +21,10 @@ Adafruit_Debounce btnUp(PIN_BTN_RELEASE, LOW);
 Adafruit_Debounce btnDown(PIN_BTN_HOLD, LOW);
 //#define INPUT_PULLDOWN
 
-#define PIN_SEN_IN  A2
+#define PIN_SEN_IN  A3
 bool sensorInState = false;
 bool sensorInStatePrev = false;
-#define PIN_SEN_OUT A3
+#define PIN_SEN_OUT A2
 bool sensorOutState = false;
 bool sensorOutStatePrev = false;
 
@@ -236,7 +236,10 @@ void SendHold()
 
 void UpdateReadyState()
 {
-
+	Serial.print("SensorInState:"); Serial.println(sensorInState);
+	Serial.print("SensorOutState:"); Serial.println(sensorOutState);
+	Serial.print("sensorDoor1State:"); Serial.println(sensorDoor1State);
+	Serial.print("sensorDoor2State:"); Serial.println(sensorDoor2State);
 	sensorInState = digitalRead(PIN_SEN_IN);
 
 	sensorOutState = digitalRead(PIN_SEN_OUT);
@@ -245,23 +248,8 @@ void UpdateReadyState()
 
 	sensorDoor2State = digitalRead(PIN_SEN_DOOR2);
  	//we are responding to the host request if the module is ready to be operated.
-	if (sensorDoor1State == LOW && sensorDoor2State == LOW && sensorInState == LOW && sensorOutState == LOW) {
-		//both doors are closed
-		if (isProdReadyState != isProdReadyStatePrev) Serial.println("Module Ready");
-		isProdReadyState = true;
-
-	}
-	else {
-
-		//engineStop();
-		if (isProdReadyState != isProdReadyStatePrev) {
-			SendHold();
-		}
-
-
-	}
-
-	isProdReadyStatePrev = isProdReadyState;
+	isProdReadyState = sensorDoor1State == LOW && sensorDoor2State == LOW && sensorInState == HIGH && sensorOutState == HIGH;
+	delay(5);
 }
 
 void SendReadyStateToHost()
