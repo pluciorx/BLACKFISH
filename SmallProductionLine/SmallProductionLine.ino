@@ -721,12 +721,12 @@ void loop() {
 			{
 				//if (IsPipeEndDetectedOnEncoder() || IsTapeBreakDetectedOnEncoder()) {
 
-				/*if (IsTapeBreakDetectedOnLaser()) {
+				if (IsTapeBreakDetectedOnLaser()) {
 
 					nextState = E_STATE::FOAM_END;
 					Serial.println("Foam Missing;");
 					break;
-				}*/
+				}
 				if (IsPipeBreakDetectedOnLaser()) {
 
 					nextState = E_STATE::PIPE_END;
@@ -914,9 +914,6 @@ bool HandleComms()
 			updateSlaveHealth(slaveID, true);
 
 		}
-
-
-
 		else {
 			Serial.println("Unknown message received: " + message);
 		}

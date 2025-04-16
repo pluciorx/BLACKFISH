@@ -116,7 +116,7 @@
       <CLanguageStandard>gnu11</CLanguageStandard>
       <CAdditionalWarning />
       <CppAdditionalWarning />
-      <ForcedIncludeFiles>c:\program files\microsoft visual studio\2022\enterprise\common7\ide\extensions\m0qkv1wn.zvu\Micro Platforms\default\vm-intelli-pre.h;C:\Users\pluci\AppData\Local\Temp\VMBuilds\SmallLinePull\minima\Debug\.vmintelli\803306fd60ac9e7515d3ba7d8fa63acc\vm-intelli-gcc-defines.h;c:\program files\microsoft visual studio\2022\enterprise\common7\ide\extensions\m0qkv1wn.zvu\Micro Platforms\default\vm-intelli-post.h;$(ProjectDir)__vm\.SmallLinePull.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles>c:\program files\microsoft visual studio\2022\enterprise\common7\ide\extensions\m0qkv1wn.zvu\Micro Platforms\default\vm-intelli-pre.h;C:\Users\pluci\AppData\Local\Temp\VMBuilds\SmallLinePull\minima\Debug\.vmintelli\5a843e5e01750d18daf14231fd6e63a9\vm-intelli-gcc-defines.h;c:\program files\microsoft visual studio\2022\enterprise\common7\ide\extensions\m0qkv1wn.zvu\Micro Platforms\default\vm-intelli-post.h;$(ProjectDir)__vm\.SmallLinePull.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <UndefineAllPreprocessorDefinitions>true</UndefineAllPreprocessorDefinitions>
       <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
       <PreprocessorDefinitions>_VMICRO_INTELLISENSE;_VMDEBUG=1;F_CPU=48000000;ARDUINO_UNOR4_MINIMA;ARDUINO=108010;ARDUINO_MINIMA;ARDUINO_ARCH_RENESAS_UNO;ARDUINO_ARCH_RENESAS;ARDUINO_FSP;_XOPEN_SOURCE=700;CFG_TUSB_MCU=OPT_MCU_RAXXX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
