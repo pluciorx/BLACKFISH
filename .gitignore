@@ -363,3 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 
 **/__vm/*
+/SmallLinePush/__vm/.SmallLinePush.vsarduino.h
+/SmallLinePull/__vm/.SmallLinePull.vsarduino.h
