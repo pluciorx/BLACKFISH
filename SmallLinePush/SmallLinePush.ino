@@ -48,12 +48,13 @@ SlaveState slaveState = SlaveState::IDLE;
 enum TapeDirection { FORWARD, BACKWARD, STOP };
 
 unsigned long lastHostUpdate = 0;
-const unsigned long healthCheckInterval = 3000UL; //3S TTL check 
+const unsigned long healthCheckInterval = 5000UL; //3S TTL check 
 
 bool isProdReadyState = false;
 bool isProdReadyStatePrev = false;
 bool isValveUp = false;
 bool isEngineRotating = false;
+bool isProductionRunning = false;
 
 
 void setup() {
@@ -95,6 +96,7 @@ void setup() {
 void loop() {
 	updateButtons();
 	UpdateReadyState();
+	CheckIfPipeIsPresentWhenProductionRunning();
 	if (Serial1.available()) {
 		slaveState = SlaveState::RECEIVE_COMMAND;
 	}
@@ -108,8 +110,8 @@ void loop() {
 	case IDLE: {
 		if (millis() - lastHostUpdate > healthCheckInterval) {
 			Serial.println("PUSH going DEREG.");
+			
 			slaveState = SlaveState::DEREG;
-
 		}
 
 	}break;
@@ -136,6 +138,23 @@ void loop() {
 	else {
 		digitalWrite(PIN_LED, LOW);
 	}
+}
+
+
+void CheckIfPipeIsPresentWhenProductionRunning()
+{
+	if (sensorInState == LOW && sensorOutState == LOW && isProductionRunning) {
+		closeValve();
+		delay(100);
+		engineStop();
+	}
+	
+}
+
+void SendDoorOpen()
+{
+	sendCommand(nodeAddr, "DOPEN");
+
 }
 
 void RegisterNode() {
@@ -165,7 +184,7 @@ void processCommand(String cmd) {
 		
 		return;
 	}
-
+	
 	lastHostUpdate = millis();
 	delay(100);
 	String message = cmd.substring(0, cmd.lastIndexOf(':'));
@@ -205,6 +224,11 @@ void processEngineCommand(String cmd)
 	}
 
 	String engineDir = cmd.substring(colonIndex + 1);
+	if (engineDir.startsWith("b"))//small f means is production run
+	{
+		isProductionRunning = true;
+		engineMoveBackward();
+	}
 	if (engineDir.startsWith("F") )
 	{
 		engineMoveForward();
@@ -215,6 +239,7 @@ void processEngineCommand(String cmd)
 	}
 	if (engineDir.startsWith("S"))
 	{
+		isProductionRunning = false;	
 		engineStop();
 	}
 }
@@ -226,7 +251,6 @@ void setMotorSpeed(int speed) {
 	Serial.println("Set motor speed: " + String(speed));
 	analogWrite(PIN_MOTOR_SPD, speed);
 }
-
 
 void SendHold()
 {
@@ -249,6 +273,13 @@ void UpdateReadyState()
 	sensorDoor2State = digitalRead(PIN_SEN_DOOR2);
  	//we are responding to the host request if the module is ready to be operated.
 	isProdReadyState = sensorDoor1State == LOW && sensorDoor2State == LOW && sensorInState == HIGH && sensorOutState == HIGH;
+	if (isProductionRunning && (sensorDoor1State || sensorDoor2State))
+	{
+
+		SendDoorOpen();
+
+	}
+
 	delay(5);
 }
 

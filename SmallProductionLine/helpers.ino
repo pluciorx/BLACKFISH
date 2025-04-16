@@ -9,6 +9,17 @@ void SendEngineForwardRequest()
 	
 }
 
+void SendProductionStartRequest()
+{
+	if (!isEngRotating) {
+		sendCommand(ADDR_PULL, "ENG:b");
+		delay(10);
+		sendCommand(ADDR_PUSH, "ENG:b");
+		isEngRotating = true;
+	}
+
+}
+
 void SendEngineBackwardRequest()
 {
 	if (!isEngRotating) {
@@ -46,7 +57,7 @@ void CheckSlaves() {
  int ReadAndUpdateSpeed() {
 	
 	speed = constrain(1024 - analogRead(PIN_MOTOR_SPD), 0, 1023);
-	if (speed != _prevSpeed && abs(_prevSpeed - speed) >= 64) {
+	if (speed != _prevSpeed && abs(_prevSpeed - speed) >= 32) {
 		_prevSpeed = speed;
 
 		String message = "ESPD:" + String(speed);
@@ -55,9 +66,12 @@ void CheckSlaves() {
 		if (isPullRegistered) sendCommand(ADDR_PULL, message);
 		
 		lcd.setCursor(4, 2);
+		
+		lcd.print("    ");
+		lcd.setCursor(4, 2);
 		lcd.print(map(speed, 0, 1024, 0, 100));
 		lcd.print("% ");
-
+		Serial.println("Speed: " + String(speed));
 		return speed;
 
 	}
@@ -82,7 +96,7 @@ bool registerSlave(char slaveID, byte type) {
 	// Check if the slave is already registered
 	for (int i = 0; i < maxSlaves; i++) {
 		if (registeredSlaves[i].ID == slaveID) {
-			Serial.println("Slave " + String(slaveID) + " is already registered.");
+			//Serial.println("Slave " + String(slaveID) + " is already registered.");
 			updateSlaveHealth(slaveID, true);
 		
 			return true; // Slave already registered
@@ -121,7 +135,7 @@ void sendCommand(char slave_id, String cmd) {
 	String message = cmd + ":" + String(slave_id);
 	Serial1.println(message);
 	Serial1.flush();
-	delay(5);
+	delay(3);
 	Serial.println("=>" + message);
 }
 

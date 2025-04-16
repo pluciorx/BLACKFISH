@@ -203,6 +203,7 @@ enum E_STATE {
 	COMMS_CHECK,
 	PIPE_LOAD,
 	PIPE_END,
+	DOOR_OPEN,
 	FOAM_END,
 	STARTING,
 	PROCESS_RUN,
@@ -289,6 +290,8 @@ void setup() {
 	pinMode(SIG_TAPE_LEFT, OUTPUT);
 	digitalWrite(SIG_TAPE_RIGHT, LOW);
 	digitalWrite(SIG_TAPE_LEFT, LOW);
+
+	pinMode(PIN_MOTOR_SPD, INPUT);
 
 	pinMode(SIG_BLOWER_PIN, OUTPUT);
 	pinMode(FOAM_PNEUMATIC_1, OUTPUT);
@@ -386,9 +389,11 @@ void loop() {
 			checkAndDeregisterSlaves();
 			UpdateButtons();
 			HandleTapeMovement();
+			
 		}
 		lcd.setCursor(0, 3);
 		lcd.print("  SYSTEM READY   ");
+
 		delay(2000);
 	
 		SendEngineStopRequest();
@@ -403,7 +408,7 @@ void loop() {
 		lcd.setCursor(0, 0);
 		lcd.print("-   System ready   -");          // print message at the first row
 		CheckSlaves();
-
+		ReadAndUpdateSpeed();
 		lcd.setCursor(0, 2);
 		lcd.print("SPD:");
 		lcd.setCursor(0, 3);
@@ -681,7 +686,7 @@ void loop() {
 		digitalWrite(LED_PROD_START, HIGH);
 		digitalWrite(LED_PROD_END, LOW);
 
-		SendEngineBackwardRequest();
+		SendProductionStartRequest();
 		
 		delay(200);
 		digitalWrite(SIG_TAPE_LEFT, HIGH);
@@ -788,6 +793,7 @@ void loop() {
 		}
 		SetState(E_STATE::PIPE_LOAD);
 	}break;
+	case DOOR_OPEN:
 	case FOAM_END:
 	case PIPE_END:
 	{
@@ -795,6 +801,7 @@ void loop() {
 		lcd.setCursor(0, 0);
 		if (_state == E_STATE::FOAM_END) lcd.print("-  Foam end found  -");
 		if (_state == E_STATE::PIPE_END) lcd.print("-  Pipe end found  -");
+		if (_state == E_STATE::DOOR_OPEN) lcd.print("- ! Doors Open !  -");
 		lcd.setCursor(0, 2);
 		lcd.print("    Please load  ");
 		lcd.setCursor(0, 3);
@@ -895,6 +902,12 @@ bool HandleComms()
 			updateSlaveHealth(slaveID, true);
 
 		}
+		else if (message.startsWith("DOPEN")) {
+
+			HandleDoorOpen();
+			updateSlaveHealth(slaveID, true);
+
+		}
 
 
 
@@ -956,6 +969,13 @@ void HandleEmergency(bool force)
 		Serial.println("EMERGENCY STOP released");
 		resetFunc();
 	}
+
+}
+
+void HandleDoorOpen()
+{
+	Serial.println("Some Doors are open");
+	SetState(E_STATE::DOOR_OPEN);
 
 }
 
@@ -1097,7 +1117,7 @@ void UpdateButtons()
 {
 	HandleEmergency(false);
 	ReadAndUpdateSpeed();
-
+	UpdateRemoteButtons();
 	btnPullRight.update();
 	btnPullLeft.update();
 	btnHeat1.update();

@@ -54,6 +54,7 @@ bool isProdReadyState = false;
 bool isProdReadyStatePrev = false;
 bool isValveUp = false;
 bool isEngineRotating = false;
+bool isProductionRunning = false;
 
 void setup() {
 
@@ -94,6 +95,8 @@ void setup() {
 void loop() {
 	updateButtons();
 	UpdateReadyState();
+	CheckIfPipeIsPresentWhenProductionRunning();
+
 	if (Serial1.available()) {
 		slaveState = SlaveState::RECEIVE_COMMAND;
 	}
@@ -106,7 +109,7 @@ void loop() {
 	}break;
 	case IDLE: {
 		if (millis() - lastHostUpdate > healthCheckInterval) {
-			
+
 			Serial.println("PULL going DEREG.");
 			slaveState = SlaveState::DEREG;
 		}
@@ -122,7 +125,7 @@ void loop() {
 		String command = Serial1.readStringUntil('\n');
 		Serial1.flush();
 		processCommand(command);
-		
+
 		slaveState = SlaveState::IDLE;
 		break;
 	}
@@ -143,16 +146,29 @@ void RegisterNode() {
 
 	if (now - lastAttempt >= 500) {  // every 2 seconds
 		String message = "REG_PULL";
-		sendCommand(nodeAddr, message);	
-	
+		sendCommand(nodeAddr, message);
+
 		lastAttempt = now;
 	}
 
 }
 
+void CheckIfPipeIsPresentWhenProductionRunning()
+{
+	if (sensorInState == LOW && isProductionRunning) {
+		// Pipe is Not present and production is running
+		SendProcessFishiedRequest(); //stop the production as its most likely finished
+		delay(3000);
+		openValve();
+		delay(100);
+		engineStop();
+
+	}
+}
+
 void processEngineCommand(String cmd)
 {
-	
+
 	int colonIndex = cmd.indexOf(':');
 	if (colonIndex == -1) {
 		Serial.println("Invalid ENG command format.");
@@ -160,7 +176,11 @@ void processEngineCommand(String cmd)
 	}
 
 	String engineDir = cmd.substring(colonIndex + 1);
-	
+	if (engineDir.startsWith("b"))//small f means is production run
+	{
+		isProductionRunning = true;
+		engineMoveBackward();
+	}
 	if (engineDir.startsWith("F"))
 	{
 		engineMoveForward();
@@ -171,14 +191,15 @@ void processEngineCommand(String cmd)
 	}
 	if (engineDir.startsWith("S"))
 	{
+		isProductionRunning = false;
 		engineStop();
 	}
 }
 
-void sendSensorState(String sensor,bool state) {	
+void sendSensorState(String sensor, bool state) {
 	String message = sensor + ":" + String(state);
 	sendCommand(nodeAddr, message);
-	
+
 }
 
 
@@ -247,6 +268,13 @@ void UpdateReadyState()
 	Serial.print("sensorDoor2State:"); Serial.println(sensorDoor2State);
 	//we are responding to the host request if the module is ready to be operated.
 	isProdReadyState = sensorDoor1State == LOW && sensorDoor2State == LOW && sensorInState == HIGH && sensorOutState == HIGH;
+
+	if (isProductionRunning && (sensorDoor1State || sensorDoor2State))
+	{
+		
+		SendDoorOpen();
+
+	}
 	delay(5);
 }
 
@@ -254,6 +282,12 @@ void SendHold()
 {
 	sendCommand(nodeAddr, "HOLD");
 	sendCommand(ADDR_PUSH, "ENG:S");
+}
+
+void SendDoorOpen()
+{
+	sendCommand(nodeAddr, "DOPEN");
+	
 }
 
 void SendReadyStateToHost()
