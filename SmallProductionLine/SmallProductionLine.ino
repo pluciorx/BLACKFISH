@@ -183,6 +183,12 @@ bool isPullStateReadyToStart = false;
 bool isPushStateReadyToStart = false;
 
 
+bool isPullDoorOpen = false;
+bool isPushDoorOpen = false;
+bool PushInState = false;
+bool PullInState = false;
+bool PushOutState = false;
+
 
 int currentSlaveIndex = -1;
 unsigned long pingSentTime = 0;
@@ -686,7 +692,7 @@ void loop() {
 		digitalWrite(LED_PROD_START, HIGH);
 		digitalWrite(LED_PROD_END, LOW);
 
-		SendProductionStartRequest();
+		SendEngineBackwardRequest(); // the engine is running in reverse direction because buttons are swapped on panel.
 		
 		delay(200);
 		digitalWrite(SIG_TAPE_LEFT, HIGH);
@@ -715,12 +721,12 @@ void loop() {
 			{
 				//if (IsPipeEndDetectedOnEncoder() || IsTapeBreakDetectedOnEncoder()) {
 
-				if (IsTapeBreakDetectedOnLaser()) {
+				/*if (IsTapeBreakDetectedOnLaser()) {
 
 					nextState = E_STATE::FOAM_END;
 					Serial.println("Foam Missing;");
 					break;
-				}
+				}*/
 				if (IsPipeBreakDetectedOnLaser()) {
 
 					nextState = E_STATE::PIPE_END;
