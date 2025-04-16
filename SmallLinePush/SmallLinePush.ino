@@ -260,10 +260,10 @@ void SendHold()
 
 void UpdateReadyState()
 {
-	Serial.print("SensorInState:"); Serial.println(sensorInState);
+	/*Serial.print("SensorInState:"); Serial.println(sensorInState);
 	Serial.print("SensorOutState:"); Serial.println(sensorOutState);
 	Serial.print("sensorDoor1State:"); Serial.println(sensorDoor1State);
-	Serial.print("sensorDoor2State:"); Serial.println(sensorDoor2State);
+	Serial.print("sensorDoor2State:"); Serial.println(sensorDoor2State);*/
 	sensorInState = digitalRead(PIN_SEN_IN);
 
 	sensorOutState = digitalRead(PIN_SEN_OUT);
@@ -273,11 +273,9 @@ void UpdateReadyState()
 	sensorDoor2State = digitalRead(PIN_SEN_DOOR2);
  	//we are responding to the host request if the module is ready to be operated.
 	isProdReadyState = sensorDoor1State == LOW && sensorDoor2State == LOW && sensorInState == HIGH && sensorOutState == HIGH;
-	if (isProductionRunning && (sensorDoor1State || sensorDoor2State))
+	if (isProductionRunning && (sensorDoor1State || sensorDoor2State) && (sensorInState || sensorOutState))
 	{
-
 		SendDoorOpen();
-
 	}
 
 	delay(5);
