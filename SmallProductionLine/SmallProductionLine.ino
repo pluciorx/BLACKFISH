@@ -220,11 +220,8 @@ VirtualDelay btnStop3sCounterl;
 VirtualDelay blowerSwitchOffDelay;
 VirtualDelay pipePresenceDelay;
 
-//volatile ES_START _start_sub_state = ES_START::HEATERS_ON;
 volatile E_STATE _state = E_STATE::STARTING;
 
-
-// the setup function runs once when you press reset or power the board
 void setup() {
 	String version = "V2025.04.17";
 	Serial.begin(115200);
@@ -233,15 +230,15 @@ void setup() {
 	//Serial1.is RS485
 	Serial1.begin(14400);
 
-	lcd.init(); // initialize the lcd	
+	lcd.init(); 
 	lcd.backlight();
 	lcd.clear();
-	lcd.setCursor(0, 0);            // move cursor the first row
-	lcd.print("     BLACKFISH   ");          // print message at the first row
-	lcd.setCursor(0, 1);            // move cursor to the second row
-	lcd.print("   FOAM MASTER PRO  "); // print message at the second row
-	lcd.setCursor(0, 2);            // move cursor to the third row
-	lcd.print("     "+version); // print message at the second row
+	lcd.setCursor(0, 0);          
+	lcd.print("     BLACKFISH   ");        
+	lcd.setCursor(0, 1);            
+	lcd.print("   FOAM MASTER PRO  "); 
+	lcd.setCursor(0, 2);          
+	lcd.print("     "+version); 
 	delay(1500);
 	btnPullRight.begin();
 	btnPullLeft.begin();

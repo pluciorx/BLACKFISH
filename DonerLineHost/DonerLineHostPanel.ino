@@ -247,11 +247,6 @@ void loop() {
 			//Serial.println("=> Pong received");
 			updateSlaveHealth(slaveID, true);
 		}
-		else if (message.startsWith("ACK")) {
-			//Serial.println(" = > ACK received");
-			updateSlaveHealth(slaveID, true);
-
-		}
 		else if (message.startsWith("AREAD")) {
 			//Serial.println("=> AREAD received");
 			updateSlaveHealth(slaveID, true);

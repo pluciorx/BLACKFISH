@@ -44,6 +44,7 @@ const char nodeAddr = ADDR_ROLL;
 enum SlaveState { IDLE, SEND_SENSOR_DATA, RECEIVE_COMMAND, DEREG };
 SlaveState slaveState = SlaveState::IDLE;
 
+
 unsigned long lastHostUpdate = 0;
 const unsigned long healthCheckInterval = 2000UL; //3S TTL check 
 
@@ -75,9 +76,9 @@ void setup() {
 }
 
 
-
-
 void loop() {
+
+
 	if (Serial1.available()) {
 		slaveState = SlaveState::RECEIVE_COMMAND;
 	}
@@ -120,6 +121,8 @@ void loop() {
 		digitalWrite(LED_PIN, LOW);
 	}
 }
+
+
 
 void RegisterRollerNode() {
 	static unsigned long lastAttempt = 0;

@@ -20,7 +20,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="LongLineSlave.ino" />
+    <ClCompile Include="DonerLineRoller.ino" />
     <ClCompile Include="helpers.ino" />
   </ItemGroup>
   <ItemGroup>
