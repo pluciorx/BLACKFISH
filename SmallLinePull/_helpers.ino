@@ -16,8 +16,6 @@ void sendCommand(char slave_id, String cmd) {
 	Serial.println("=>" + message);
 }
 
-
-
 bool processRSPEED(String cmd) {
 	int colonIndex = cmd.indexOf(':');
 	if (colonIndex == -1) {
@@ -55,6 +53,7 @@ bool processAnalogReadCommand(String cmd) {
 
 void processPingCommand()
 {
+	
 	String message = "PONG";
 	sendCommand(nodeAddr, message);
 	//Serial.println("=>:" + message);
@@ -63,6 +62,7 @@ void processPingCommand()
 
 void engineMoveBackward()
 {
+	Serial.println("Engine backward");
 	if (!isEngineRotating) {
 		digitalWrite(PIN_RL_FORWARD, LOW);
 		digitalWrite(PIN_RL_BACKWARD, HIGH);
@@ -72,6 +72,7 @@ void engineMoveBackward()
 
 void engineMoveForward()
 {
+	Serial.println("Engine forward");
 	if (!isEngineRotating) {
 		digitalWrite(PIN_RL_FORWARD, HIGH);
 		digitalWrite(PIN_RL_BACKWARD, LOW);
@@ -81,10 +82,12 @@ void engineMoveForward()
 
 void engineStop()
 {
-	if (isEngineRotating)
+	Serial.println("Engine stop");
+	if (isEngineRotating || isProductionRunning)
 	{
 		digitalWrite(PIN_RL_FORWARD, LOW);
 		digitalWrite(PIN_RL_BACKWARD, LOW);
 		isEngineRotating = false;
+	
 	}
 }

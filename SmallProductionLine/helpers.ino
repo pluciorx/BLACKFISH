@@ -1,12 +1,12 @@
 void SendEngineForwardRequest()
-{ 
+{
 	if (!isEngRotating) {
 		sendCommand(ADDR_PULL, "ENG:F");
 		delay(10);
 		sendCommand(ADDR_PUSH, "ENG:F");
 		isEngRotating = true;
 	}
-	
+
 }
 
 void SendProductionStartRequest()
@@ -28,18 +28,18 @@ void SendEngineBackwardRequest()
 		sendCommand(ADDR_PUSH, "ENG:B");
 		isEngRotating = true;
 	}
-	
+
 }
 
-void SendEngineStopRequest()
+void SendEngineStopRequest(bool isForced)
 {
-	if (isEngRotating) {
+	if (isEngRotating || isForced)
+	{
 		sendCommand(ADDR_PULL, "ENG:S");
 		delay(10);
 		sendCommand(ADDR_PUSH, "ENG:S");
 		isEngRotating = false;
 	}
-	
 }
 
 void CheckSlaves() {
@@ -49,26 +49,27 @@ void CheckSlaves() {
 				SendPing(registeredSlaves[i].ID);
 				registeredSlaves[i].lastCheckedTime = millis();
 			}
-			
+
 		}
 		updateSlaveScreen(i);
 	}
 }
- int ReadAndUpdateSpeed() {
-	
+int ReadAndUpdateSpeed() {
+	int adc_value = analogRead(PIN_MOTOR_SPD);
 	speed = constrain(1024 - analogRead(PIN_MOTOR_SPD), 0, 1023);
 	if (speed != _prevSpeed && abs(_prevSpeed - speed) >= 32) {
 		_prevSpeed = speed;
 
-		String message = "ESPD:" + String(speed);
+		String message = "ESPD:" + String(map(adc_value, 0, 1023, 0, 255));
 		if (isPushRegistered) sendCommand(ADDR_PUSH, message);
 		delay(10);
 		if (isPullRegistered) sendCommand(ADDR_PULL, message);
-		
-		lcd.setCursor(4, 2);
-		
-		lcd.print("    ");
-		lcd.setCursor(4, 2);
+
+		lcd.setCursor(13, 2);
+
+		lcd.print("      ");
+		lcd.setCursor(13, 2);
+		lcd.print("SPD:");
 		lcd.print(map(speed, 0, 1024, 0, 100));
 		lcd.print("% ");
 		Serial.println("Speed: " + String(speed));
@@ -98,7 +99,7 @@ bool registerSlave(char slaveID, byte type) {
 		if (registeredSlaves[i].ID == slaveID) {
 			//Serial.println("Slave " + String(slaveID) + " is already registered.");
 			updateSlaveHealth(slaveID, true);
-		
+
 			return true; // Slave already registered
 		}
 	}
@@ -114,7 +115,7 @@ bool registerSlave(char slaveID, byte type) {
 			numRegisteredSlaves++;
 			Serial.println("Slave " + String(slaveID) + " registered successfully.");
 			SendPing(slaveID);
-			
+
 			return true; // Slave registered successfully
 
 		}
@@ -145,13 +146,13 @@ static void updateSlaveScreen(int slaveIndex) {
 		switch (registeredSlaves[slaveIndex].slaveType) {
 		case ADDR_PUSH:
 			isPushRegistered = false;
-			lcd.setCursor(0, 1);
-			lcd.print("PUSH:- ");
+			lcd.setCursor(0, 2);
+			lcd.print("IN:- ");
 			break;
 		case ADDR_PULL:
 			isPullRegistered = false;
-			lcd.setCursor(8, 1);
-			lcd.print("PULL:- ");
+			lcd.setCursor(6, 2);
+			lcd.print("OUT:- ");
 			break;
 		}
 	}
@@ -159,13 +160,13 @@ static void updateSlaveScreen(int slaveIndex) {
 		switch (registeredSlaves[slaveIndex].slaveType) {
 		case ADDR_PUSH:
 			isPushRegistered = true;
-			lcd.setCursor(0, 1);
-			lcd.print("PUSH:OK");
+			lcd.setCursor(0, 2);
+			lcd.print("IN:OK");
 			break;
 		case ADDR_ROLL:
 			isPullRegistered = true;
-			lcd.setCursor(8, 1);
-			lcd.print("PULL:OK");
+			lcd.setCursor(8, 2);
+			lcd.print("OUT:OK");
 			break;
 		}
 	}

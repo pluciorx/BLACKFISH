@@ -48,7 +48,7 @@ SlaveState slaveState = SlaveState::IDLE;
 enum TapeDirection { FORWARD, BACKWARD, STOP };
 
 unsigned long lastHostUpdate = 0;
-const unsigned long healthCheckInterval = 5000UL; //3S TTL check 
+const unsigned long healthCheckInterval = 2000UL; //3S TTL check 
 
 bool isProdReadyState = false;
 bool isProdReadyStatePrev = false;
@@ -58,14 +58,14 @@ bool isProductionRunning = false;
 
 
 void setup() {
-
+	delay(350);//modules needs to start at different time
 	pinMode(PIN_RL_FORWARD, OUTPUT);
 	pinMode(PIN_RL_BACKWARD, OUTPUT);
 
 	pinMode(PIN_SEN_IN, INPUT);
 	pinMode(PIN_SEN_OUT, INPUT);
-	pinMode(PIN_SEN_DOOR1, INPUT);
-	pinMode(PIN_SEN_DOOR2, INPUT);
+	pinMode(PIN_SEN_DOOR1, INPUT_PULLUP);
+	pinMode(PIN_SEN_DOOR2, INPUT_PULLUP);
 
 	pinMode(PIN_MOTOR_SPD, OUTPUT);
 	pinMode(PIN_VALVE, OUTPUT);
@@ -97,6 +97,7 @@ void loop() {
 	updateButtons();
 	UpdateReadyState();
 	CheckIfPipeIsPresentWhenProductionRunning();
+	CheckDoorState();
 	if (Serial1.available()) {
 		slaveState = SlaveState::RECEIVE_COMMAND;
 	}
@@ -143,17 +144,24 @@ void loop() {
 
 void CheckIfPipeIsPresentWhenProductionRunning()
 {
-	if (sensorInState == LOW && sensorOutState == LOW && isProductionRunning) {
-		closeValve();
-		delay(100);
+	sensorInState = digitalRead(PIN_SEN_IN);
+
+	sensorOutState = digitalRead(PIN_SEN_OUT);
+
+	if (isProductionRunning && sensorInState == LOW && sensorOutState == LOW ) {
+		openTape();
+		delay(50);
 		engineStop();
-	}
-	
+	}	
 }
 
 void SendDoorOpen()
 {
 	sendCommand(nodeAddr, "DOPEN");
+	openTape();
+	delay(50);
+	engineStop();
+	isProductionRunning = false;
 
 }
 
@@ -205,9 +213,15 @@ void processCommand(String cmd) {
 		processEngineCommand(message);
 		return;
 	}
-
 	if (message.startsWith("ESPD")) {
 		processRSPEED(message);
+		return;
+	}
+
+	if (message.startsWith("ESTOP")) {
+		Serial.println("EMERGENCY STOP REQUEST RECEIVED");
+		engineStop();
+		closeTape();
 		return;
 	}
 
@@ -226,8 +240,9 @@ void processEngineCommand(String cmd)
 	String engineDir = cmd.substring(colonIndex + 1);
 	if (engineDir.startsWith("b"))//small f means is production run
 	{
-		isProductionRunning = true;
+		Serial.println("Production is started");
 		engineMoveBackward();
+		isProductionRunning = true;
 	}
 	if (engineDir.startsWith("F") )
 	{
@@ -239,7 +254,6 @@ void processEngineCommand(String cmd)
 	}
 	if (engineDir.startsWith("S"))
 	{
-		isProductionRunning = false;	
 		engineStop();
 	}
 }
@@ -281,6 +295,14 @@ void UpdateReadyState()
 	delay(5);
 }
 
+void CheckDoorState()
+{
+if (isProductionRunning && (sensorDoor1State == HIGH || sensorDoor2State == HIGH))
+	{
+		SendDoorOpen();
+	}
+}
+
 void SendReadyStateToHost()
 {
 	UpdateReadyState();
@@ -305,10 +327,10 @@ void updateButtons() {
 	btnDown.update();
 
 	if (btnDown.justReleased()) {
-		closeValve();
+		openTape();
 	}
 	if (btnUp.justReleased()) {
-		openValve();
+		closeTape();
 	}
 
 	if (btnForward.isPressed()) {
@@ -355,14 +377,14 @@ void setmMotorDir(TapeDirection direction) {
 	}
 }
 
-void openValve() {
+void closeTape() {
 	// Open the valve
 	Serial.println("Open valve");
 	digitalWrite(PIN_VALVE, HIGH);
 
 }
 
-void closeValve() {
+void openTape() {
 	Serial.println("Close valve");
 	digitalWrite(PIN_VALVE, LOW);
 }

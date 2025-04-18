@@ -201,8 +201,6 @@ const unsigned long readinessRequestInterval = 1500; // Interval in milliseconds
 
 const int healthCheckInterval = 2500; //10s TTL check 
 
-
-
 void(*resetFunc) (void) = 0;
 
 enum E_STATE {
@@ -214,8 +212,7 @@ enum E_STATE {
 	STARTING,
 	PROCESS_RUN,
 	COOLDOWN,
-	EMERGENCY_STOP,
-
+	EMERGENCY_STOP
 };
 
 VirtualDelay heaterStartDelay;
@@ -229,10 +226,10 @@ volatile E_STATE _state = E_STATE::STARTING;
 
 // the setup function runs once when you press reset or power the board
 void setup() {
-
+	String version = "V2025.04.17";
 	Serial.begin(115200);
 	Serial.println("");
-	Serial.println("Foam Master V2025.04.07");
+	Serial.println("Foam Master "+version);
 	//Serial1.is RS485
 	Serial1.begin(14400);
 
@@ -244,7 +241,7 @@ void setup() {
 	lcd.setCursor(0, 1);            // move cursor to the second row
 	lcd.print("   FOAM MASTER PRO  "); // print message at the second row
 	lcd.setCursor(0, 2);            // move cursor to the third row
-	lcd.print("     V2025.04.14"); // print message at the second row
+	lcd.print("     "+version); // print message at the second row
 	delay(1500);
 	btnPullRight.begin();
 	btnPullLeft.begin();
@@ -364,45 +361,25 @@ void loop() {
 		lcd.backlight();
 		lcd.setCursor(0, 0);
 		lcd.print("-  LINE NOT READY  -");          // print message at the first row
-
-		lcd.setCursor(0, 1);
-		lcd.print("PUSH:- ");
-		lcd.setCursor(9, 1);
-		lcd.print("PULL:- ");
-		lcd.setCursor(0, 2);
-		lcd.print("SPD:");
-		lcd.setCursor(4, 2);
-		lcd.print(map(speed, 0, 1024, 0, 100));
-		lcd.print("% ");
+		
 		lcd.setCursor(0, 3);
 		lcd.println("PIPE NOT DETECTED");
 		
 		while (!isPullStateReadyToStart || !isPushStateReadyToStart)
 		{
-			unsigned long currentTime = millis();
-			
-			// Check if 1.5 seconds have passed since the last readiness request
-			if (currentTime - lastReadinessRequestTime >= readinessRequestInterval)
-			{
-				if (isPushRegistered) sendReadinesRequest(ADDR_PUSH);
-				delay(20);
-				if (isPullRegistered) sendReadinesRequest(ADDR_PULL);
-				lastReadinessRequestTime = currentTime; // Update the last request time
-			}
-			
-			HandleComms();
-			CheckSlaves();
-			checkAndDeregisterSlaves();
+			if (HandleComms()) return;
+			HandleProdReadyState();
 			UpdateButtons();
 			HandleTapeMovement();
+			
 			
 		}
 		lcd.setCursor(0, 3);
 		lcd.print("  SYSTEM READY   ");
 
-		delay(2000);
-	
-		SendEngineStopRequest();
+		delay(1000);
+		
+		SendEngineStopRequest(true);
 		SetState(E_STATE::PIPE_LOAD);
 
 	}break;
@@ -415,8 +392,6 @@ void loop() {
 		lcd.print("-   System ready   -");          // print message at the first row
 		CheckSlaves();
 		ReadAndUpdateSpeed();
-		lcd.setCursor(0, 2);
-		lcd.print("SPD:");
 		lcd.setCursor(0, 3);
 		lcd.print("    Press START    ");
 		analogWrite(TAPE_ENGINE_INVERTER, TAPE_SLOW_SPEED);
@@ -431,11 +406,17 @@ void loop() {
 		digitalWrite(SIG_FOAM_HEAT_1, LOW);
 		digitalWrite(LED_HEAT_2, LOW);
 		delay(100);
-		HandleComms();
+	
 		int endCounter = 0;
 		while (endCounter < 3)
 		{
-			HandleComms();
+			if (HandleComms()) return;
+			if (!isPullStateReadyToStart || !isPushStateReadyToStart)
+			{
+				SetState(E_STATE::COOLDOWN);
+				return;
+			}
+		 
 			UpdateButtons();
 			ReadAndUpdateSpeed();
 			if (btnHeat1.isPressed())
@@ -541,6 +522,7 @@ void loop() {
 		while (!btnProdEnd.isPressed())
 		{
 			UpdateButtons();
+		
 			if (heaterStartDelay.elapsed())
 			{
 				digitalWrite(SIG_BLOWER_PIN, HIGH); // Make sure the blower is ALWAYS ON !!
@@ -585,7 +567,12 @@ void loop() {
 				E_STATE nextState = E_STATE::PROCESS_RUN;
 				while (!isH1Ready || !isH2Ready)
 				{
-
+					if (HandleBasicComms()) return;
+					if (!isPullStateReadyToStart || !isPushStateReadyToStart)
+					{
+						SetState(E_STATE::COOLDOWN);
+						return;
+					}
 					if (!isH2Ready && digitalRead(FOAM_HEAT_2_TEMP_AL1_TRIG) == HIGH)
 					{
 						digitalWrite(SIG_FOAM_HEAT_2, LOW);
@@ -657,6 +644,7 @@ void loop() {
 					lcd.print("  READY TO START ?");
 					while (1)
 					{
+						HandleBasicComms();
 						UpdateButtons();
 						if (btnProdStart.isPressed()) {
 
@@ -692,7 +680,7 @@ void loop() {
 		digitalWrite(LED_PROD_START, HIGH);
 		digitalWrite(LED_PROD_END, LOW);
 
-		SendEngineBackwardRequest(); // the engine is running in reverse direction because buttons are swapped on panel.
+		SendProductionStartRequest(); // the engine is running in reverse direction because buttons are swapped on panel.
 		
 		delay(200);
 		digitalWrite(SIG_TAPE_LEFT, HIGH);
@@ -714,8 +702,10 @@ void loop() {
 
 		while (endCounter < 2)
 		{
+			
 			IsPipeEncRotating();
 			IsTapeEncRotating();
+			if (HandleComms()) return;
 
 			if (pipePresenceDelay.elapsed())
 			{
@@ -786,6 +776,7 @@ void loop() {
 		while (endCounter < 3)
 		{
 			UpdateButtons();
+			HandleComms();
 			if (btnProdStart.isPressed())
 			{
 				if (endCounter == 0) btnStop3sCounterl.start(200);
@@ -807,9 +798,8 @@ void loop() {
 		lcd.setCursor(0, 0);
 		if (_state == E_STATE::FOAM_END) lcd.print("-  Foam end found  -");
 		if (_state == E_STATE::PIPE_END) lcd.print("-  Pipe end found  -");
-		if (_state == E_STATE::DOOR_OPEN) lcd.print("- ! Doors Open !  -");
-		lcd.setCursor(0, 2);
-		lcd.print("    Please load  ");
+		if (_state == E_STATE::DOOR_OPEN)lcd.print("-  ! Doors Open !  -");
+		
 		lcd.setCursor(0, 3);
 		lcd.print("    Press START     ");
 
@@ -818,6 +808,7 @@ void loop() {
 		int endCounter = 0;
 		while (endCounter < 3)
 		{
+			HandleBasicComms();
 			UpdateButtons();
 			if (btnProdStart.isPressed())
 			{
@@ -830,6 +821,7 @@ void loop() {
 			}
 			if (!btnProdStart.isPressed()) endCounter = 0;
 		}
+		
 		SetState(E_STATE::PIPE_LOAD);
 
 	}break;
@@ -839,9 +831,9 @@ void loop() {
 	}
 }
 
-
 bool HandleComms()
 {
+
 	if (Serial1.available()) {
 		String data = "";
 		data = Serial1.readStringUntil('\n');
@@ -867,8 +859,8 @@ bool HandleComms()
 				//Serial.println("Can't register node: " + String(slaveID));
 			}
 			isPushRegistered = true;
-			lcd.setCursor(0, 1);
-			lcd.print("PUSH:OK");
+			lcd.setCursor(0, 2);
+			lcd.print("IN:OK");
 		}
 		else if (message.startsWith("REG_PULL")) {
 			if (registerSlave(slaveID, ADDR_PULL)) {
@@ -879,11 +871,11 @@ bool HandleComms()
 			}
 
 			isPullRegistered = true;
-			lcd.setCursor(8, 1);
-			lcd.print("PULL:OK");
+			lcd.setCursor(6, 2);
+			lcd.print("OUT:OK");
 		}
 		else if (message.startsWith("PONG")) {
-			//Serial.println("=> Pong received");
+			Serial.println("=> Pong received"+String(slaveID));
 			updateSlaveHealth(slaveID, true);
 		}
 		else if (message.startsWith("ACK")) {
@@ -900,24 +892,113 @@ bool HandleComms()
 
 			HandleIRREP(slaveID, message);
 			updateSlaveHealth(slaveID, true);
-
 		}
 		else if (message.startsWith("HOLD")) {
 
 			HandleEmergency(true);
 			updateSlaveHealth(slaveID, true);
+			return true;
 
 		}
-		else if (message.startsWith("DOPEN")) {
+		else if (message.startsWith("PFIN")) {
 
-			HandleDoorOpen();
+			Serial.println("Pipe processing finished.");
+			SetState(E_STATE::COOLDOWN);
+			updateSlaveHealth(slaveID, true);
+			return true;
+		}
+		else if (message.startsWith("DOPEN")) {
+			Serial.println("DOPEN FROM:" + String(slaveID));
+			updateSlaveHealth(slaveID, true);
+			SendEngineStopRequest(true);
+			SetState(E_STATE::DOOR_OPEN);
+			
+			return true;
+		}
+		else {
+			Serial.println("Unknown message received: " + message);
+			return false;
+		}
+
+	}
+	
+	return false;
+}
+
+bool HandleBasicComms()
+{
+
+	if (Serial1.available()) {
+		String data = "";
+		data = Serial1.readStringUntil('\n');
+		Serial1.flush();
+		//data = data.trim(); // Remove any leading or trailing whitespace
+		if (data.length() < 2) {
+			Serial.println("Invalid data received: " + data);
+			return false;
+		}
+
+		char slaveID = data.charAt(data.lastIndexOf(':') + 1);
+
+		//Serial.println("SlaveID: " + String(slaveID));
+
+		String message = data.substring(0, data.lastIndexOf(':'));
+
+		if (message.startsWith("REG_PUSH")) {
+			if (registerSlave(slaveID, ADDR_PUSH)) {
+				//Serial.println("Slave registered successfully REG_PUSH node: " + String(slaveID));
+
+			}
+			else {
+				//Serial.println("Can't register node: " + String(slaveID));
+			}
+			isPushRegistered = true;
+			lcd.setCursor(0, 2);
+			lcd.print("IN:OK");
+		}
+		else if (message.startsWith("REG_PULL")) {
+			if (registerSlave(slaveID, ADDR_PULL)) {
+				//Serial.println("Slave registered successfully REG_PULL node: " + String(slaveID));
+			}
+			else {
+				//Serial.println("Can't register node: " + String(slaveID));
+			}
+
+			isPullRegistered = true;
+			lcd.setCursor(6, 2);
+			lcd.print("OUT:OK");
+		}
+		else if (message.startsWith("PONG")) {
+			Serial.println("=> Pong received" + String(slaveID));
+			updateSlaveHealth(slaveID, true);
+		}
+		else if (message.startsWith("ACK")) {
+			//Serial.println(" = > ACK received");
 			updateSlaveHealth(slaveID, true);
 
 		}
 		else {
 			Serial.println("Unknown message received: " + message);
+			return false;
 		}
 
+	}
+
+	return false;
+}
+
+
+void HandleProdReadyState()
+{
+	unsigned long currentTime = millis();
+
+	// Check if 1.5 seconds have passed since the last readiness request
+	if (currentTime - lastReadinessRequestTime >= readinessRequestInterval)
+	{
+		if (isPushRegistered) sendReadinesRequest(ADDR_PUSH);
+		delay(20);
+		if (isPullRegistered) sendReadinesRequest(ADDR_PULL);
+		lastReadinessRequestTime = currentTime; // Update the last request time
 	}
 }
 
@@ -929,11 +1010,11 @@ void HandleIRREP(int slaveID, String message)
 	updateSlaveScreen(slaveID);
 	if (slaveID == ADDR_PUSH ) {
 		isPushStateReadyToStart = (readiness == '1');
-		Serial.println("Push node readiness: " + String(isPushStateReadyToStart ? "Ready" : "Not Ready"));
+		Serial.println("In node readiness: " + String(isPushStateReadyToStart ? "Ready" : "Not Ready"));
 	}
 	else if (slaveID == ADDR_PULL) {
 		isPullStateReadyToStart = (readiness == '1');
-		Serial.println("Pull node readiness: " + String(isPullStateReadyToStart ? "Ready" : "Not Ready"));
+		Serial.println("Out node readiness: " + String(isPullStateReadyToStart ? "Ready" : "Not Ready"));
 
 	}
 	else {
@@ -963,8 +1044,9 @@ void HandleEmergency(bool force)
 		lcd.print("        STOP     ");
 
 		DoCoolDownAndStopTape();
-		sendCommand(-1, "EMERGENCY STOP");
-		SendEngineStopRequest();
+		sendCommand(ADDR_PULL, "ESTOP");
+		sendCommand(ADDR_PUSH, "ESTOP");
+		SendEngineStopRequest(true);
 		while (digitalRead(BTN_FAIL_STOP) != HIGH) {
 			delay(10);
 
@@ -975,16 +1057,10 @@ void HandleEmergency(bool force)
 
 }
 
-void HandleDoorOpen()
-{
-	Serial.println("Some Doors are open");
-	SetState(E_STATE::DOOR_OPEN);
-
-}
 
 void DoCoolDownAndStopTape()
 {
-	SendEngineStopRequest();
+	SendEngineStopRequest(true);
 	
 	digitalWrite(FOAM_PNEUMATIC_1, LOW);
 	digitalWrite(FOAM_PNEUMATIC_2, LOW);
@@ -1087,8 +1163,7 @@ void HandleTapeMovement()
 
 	if (btnTapeLeft.isReleased() && btnTapeRight.isReleased() && isEngRotating)
 	{
-		
-		SendEngineStopRequest();
+		SendEngineStopRequest(false);
 	}
 }
 
